@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Manrope, Oswald } from 'next/font/google';
+import { Manrope, Oswald, Roboto } from 'next/font/google';
 import './globals.css';
 
 const manrope = Manrope({
@@ -13,9 +13,15 @@ const oswald = Oswald({
   weight: ['700'],
 });
 
+const roboto = Roboto({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto',
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${manrope.variable} ${oswald.variable}`}>
+    <html lang="fr" className={`${manrope.variable} ${oswald.variable} ${roboto.variable}`}>
       <body className="bg-black text-white font-sans antialiased overflow-x-hidden">
         {children}
       </body>

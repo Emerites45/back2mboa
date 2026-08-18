@@ -12,6 +12,16 @@ import {
 const TEXT_Y_HIDDEN = "100%";
 const TEXT_Y_SHOWN = "0%";
 
+const MUSEE_COPY =
+  "Nous ouvrons les voies, nous levons les obstacles, nous connectons les bonnes personnes, pour que la prospérité soit créée, captée, partagée et multipliée.";
+
+function toTitleCaseFr(value: string) {
+  return value.replace(/\p{L}+/gu, (word) => {
+    const lower = word.toLocaleLowerCase("fr-FR");
+    return lower.charAt(0).toLocaleUpperCase("fr-FR") + lower.slice(1);
+  });
+}
+
 export function MuseeSection() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -41,9 +51,7 @@ export function MuseeSection() {
           style={{ y: reduce ? TEXT_Y_SHOWN : y }}
           className="absolute inset-x-0 bottom-0 z-10 mx-auto mb-15 max-w-[64rem] px-[var(--page-gutter)] text-center font-sans text-[clamp(1.2rem,3.8vw,3.0rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white [text-shadow:0_2px_28px_rgb(0_0_0_/_0.5)]"
         >
-          Nous ouvrons les voies, nous levons les obstacles, nous connectons les
-          bonnes personnes, pour que la prospérité soit créée, captée, partagée
-          et multipliée.
+          {toTitleCaseFr(MUSEE_COPY)}
         </motion.p>
       </div>
 

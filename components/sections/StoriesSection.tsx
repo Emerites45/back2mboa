@@ -110,6 +110,12 @@ const ARROW_ICON_HOVER = {
   tap: { x: 1, y: -1 },
 } as const;
 
+function isVideoDownloaded(video: HTMLVideoElement) {
+  const { buffered, duration } = video;
+  if (!duration || buffered.length === 0) return false;
+  return buffered.end(buffered.length - 1) >= duration - 0.25;
+}
+
 function StoryVideo({
   src,
   poster,
@@ -121,17 +127,51 @@ function StoryVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || reduce) return;
+
+    if (!active) {
+      video.pause();
+      if (!ready) {
+        video.removeAttribute("src");
+        video.load();
+      } else if (video.readyState >= 1) {
+        video.currentTime = 0;
+      }
+      return;
+    }
+
+    const markReady = () => {
+      if (isVideoDownloaded(video)) setReady(true);
+    };
+
+    if (video.getAttribute("src") !== src) {
+      video.src = src;
+      video.preload = "auto";
+      video.load();
+    }
+
+    video.addEventListener("progress", markReady);
+    video.addEventListener("canplaythrough", markReady);
+    markReady();
+    return () => {
+      video.removeEventListener("progress", markReady);
+      video.removeEventListener("canplaythrough", markReady);
+    };
+  }, [active, src, reduce, ready]);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    if (active && !reduce) {
+    if (active && ready && !reduce) {
       void video.play().catch(() => {});
       return;
     }
     video.pause();
-    if (video.readyState >= 1) video.currentTime = 0;
-  }, [active, reduce]);
+  }, [active, ready, reduce]);
 
   return (
     <>
@@ -139,12 +179,14 @@ function StoryVideo({
       {reduce ? null : (
         <video
           ref={ref}
-          src={src}
           muted
           loop
           playsInline
-          preload={active ? "auto" : "metadata"}
-          className="absolute inset-0 size-full object-cover"
+          preload="none"
+          className={cn(
+            "absolute inset-0 size-full object-cover transition-opacity duration-300 ease-out",
+            ready ? "opacity-100" : "opacity-0",
+          )}
           aria-hidden
         />
       )}

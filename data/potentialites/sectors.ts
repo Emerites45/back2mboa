@@ -1,0 +1,101 @@
+import type { Sector } from "@/types/potentialites";
+
+/**
+ * Mots-clés alignés sur la colonne Opportunités du corpus Word.
+ * Matching insensible à la casse, sous-chaîne (voir opportunityMatchesSector).
+ * Finance : volontairement restrictif — le corpus n’en parle presque pas.
+ */
+export const SECTORS: Sector[] = [
+  {
+    id: "agriculture",
+    label: "Agriculture et agro-transformation",
+    keywords: [
+      "agriculture",
+      "élevage",
+      "elevage",
+      "elévage",
+      "cultures",
+      "maraîch",
+      "maraich",
+      "agro",
+      "apiculture",
+      "horticulture",
+      "sylviculture",
+      "pâturage",
+      "paturage",
+      "transformation",
+      "vivrières",
+      "vivrieres",
+    ],
+  },
+  {
+    id: "finance",
+    label: "Finance, fiscalité et paiements",
+    keywords: ["finance", "fiscal", "paiement", "banque", "microfinance"],
+  },
+  {
+    id: "foncier",
+    label: "Foncier, immobilier et construction",
+    keywords: [
+      "carrière",
+      "carriere",
+      "construction",
+      "foncier",
+      "immobilier",
+      "latérite",
+      "laterite",
+      "minière",
+      "miniere",
+      "minérale",
+      "minerale",
+      "cimenterie",
+      "céramique",
+      "ceramique",
+      "sable",
+      "granit",
+      "basalte",
+      "pierre",
+    ],
+  },
+  {
+    id: "tourisme",
+    label: "Tourisme, mobilité et marketing territorial",
+    keywords: [
+      "tourisme",
+      "loisirs",
+      "écotourisme",
+      "ecotourisme",
+      "agrotourisme",
+      "parc",
+      "zoologique",
+      "réserve",
+      "reserve",
+    ],
+  },
+  {
+    id: "eau-energie",
+    label: "Eau et énergie",
+    keywords: [
+      "pêche",
+      "peche",
+      "aquaculture",
+      "aquacultur",
+      "pisciculture",
+      "pisiculture",
+      "hydro",
+      "solaire",
+      "éolienne",
+      "eolienne",
+      "énergie",
+      "energie",
+      "barrage",
+      "retenue",
+      "eau potable",
+    ],
+  },
+  {
+    id: "sante",
+    label: "Santé, social et bien-être",
+    keywords: ["pharmacopée", "pharmacopee", "santé", "sante", "médecine", "medecine"],
+  },
+];

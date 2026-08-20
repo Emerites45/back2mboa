@@ -1,0 +1,226 @@
+.open-road {
+  --or-white: #ffffff;
+  --or-bar: rgba(0, 0, 0, 0.75);
+  --or-fade: rgba(0, 0, 0, 0.65);
+  --or-sep: rgba(255, 255, 255, 0.2);
+  --or-pad-x: clamp(24px, 4vw, 40px);
+  --or-pad-y: clamp(24px, 4vh, 40px);
+  --or-bar-h: 76px;
+  --or-font: var(--font-inter), Inter, system-ui, sans-serif;
+  --or-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  min-height: 700px;
+  height: 100vh;
+  height: 100dvh;
+  color: var(--or-white);
+  font-family: var(--or-font);
+  padding:
+    max(var(--or-pad-y), env(safe-area-inset-top))
+    max(var(--or-pad-x), env(safe-area-inset-right))
+    calc(var(--or-bar-h) + max(var(--or-pad-y), env(safe-area-inset-bottom)))
+    max(var(--or-pad-x), env(safe-area-inset-left));
+}
+
+.open-road *,
+.open-road *::before,
+.open-road *::after {
+  box-sizing: border-box;
+}
+
+.open-road-photo {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.open-road-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+.open-road-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 38%, var(--or-fade) 100%);
+}
+
+.open-road-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 720px;
+  height: 100%;
+  padding-bottom: 8px;
+}
+
+.open-road-main h2 {
+  margin: 0 0 16px;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+.open-road-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--or-white);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.open-road-watch:hover {
+  opacity: 0.85;
+}
+
+.open-road-watch:focus-visible {
+  outline: 2px solid var(--or-white);
+  outline-offset: 6px;
+}
+
+.open-road-duration {
+  opacity: 0.78;
+}
+
+.open-road-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: stretch;
+  min-height: var(--or-bar-h);
+  padding: 0 max(var(--or-pad-x), env(safe-area-inset-right)) env(safe-area-inset-bottom)
+    max(var(--or-pad-x), env(safe-area-inset-left));
+  background: var(--or-bar);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.open-road-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 14px 20px;
+  border: 0;
+  border-right: 1px solid var(--or-sep);
+  background: transparent;
+  color: var(--or-white);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity 200ms var(--or-ease);
+}
+
+.open-road-item:last-child {
+  border-right: 0;
+}
+
+.open-road-item:hover,
+.open-road-item.is-active {
+  opacity: 1;
+}
+
+.open-road-item:focus-visible {
+  outline: 2px solid var(--or-white);
+  outline-offset: -4px;
+}
+
+.open-road-index {
+  flex-shrink: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.open-road-item-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.open-road-item-title {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.open-road-item-schedule {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .open-road-main h2 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+
+  .open-road-bar {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .open-road-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .open-road-item {
+    flex: 0 0 min(78vw, 320px);
+  }
+}
+
+@media (max-width: 640px) {
+  .open-road {
+    --or-bar-h: auto;
+    min-height: 100svh;
+  }
+
+  .open-road-bar {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4px;
+  }
+
+  .open-road-item {
+    flex: none;
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--or-sep);
+  }
+
+  .open-road-item:last-child {
+    border-bottom: 0;
+  }
+}

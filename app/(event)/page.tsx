@@ -6,7 +6,13 @@ import { Button } from '@/components/ui/button';
 import HeroBackgroundSlider from '@/components/hero/HeroBackgroundSlider';
 import { CountdownTimer } from '@/components/hero/CountdownTimer';
 
-import { PlatformSection } from '@/components/sections/PlatformSection';
+import { ContrasteSection } from '@/components/sections/contraste/ContrasteSection';
+import { ModeleSection } from '@/components/sections/modele/ModeleSection';
+import { PotentialitesSection } from '@/components/sections/potentialites/PotentialitesSection';
+import { EcosystemeSection } from '@/components/sections/ecosysteme/EcosystemeSection';
+import { PlateformeSection } from '@/components/sections/plateforme/PlateformeSection';
+import { OpenRoadSection } from '@/components/sections/open-road/OpenRoadSection';
+import { NecessiteSection } from '@/components/sections/necessite/NecessiteSection';
 import { SLIDES_DATA } from '@/data/slides';
 
 export default function HomePage() {
@@ -140,6 +146,13 @@ export default function HomePage() {
 
       </section>
 
+      <ContrasteSection />
+      <ModeleSection />
+      <PotentialitesSection />
+      <EcosystemeSection />
+      <PlateformeSection />
+      <OpenRoadSection />
+      <NecessiteSection />
 
       {/* BOUTON FLOTTANT FIXE "S'INSCRIRE" */}
       <div className="fixed bottom-12 right-6 z-50">

@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Manrope, Oswald, Roboto } from 'next/font/google';
+import { Bricolage_Grotesque, IBM_Plex_Mono, Manrope, Oswald, Roboto } from 'next/font/google';
 import './globals.css';
 
 const manrope = Manrope({
@@ -10,7 +10,7 @@ const manrope = Manrope({
 const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-oswald',
-  weight: ['700'],
+  weight: ['400', '500', '600', '700'],
 });
 
 const roboto = Roboto({
@@ -19,9 +19,21 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ibm-plex-mono',
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-bricolage',
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${manrope.variable} ${oswald.variable} ${roboto.variable}`}>
+    <html lang="fr" className={`${manrope.variable} ${oswald.variable} ${roboto.variable} ${ibmPlexMono.variable} ${bricolage.variable}`}>
       <body className="bg-black text-white font-sans antialiased overflow-x-hidden">
         {children}
       </body>

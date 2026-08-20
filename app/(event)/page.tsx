@@ -1,5 +1,7 @@
 import { SmoothScroll } from '@/components/SmoothScroll';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { ImpactSection } from '@/components/sections/ImpactSection';
+import { StoriesSection } from '@/components/sections/StoriesSection';
 import { ParcoursSection } from '@/components/sections/ParcoursSection';
 import { LiaisonSection } from '@/components/sections/LiaisonSection';
 import { MuseeSection } from '@/components/sections/MuseeSection';
@@ -11,6 +13,8 @@ export default function HomePage() {
       <SmoothScroll />
       <HeroSection />
       <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
+        <ImpactSection />
+        <StoriesSection />
         <ParcoursSection />
         <LiaisonSection />
         <MuseeSection />

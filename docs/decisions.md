@@ -17,6 +17,10 @@
 
 Cadre `.contraste-cards-wrapper` : gouttière `rgba(140,160,162,0.45)` (#8CA0A2), radius 20px, padding 24px. Photo 680px (niveau des mains), fond `#102B24`. Grille 5 × `1fr`. Hover carte : `translateY(-12px) scale(1.02)` + ombre.
 
+## 2026-08-21 — Contraste sans portrait
+
+Portrait `homme.jpeg` retiré. Recalé sur maquette fond vert uni, kicker « Le Contraste », 5 cartes (1re = Le Maire). `id="contraste"`.
+
 ## 2026-08-19 — Session Potentialités
 
 Nouvelle arborescence isolée `components/sections/potentialites/` + `data/potentialites/` + `types/potentialites.ts`.  
@@ -54,6 +58,26 @@ Nouveau dossier isolé `modele/` : 6 cartes secteurs, fond `#F9F9F9`, griffes d�
 ## 2026-08-19 — Section Open Road
 
 Nouveau dossier isolé `open-road/` : hero full-bleed style streaming, photo `femme.jpg`. `id="open-road"`. Copy maquette, pas d’invention.
+
+## 2026-08-21 — Open Road recalé maquette NG
+
+`open-road/` recréé sur `National Geographic.png` : photo route, wordmark, barre programmes bas-droite, filet or actif. JPEG local `national-geographic.jpg`.
+
+## 2026-08-21 — Open Road recalé maquette NG new
+
+`open-road/` recalé sur `National Geographic new.png` : Monument de la Réunification, horaires 6PM / 8PM / 21 juillet, « View all ». JPEG local mis à jour.
+
+## 2026-08-21 — Section Preuve par les chiffres
+
+Nouveau dossier isolé `preuve-chiffres/` : KPI 2022/2023 + tableau Meet Administrations / Meet Écosystème. Copy extraite de `01_Preuve_Chiffres_2022_2023 1.png`, sans invention. `id="preuve-chiffres"`. Montée après Open Road.
+
+## 2026-08-21 — Section Agenda 2026
+
+Nouveau dossier isolé `agenda/` : carousel 4 rendez-vous. Copy slide 01 issue de `Back2Mboa section Events SVG Grok 1.png`. Onglets 02–04 : titres/dates maquette uniquement. `id="agenda"`. Montée après Preuve.
+
+## 2026-08-21 — Section Mairies Championnes
+
+Nouveau dossier isolé `mairies-championnes/` : carousel 6 territoires (SVG maquette + HTML). `id="mairies-championnes"`. Copy figée. Autoplay 6,2 s.
 
 ## 2026-08-20 — Ordre landing (maquette verticale)
 

@@ -29,9 +29,11 @@ types/                        # Interfaces partagées
 lib/                          # Utils / constantes
 ```
 
-`page.tsx` importe et empile les sections. Le Hero est encore inline (à extraire en session Hero).
+`page.tsx` importe et empile les sections. Hero extrait dans `HeroSection` (main).
 
 Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème montés. Écosystème : grille resserrée + orbit CSS 48s (`#digital-twin`).
 
 ## État
-Landing : Hero → Contraste → Modèle → Potentialités → Écosystème → Plateforme → Open Road → Nécessité. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
+Branche `feat/section_paul_alain` fusionnée avec `origin/main` (parcours, liaison, musée, ticker, SmoothScroll).
+
+Landing : Hero → Parcours → Liaison → Musée → Ticker → Contraste → Modèle → Mairies Championnes → Potentialités → Écosystème → Plateforme → Open Road → Preuve par les chiffres → Agenda 2026 → Nécessité. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.

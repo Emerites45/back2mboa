@@ -6,8 +6,9 @@ export type OpenRoadProgram = {
 };
 
 export type OpenRoadCopy = {
-  title: string;
+  brand: string;
   watchLabel: string;
-  duration: string;
+  viewAll: string;
+  image: string;
   programs: [OpenRoadProgram, OpenRoadProgram, OpenRoadProgram];
 };

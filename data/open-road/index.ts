@@ -1,27 +1,29 @@
 import type { OpenRoadCopy } from "@/types/open-road";
 
+/** Copy + cadrage maquette National Geographic new.png. */
 export const OPEN_ROAD_COPY: OpenRoadCopy = {
-  title: "The Open Road",
+  brand: "BACK 2 MBOA",
   watchLabel: "Watch trailer",
-  duration: "60 min",
+  viewAll: "View all",
+  image: "/images/open-road/national-geographic.jpg",
   programs: [
     {
       id: "open-road",
       index: "01",
       title: "The Open Road",
-      schedule: "EVERY TUESDAY | 6PM",
+      schedule: "Every Tuesday | 6PM",
     },
     {
       id: "rainforest",
       index: "02",
       title: "A Journey Into The Rainforest",
-      schedule: "EVERY FRIDAY | 8PM",
+      schedule: "Every Friday | 8PM",
     },
     {
       id: "summit",
       index: "03",
       title: "Summit Seekers",
-      schedule: "JULY 27 | 8PM",
+      schedule: "July 21 | 6PM",
     },
   ],
 };

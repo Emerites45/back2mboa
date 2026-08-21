@@ -17,7 +17,7 @@ export const CONTRASTE_COPY = {
 export const CONTRASTE_ACTORS: ContrasteActor[] = [
   {
     id: "maire",
-    label: "Le Contraste",
+    label: "Le Maire",
     quote:
       "On manque de moyens. Les investisseurs ne connaissent pas notre territoire.",
     sentiments: ["Frustration", "Impuissance", "Espoir Contenu"],

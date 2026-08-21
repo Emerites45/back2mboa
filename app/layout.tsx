@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Bricolage_Grotesque, Fraunces, IBM_Plex_Mono, IBM_Plex_Sans, Inter, JetBrains_Mono, Manrope, Oswald } from 'next/font/google';
+import { Bricolage_Grotesque, Fraunces, IBM_Plex_Mono, IBM_Plex_Sans, Inter, JetBrains_Mono, Manrope, Oswald, Roboto } from 'next/font/google';
 import './globals.css';
 
 const manrope = Manrope({
@@ -11,6 +11,12 @@ const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-oswald',
   weight: ['700'],
+});
+
+const roboto = Roboto({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto',
 });
 
 const inter = Inter({
@@ -51,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="fr"
-      className={`${manrope.variable} ${oswald.variable} ${inter.variable} ${jetbrains.variable} ${ibmSans.variable} ${ibmMono.variable} ${bricolage.variable} ${fraunces.variable}`}
+      className={`${manrope.variable} ${oswald.variable} ${roboto.variable} ${inter.variable} ${jetbrains.variable} ${ibmSans.variable} ${ibmMono.variable} ${bricolage.variable} ${fraunces.variable}`}
     >
       <body className="bg-black text-white font-sans antialiased overflow-x-hidden">
         {children}

@@ -45,3 +45,16 @@ scripts/*.png
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# docs locales
+/docs/
+
+# Cursor / agents IA (hors AGENTS.md / CLAUDE.md du template Next)
+.cursor/
+.cursorrules
+.cursorignore
+/project_context.md
+
+# pnpm local — le dépôt reste npm (package-lock.json)
+pnpm-lock.yaml
+pnpm-workspace.yaml

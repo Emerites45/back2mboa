@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="160" height="48" viewBox="0 0 160 48" fill="none">
+  <rect x="4" y="10" width="28" height="28" rx="4" stroke="white" stroke-opacity="0.92" stroke-width="2.5"/>
+  <path d="M12 30V18h5.4c3.2 0 5.2 1.6 5.2 4.2 0 2.6-2 4.2-5.2 4.2H16.2V30H12zm5.2-9.2H16.2v5.4h1c1.7 0 2.7-.8 2.7-2.7 0-1.8-1-2.7-2.7-2.7z" fill="white" fill-opacity="0.92"/>
+  <text x="44" y="30" fill="white" fill-opacity="0.92" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="0.04em">PARTNER C</text>
+</svg>

@@ -123,7 +123,8 @@ export function LiaisonSection() {
         aria-hidden="true"
       />
 
-      <div className="relative z-[1] overflow-hidden rounded-t-[71px]">
+      {/* <div className="relative z-[1] overflow-hidden rounded-t-[71px]"> */}
+      <div className="relative z-[1] overflow-hidden">
         <Image
           src="/images/background_link_section-1920.webp"
           alt=""

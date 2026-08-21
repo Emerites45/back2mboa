@@ -13,6 +13,8 @@ const PLAN = [
   { file: "sky.png", widths: [768, 1280, 1920, 2560], quality: 76, opaque: true },
   { file: "mount_1.png", widths: [768, 1280, 1920, 2560], quality: 80 },
   { file: "mount_2.png", widths: [768, 1280, 1920, 2560], quality: 80 },
+  { file: "resultat_1.png", widths: [768, 1280, 1920], quality: 80, opaque: true },
+  { file: "resultat_2.png", widths: null, quality: 80, opaque: true },
   
 ];
 

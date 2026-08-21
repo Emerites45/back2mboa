@@ -38,7 +38,13 @@ const TYPE = {
   headlineWeight: 700,
 } as const;
 
-const PARTNERS = [1, 2, 3, 4, 5] as const;
+const PARTNERS = [
+  { src: "/images/partners/partner-1.svg", alt: "Logo partenaire 1" },
+  { src: "/images/partners/partner-2.svg", alt: "Logo partenaire 2" },
+  { src: "/images/partners/partner-3.svg", alt: "Logo partenaire 3" },
+  { src: "/images/partners/partner-4.svg", alt: "Logo partenaire 4" },
+  { src: "/images/partners/partner-5.svg", alt: "Logo partenaire 5" },
+] as const;
 
 const BAND = {
   top: "65%",
@@ -188,14 +194,19 @@ export function ImpactSection() {
             style={{ backdropFilter: `blur(${BAND.blur})` }}
           >
             {PARTNERS.map((partner) => (
-              <span
-                key={partner}
-                className={
-                  "font-[family-name:var(--font-ibm-plex-mono)] text-sm font-medium text-white/90 md:text-base"
-                }
+              <div
+                key={partner.src}
+                className="relative flex h-8 w-[7.5rem] items-center justify-center md:h-10 md:w-[9rem]"
               >
-                {partner}
-              </span>
+                <Image
+                  src={partner.src}
+                  alt={partner.alt}
+                  width={160}
+                  height={48}
+                  unoptimized
+                  className="h-full w-auto max-w-full object-contain opacity-90"
+                />
+              </div>
             ))}
           </div>
         </div>

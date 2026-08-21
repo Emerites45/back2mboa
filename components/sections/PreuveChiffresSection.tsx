@@ -88,11 +88,6 @@ const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
     y23: { kind: "text", strong: "70", tone: "jaune" },
   },
   {
-    label: "Institutions",
-    y22: { kind: "tags", tags: INST_2022 },
-    y23: { kind: "tags", tags: INST_2023 },
-  },
-  {
     label: "Satisfaction CTD",
     y22: { kind: "text", strong: "89 %", tone: "aqua" },
     y23: { kind: "na" },
@@ -116,6 +111,11 @@ const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
     label: "Portée numérique",
     y22: { kind: "na" },
     y23: { kind: "text", strong: "60 000+", tone: "jaune" },
+  },
+  {
+    label: "Institutions",
+    y22: { kind: "tags", tags: INST_2022 },
+    y23: { kind: "tags", tags: INST_2023 },
   },
 ];
 

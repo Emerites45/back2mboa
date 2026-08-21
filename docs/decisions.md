@@ -82,3 +82,7 @@ Nouveau dossier isolé `mairies-championnes/` : carousel 6 territoires (SVG maqu
 ## 2026-08-20 — Ordre landing (maquette verticale)
 
 Assemblage dans `page.tsx` calé sur le fil narratif de la capture : Hero → Contraste → Modèle → Potentialités → Écosystème → Plateforme → Open Road → Nécessité. Bandeau stats 4 icônes et footer paysage absents du code (non inventés).
+
+## 2026-08-21 — Merge feat/section_williams
+
+`feat/section_williams` mergé dans `feat/section_paul_alain`. Sections Williams (Impact, Stories, Résultats, Preuve impact) montées sous le Hero dans le bloc paper ; sections Paul Alain conservées ensuite. Deux `PreuveChiffresSection` coexistent (alias `PreuveChiffresImpact` vs `preuve-chiffres/`). Polices unifiées dans `layout.tsx` ; `--font-ibm-plex-mono` aliasé sur `--font-ibm-mono`.

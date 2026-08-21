@@ -10,7 +10,7 @@ const manrope = Manrope({
 const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-oswald',
-  weight: ['700'],
+  weight: ['400', '500', '600', '700'],
 });
 
 const roboto = Roboto({
@@ -37,12 +37,13 @@ const ibmSans = IBM_Plex_Sans({
 
 const ibmMono = IBM_Plex_Mono({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-ibm-mono',
 });
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-bricolage',
 });
 
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="fr"
       className={`${manrope.variable} ${oswald.variable} ${roboto.variable} ${inter.variable} ${jetbrains.variable} ${ibmSans.variable} ${ibmMono.variable} ${bricolage.variable} ${fraunces.variable}`}
+      style={{ ['--font-ibm-plex-mono' as string]: 'var(--font-ibm-mono)' }}
     >
       <body className="bg-black text-white font-sans antialiased overflow-x-hidden">
         {children}

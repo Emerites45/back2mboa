@@ -26,26 +26,30 @@ export default function HomePage() {
     <>
       <SmoothScroll />
       <HeroSection />
-      <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
-        <ImpactSection />
-        <StoriesSection />
-        <ParcoursSection />
-        <ResultatsSection />
-        <PreuveChiffresImpact />
-        <LiaisonSection />
-        <MuseeSection />
-        <TickerSection />
-      </div>
       <ContrasteSection />
-      <ModeleSection />
+      <OpenRoadSection />
       <MairiesChampionnesSection />
+      <ModeleSection />
       <PotentialitesSection />
-      <EcosystemeSection />
+      <NecessiteSection />
       <PlateformeSection />
       <OpenRoadSection />
-      <PreuveChiffresSection />
+      <ParcoursSection />
+      <ImpactSection />
+      <ResultatsSection />
+      <PreuveChiffresImpact />
+      <EcosystemeSection />
+      <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
+        {/* <StoriesSection />
+        <LiaisonSection />
+        <MuseeSection /> */}
+        <TickerSection />
+      </div>
+      {/* <PreuveChiffresSection /> */}
+      <LiaisonSection />
+      <MuseeSection />
       <AgendaSection />
-      <NecessiteSection />
+      
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

@@ -40,8 +40,8 @@ export default function HomePage() {
       <PreuveChiffresImpact />
       <EcosystemeSection />
       <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
-        {/* <StoriesSection />
-        <LiaisonSection />
+        <StoriesSection />
+        {/* <LiaisonSection />
         <MuseeSection /> */}
         <TickerSection />
       </div>

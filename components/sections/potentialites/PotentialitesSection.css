@@ -1,0 +1,591 @@
+.potentialites {
+  --pt-bg: #0b1210;
+  --pt-bg-2: #111a17;
+  --pt-gold: #e3a73b;
+  --pt-aqua: #00c2a8;
+  --pt-text: #f5f5f0;
+  --pt-muted: #a8b5a8;
+  --pt-line: rgba(227, 167, 59, 0.18);
+  --pt-font-title: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --pt-font-body: var(--font-ibm-sans), "IBM Plex Sans", sans-serif;
+  --pt-font-mono: var(--font-ibm-mono), "IBM Plex Mono", monospace;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 56px 1fr;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--pt-text);
+  background: linear-gradient(180deg, var(--pt-bg), var(--pt-bg-2));
+  font-family: var(--pt-font-body);
+}
+
+.potentialites *,
+.potentialites *::before,
+.potentialites *::after {
+  box-sizing: border-box;
+}
+
+.potentialites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--pt-line);
+  background: rgba(11, 18, 16, 0.85);
+}
+
+.potentialites-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.potentialites-brand strong {
+  font-family: var(--pt-font-title);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.potentialites-brand span {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pt-muted);
+}
+
+.potentialites-filter {
+  font-size: 12px;
+  color: var(--pt-muted);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-board {
+  display: grid;
+  grid-template-columns: minmax(280px, 30%) minmax(0, 42%) minmax(260px, 28%);
+  min-height: 0;
+}
+
+.potentialites-panel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--pt-line);
+}
+
+.potentialites-panel:last-child {
+  border-right: none;
+}
+
+.potentialites-panel-head {
+  padding: 16px 18px 10px;
+  border-bottom: 1px solid var(--pt-line);
+}
+
+.potentialites-panel-head p {
+  margin: 0 0 4px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pt-gold);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-panel-head h2 {
+  margin: 0;
+  font-family: var(--pt-font-title);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.potentialites-panel-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 16px 24px;
+}
+
+.potentialites-back {
+  margin-bottom: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pt-aqua);
+  font-size: 12px;
+  font-family: var(--pt-font-mono);
+  cursor: pointer;
+}
+
+.potentialites-back:hover,
+.potentialites-back:focus-visible {
+  color: var(--pt-gold);
+  outline: none;
+}
+
+.potentialites-empty {
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px dashed rgba(0, 194, 168, 0.28);
+  border-radius: 12px;
+  color: var(--pt-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.potentialites-commune-btn,
+.potentialites-sector {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+}
+
+.potentialites-commune-btn {
+  display: block;
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-color: rgba(245, 245, 240, 0.08);
+}
+
+.potentialites-commune-btn:hover,
+.potentialites-commune-btn:focus-visible {
+  border-color: var(--pt-gold);
+  box-shadow: 0 0 0 1px rgba(227, 167, 59, 0.35);
+  outline: none;
+}
+
+.potentialites-commune-btn strong {
+  display: block;
+  font-size: 14px;
+}
+
+.potentialites-commune-btn span {
+  font-size: 11px;
+  color: var(--pt-muted);
+}
+
+.potentialites-fiche-kicker {
+  margin: 0 0 6px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pt-aqua);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-fiche-title {
+  margin: 0 0 8px;
+  font-family: var(--pt-font-title);
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+.potentialites-maire {
+  margin: 0 0 14px;
+  color: var(--pt-muted);
+  font-size: 13px;
+}
+
+.potentialites-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.potentialites-stats div {
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.potentialites-stats span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pt-muted);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-stats strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.potentialites-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.potentialites-table th {
+  text-align: left;
+  padding: 8px 6px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pt-gold);
+  border-bottom: 1px solid var(--pt-line);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-table td {
+  padding: 10px 6px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(245, 245, 240, 0.06);
+  color: var(--pt-muted);
+  line-height: 1.45;
+}
+
+.potentialites-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.potentialites-table td:first-child {
+  color: var(--pt-text);
+  font-weight: 600;
+  width: 22%;
+}
+
+.potentialites-tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(0, 194, 168, 0.12);
+  color: var(--pt-text);
+  font-size: 10px;
+}
+
+.potentialites-tag.is-active {
+  background: rgba(227, 167, 59, 0.2);
+  color: var(--pt-gold);
+}
+
+.potentialites-map {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.potentialites-map-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.potentialites-map-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.potentialites-map-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.potentialites-region,
+.map-region {
+  fill: transparent;
+  fill-rule: evenodd;
+  stroke: transparent;
+  stroke-width: 1.5;
+  cursor: pointer;
+  touch-action: manipulation;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.18s ease, stroke 0.18s ease, filter 0.18s ease;
+}
+
+.potentialites-region:hover,
+.potentialites-region.is-hover {
+  fill: rgba(227, 167, 59, 0.22);
+  stroke: var(--pt-gold);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 6px rgba(227, 167, 59, 0.55));
+}
+
+.potentialites-region.is-selected {
+  fill: rgba(0, 194, 168, 0.18);
+  stroke: var(--pt-aqua);
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 7px rgba(0, 194, 168, 0.5));
+}
+
+.potentialites-region.is-muted {
+  fill: rgba(11, 18, 16, 0.38);
+  cursor: default;
+}
+
+.potentialites-region.is-lit {
+  fill: rgba(0, 194, 168, 0.07);
+}
+
+.potentialites-map-stage.is-filter .potentialites-region:hover,
+.potentialites-map-stage.is-filter .potentialites-region.is-hover {
+  fill: rgba(0, 194, 168, 0.1);
+  stroke: transparent;
+  filter: none;
+}
+
+.potentialites-map-stage.is-filter .potentialites-region.is-muted:hover {
+  fill: rgba(11, 18, 16, 0.38);
+}
+
+.potentialites-region:focus-visible {
+  outline: 2px solid var(--pt-aqua);
+  outline-offset: 2px;
+}
+
+.potentialites-region-card {
+  position: absolute;
+  z-index: 5;
+  top: 14px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 220px;
+  max-width: calc(100% - 28px);
+  padding: 12px 18px 13px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 194, 168, 0.35);
+  background: rgba(11, 18, 16, 0.88);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: potentialites-card-in 0.3s ease;
+}
+
+.potentialites-region-card strong {
+  margin-bottom: 4px;
+  font-family: var(--pt-font-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--pt-text);
+}
+
+.potentialites-region-card p {
+  margin: 0;
+  color: var(--pt-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  font-family: var(--pt-font-mono);
+  letter-spacing: 0.02em;
+}
+
+@keyframes potentialites-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.potentialites-pin {
+  cursor: pointer;
+  outline: none;
+}
+
+.potentialites-pin-scale {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: potentialites-pin-in 0.38s ease both;
+}
+
+.potentialites-pin-halo {
+  fill: rgba(227, 167, 59, 0.2);
+  stroke: none;
+  transition: fill 0.35s ease;
+}
+
+.potentialites-pin-core {
+  fill: #e3a73b;
+  stroke: #0b1210;
+  stroke-width: 1.4;
+  transition: fill 0.35s ease, filter 0.35s ease;
+}
+
+.potentialites-pin:hover .potentialites-pin-scale,
+.potentialites-pin:focus-visible .potentialites-pin-scale {
+  transform: scale(1.16);
+}
+
+.potentialites-pin:hover .potentialites-pin-halo,
+.potentialites-pin:focus-visible .potentialites-pin-halo {
+  fill: rgba(227, 167, 59, 0.42);
+}
+
+.potentialites-pin:hover .potentialites-pin-core,
+.potentialites-pin:focus-visible .potentialites-pin-core {
+  filter: drop-shadow(0 0 6px rgba(227, 167, 59, 0.7));
+}
+
+.potentialites-pin.is-active .potentialites-pin-halo {
+  fill: rgba(0, 194, 168, 0.32);
+}
+
+.potentialites-pin.is-active .potentialites-pin-core {
+  fill: #00c2a8;
+  filter: drop-shadow(0 0 6px rgba(0, 194, 168, 0.55));
+}
+
+.potentialites-pin:focus-visible .potentialites-pin-core {
+  outline: 2px solid var(--pt-aqua);
+}
+
+@keyframes potentialites-pin-in {
+  from {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.potentialites-tooltip {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 11px;
+  border-radius: 8px;
+  background: rgba(11, 18, 16, 0.92);
+  border: 1px solid var(--pt-gold);
+  color: var(--pt-text);
+  font-size: 12px;
+  font-family: var(--pt-font-mono);
+  pointer-events: none;
+  transform: translate(-50%, -120%);
+}
+
+.potentialites-tooltip.is-rich {
+  min-width: 168px;
+  padding: 9px 12px;
+}
+
+.potentialites-tooltip strong {
+  font-family: var(--pt-font-title);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.potentialites-tooltip span {
+  color: var(--pt-muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.potentialites-sector {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border-color: rgba(245, 245, 240, 0.08);
+  transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.potentialites-sector:hover,
+.potentialites-sector:focus-visible {
+  border-color: var(--pt-gold);
+  outline: none;
+}
+
+.potentialites-sector.is-active {
+  border-color: var(--pt-aqua);
+  background: rgba(0, 194, 168, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 194, 168, 0.12);
+}
+
+.potentialites-sector strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.potentialites-sector em {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--pt-muted);
+  font-family: var(--pt-font-mono);
+}
+
+.potentialites-tabs {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .potentialites {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .potentialites-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--pt-line);
+  }
+
+  .potentialites-tabs button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--pt-line);
+    background: transparent;
+    color: var(--pt-muted);
+    cursor: pointer;
+  }
+
+  .potentialites-tabs button.is-active {
+    color: var(--pt-text);
+    border-color: var(--pt-aqua);
+  }
+
+  .potentialites-board {
+    display: block;
+  }
+
+  .potentialites-panel {
+    display: none;
+    border-right: none;
+    min-height: 70vh;
+  }
+
+  .potentialites-panel.is-mobile-on {
+    display: flex;
+  }
+
+  .potentialites-map {
+    min-height: 70vh;
+  }
+}

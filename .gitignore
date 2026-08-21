@@ -33,6 +33,12 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# secrets
+LocationIQ.txt
+
+# calibration debug rasters (régénérés par scripts/calibrate_cmr_map.py)
+scripts/*.png
+
 # vercel
 .vercel
 

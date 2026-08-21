@@ -98,6 +98,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Contraste — design system */
+  --font-primary: var(--font-inter), "Inter", system-ui, sans-serif;
+  --color-dark-green: #102B24;
+  --color-wrapper-space: rgba(140, 160, 162, 0.45);
+  --color-card-bg: rgba(235, 235, 235, 0.92);
+  --color-red: #D33636;
+  --color-text-dark: #2B2B2B;
+  --color-text-white: #ffffff;
+  --color-text-gray: #e5e7eb;
+  --color-accent-red: #D33636;
+  --color-card-text: #2B2B2B;
+
   --brand-ink: #1a1a1a;
   --brand-copy: #6b7280;
   --brand-teal: #45b3a9;

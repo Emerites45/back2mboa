@@ -1,0 +1,326 @@
+.open-road {
+  --or-ink: #ffffff;
+  --or-gold: #e8b923;
+  --or-bar: rgba(10, 10, 10, 0.86);
+  --or-sep: rgba(255, 255, 255, 0.12);
+  --or-pad-x: clamp(1.35rem, 3.8vw, 2.85rem);
+  --or-pad-y: clamp(1.2rem, 3.2vh, 2.4rem);
+  --or-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  --or-display: var(--font-oswald), Oswald, ui-sans-serif, sans-serif;
+  --or-script: var(--font-fraunces), Fraunces, Georgia, serif;
+  --or-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  min-height: 36rem;
+  height: 100svh;
+  color: var(--or-ink);
+  font-family: var(--or-sans);
+}
+
+.open-road *,
+.open-road *::before,
+.open-road *::after {
+  box-sizing: border-box;
+}
+
+.open-road::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, transparent 28%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.38) 0%, transparent 42%);
+}
+
+.open-road-photo {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center 38%;
+}
+
+.open-road-brand {
+  position: absolute;
+  top: max(var(--or-pad-y), env(safe-area-inset-top));
+  left: max(var(--or-pad-x), env(safe-area-inset-left));
+  z-index: 2;
+  margin: 0;
+  font-family: var(--or-display);
+  font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+
+.open-road-brand span {
+  display: inline-block;
+  margin-inline: 0.06em;
+  font-family: var(--or-script);
+  font-size: 1.55em;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.7;
+  text-transform: none;
+  transform: translateY(0.08em);
+}
+
+.open-road-footer {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.open-road-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding:
+    0
+    var(--or-pad-x)
+    clamp(1.65rem, 4.2vh, 2.9rem)
+    max(var(--or-pad-x), env(safe-area-inset-left));
+}
+
+.open-road-title {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 5.6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  text-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+  animation: or-title-in 480ms var(--or-ease) both;
+}
+
+.open-road-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+.open-road-watch,
+.open-road-viewall {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.15rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--or-ink);
+  font-family: inherit;
+  cursor: pointer;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.open-road-watch {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.open-road-viewall {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+}
+
+.open-road-watch:hover,
+.open-road-viewall:hover {
+  opacity: 0.88;
+}
+
+.open-road-watch:focus-visible,
+.open-road-viewall:focus-visible {
+  outline: 2px solid var(--or-ink);
+  outline-offset: 6px;
+}
+
+.open-road-play {
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+.open-road-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 46rem);
+  min-height: 5.15rem;
+  background: var(--or-bar);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
+}
+
+.open-road-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 1rem 1.05rem 0.95rem;
+  border: 0;
+  border-right: 1px solid var(--or-sep);
+  background: transparent;
+  color: var(--or-ink);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.open-road-item:last-child {
+  border-right: 0;
+}
+
+.open-road-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: var(--or-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--or-ease);
+}
+
+.open-road-item.is-active::before {
+  transform: scaleX(1);
+}
+
+.open-road-item:focus-visible {
+  outline: 2px solid var(--or-ink);
+  outline-offset: -4px;
+}
+
+.open-road-index {
+  flex-shrink: 0;
+  font-size: 1.55rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.28);
+  transition: color 220ms var(--or-ease);
+}
+
+.open-road-item.is-active .open-road-index {
+  color: var(--or-ink);
+}
+
+.open-road-item-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.open-road-item-title {
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.55;
+  transition: opacity 220ms var(--or-ease);
+}
+
+.open-road-item.is-active .open-road-item-title {
+  opacity: 1;
+}
+
+.open-road-item-schedule {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  opacity: 0.42;
+}
+
+.open-road-item.is-active .open-road-item-schedule {
+  opacity: 0.72;
+}
+
+@keyframes or-title-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .open-road-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .open-road-main {
+    padding-bottom: 1.25rem;
+  }
+
+  .open-road-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .open-road {
+    min-height: 100svh;
+  }
+
+  .open-road-title {
+    max-width: 11ch;
+    font-size: clamp(2.1rem, 11vw, 3rem);
+  }
+
+  .open-road-bar {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .open-road-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .open-road-item {
+    flex: 0 0 min(78vw, 17.5rem);
+  }
+
+  .open-road-item-title {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .open-road-title,
+  .open-road-item,
+  .open-road-item::before {
+    animation: none;
+    transition: none;
+  }
+}

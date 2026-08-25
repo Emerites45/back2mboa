@@ -1,0 +1,98 @@
+/* Scoped explicitly under .b2m-cmp — no leakage to landing */
+
+.b2m-cmp { isolation: isolate; position: relative; z-index: 0; }
+.b2m-cmp i.fa-solid, .b2m-cmp i.fa-star, .b2m-cmp i.fa-star-half-stroke { font-style: normal; font-family: inherit; }
+.b2m-cmp .fa-star::before { content: "★"; }
+.b2m-cmp .fa-star.empty::before { content: "★"; opacity: 0.28; color: var(--star-empty, #D5D0C6); }
+.b2m-cmp .fa-star-half-stroke::before { content: "★"; opacity: 0.62; }
+.b2m-cmp{
+  --jaune:#FFD506; --vert:#119D63; --forest:#0A2B21;
+  --canvas:#F7F3EB; --ink:#1A1F1C; --muted:#5A6B60;
+  --line:rgba(10,43,33,.1); --card:#fff;
+  --star:#FFD506; --star-empty:#D5D0C6;
+}.b2m-cmp, .b2m-cmp *{box-sizing:border-box;margin:0;padding:0}.b2m-cmp{font-family:var(--font-inter), system-ui, sans-serif;background:var(--canvas);color:var(--ink)}.b2m-cmp .cmp{
+  width:100%;max-width:100%;margin:0 auto;
+  padding:clamp(40px,6vw,72px) clamp(12px,2.5vw,28px);
+}.b2m-cmp .cmp-inner{max-width:1280px;margin:0 auto}.b2m-cmp .cmp-eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--vert);margin-bottom:12px;
+}.b2m-cmp .cmp-title{
+  font-family:var(--font-bricolage), sans-serif;font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-.03em;
+  color:var(--forest);margin-bottom:10px;max-width:28ch;
+}.b2m-cmp .cmp-sub{
+  font-size:.98rem;line-height:1.55;color:var(--muted);max-width:56ch;margin-bottom:36px;
+}.b2m-cmp .table-wrap{
+  width:100%;border-radius:12px;
+  border:1px solid var(--line);background:var(--card);
+  box-shadow:0 8px 32px rgba(10,43,33,.06);overflow:hidden;
+}.b2m-cmp table{width:100%;border-collapse:collapse;table-layout:fixed}.b2m-cmp thead th{
+  padding:18px 14px;text-align:left;font-size:.72rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  border-bottom:1px solid var(--line);background:#FBF9F4;vertical-align:middle;
+}.b2m-cmp thead th:first-child{width:22%;color:var(--muted)}.b2m-cmp thead th.col-classic{width:14%;color:var(--muted)}.b2m-cmp thead th.col-forum{width:14%;color:var(--muted)}.b2m-cmp thead th.col-b2m{
+  width:50%;color:var(--forest);
+  background:rgba(17,157,99,.08);
+  border-bottom-color:rgba(17,157,99,.2);
+  position:relative;text-align:center;
+}.b2m-cmp thead th.col-b2m::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--vert);
+}.b2m-cmp .logo-head{display:flex;flex-direction:column;align-items:center;gap:8px}.b2m-cmp .logo-head a{
+  display:inline-block;line-height:0;
+  transition:transform .2s ease, opacity .2s;
+}.b2m-cmp .logo-head a:hover{transform:scale(1.04);opacity:.92}.b2m-cmp .logo-head img{
+  height:42px;width:auto;max-width:200px;object-fit:contain;display:block;
+}.b2m-cmp .badge-reco{
+  display:inline-block;font-size:.62rem;font-weight:700;
+  background:var(--vert);color:#fff;padding:3px 9px;border-radius:99px;letter-spacing:.05em;
+}.b2m-cmp tbody td{
+  padding:16px 14px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-size:.88rem;
+}.b2m-cmp tbody tr:last-child td{border-bottom:none}.b2m-cmp tbody tr:hover td{background:rgba(17,157,99,.02)}.b2m-cmp tbody tr:hover td.cell-b2m{background:rgba(17,157,99,.06)}.b2m-cmp .critere{
+  font-weight:600;color:var(--forest);font-size:.9rem;
+  display:flex;align-items:flex-start;gap:10px;
+}.b2m-cmp .critere i{
+  color:var(--vert);font-size:.95rem;margin-top:2px;flex-shrink:0;width:1.1em;text-align:center;
+}.b2m-cmp .critere .critere-text{flex:1}.b2m-cmp .critere span{
+  display:block;font-weight:400;font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.4;
+}.b2m-cmp .stars{display:inline-flex;gap:3px;align-items:center;color:var(--star)}.b2m-cmp .stars .fa-star, .b2m-cmp .stars .fa-star-half-stroke{font-size:.85rem}.b2m-cmp .stars .empty{color:var(--star-empty)}.b2m-cmp .cell-b2m{background:rgba(17,157,99,.03)}.b2m-cmp .b2m-block{display:flex;flex-direction:column;gap:8px}.b2m-cmp .b2m-why{
+  font-size:.8rem;line-height:1.45;color:var(--forest);
+  padding:8px 10px;border-radius:8px;
+  background:rgba(255,213,6,.15);border-left:3px solid var(--jaune);
+}.b2m-cmp .foot-note{
+  margin-top:28px;font-size:.84rem;color:var(--muted);line-height:1.5;
+  display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;
+}.b2m-cmp .foot-note .cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--jaune);color:var(--forest);font-weight:700;font-size:.88rem;
+  padding:12px 20px;border-radius:99px;text-decoration:none;transition:filter .2s;
+}.b2m-cmp .foot-note .cta:hover{filter:brightness(1.05)}.b2m-cmp .foot-note .cta i{font-size:.85rem}/* —— Étoiles Font Awesome (états) —— */.b2m-cmp .stars .fa-star, .b2m-cmp .stars .fa-star-half-stroke{
+  font-size:.9rem;
+  line-height:1;
+}.b2m-cmp .stars .fa-star:not(.empty), .b2m-cmp .stars .fa-star-half-stroke{
+  color:var(--star);
+}.b2m-cmp .stars .fa-star.empty, .b2m-cmp .stars .empty{
+  color:var(--star-empty);
+  opacity:.95;
+}/* —— Accessibilité focus —— */.b2m-cmp a:focus-visible, .b2m-cmp .logo-head a:focus-visible, .b2m-cmp .cta:focus-visible{
+  outline:2px solid var(--vert);
+  outline-offset:3px;
+  border-radius:4px;
+}.b2m-cmp .logo-head a:focus-visible{border-radius:6px}/* —— Responsive étendu —— */
+@media(max-width:900px){.b2m-cmp thead th{font-size:.68rem;padding:14px 10px}.b2m-cmp tbody td{padding:14px 10px}.b2m-cmp .critere{font-size:.84rem;gap:8px}.b2m-cmp .critere span{font-size:.74rem}.b2m-cmp .b2m-why{font-size:.76rem;padding:7px 9px}.b2m-cmp .logo-head img{height:36px;max-width:160px}}
+@media(max-width:720px){.b2m-cmp table{table-layout:auto;min-width:640px}.b2m-cmp .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}.b2m-cmp .logo-head img{height:32px}.b2m-cmp .b2m-why{font-size:.74rem}.b2m-cmp .cmp-title{font-size:1.35rem}}
+@media(max-width:480px){.b2m-cmp .cmp{padding:28px 12px}.b2m-cmp .foot-note{flex-direction:column;align-items:flex-start}}/* —— Préférence motion réduite —— */
+@media(prefers-reduced-motion:reduce){.b2m-cmp .logo-head a, .b2m-cmp .cta{transition:none}}/* —— Impression —— */
+@media print{.b2m-cmp .cmp{padding:0}.b2m-cmp .table-wrap{box-shadow:none;border:1px solid #ccc}.b2m-cmp .cta{display:none}.b2m-cmp thead th.col-b2m{background:#eee!important}.b2m-cmp .cell-b2m, .b2m-cmp .b2m-why{background:#f9f9f9!important}}/* —— Ancre La bonne porte —— */.b2m-cmp #la-bonne-porte{
+  scroll-margin-top:80px;
+  padding:clamp(40px,6vw,64px) clamp(16px,4vw,28px);
+  max-width:800px;
+  margin:0 auto;
+}.b2m-cmp #la-bonne-porte .eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--vert);margin-bottom:10px;
+}.b2m-cmp #la-bonne-porte h2{
+  font-family:var(--font-bricolage), sans-serif;
+  font-size:clamp(1.25rem,2.5vw,1.6rem);
+  color:var(--forest);margin-bottom:12px;letter-spacing:-.02em;
+}.b2m-cmp #la-bonne-porte p{color:var(--muted);line-height:1.55;font-size:.95rem}

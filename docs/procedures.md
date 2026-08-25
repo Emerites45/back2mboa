@@ -1,20 +1,6 @@
 # Procédures
 
-## Lancer le projet
-```bash
-cd back2mboa
-npm install
-npm run dev
-```
-Ouvrir http://localhost:3000
-
-## Ajouter une section (session d’un développeur)
-1. Créer `components/sections/<nom>/XxxSection.tsx`
-2. Mettre les mocks dans `data/<nom>.ts`
-3. Déclarer les types partagés dans `types/`
-4. Importer et monter **uniquement** dans `app/(event)/page.tsx`
-5. Ne pas modifier le markup des autres dossiers `components/sections/*`
-
-## Conflits Git
-- Travailler uniquement dans son dossier de section
-- `page.tsx` : n’ajouter que l’import + le composant, dans l’ordre des sections
+- `npm run dev` à la racine `back2mboa/`.
+- CSS de port HTML : wrapper `.b2m-*` obligatoire autour du markup d’origine.
+- Liens : `next/link` vers `/inscription`, `#billets`, `#partenaires`.
+- `app/(event)/page.tsx` = assemblage uniquement : importer la section, la poser dans le flux, ne pas y mettre de logique métier.

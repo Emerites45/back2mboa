@@ -5,6 +5,7 @@ import { HERO_LINES } from "@/data/hero-landing";
 
 const N = HERO_LINES.length;
 const TRIPLE = [...HERO_LINES, ...HERO_LINES, ...HERO_LINES];
+const MOVE_MS = 750; // cadence du déplacement, un cran à la fois
 
 function tickMs(el: HTMLElement | null): number {
   if (!el) return 2600;
@@ -18,7 +19,8 @@ export function BottomLinesWheel() {
   const indexRef = useRef(0);
   const ihRef = useRef(56);
   const animatingRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const unlockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [logical, setLogical] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduceMotion = useRef(false);
@@ -34,7 +36,8 @@ export function BottomLinesWheel() {
     (withTransition: boolean, idx: number) => {
       const list = listRef.current;
       if (!list) return;
-      list.style.transition = withTransition ? "transform .75s var(--ease)" : "none";
+      list.style.willChange = withTransition ? "transform" : "auto";
+      list.style.transition = withTransition ? `transform ${MOVE_MS}ms var(--ease)` : "none";
       list.style.transform = `translate3d(0, ${yFor(idx)}px, 0)`;
     },
     [yFor],
@@ -55,48 +58,52 @@ export function BottomLinesWheel() {
       if (animatingRef.current && !manual) return;
       const prev = indexRef.current;
       const i = ((next % N) + N) % N;
+      if (i === prev) return;
+
+      if (unlockRef.current) {
+        clearTimeout(unlockRef.current);
+        unlockRef.current = null;
+      }
+
       indexRef.current = i;
       setLogical(i);
       const list = listRef.current;
       if (!list) return;
       animatingRef.current = true;
-      list.style.transition = "transform .75s var(--ease)";
+      list.style.willChange = "transform";
 
-      const finish = () => {
-        animatingRef.current = false;
+      const afterMove = (reset?: () => void) => {
+        unlockRef.current = window.setTimeout(() => {
+          reset?.();
+          animatingRef.current = false;
+          list.style.willChange = "auto";
+          unlockRef.current = null;
+        }, MOVE_MS);
       };
 
       if (prev === N - 1 && i === 0 && !manual) {
+        list.style.transition = `transform ${MOVE_MS}ms var(--ease)`;
         list.style.transform = `translate3d(0, ${yFor(0) - N * ihRef.current}px, 0)`;
-        const onEnd = (e: TransitionEvent) => {
-          if (e.propertyName !== "transform") return;
-          list.removeEventListener("transitionend", onEnd);
+        afterMove(() => {
           list.style.transition = "none";
           list.style.transform = `translate3d(0, ${yFor(0)}px, 0)`;
           void list.offsetHeight;
-          finish();
-        };
-        list.addEventListener("transitionend", onEnd);
-        window.setTimeout(finish, 850);
+        });
       } else if (manual && prev === 0 && i === N - 1) {
         list.style.transition = "none";
         list.style.transform = `translate3d(0, ${yFor(0) + N * ihRef.current}px, 0)`;
         void list.offsetHeight;
-        list.style.transition = "transform .75s var(--ease)";
+        list.style.transition = `transform ${MOVE_MS}ms var(--ease)`;
         list.style.transform = `translate3d(0, ${yFor(N - 1) + N * ihRef.current}px, 0)`;
-        const onEnd = (e: TransitionEvent) => {
-          if (e.propertyName !== "transform") return;
-          list.removeEventListener("transitionend", onEnd);
+        afterMove(() => {
           list.style.transition = "none";
           list.style.transform = `translate3d(0, ${yFor(N - 1)}px, 0)`;
           void list.offsetHeight;
-          finish();
-        };
-        list.addEventListener("transitionend", onEnd);
-        window.setTimeout(finish, 850);
+        });
       } else {
+        list.style.transition = `transform ${MOVE_MS}ms var(--ease)`;
         list.style.transform = `translate3d(0, ${yFor(i)}px, 0)`;
-        window.setTimeout(finish, 850);
+        afterMove();
       }
     },
     [yFor],
@@ -113,18 +120,35 @@ export function BottomLinesWheel() {
   }, [measure]);
 
   useEffect(() => {
-    if (reduceMotion.current || paused) {
-      if (timerRef.current) clearInterval(timerRef.current);
-      return;
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-    timerRef.current = setInterval(() => go(indexRef.current + 1, false), tickMs(wheelRef.current));
+    if (reduceMotion.current || paused) return;
+
+    const wait = tickMs(wheelRef.current);
+    const loop = () => {
+      timerRef.current = window.setTimeout(() => {
+        go(indexRef.current + 1, false);
+        loop();
+      }, wait);
+    };
+    loop();
+
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [go, paused]);
 
+  useEffect(
+    () => () => {
+      if (unlockRef.current) clearTimeout(unlockRef.current);
+    },
+    [],
+  );
+
   return (
-    <div>
+    <div className="stage">
       <div
         className="wheel"
         ref={wheelRef}
@@ -146,22 +170,16 @@ export function BottomLinesWheel() {
           })}
         </ul>
       </div>
-      <div className="dots">
+      <div className="dots" role="tablist" aria-label="Bottom lines">
         {HERO_LINES.map(([text], k) => (
-          <i
+          <button
+            type="button"
+            role="tab"
             key={text}
-            data-k={k}
             className={k === logical ? "on" : undefined}
-            role="button"
-            tabIndex={0}
-            aria-label={`Ligne ${k + 1}`}
+            aria-label={text}
+            aria-selected={k === logical}
             onClick={() => go(k, true)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                go(k, true);
-              }
-            }}
           />
         ))}
       </div>

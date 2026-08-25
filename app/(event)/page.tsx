@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroLandingSection } from "@/components/sections/hero-landing/HeroLandingSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
 import { StoriesSection } from "@/components/sections/StoriesSection";
+import { MethodeSection } from "@/components/sections/methode/MethodeSection";
 import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
@@ -36,40 +37,37 @@ export default function HomePage() {
   return (
     <>
       <SmoothScroll />
-      <HeroSection />
-      <HeroLandingSection />
-      <ContrasteSection />
-      <ComparatifSection />
-      <BonnePorteSection />
-      <MairiesChampionnesSection />
-      <ModeleSection />
-      <BoulevardSection />
-      <PotentialitesSection />
-      <NecessiteSection />
-      <PlateformeSection />
-      <OpenRoadSection />
+      {/* <HeroSection /> */}
+      {/* <ContrasteSection /> */}
+      {/* <ComparatifSection /> */}
+      {/* <BonnePorteSection /> */}
+      {/* <MairiesChampionnesSection /> */}
+      {/* <ModeleSection /> */}
+      {/* <PotentialitesSection /> */} 
+      {/* <NecessiteSection /> */}
+      {/* <PlateformeSection /> */}
+      {/* <OpenRoadSection /> */}
+      <MethodeSection />
       <ParcoursSection />
-      <BeforeDuringAfterSection />
-      <PreludeSection />
-      <SalonDiasporaSection />
-      <ImpactSection />
+      {/* <BeforeDuringAfterSection /> */}
+      {/* <PreludeSection /> */}
+      {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
-      <PreuvesPilotesSection />
-      <BatisseursSection />
-      <EcosystemeSection />
-      <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
-        <StoriesSection />
-        {/* <LiaisonSection />
-        <MuseeSection /> */}
-        <TickerSection />
-      </div>
-      <LiaisonSection />
-      <MuseeSection />
+      <ImpactSection />
+      {/* <PreuvesPilotesSection /> */}
+      {/* <BatisseursSection /> */}
+      {/* <EcosystemeSection /> */}
+      <StoriesSection />
+      <TickerSection />
+      {/* <LiaisonSection /> */}
+      {/* <MuseeSection /> */}
+      {/* <PartenairesSection /> */}
+      <BoulevardSection />
+      <HeroLandingSection />
       <AgendaSection />
-      <PartenairesSection />
       <BilletsSection />
-      <RessourcesSection />
+      {/* <RessourcesSection /> */}
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

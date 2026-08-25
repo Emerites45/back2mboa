@@ -11,11 +11,13 @@ import {
   type MotionValue,
 } from "framer-motion";
 
-const TEXT_Y_HIDDEN = "32vh";
+/* Y_HIDDEN : sous la crête opaque (alpha), pas de fade — occlusion réelle par mount_*.webp */
 const TEXT_Y_SHOWN = "0vh";
-const REVEAL_EASE = cubicBezier(0.22, 1, 0.36, 1);
-const REVEAL_MOUNT_1 = ["0.25 end", "start 0.28"] as const;
-const REVEAL_MOUNT_2 = ["0.38 end", "start 0.46"] as const;
+const TEXT_Y_HIDDEN_1 = "56vh";
+const TEXT_Y_HIDDEN_2 = "48vh";
+const REVEAL_EASE = cubicBezier(0.4, 0, 0.2, 1);
+const REVEAL_MOUNT_1 = ["0.08 end", "start 0.44"] as const;
+const REVEAL_MOUNT_2 = ["0.05 end", "start 0.68"] as const;
 
 const STATS_MOUNT_1 = [
   { value: "100+", label: "Investisseurs diaspora" },
@@ -50,11 +52,16 @@ const BAND = {
   top: "65%",
   gap: "5rem",
   blur: "8px",
+  framePad: "0.55rem 0.85rem",
+  frameRadius: "0.35rem",
 } as const;
+
+const CENTER_PARTNER_INDEX = Math.floor(PARTNERS.length / 2);
 
 function useMountainReveal(
   target: RefObject<HTMLDivElement | null>,
   offset: typeof REVEAL_MOUNT_1 | typeof REVEAL_MOUNT_2,
+  yHidden: string,
 ) {
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -64,17 +71,11 @@ function useMountainReveal(
   const y = useTransform(
     scrollYProgress,
     [0, 1],
-    [TEXT_Y_HIDDEN, TEXT_Y_SHOWN],
-    { ease: REVEAL_EASE },
-  );
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.28, 1],
-    [0, 1, 1],
+    [yHidden, TEXT_Y_SHOWN],
     { ease: REVEAL_EASE },
   );
   return {
-    style: reduce ? { y: TEXT_Y_SHOWN, opacity: 1 } : { y, opacity },
+    style: reduce ? { y: TEXT_Y_SHOWN } : { y },
   };
 }
 
@@ -86,7 +87,7 @@ function StatRow({
 }: {
   stats: readonly { value: string; label: string }[];
   className: string;
-  style: { y: MotionValue<string> | string; opacity: MotionValue<number> | number };
+  style: { y: MotionValue<string> | string };
   firstItemClassName?: string;
 }) {
   return (
@@ -117,13 +118,13 @@ function StatRow({
 export function ImpactSection() {
   const mount1Ref = useRef<HTMLDivElement>(null);
   const mount2Ref = useRef<HTMLDivElement>(null);
-  const reveal1 = useMountainReveal(mount1Ref, REVEAL_MOUNT_1);
-  const reveal2 = useMountainReveal(mount2Ref, REVEAL_MOUNT_2);
+  const reveal1 = useMountainReveal(mount1Ref, REVEAL_MOUNT_1, TEXT_Y_HIDDEN_1);
+  const reveal2 = useMountainReveal(mount2Ref, REVEAL_MOUNT_2, TEXT_Y_HIDDEN_2);
 
   return (
     <section
       id="impact"
-      className="relative h-[140vh] overflow-hidden bg-[#0088aa]"
+      className="relative h-[165vh] overflow-hidden bg-[#0088aa]"
       aria-label="Impact"
     >
       <div className="absolute inset-x-0 -top-[4%] bottom-0 z-0">
@@ -193,21 +194,40 @@ export function ImpactSection() {
             className="flex items-center justify-around bg-white/25 px-6 py-4 md:px-16"
             style={{ backdropFilter: `blur(${BAND.blur})` }}
           >
-            {PARTNERS.map((partner) => (
-              <div
-                key={partner.src}
-                className="relative flex h-8 w-[7.5rem] items-center justify-center md:h-10 md:w-[9rem]"
-              >
-                <Image
-                  src={partner.src}
-                  alt={partner.alt}
-                  width={160}
-                  height={48}
-                  unoptimized
-                  className="h-full w-auto max-w-full object-contain opacity-90"
-                />
-              </div>
-            ))}
+            {PARTNERS.map((partner, index) => {
+              const isCenter = index === CENTER_PARTNER_INDEX;
+              return (
+                <div
+                  key={partner.src}
+                  className={
+                    isCenter
+                      ? "relative flex items-center justify-center bg-white"
+                      : "relative flex h-8 w-[7.5rem] items-center justify-center md:h-10 md:w-[9rem]"
+                  }
+                  style={
+                    isCenter
+                      ? {
+                          padding: BAND.framePad,
+                          borderRadius: BAND.frameRadius,
+                        }
+                      : undefined
+                  }
+                >
+                  <Image
+                    src={partner.src}
+                    alt={partner.alt}
+                    width={isCenter ? 148 : 160}
+                    height={48}
+                    unoptimized
+                    className={
+                      isCenter
+                        ? "mx-auto h-8 w-auto object-contain md:h-10"
+                        : "h-full w-auto max-w-full object-contain opacity-90"
+                    }
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

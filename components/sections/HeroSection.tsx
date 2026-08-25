@@ -12,8 +12,8 @@ export function HeroSection() {
   const currentSlide = SLIDES_DATA[activeSlideIndex];
 
   return (
-    <div className="relative w-full bg-black text-white overflow-x-hidden font-sans">
-      <section className="relative w-screen h-screen overflow-hidden flex flex-col justify-between p-6 md:p-12 pt-24 md:pt-28 pb-14">
+    <div className="relative w-full overflow-x-clip bg-[#102B24] font-sans text-white">
+      <section className="relative flex h-dvh min-h-dvh w-full flex-col justify-between overflow-hidden p-6 pt-24 pb-14 md:p-12 md:pt-28">
         <HeroBackgroundSlider onSlideChange={(index) => setActiveSlideIndex(index)} />
 
         <header className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5 md:px-12 backdrop-blur-[2px]">

@@ -37,9 +37,10 @@ export default function HomePage() {
   return (
     <>
       <SmoothScroll />
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* <ContrasteSection /> */}
       {/* <ComparatifSection /> */}
+      <ImpactSection />
       {/* <BonnePorteSection /> */}
       {/* <MairiesChampionnesSection /> */}
       {/* <ModeleSection /> */}
@@ -50,18 +51,18 @@ export default function HomePage() {
       <MethodeSection />
       <ParcoursSection />
       {/* <BeforeDuringAfterSection /> */}
-      {/* <PreludeSection /> */}
       {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
-      <ImpactSection />
+      {/* <ImpactSection /> */}
+      <PreludeSection />
+      <LiaisonSection />
+      <MuseeSection />
       {/* <PreuvesPilotesSection /> */}
       {/* <BatisseursSection /> */}
       {/* <EcosystemeSection /> */}
       <StoriesSection />
       <TickerSection />
-      {/* <LiaisonSection /> */}
-      {/* <MuseeSection /> */}
       {/* <PartenairesSection /> */}
       <BoulevardSection />
       <HeroLandingSection />

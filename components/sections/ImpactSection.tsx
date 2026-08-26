@@ -3,7 +3,6 @@
 import { useRef, type RefObject } from "react";
 import Image from "next/image";
 import {
-  cubicBezier,
   motion,
   useReducedMotion,
   useScroll,
@@ -15,9 +14,9 @@ import {
 const TEXT_Y_SHOWN = "0vh";
 const TEXT_Y_HIDDEN_1 = "56vh";
 const TEXT_Y_HIDDEN_2 = "48vh";
-const REVEAL_EASE = cubicBezier(0.4, 0, 0.2, 1);
-const REVEAL_MOUNT_1 = ["0.08 end", "start 0.44"] as const;
-const REVEAL_MOUNT_2 = ["0.05 end", "start 0.68"] as const;
+/* Plage ≈ 80vh de scroll (linéaire) : plus courte, les stats dépassent le scroll. */
+const REVEAL_MOUNT_1 = ["start end", "start 0.18"] as const;
+const REVEAL_MOUNT_2 = ["start end", "start 0.32"] as const;
 
 const STATS_MOUNT_1 = [
   { value: "100+", label: "Investisseurs diaspora" },
@@ -68,12 +67,7 @@ function useMountainReveal(
     target,
     offset: [offset[0], offset[1]],
   });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [yHidden, TEXT_Y_SHOWN],
-    { ease: REVEAL_EASE },
-  );
+  const y = useTransform(scrollYProgress, [0, 1], [yHidden, TEXT_Y_SHOWN]);
   return {
     style: reduce ? { y: TEXT_Y_SHOWN } : { y },
   };

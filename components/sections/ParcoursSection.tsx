@@ -7,15 +7,6 @@ import { cn } from "@/lib/utils";
 export function ParcoursSection() {
   return (
     <section id="parcours" className="relative overflow-hidden bg-grad-section px-[var(--page-gutter)] pt-10 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:pt-16 lg:min-h-[140vh] lg:pt-20 lg:pb-5">
-      <div
-        className="pointer-events-none absolute top-0 left-0 size-64 -translate-x-1/3 -translate-y-1/3 rounded-full bg-brand-glow-blue opacity-90 blur-[80px] md:size-[26rem] md:blur-[110px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-0 bottom-0 size-72 translate-x-1/4 translate-y-1/4 rounded-full bg-brand-glow-mint opacity-90 blur-[90px] md:size-[32rem] md:blur-[120px]"
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 mx-auto max-w-[1360px]">
         <Reveal
           as="span"

@@ -1,15 +1,28 @@
 "use client";
 
-import { ReactLenis } from "lenis/react";
+import { useEffect, useRef } from "react";
+import { ReactLenis, type LenisRef } from "lenis/react";
+import { cancelFrame, frame } from "framer-motion";
 import "lenis/dist/lenis.css";
 
 const OPTIONS = {
-  autoRaf: true,
+  autoRaf: false,
   lerp: 0.08,
   anchors: true,
   allowNestedScroll: true,
 };
 
 export function SmoothScroll() {
-  return <ReactLenis root options={OPTIONS} />;
+  const lenisRef = useRef<LenisRef>(null);
+
+  useEffect(() => {
+    function update({ timestamp }: { timestamp: number }) {
+      lenisRef.current?.lenis?.raf(timestamp);
+    }
+
+    frame.update(update, true);
+    return () => cancelFrame(update);
+  }, []);
+
+  return <ReactLenis root options={OPTIONS} ref={lenisRef} />;
 }

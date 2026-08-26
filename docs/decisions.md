@@ -1,5 +1,16 @@
 # Décisions
 
+## 2026-08-26 — ImpactSection : Lenis + reveal trop violent
+
+- Cause : `html { scroll-behavior: smooth }` combattait le lerp Lenis (CSS 1.3 sans override). `useScroll` lisait un scroll natif par à-coups. Offsets trop courts (~26–46 vh) + ease Material → stats plus rapides que le scroll.
+- Fix : `scroll-behavior: auto` sur `html.lenis` ; RAF Lenis branché sur `frame` Framer Motion ; reveal linéaire `"start end"` → `"start 0.18/0.32"`.
+
+## 2026-08-26 — PreludeSection : 7 tells critiques
+
+- Photos : Unsplash conférence / post-it / loft → assets locaux (`resultat_1`, Douala III, `contraste/homme`).
+- Ordre : masterclass octobre en tête, salon décembre ensuite. Plus d’eyebrow tracked, pastilles 01–03, tags 99px, Inter, canvas crème.
+- Grille variée (`lead` / `reverse` via `order` / CTA) ; radius 4px ; Bricolage ; paper `#FAFAFA`.
+
 ## 2026-08-25 — BilletsSection : accordéon horizontal
 
 - Plus d’éjection « imprimante ». Chaque souche est un ticket : au clic elle s’ouvre (`1fr`), les autres restent à `3.5rem` et sont poussées.

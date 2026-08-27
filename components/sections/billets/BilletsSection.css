@@ -18,16 +18,30 @@
   --f-body: var(--font-bricolage), system-ui, sans-serif;
   --f-mono: var(--font-ibm-mono), ui-monospace, monospace;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --notch: 26px;
-  --ticket-h: clamp(12.5rem, 38vh, 30rem);
-  --details-min-h: clamp(16rem, 28vh, 22rem);
-  background: var(--canvas);
+  --notch: 22px;
+  --ticket-h: clamp(18rem, 42vh, 58rem);
+  --section-bg: #f4f1ea;
+  --head: #0a2b21;
+  --head-muted: #3d4a42;
+  background: var(--section-bg);
   color: var(--ink);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
   display: flex;
   flex-direction: column;
+}
+
+.b2m-billets[data-tone="night"] {
+  --section-bg: #0a2b21;
+  --head: #ffd506;
+  --head-muted: #9bb0a6;
+}
+
+.b2m-billets[data-tone="night"] .ticket {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.1),
+    0 8px 24px rgb(0 0 0 / 0.28);
 }
 
 .b2m-billets *,
@@ -71,13 +85,13 @@
   font-family: var(--f-mono);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
-  color: var(--ink-soft);
+  color: var(--head-muted);
   margin-bottom: 0.35rem;
 }
 
 .b2m-billets .head h2 {
   font-size: clamp(1.45rem, 3vw, 2.1rem);
-  color: var(--forest);
+  color: var(--head);
   max-width: none;
 }
 
@@ -85,8 +99,8 @@
 .b2m-billets .zone {
   display: flex;
   flex-direction: column;
-  background: var(--canvas);
-  padding: 0.65rem clamp(1rem, 3vw, 2.5rem) 0.7rem;
+  background: var(--section-bg);
+  padding: 0.55rem clamp(1rem, 3vw, 2.5rem) 0.55rem;
 }
 
 .b2m-billets .ticket {
@@ -99,13 +113,13 @@
   flex: 0 0 auto;
   height: auto;
   min-height: 0;
-  background: #f7f4ec;
-  border: 1px solid rgb(10 43 33 / 0.16);
-  border-radius: 5px;
+  background: var(--section-bg);
+  border: 0;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.65) inset,
-    0 10px 28px rgb(10 43 33 / 0.1);
+    0 0 0 1px rgb(10 43 33 / 0.08),
+    0 8px 24px rgb(10 43 33 / 0.08);
 }
 
 .b2m-billets .ticket.is-live {
@@ -128,15 +142,20 @@
   grid-template-columns: 3.5rem 3.5rem 3.5rem minmax(0, 1fr);
 }
 
+.b2m-billets .ticket[data-count="2"] {
+  grid-template-columns: minmax(0, 1fr) 3.5rem;
+}
+
+.b2m-billets .ticket[data-count="2"][data-open="0"] {
+  grid-template-columns: minmax(0, 1fr) 3.5rem;
+}
+
+.b2m-billets .ticket[data-count="2"][data-open="1"] {
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+}
+
 .b2m-billets .ticket::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 8;
-  opacity: 0.07;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  display: none;
 }
 
 @media (min-width: 900px) {
@@ -155,19 +174,13 @@
   .b2m-billets .ticket {
     align-items: stretch;
     height: var(--ticket-h);
+    min-height: 0;
   }
 
   .b2m-billets .lane,
   .b2m-billets .face {
     min-height: 0;
     height: 100%;
-  }
-
-  .b2m-billets .details {
-    flex: none;
-    min-height: var(--details-min-h);
-    max-height: calc(100svh - 22rem);
-    overflow-y: auto;
   }
 }
 
@@ -178,6 +191,10 @@
   overflow: hidden;
 }
 
+.b2m-billets .lane.on {
+  overflow: hidden;
+}
+
 .b2m-billets .face {
   display: grid;
   grid-template-columns: 1fr;
@@ -185,12 +202,25 @@
   min-width: 0;
   min-height: 0;
   height: 100%;
-  background: #f7f4ec;
+  background: var(--section-bg);
+  position: relative;
+}
+
+.b2m-billets .face::after {
+  content: "";
+  position: absolute;
+  left: calc(100% * 1 / 2.05);
+  top: 12px;
+  bottom: 12px;
+  width: 0;
+  border-left: 2px dashed rgb(10 43 33 / 0.12);
+  z-index: 2;
+  pointer-events: none;
 }
 
 @media (min-width: 900px) {
   .b2m-billets .face {
-    grid-template-columns: minmax(200px, 1fr) minmax(240px, 1.25fr) auto;
+    grid-template-columns: 1fr 1.05fr;
     opacity: 0;
     transform: translateX(-0.7rem);
   }
@@ -234,10 +264,6 @@
     color 0.25s var(--ease);
 }
 
-.b2m-billets .lane:first-child .stub {
-  border-radius: 4px 0 0 4px;
-}
-
 .b2m-billets .stub:hover {
   filter: brightness(0.97);
 }
@@ -249,31 +275,17 @@
 
 .b2m-billets .lane.on .stub {
   filter: none;
-  flex: 0 0 4rem;
-  width: 4rem;
-  min-width: 4rem;
-  max-width: 4rem;
+  flex: 0 0 4.375rem;
+  width: 4.375rem;
+  min-width: 4.375rem;
+  max-width: 4.375rem;
   margin: 0;
-  box-shadow:
-    inset 1px 0 0 rgb(255 255 255 / 0.28),
-    inset -8px 0 12px rgb(10 43 33 / 0.08);
+  border-right: 2px dashed rgb(10 43 33 / 0.12);
+  box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.28);
 }
 
 .b2m-billets .lane.on .stub::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 10px;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 100%,
-    var(--canvas) 4px,
-    transparent 4.5px
-  );
-  background-size: 10px 14px;
-  background-repeat: repeat-y;
+  display: none;
 }
 
 .b2m-billets .stub-in {
@@ -308,96 +320,129 @@
   letter-spacing: 0.04em;
 }
 
-/* Palier */
+/* Palier — volet central boarding pass */
 .b2m-billets .tier {
-  padding: 0.85rem 1.1rem;
-  text-align: left;
+  padding: 0.7rem 0.9rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 0;
   position: relative;
+  background: #fff;
+  min-height: 0;
 }
 
 .b2m-billets .tier::after {
-  content: "";
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  right: 0;
-  border-right: 1.5px dashed rgb(10 43 33 / 0.22);
+  display: none;
+}
+
+.b2m-billets .tier .dyn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.b2m-billets .tier .eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--selTxt);
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .b2m-billets .tier .name {
   font-weight: 800;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   color: var(--selTxt);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
 }
 
 .b2m-billets .tier .amount {
   font-weight: 800;
-  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
   color: var(--forest);
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.04em;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .b2m-billets .tier .unit {
   font-weight: 500;
-  font-size: 0.82rem;
-  color: var(--ink-soft);
+  font-size: 0.78rem;
+  color: #6b736c;
   line-height: 1.4;
   max-width: 28ch;
-}
-
-.b2m-billets .tier .unit span {
-  display: block;
-  font-family: var(--f-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: var(--forest);
-  margin-bottom: 4px;
+  margin-top: 6px;
 }
 
 .b2m-billets .tier .avail {
-  margin-top: 4px;
-  font-weight: 700;
-  font-size: 0.82rem;
+  margin-top: 10px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--selTxt);
+  border: 2px solid var(--selTxt);
+  padding: 6px 12px;
+  border-radius: 4px;
+  transform: rotate(-3deg);
 }
 
-.b2m-billets .tier .avail.dispo {
-  color: var(--vert);
-}
-
+.b2m-billets .tier .avail.dispo,
 .b2m-billets .tier .avail.clos {
-  color: var(--ink-soft);
+  color: var(--selTxt);
 }
 
-.b2m-billets .tier .europe {
-  font-family: var(--f-mono);
-  font-size: 0.7rem;
-  color: var(--ink-soft);
+/* Volet droit */
+.b2m-billets .pass-right {
+  padding: 0.7rem 0.9rem 0.65rem;
+  background: #fff;
+  border-radius: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 12px;
+  align-items: start;
+  min-height: 0;
+  overflow: hidden;
 }
 
-/* Corps */
 .b2m-billets .body {
-  padding: 0.85rem 1.15rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0;
   position: relative;
 }
 
 .b2m-billets .body .mast {
-  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--forest);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.b2m-billets .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.b2m-billets .chip {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: rgb(17 157 99 / 0.1);
+  color: var(--vert);
 }
 
 .b2m-billets .cta {
@@ -410,14 +455,14 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 10px 14px;
-  border-radius: 2px;
+  border-radius: 6px;
   border: 2px solid var(--ctaBg);
-  box-shadow: 0 0 0 2px #f7f4ec, 0 0 0 3px var(--ctaBg);
   text-decoration: none;
   white-space: nowrap;
   transform: rotate(-1.5deg);
   transform-origin: left center;
   transition: transform 0.2s var(--ease);
+  margin-top: 8px;
 }
 
 .b2m-billets .cta:hover {
@@ -432,115 +477,99 @@
 .b2m-billets .facts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
+  gap: 6px 12px;
   width: 100%;
-  margin: 2px 0 0;
-  border: 1px solid rgb(10 43 33 / 0.16);
+  margin: 0;
+  border: 0;
 }
 
 .b2m-billets .facts > div {
-  padding: 8px 10px;
-  border-right: 1px solid rgb(10 43 33 / 0.12);
-  border-bottom: 1px solid rgb(10 43 33 / 0.12);
-}
-
-.b2m-billets .facts > div:nth-child(2n) {
-  border-right: 0;
-}
-
-.b2m-billets .facts > div:nth-child(n + 3) {
-  border-bottom: 0;
+  padding: 0;
+  border: 0;
 }
 
 .b2m-billets .facts dt {
   font-family: var(--f-mono);
-  font-size: 0.68rem;
-  color: var(--ink-soft);
-  margin: 0 0 2px;
+  font-size: 0.72rem;
+  color: #6b736c;
+  margin: 0;
 }
 
 .b2m-billets .facts dd {
-  margin: 0;
+  margin: 2px 0 0;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: var(--forest);
 }
 
-/* Coupon détachable */
 .b2m-billets .qr-panel {
-  width: clamp(140px, 16vw, 188px);
-  padding: clamp(16px, 1.9vw, 24px) 16px;
+  width: auto;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--canvas-2);
+  justify-content: flex-start;
+  gap: 0;
+  background: transparent;
   position: relative;
 }
 
 .b2m-billets .qr-panel::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 14px;
-  z-index: 7;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 0,
-    var(--canvas) 5px,
-    transparent 5.5px
-  );
-  background-size: 14px 16px;
-  background-repeat: repeat-y;
+  display: none;
 }
 
 .b2m-billets .qr-lab {
   font-family: var(--f-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: #6b736c;
+  margin-top: 6px;
+  text-align: center;
 }
 
 .b2m-billets .qr-box {
-  background: transparent;
-  padding: 0;
-  width: 78%;
+  width: 72px;
+  height: 72px;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid rgb(10 43 33 / 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(10 43 33 / 0.06);
 }
 
 .b2m-billets .qr-box svg.qr {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   shape-rendering: crispEdges;
 }
 
-.b2m-billets .qr-ref {
+.b2m-billets .seat {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid rgb(10 43 33 / 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: var(--f-mono);
-  font-size: 0.64rem;
+  font-size: 0.7rem;
+  color: #6b736c;
+}
+
+.b2m-billets .seat b {
   color: var(--forest);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 0.85rem;
 }
 
-.b2m-billets .qr-fine {
-  font-family: var(--f-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-/* Encoches : trous, pas stickers */
+/* Encoches boarding pass */
 .b2m-billets .notch {
   position: absolute;
-  width: var(--notch);
-  height: var(--notch);
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--canvas);
+  background: var(--section-bg);
   z-index: 9;
   display: none;
   pointer-events: none;
@@ -552,161 +581,24 @@
   }
 }
 
-.b2m-billets .qr-panel .notch.top,
-.b2m-billets .qr-panel .notch.bot {
+.b2m-billets .notch.tl {
   left: -13px;
+  top: -13px;
 }
 
-.b2m-billets .notch.top {
-  top: calc(var(--notch) / -2);
+.b2m-billets .notch.bl {
+  left: -13px;
+  bottom: -13px;
 }
 
-.b2m-billets .notch.bot {
-  bottom: calc(var(--notch) / -2);
+.b2m-billets .notch.tm {
+  left: calc(100% * 1 / 2.05 - 13px);
+  top: -13px;
 }
 
-/* Détails */
-.b2m-billets .details {
-  max-width: 1180px;
-  width: 100%;
-  margin: 0.55rem auto 0;
-  flex: none;
-  background: #f7f4ec;
-  border: 1px solid rgb(10 43 33 / 0.16);
-  border-radius: 5px;
-}
-
-.b2m-billets .det-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding: 0.65rem 1.15rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.b2m-billets .det-head .dn {
-  font-weight: 800;
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-  color: var(--selTxt);
-  letter-spacing: -0.03em;
-}
-
-.b2m-billets .det-head .dp {
-  font-weight: 800;
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  color: var(--forest);
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-}
-
-.b2m-billets .det-head .db {
-  margin-left: auto;
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-}
-
-.b2m-billets .det-head .db.dispo {
-  color: var(--vert);
-  font-weight: 700;
-}
-
-.b2m-billets .det-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-@media (min-width: 820px) {
-  .b2m-billets .det-grid {
-    grid-template-columns: 1.25fr 1fr;
-  }
-}
-
-.b2m-billets .det-col {
-  padding: 0.7rem 1.15rem 0.85rem;
-}
-
-.b2m-billets .det-col + .det-col {
-  border-top: 1px solid var(--line);
-}
-
-@media (min-width: 820px) {
-  .b2m-billets .det-col + .det-col {
-    border-top: 0;
-    border-left: 1px solid var(--line);
-  }
-}
-
-.b2m-billets .det-col h4 {
-  font-size: 0.95rem;
-  letter-spacing: -0.02em;
-  color: var(--forest);
-  margin: 0 0 8px;
-  font-weight: 800;
-  text-transform: none;
-}
-
-.b2m-billets .det-col ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 6px;
-}
-
-.b2m-billets .det-col li {
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-  padding-left: 1rem;
-  border-left: 1px solid var(--line);
-}
-
-.b2m-billets .det-col.who li {
-  padding-left: 0;
-  border-left: 0;
-}
-
-.b2m-billets .det-col li b {
-  color: var(--forest);
-  font-weight: 700;
-}
-
-.b2m-billets .det-bl {
-  margin: 12px 0 0;
-  padding: 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
-  background: none;
-  color: inherit;
-}
-
-.b2m-billets .det-bl p {
-  font-weight: 700;
-  font-size: clamp(0.98rem, 1.5vw, 1.15rem);
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-  color: var(--forest);
-  max-width: 36ch;
-}
-
-.b2m-billets .det-bl p em {
-  font-style: normal;
-  color: var(--selTxt);
-}
-
-.b2m-billets .is-swap {
-  animation: b2m-swap 0.28s var(--ease) both;
-}
-
-@keyframes b2m-swap {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.b2m-billets .notch.bm {
+  left: calc(100% * 1 / 2.05 - 13px);
+  bottom: -13px;
 }
 
 @keyframes b2m-face-up {
@@ -727,7 +619,7 @@
   flex: none;
   font-family: var(--f-mono);
   font-size: 0.72rem;
-  color: var(--ink-soft);
+  color: var(--head-muted);
   line-height: 1.45;
   text-align: center;
 }
@@ -737,7 +629,10 @@
   .b2m-billets .ticket[data-open="0"],
   .b2m-billets .ticket[data-open="1"],
   .b2m-billets .ticket[data-open="2"],
-  .b2m-billets .ticket[data-open="3"] {
+  .b2m-billets .ticket[data-open="3"],
+  .b2m-billets .ticket[data-count="2"],
+  .b2m-billets .ticket[data-count="2"][data-open="0"],
+  .b2m-billets .ticket[data-count="2"][data-open="1"] {
     display: flex;
     flex-wrap: wrap;
     height: auto;
@@ -770,10 +665,16 @@
     flex: 1 1 25%;
   }
 
+  .b2m-billets .ticket[data-count="2"] .stub,
+  .b2m-billets .ticket[data-count="2"] .lane.on .stub {
+    flex: 1 1 50%;
+  }
+
   .b2m-billets .lane.on .stub::after {
     display: none;
   }
 
+  .b2m-billets .face::after,
   .b2m-billets .qr-panel::before {
     display: none;
   }
@@ -810,27 +711,33 @@
     letter-spacing: 0.02em;
   }
 
-  .b2m-billets .tier::after {
-    display: none;
-  }
-
   .b2m-billets .cta,
   .b2m-billets .cta:hover {
     transform: none;
   }
 
+  .b2m-billets .tier .avail {
+    transform: none;
+  }
+
   .b2m-billets .tier,
-  .b2m-billets .body {
+  .b2m-billets .pass-right {
     border-right: 0;
-    border-bottom: 1px dashed rgb(10 43 33 / 0.22);
+    border-bottom: 1px dashed rgb(10 43 33 / 0.12);
+  }
+
+  .b2m-billets .pass-right {
+    grid-template-columns: 1fr;
+    border-radius: 0;
   }
 
   .b2m-billets .qr-panel {
     width: 100%;
+    align-items: flex-start;
   }
 
   .b2m-billets .qr-box {
-    max-width: 160px;
+    max-width: 100px;
   }
 }
 
@@ -843,7 +750,6 @@
     transform: none;
   }
 
-  .b2m-billets .is-swap,
   .b2m-billets .ticket.is-live .lane.on .face {
     animation: none;
   }

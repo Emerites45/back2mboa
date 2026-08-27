@@ -32,7 +32,7 @@ import { SalonDiasporaSection } from "@/components/sections/salon-diaspora/Salon
 import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
 import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
-import { BilletsSection } from "@/components/sections/billets/BilletsSection";
+import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
 import { Button } from "@/components/ui/button";
 
@@ -73,7 +73,9 @@ export default function HomePage() {
       <AgendaSection />
       <PartenairesSection />
       <BilletsSection />
+      <BilletsPartenairesSection />
       {/* <RessourcesSection /> */}
+
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

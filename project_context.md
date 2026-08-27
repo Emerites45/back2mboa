@@ -48,8 +48,8 @@ Sections HTML Back2Mboa montées dans `app/(event)/page.tsx` (wrappers `.b2m-*`)
 Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème montés. Écosystème : grille resserrée + orbit CSS 48s (`#digital-twin`).
 
 ## État
-Branche `feat/section_paul_alain` synchronisée avec `origin/main` + `feat/section_williams` + `feat/parcours-liaison-musee` (sans `vue-globale`).
+Branche `feat/section_paul_alain` synchronisée avec `origin/main` + `feat/section_williams` (sans `vue-globale`).
 
-Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Méthode → Parcours → Résultats / Preuve → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories / Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets. Ports HTML `.b2m-*` disponibles (certains commentés). `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
+Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Méthode → Parcours → Résultats / Preuve → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories / Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets. Ports HTML `.b2m-*` disponibles (certains commentés). Sync Williams : Billets boarding pass, logos institutions Preuve. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
 
 Sections Paul-Alain récentes : Pourquoi, Bonne Porte, Open Road, Homecoming, Prélude (`#prelude-mission`, Double flux), Éditions pilotes, Résultats (Rectangle 175).

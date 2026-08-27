@@ -48,6 +48,39 @@ Desktop `100svh` / `overflow-hidden`. Grille dans cadre `rounded-2xl`, index pas
 
 5 locales + 3 Unsplash / colonne (8 slides). Crossfade snappy 420 ms, hold 2,4 s, boucle RAF continue sans pause au hover colonne, points à progression.
 
+## 2026-08-26 — Billets : 4 packs × 2, fonds distincts
+
+- Les deux sections montrent les 4 mêmes tickets (Growth → Prosperity). Copy packs inchangée.
+- `#billets` crème, `#partenaires` forest + titre jaune. Encoches calées sur `--section-bg`.
+
+## 2026-08-26 — PreludeSection : salon en tête, packs retirés
+
+- Ligne 1 : image SVG city + copy du Salon de la Diaspora (checklist, tags).
+- Ligne 2 : image SVG museum + copy Masterclass de SalonDiaspora (accent terre).
+- Clôture : paragraphe « même route » centré au-dessus de la barre ; CTA jaune « Nous rejoindre » → `/inscription`.
+- Bloc partenaires (packs Vision / Prosperity) retiré.
+- *Note sync 2026-08-27* : version Paul-Alain maquette Double flux a repris la priorité sur cette variante Williams.
+
+## 2026-08-26 — BilletsSection : boarding pass HTML
+
+- Accordéon 4 souches conservé. Face ouverte = modèle `Back2Mboa_Billet_Design.html` (encoches, perforation, QR, stamp).
+
+## 2026-08-26 — PreuveChiffresSection : logos institutions
+
+- Ligne Institutions : pastilles 32px (48px GIZ/AFD), SVG dans `public/images/institutions/`. Nom seulement en `alt` / `title`.
+- Marques identitaires (pas les fichiers officiels) — à remplacer par les logos fournis.
+
+## 2026-08-26 — PreuveChiffresSection : anti-slop
+
+- Coupe : eyebrow `2.6`, rangée 4 KPIs (doublon Resultats), punch « pas des promesses », `<em>` or, pills `rounded-full`, 6 Reveals, hover de lignes.
+- Garde : table 2022 / 2023. Jaune = année 2023 seulement ; teal = 2022. Institutions en points médians. Tokens `dark-green` / `brand-yellow` / `brand-teal`.
+- Mobile : deux piles année / année (`dl`), plus de `min-w-[680px]`. Un Reveal.
+
+## 2026-08-26 — PreuveChiffresSection : 1 écran (`100dvh`)
+
+- Cause : paddings `clamp(3.5rem…)` + KPIs + tableau 8 lignes + punchline → overflow du viewport.
+- Fix : desktop `md:h-dvh`, colonne flex, gaps/`TYPE` liés au `vh`. Mobile : `min-h-dvh` + hauteur auto (tableau trop dense). Scroll interne seulement si le fold desktop est trop bas.
+
 ## 2026-08-26 — ImpactSection : Lenis + reveal trop violent
 
 - Cause : `html { scroll-behavior: smooth }` combattait le lerp Lenis (CSS 1.3 sans override). `useScroll` lisait un scroll natif par à-coups. Offsets trop courts (~26–46 vh) + ease Material → stats plus rapides que le scroll.

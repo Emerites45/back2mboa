@@ -14,7 +14,6 @@ import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
 import { ContrasteSection } from "@/components/sections/contraste/ContrasteSection";
 import { PourquoiSection } from "@/components/sections/pourquoi/PourquoiSection";
-import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 import { ModeleSection } from "@/components/sections/modele/ModeleSection";
 import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
 import { PotentialitesSection } from "@/components/sections/potentialites/PotentialitesSection";
@@ -26,16 +25,19 @@ import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
 import { NecessiteSection } from "@/components/sections/necessite/NecessiteSection";
 import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
 import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSection";
-import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
 import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
-import { SalonDiasporaSection } from "@/components/sections/salon-diaspora/SalonDiasporaSection";
-import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
-import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
-import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
-import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
+import {
+  BilletsSection,
+  BilletsPartenairesSection,
+} from "@/components/sections/billets/BilletsSection";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Assemblage landing — Paul-Alain + Williams.
+ * Williams : Preuve institutions, Billets ×2, Stories actif.
+ * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Éditions pilotes, Prélude maquette…
+ */
 export default function HomePage() {
   return (
     <>
@@ -43,7 +45,6 @@ export default function HomePage() {
       <HeroSection />
       <ContrasteSection />
       <PourquoiSection />
-      {/* <ComparatifSection /> */}
       <OpenRoadSection />
       <MairiesChampionnesSection />
       <ModeleSection />
@@ -54,8 +55,6 @@ export default function HomePage() {
       <BonnePorteSection />
       <MethodeSection />
       <ParcoursSection />
-      {/* <BeforeDuringAfterSection /> */}
-      {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
       <EditionsPilotesSection />
@@ -63,8 +62,6 @@ export default function HomePage() {
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
-      {/* <PreuvesPilotesSection /> */}
-      {/* <BatisseursSection /> */}
       <EcosystemeSection />
       <StoriesSection />
       <TickerSection />
@@ -74,8 +71,6 @@ export default function HomePage() {
       <PartenairesSection />
       <BilletsSection />
       <BilletsPartenairesSection />
-      {/* <RessourcesSection /> */}
-
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

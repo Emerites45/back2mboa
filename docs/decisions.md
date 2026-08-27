@@ -1,5 +1,9 @@
 # Décisions
 
+## 2026-08-27 — Sync Williams × Paul-Alain
+
+Merge `origin/feat/section_williams` dans `feat/section_paul_alain`. Conservé : Prélude maquette Paul-Alain. Intégré Williams : Billets + BilletsPartenaires, logos institutions Preuve, Stories actif. `page.tsx` assemble les deux piles sans sections commentées mortes.
+
 ## 2026-08-27 — Agenda : transitions slides
 
 Contenu (titre → meta → body → CTA) : entrée directionnelle staggered ~720 ms (next/prev), léger blur. Disques SVG : dérive/scale par slide. Tabs : fill or + pastille active. `prefers-reduced-motion` coupe les anims.

@@ -21,14 +21,33 @@ export interface SlideData {
 export const SLIDES_DATA: SlideData[] = [
   {
     id: 1,
+    subtitle: "African Solutions Activating Prosperity (ASAP)",
+    titleTop: "LE RETOUR",
+    titleMain: "DES BÂTISSEURS-SOLUTIONNEURS",
+    quote: "Babadjou — Région de l’Ouest, Cameroun.",
+    description: "Le Maire de Babadjou fait face à une réalité : sa commune produit 4 000 tonnes de pommes de terre, mais cette richesse pourrait créer beaucoup plus de valeur si elle était transformée localement.\n\nBACK2MBOA le connecte à un Bâtisseur-Solutionneur camerounais basé en Arizona, aux États-Unis, qui travaille chez Pringles, dans l’industrie des chips de pomme de terre, et peut lui apporter les partenaires, la technicité et les solutions de micro-industrialisation nécessaires.",
+    extraText: "BACK2MBOA active également les bailleurs de fonds qui investissent dans l’agriculture et les régulateurs tels que l’ANOR, le MINADER et le PAD, afin de faciliter le transfert des ressources, des compétences, des équipements et des financements vers son territoire.\n\nSIX MOIS PLUS TARD…\n\nBabadjou ne se contente plus de produire des pommes de terre : une dynamique de transformation locale est enclenchée, créant de nouveaux débouchés, de la valeur et des emplois sur le territoire.",
+    videoUrl: "/videos/canyon-final.mp4",
+    posterUrl: "/images/canyon-final_225.jpeg",
+    stats: {
+      stat1: "4 000 T",
+      label1: "Pommes de terre / an",
+      stat2: "1 unité",
+      label2: "Transfert d'expertise",
+      stat3: "+100",
+      label3: "Emplois territoriaux"
+    }
+  },
+  {
+    id: 2,
     subtitle: "Fundong - Hauts-Plateaux Du Nord-Ouest",
     titleTop: "LE MATIN OÙ",
     titleMain: "LA DIASPORA EST REVENUE",
-    quote: "« Monsieur Le Maire, J'ai Analysé Vos Données, Je Pense Que Nous Pouvons Monter Un Projet PPP Avec Des Investisseurs De La Diaspora. Je Serai Chez Vous Dans Deux Semaines, Avec Une Équipe D'ingénieurs. »",
-    description: "Un Maire Ouvre Sa Boite Mail. Un Ingénieur Camerounais Installé À Paris A Lu Les Données De Sa Commune - Et Propose De Venir. Avec Une Équipe.",
+    quote: "Fundong — Nord-Ouest, Cameroun.",
+    description: "Un Maire Ouvre Sa Boîte Mail. Un Ingénieur Camerounais Installé À Paris A Lu Les Données De Sa Commune - Et Propose De Venir Avec Une Équipe D'ingénieurs.",
     extraText: "Six Mois Plus Tard, L'eau Coule Dans Douze Villages. L'électricité S'allume Dans Les Centres De Santé. Des Emplois Sont Nés. Ce N'est Pas Un Miracle : C'est Un Mécanisme.\n\nCe Mécanisme, C'est Back2Mboa. Il Transforme Une Opportunité Invisible En Dossier Crédible, Puis En Partenariat, Puis En Projet Exécuté.",
-    videoUrl: "/videos/canyon-final.mp4",
-    posterUrl: "/images/canyon-final_225.jpeg",
+    videoUrl: "/videos/waterfall-final2.mp4",
+    posterUrl: "/images/waterfall-final2_227.jpeg",
     stats: {
       stat1: "12",
       label1: "Villages alimentés",
@@ -39,15 +58,15 @@ export const SLIDES_DATA: SlideData[] = [
     }
   },
   {
-    id: 2,
+    id: 3,
     subtitle: "Kribi - Chutes de la Lobé",
     titleTop: "L'ÉNERGIE ET L'EAU",
     titleMain: "UN IMPACT STRUCTURANT",
-    quote: "« Grâce aux synergies créées, nous connectons les compétences locales aux capitaux internationaux. »",
-    description: "Développement d'infrastructures durables pour le développement des collectivités locales.",
-    extraText: "Une approche pragmatique pour moderniser l'accès aux services essentiels dans toutes les régions du Cameroun.",
-    videoUrl: "/videos/waterfall-final2.mp4",
-    posterUrl: "/images/waterfall-final2_227.jpeg",
+    quote: "Kribi — Sud, Cameroun.",
+    description: "Développement d'infrastructures durables pour le développement des collectivités locales et valorisation des opportunités.",
+    extraText: "Grâce aux synergies créées, nous connectons les compétences locales aux capitaux internationaux.\n\nUne approche pragmatique pour moderniser l'accès aux services essentiels dans toutes les régions du Cameroun.",
+    videoUrl: "/videos/field-tree.mp4",
+    posterUrl: "/images/field-tree_228.jpeg",
     stats: {
       stat1: "25",
       label1: "Projets validés",
@@ -58,32 +77,13 @@ export const SLIDES_DATA: SlideData[] = [
     }
   },
   {
-    id: 3,
-    subtitle: "Bafoussam - Ouest Cameroun",
-    titleTop: "DES PROJETS CONCRETS",
-    titleMain: "LE RETOUR DES COMPÉTENCES",
-    quote: "« Le transfert de technologie et de savoir-faire au service de nos territoires et municipalités. »",
-    description: "Autonomisation économique et transformation numérique des collectivités décentralisées.",
-    extraText: "Mise en œuvre accélérée de projets d'aménagement et d'équipements publics structurants.",
-    videoUrl: "/videos/field-tree.mp4",
-    posterUrl: "/images/field-tree_228.jpeg",
-    stats: {
-      stat1: "40",
-      label1: "Mairies partenaires",
-      stat2: "10",
-      label2: "Régions couvertes",
-      stat3: "216",
-      label3: "Maillons actifs"
-    }
-  },
-  {
     id: 4,
     subtitle: "Garoua - Grand Nord",
     titleTop: "UN AVENIR PARTAGÉ",
     titleMain: "BÂTIR LE CAMEROUN DE DEMAIN",
-    quote: "« Ensemble, chaque projet concrétisé rapproche les talents de la terre mère. »",
-    description: "Partenariats public-privé innovants et accompagnement sur-mesure.",
-    extraText: "Découvrez nos indicateurs d'impact et participez dès aujourd'hui à la dynamique nationale.",
+    quote: "Garoua — Nord, Cameroun.",
+    description: "Partenariats public-privé innovants et accompagnement sur-mesure pour un retour efficace des talents au pays.",
+    extraText: "Ensemble, chaque projet concrétisé rapproche les talents de la terre mère.\n\nDécouvrez nos indicateurs d'impact et participez dès aujourd'hui à la dynamique nationale.",
     videoUrl: "/videos/aurora-final.mp4",
     posterUrl: "/images/aurora-final_229.jpeg",
     stats: {

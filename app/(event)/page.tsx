@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { SmoothScroll } from '@/components/SmoothScroll';
+import TerritorySection from '@/components/sections/territory-section';
+import CapMethodSection from '@/components/sections/capmethodsection';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { ImpactSection } from '@/components/sections/ImpactSection';
 import { StoriesSection } from '@/components/sections/StoriesSection';
@@ -26,8 +28,10 @@ export default function HomePage() {
     <>
       <SmoothScroll />
       <HeroSection />
+      <TerritorySection />
       <ContrasteSection />
       <OpenRoadSection />
+      <CapMethodSection />
       <MairiesChampionnesSection />
       <ModeleSection />
       <PotentialitesSection />

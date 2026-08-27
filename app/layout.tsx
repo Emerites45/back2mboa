@@ -1,7 +1,6 @@
 // app/layout.tsx
 import { Bricolage_Grotesque, Fraunces, IBM_Plex_Mono, IBM_Plex_Sans, Inter, JetBrains_Mono, Manrope, Oswald, Roboto } from 'next/font/google';
 import './globals.css';
-
 const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-manrope',

@@ -1,0 +1,73 @@
+/* Scoped explicitly under .b2m-part — no leakage to landing */
+
+.b2m-part { isolation: isolate; position: relative; z-index: 0; overflow: hidden; }
+.b2m-part .map { pointer-events: none; }
+.b2m-part[data-motion="off"] .track { animation-play-state: paused !important; }
+.b2m-part[data-motion="off"] .big .bar { animation-play-state: paused !important; }
+.b2m-part{
+  --forest:#0A2B21; --night:#061A14;
+  --jaune:#FFD506; --vert:#119D63; --rouge:#D8212E; --terre:#AE3C3A;
+  --f-d:var(--font-bricolage), system-ui, sans-serif;
+  --f-b:var(--font-inter), system-ui, sans-serif;
+  --f-m:var(--font-ibm-mono), ui-monospace, monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --speed-in:36s;
+  --speed-out:40s;
+}.b2m-part, .b2m-part *{box-sizing:border-box;margin:0;padding:0}.b2m-part{font-family:var(--f-b);background:var(--night);color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}.b2m-part .partners{position:relative;padding:clamp(52px,7vw,100px) 0;overflow:hidden;background:var(--night)}.b2m-part .map{position:absolute;inset:0;z-index:0;opacity:.45;pointer-events:none}.b2m-part .map svg{width:100%;height:100%;display:block}.b2m-part .intro{position:relative;z-index:3;max-width:1200px;margin:0 auto clamp(32px,4vw,56px);padding:0 clamp(20px,4vw,48px)}.b2m-part .eyebrow{
+  display:inline-block;font-family:var(--f-m);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--jaune);border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);
+  padding:8px 16px;border-radius:999px;margin-bottom:18px;
+}.b2m-part .intro h2{font-family:var(--f-d);font-weight:800;letter-spacing:-.035em;font-size:clamp(1.65rem,3.4vw,2.65rem);margin-bottom:14px;max-width:22ch;line-height:1.05}.b2m-part .intro h2 em{font-style:normal;color:var(--jaune)}.b2m-part .intro p{color:rgba(255,255,255,.7);max-width:58ch;font-size:1rem}/* Bands */.b2m-part .band{
+  position:relative;z-index:2;
+  display:grid;align-items:center;gap:clamp(12px,2vw,28px);
+  padding:0 clamp(14px,3vw,40px);
+  min-height:clamp(180px,22vw,260px);
+}.b2m-part .band + .band{margin-top:clamp(16px,2.5vw,32px)}.b2m-part .band.enter{grid-template-columns:minmax(0,auto) minmax(60px,1fr) auto}.b2m-part .band.exit{grid-template-columns:auto minmax(60px,1fr) minmax(0,auto)}.b2m-part .corridor{position:relative;overflow:hidden;height:100%;min-height:inherit;display:flex;align-items:center}.b2m-part .track{display:flex;align-items:center;gap:clamp(28px,3.5vw,56px);width:max-content;will-change:transform}.b2m-part .track.in{animation:b2mpart_slideIn var(--speed-in) linear infinite}.b2m-part .track.out{animation:b2mpart_slideOut var(--speed-out) linear infinite}
+@keyframes b2mpart_slideIn{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes b2mpart_slideOut{from{transform:translateX(-50%)}to{transform:translateX(0)}}.b2m-part .band:hover .track{animation-play-state:paused}.b2m-part .band.enter .corridor{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 78%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 78%,transparent);
+}.b2m-part .band.exit .corridor{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 90%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 22%,#000 90%,transparent);
+}.b2m-part .logo{
+  flex:none;display:flex;align-items:center;gap:10px;
+  font-family:var(--f-d);font-weight:800;letter-spacing:-.02em;
+  font-size:clamp(.82rem,1.2vw,1.1rem);color:rgba(255,255,255,.88);white-space:nowrap;
+  transition:color .25s;
+}.b2m-part .logo:hover{color:#fff}.b2m-part .logo .glyph{
+  flex:none;width:clamp(28px,2.8vw,38px);height:clamp(28px,2.8vw,38px);border-radius:10px;
+  border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;
+  font-family:var(--f-m);font-size:.55em;font-weight:600;color:rgba(255,255,255,.8);
+  background:rgba(255,255,255,.04);
+}.b2m-part .logo small{font-family:var(--f-b);font-weight:500;font-size:.58em;color:rgba(255,255,255,.45)}/* Door — upright profile (opening on the side) */.b2m-part .door{
+  position:relative;flex:none;
+  width:clamp(88px,11vw,140px);height:clamp(160px,20vw,240px);
+  display:grid;place-items:center;
+}.b2m-part .door-glow{
+  position:absolute;inset:8% 18%;border-radius:40% 8% 8% 40%;
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,213,6,.35),transparent 70%);
+  pointer-events:none;
+}.b2m-part .band.exit .door-glow{
+  border-radius:8% 40% 40% 8%;
+  background:radial-gradient(ellipse at 70% 50%,rgba(255,213,6,.35),transparent 70%);
+}.b2m-part .door-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 12px 28px rgba(0,0,0,.5))}.b2m-part .band.enter .door-svg{transform:scaleX(1)}.b2m-part .band.exit .door-svg{transform:scaleX(-1)}.b2m-part .big{
+  font-family:var(--f-d);font-weight:800;letter-spacing:-.045em;line-height:1.02;
+  font-size:clamp(1.4rem,4.2vw,3.5rem);white-space:nowrap;
+  background:linear-gradient(100deg,var(--rouge),var(--terre) 40%,var(--jaune));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}.b2m-part .band.exit .big{text-align:right}.b2m-part .big .bar{
+  display:inline-block;width:clamp(3px,.4vw,5px);height:.75em;background:var(--jaune);
+  vertical-align:-.05em;margin-left:.15em;animation:b2mpart_blink 1.4s steps(1) infinite;
+}
+@keyframes b2mpart_blink{0%,50%{opacity:1}51%,100%{opacity:.2}}.b2m-part .legend{
+  position:relative;z-index:3;max-width:1200px;margin:clamp(28px,4vw,48px) auto 0;
+  padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:1fr;gap:14px;
+}
+@media(min-width:760px){.b2m-part .legend{grid-template-columns:1fr 1fr;gap:20px}}.b2m-part .leg{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:18px 20px;
+}.b2m-part .leg b{display:block;font-family:var(--f-d);font-weight:700;font-size:1rem;margin-bottom:6px;letter-spacing:-.02em}.b2m-part .leg b i{font-style:normal;color:var(--jaune)}.b2m-part .leg p{font-size:.88rem;color:rgba(255,255,255,.62)}
+
+@media(prefers-reduced-motion:reduce){.b2m-part .track{animation:none!important}.b2m-part .big .bar{animation:none}}
+@media(max-width:760px){.b2m-part .band.enter, .b2m-part .band.exit{grid-template-columns:1fr auto;min-height:140px}.b2m-part .band.enter .big, .b2m-part .band.exit .big{grid-column:1/-1;font-size:clamp(1.3rem,6.5vw,2rem);white-space:normal}.b2m-part .band.exit .big{text-align:left}.b2m-part .door{width:72px;height:130px}.b2m-part .corridor{min-height:88px}}

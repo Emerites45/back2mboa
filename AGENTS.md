@@ -16,4 +16,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Mocks dans `data/`, types partagés dans `types/`, UI dans `components/ui/`.
 - Pas de dossier `src/` : le projet est à la racine.
 - Docs : `docs/mvp.md`, `docs/decisions.md`, `docs/procedures.md`.
+- Ports HTML : wrapper CSS `.b2m-*` obligatoire ; sections client si interactives ; `className` uniquement.
 

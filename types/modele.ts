@@ -10,6 +10,8 @@ export type ModeleCard = {
   description: string;
   visual: ModeleVisual;
   image?: string;
+  /** object-position CSS pour cadrage carte 4:5 */
+  imagePosition?: string;
 };
 
 export type ModeleCopy = {

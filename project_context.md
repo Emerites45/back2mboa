@@ -48,8 +48,8 @@ Sections HTML Back2Mboa montées dans `app/(event)/page.tsx` (wrappers `.b2m-*`)
 Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème montés. Écosystème : grille resserrée + orbit CSS 48s (`#digital-twin`).
 
 ## État
-Branche `feat/section_paul_alain` fusionnée avec `origin/main` (parcours, liaison, musée, ticker, SmoothScroll).
+Branche `feat/section_paul_alain` synchronisée avec `origin/main` + `feat/section_williams` + `feat/parcours-liaison-musee` (sans `vue-globale`).
 
-Landing : Hero + Hero landing HTML, puis Contraste, Comparatif, Bonne porte, Mairies, Modèle, Boulevard, Potentialités, Nécessité, Plateforme, Open Road, Parcours, BDA, Prélude, Salon, Impact / Résultats / Preuves, Bâtisseurs, Écosystème, Stories / Ticker, Liaison, Musée, Agenda, Partenaires, Billets, Ressources. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
+Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Méthode → Parcours → Résultats / Preuve → Prélude → Liaison → Musée → Écosystème → Stories / Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets. Ports HTML `.b2m-*` disponibles (certains commentés). `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
 
-Ports HTML Back2Mboa assemblés dans `page.tsx` (CSS wrappers `.b2m-*`).
+Sections Paul-Alain récentes : Pourquoi (`#pourquoi`), Partenaires (carte Cameroun / `cameroon-path.ts`), photos Modèle `secteurs/`.

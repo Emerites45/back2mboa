@@ -9,6 +9,8 @@
   --or-display: var(--font-oswald), Oswald, ui-sans-serif, sans-serif;
   --or-script: var(--font-fraunces), Fraunces, Georgia, serif;
   --or-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --or-ken-ms: 10.5s;
+  --or-ken-stars-ms: 11.5s;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -32,14 +34,156 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, transparent 28%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.38) 0%, transparent 42%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, transparent 30%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.46) 0%, transparent 46%);
+}
+
+.open-road-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.open-road-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 900ms var(--or-ease);
+}
+
+.open-road-slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.open-road-ken {
+  position: absolute;
+  inset: -6%;
+  width: 112%;
+  height: 112%;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.open-road-ken.is-zoom-stars {
+  inset: -18%;
+  width: 136%;
+  height: 136%;
+  transform-origin: 62% 14%;
+}
+
+.open-road-ken.is-running.is-zoom-in-right {
+  animation: or-ken-right var(--or-ken-ms) cubic-bezier(0.15, 0.05, 0.2, 1) both;
+}
+
+.open-road-ken.is-running.is-zoom-in-left {
+  animation: or-ken-left var(--or-ken-ms) cubic-bezier(0.15, 0.05, 0.2, 1) both;
+}
+
+.open-road-ken.is-running.is-zoom-stars {
+  animation: or-ken-stars var(--or-ken-stars-ms) cubic-bezier(0.12, 0.05, 0.18, 1) both;
+}
+
+@keyframes or-ken-right {
+  from {
+    transform: scale(1.05) translate3d(-1.4%, 0.8%, 0);
+  }
+  to {
+    transform: scale(1.22) translate3d(2.2%, -1.2%, 0);
+  }
+}
+
+@keyframes or-ken-left {
+  from {
+    transform: scale(1.05) translate3d(1.6%, 0.6%, 0);
+  }
+  to {
+    transform: scale(1.24) translate3d(-2.4%, -1%, 0);
+  }
+}
+
+/* Immersion slide 03 : départ large (montagnes) → plongée dans la Voie lactée / étoiles */
+@keyframes or-ken-stars {
+  0% {
+    transform: scale(1.06) translate3d(-1%, 10%, 0);
+  }
+  45% {
+    transform: scale(1.22) translate3d(1%, 2%, 0);
+  }
+  100% {
+    transform: scale(1.48) translate3d(3.5%, -8%, 0);
+  }
 }
 
 .open-road-photo {
-  z-index: 0;
   object-fit: cover;
-  object-position: center 38%;
+}
+
+.open-road-photo.is-stars-photo {
+  filter: saturate(1.12) contrast(1.06) brightness(1.03);
+}
+
+/* Voile d’étoiles CSS — scintillement raffiné sur la 3e diapo */
+.open-road-stars-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(1px 1px at 28% 8%, rgba(255, 240, 220, 0.9), transparent),
+    radial-gradient(1.4px 1.4px at 41% 22%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 55% 12%, rgba(230, 220, 255, 0.9), transparent),
+    radial-gradient(1.6px 1.6px at 68% 6%, rgba(255, 255, 255, 1), transparent),
+    radial-gradient(1px 1px at 78% 20%, rgba(255, 230, 240, 0.85), transparent),
+    radial-gradient(1.2px 1.2px at 88% 14%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 18% 32%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.3px 1.3px at 36% 28%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 62% 30%, rgba(240, 230, 255, 0.75), transparent),
+    radial-gradient(1.5px 1.5px at 74% 26%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(1px 1px at 92% 34%, rgba(255, 255, 255, 0.7), transparent);
+  background-size: 100% 100%;
+  transition: opacity 1.2s var(--or-ease);
+}
+
+.open-road-slide.is-stars.is-active .open-road-stars-veil {
+  opacity: 0.55;
+  animation: or-star-twinkle 3.6s ease-in-out infinite;
+}
+
+.open-road.is-paused .open-road-slide.is-stars.is-active .open-road-stars-veil {
+  animation-play-state: paused;
+}
+
+@keyframes or-star-twinkle {
+  0%,
+  100% {
+    opacity: 0.38;
+    filter: brightness(0.95);
+  }
+  50% {
+    opacity: 0.72;
+    filter: brightness(1.2);
+  }
+}
+
+.open-road-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.open-road-ui .open-road-watch,
+.open-road-ui .open-road-viewall,
+.open-road-ui .open-road-item {
+  pointer-events: auto;
 }
 
 .open-road-brand {
@@ -95,19 +239,20 @@
 
 .open-road-title {
   margin: 0;
-  max-width: 12ch;
+  max-width: 14ch;
   font-size: clamp(2.5rem, 5.6vw, 4.5rem);
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 0.92;
   text-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
-  animation: or-title-in 480ms var(--or-ease) both;
+  animation: or-title-in 560ms var(--or-ease) both;
 }
 
 .open-road-actions {
   display: flex;
   align-items: center;
   gap: 1.15rem;
+  margin-top: 0.35rem;
 }
 
 .open-road-watch,
@@ -180,6 +325,7 @@
   font-family: inherit;
   text-align: left;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .open-road-item:last-child {
@@ -193,14 +339,34 @@
   right: 0;
   left: 0;
   height: 2px;
-  background: var(--or-gold);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 280ms var(--or-ease);
+  background: rgba(255, 255, 255, 0.14);
 }
 
-.open-road-item.is-active::before {
-  transform: scaleX(1);
+.open-road-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left center;
+  background: var(--or-gold);
+  animation-name: or-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.open-road.is-paused .open-road-progress,
+.open-road.is-paused .open-road-ken.is-running {
+  animation-play-state: paused;
+}
+
+@keyframes or-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .open-road-item:focus-visible {
@@ -261,7 +427,7 @@
 @keyframes or-title-in {
   from {
     opacity: 0;
-    transform: translateY(0.45rem);
+    transform: translateY(0.55rem);
   }
   to {
     opacity: 1;
@@ -319,8 +485,21 @@
 @media (prefers-reduced-motion: reduce) {
   .open-road-title,
   .open-road-item,
-  .open-road-item::before {
-    animation: none;
-    transition: none;
+  .open-road-slide,
+  .open-road-progress,
+  .open-road-stars-veil {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .open-road-slide.is-stars.is-active .open-road-stars-veil {
+    opacity: 0.35;
+  }
+
+  .open-road-ken {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: none !important;
   }
 }

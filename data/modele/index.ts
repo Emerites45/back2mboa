@@ -13,7 +13,7 @@ export const MODELE_COPY: ModeleCopy = {
     "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Cliquez un secteur pour explorer ses opportunités.",
 };
 
-/** Copy UI maquette. Métriques communes / habitants = corpus Word uniquement. */
+/** Copy UI maquette. Photos = `image secteur/` → `public/images/modele/secteurs/`. */
 export const MODELE_CARDS: ModeleCard[] = [
   {
     id: "agriculture",
@@ -23,7 +23,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     description:
       "Transformer davantage localement, réduire les pertes, augmenter les revenus des producteurs.",
     visual: "photo",
-    image: "/images/modele/agriculture.jpg",
+    image: "/images/modele/secteurs/agriculture.jpg",
+    imagePosition: "50% 32%",
   },
   {
     id: "finance",
@@ -32,7 +33,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Finance, Fiscalité & Paiements",
     description: "Moderniser les transactions et le capital.",
     visual: "photo",
-    image: "/images/modele/finance.jpg",
+    image: "/images/modele/secteurs/finance.jpg",
+    imagePosition: "50% 28%",
   },
   {
     id: "foncier",
@@ -41,7 +43,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Foncier, Immobilier & Construction",
     description: "Sécuriser le foncier, bâtir les actifs du futur.",
     visual: "photo",
-    image: "/images/modele/foncier.jpg",
+    image: "/images/modele/secteurs/foncier.jpg",
+    imagePosition: "50% 26%",
   },
   {
     id: "tourisme",
@@ -50,7 +53,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Tourisme, Mobilité & Marketing Territorial",
     description: "Valoriser les destinations et relier les territoires.",
     visual: "photo",
-    image: "/images/modele/tourisme.jpg",
+    image: "/images/modele/secteurs/tourisme.jpg",
+    imagePosition: "50% 40%",
   },
   {
     id: "eau-energie",
@@ -59,7 +63,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Eau & Énergie",
     description: "Sécuriser l'accès à l'eau et aux énergies durables.",
     visual: "photo",
-    image: "/images/modele/eau-energie.png",
+    image: "/images/modele/secteurs/eau-energie.jpg",
+    imagePosition: "50% 35%",
   },
   {
     id: "sante",
@@ -68,7 +73,8 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Santé, Social & Bien-être",
     description: "Renforcer l'offre de soins et le tissu social local.",
     visual: "photo",
-    image: "/images/modele/sante.png",
+    image: "/images/modele/secteurs/sante.jpg",
+    imagePosition: "48% 30%",
   },
 ];
 

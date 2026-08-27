@@ -38,10 +38,11 @@ const PALETTES: Record<
 type SectorVisualProps = {
   visual: ModeleVisual;
   image?: string;
+  imagePosition?: string;
   chart?: boolean;
 };
 
-export function SectorVisual({ visual, image, chart }: SectorVisualProps) {
+export function SectorVisual({ visual, image, imagePosition, chart }: SectorVisualProps) {
   if (visual === "photo" && image) {
     return (
       <>
@@ -51,6 +52,7 @@ export function SectorVisual({ visual, image, chart }: SectorVisualProps) {
           alt=""
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          style={imagePosition ? { objectPosition: imagePosition } : undefined}
         />
         {chart && <BarChartOverlay />}
       </>

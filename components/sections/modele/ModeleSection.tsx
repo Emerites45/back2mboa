@@ -78,6 +78,7 @@ export function ModeleSection() {
                   <SectorVisual
                     visual={card.visual}
                     image={card.image}
+                    imagePosition={card.imagePosition}
                     chart={card.id === "finance"}
                   />
                   <span className="modele-expand" aria-hidden="true">

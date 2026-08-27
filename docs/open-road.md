@@ -1,10 +1,11 @@
-# Open Road — hero National Geographic
+# Open Road — diaporama
 
-Section landing (`#open-road`). Recréation de `National Geographic new.png`.
+Section landing (`#open-road`). Carousel 3 photos plein écran.
 
-Photo : `public/images/open-road/national-geographic.jpg` (export JPEG de la maquette).
+Photos : `public/images/open-road/slide-01.jpg` · `slide-02.jpg` · `slide-03.jpg`  
+Sources : `National Geographic new.png`, `National Geographic(2).png`, `unsplash_phIFdC6lA4E.png`.
 
-Copy barre : Every Tuesday | 6PM · Every Friday | 8PM · July 21 | 6PM. Lien « View all » à côté de Watch trailer.
+Motion : crossfade + Ken Burns (zoom/pan lent), progression or, autoplay, pause hover.
 
 ## Arborescence
 

@@ -23,6 +23,10 @@
 - Flèches prev/next (SVG inline, pas Lucide). Barre or de l’onglet actif = timer 6,5 s ; `animationend` → slide suivant. Pause hors viewport / `prefers-reduced-motion` (plus de pause hover).
 - Conservé : anti-slop (Bricolage, un CTA, pas de ghost / Inter / fade / `<em>`), desktop `100svh`.
 
+## 2026-08-25 — Contraste recalibré Le contraste.png
+
+Copy acteurs mise à jour + bloc « Le coût de l'inaction » (4 cartes) + closing. Cartes blanches, fond `#061a14`. Interactif : hover/focus acteur → lift + lien coût ; révélation scroll du bloc coût.
+
 ## 2026-08-25 — AgendaSection : anti-slop + 100svh
 
 - Conservé : 4 dates, bandeau d’onglets, forest / jaune.
@@ -85,6 +89,26 @@
 - Pas de fade opacity sur les stats : occlusion uniquement via l’alpha des `mount_*.webp` (ciel transparent, relief opaque).
 - `TEXT_Y_HIDDEN_1/2` calés sous la crête opaque la plus basse de chaque calque pour que la rangée parte vraiment derrière l’image.
 
+## 2026-08-25 — Section Pourquoi Back2Mboa
+
+Nouveau dossier isolé `pourquoi/` : tableau comparatif étoiles (Salons / Forums / Recommandé). Copy maquette. `id="pourquoi"`. Montée après Contraste.
+
+## 2026-08-25 — Pourquoi : filigrane BACK2MBOA
+
+Sur le tableau comparatif : watermark « BACK2MBOA » + voile radial vert/rouge/or Cameroun très atténué. Lignes semi-transparentes pour laisser passer le filigrane sans nuire à la lecture.
+
+## 2026-08-25 — Pourquoi : bandeau RECOMMANDÉ
+
+Panneau détail : filet vert remplacé par bande pleine (dégradé vert marque) avec « RECOMMANDÉ » en blanc à l’intérieur. Bandeau fixe hors animation de contenu.
+
+## 2026-08-25 — Modèle : photos secteurs projet
+
+Cartes `#modele` : 5 photos depuis `image secteur/` servies sous `public/images/modele/secteurs/` (nouveaux chemins anti-cache). Finance : pas de fichier source → image existante conservée. Cadrage `object-position` par carte.
+
+## 2026-08-25 — Open Road diaporama Ken Burns
+
+Open Road en carousel 3 slides (`slide-01/02/03.jpg`) : monument, forêt, voie lactée. Crossfade, Ken Burns directionnel, autoplay 7,8 s, barre de progression or, pause au hover.
+
 ## 2026-08-25 — Sections natives : Tailwind first
 
 - AGENTS.md : Tailwind obligatoire pour sections TSX natives ; CSS fichier réservé aux ports HTML `.b2m-*`.
@@ -109,6 +133,18 @@
 ## 2026-08-24 — Assemblage HTML dans page.tsx
 
 - Tous les ports HTML sont montés dans `app/(event)/page.tsx` sans retirer les sections déjà en production.
-- `OpenRoadSection` n’apparaît qu’une fois (après Plateforme), pour éviter le doublon d’ancrage.
+- `OpenRoadSection` n’apparaît qu’une fois, pour éviter le doublon d’ancrage.
 - Liens HTML `#inscrire` / `#partenariat` → `/inscription` et `#partenaires` / `#billets`.
 - Logo comparatif : wordmark texte (PNG absent du repo).
+
+## 2026-08-25 — Section Partenaires
+
+Nouveau dossier isolé `partenaires/` : portage de `Back2Mboa_Section_Partenaires.html`. Portail PNG local, marquee bâtisseurs / visionnaires. `id="partenaires"`. Montée après Agenda.
+
+## 2026-08-25 — Partenaires fond Cameroun + 1 viewport
+
+Fond Afrique pointillée retiré. Remplacé par contour Cameroun pointillé (`cameroon-path.ts`). Layout resserré en `100svh` pour tenir intro + 2 bandes + légende sans scroll interne (desktop).
+
+## 2026-08-27 — Sync branches équipe (sans vue-globale)
+
+`feat/section_paul_alain` a intégré `origin/main`, `feat/section_williams`, `feat/parcours-liaison-musee`. `vue-globale` exclue.

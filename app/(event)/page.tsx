@@ -12,6 +12,7 @@ import { LiaisonSection } from "@/components/sections/LiaisonSection";
 import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
 import { ContrasteSection } from "@/components/sections/contraste/ContrasteSection";
+import { PourquoiSection } from "@/components/sections/pourquoi/PourquoiSection";
 import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 import { ModeleSection } from "@/components/sections/modele/ModeleSection";
 import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
@@ -38,35 +39,35 @@ export default function HomePage() {
     <>
       <SmoothScroll />
       <HeroSection />
-      {/* <ContrasteSection /> */}
+      <ContrasteSection />
+      <PourquoiSection />
       {/* <ComparatifSection /> */}
+      <OpenRoadSection />
+      <MairiesChampionnesSection />
+      <ModeleSection />
+      <PotentialitesSection />
+      <NecessiteSection />
+      <PlateformeSection />
       <ImpactSection />
       {/* <BonnePorteSection /> */}
-      {/* <MairiesChampionnesSection /> */}
-      {/* <ModeleSection /> */}
-      {/* <PotentialitesSection /> */} 
-      {/* <NecessiteSection /> */}
-      {/* <PlateformeSection /> */}
-      {/* <OpenRoadSection /> */}
       <MethodeSection />
       <ParcoursSection />
       {/* <BeforeDuringAfterSection /> */}
       {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
-      {/* <ImpactSection /> */}
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
       {/* <PreuvesPilotesSection /> */}
       {/* <BatisseursSection /> */}
-      {/* <EcosystemeSection /> */}
+      <EcosystemeSection />
       <StoriesSection />
       <TickerSection />
-      {/* <PartenairesSection /> */}
       <BoulevardSection />
       <HeroLandingSection />
       <AgendaSection />
+      <PartenairesSection />
       <BilletsSection />
       {/* <RessourcesSection /> */}
 

@@ -1,5 +1,36 @@
 # Décisions
 
+## 2026-08-27 — TeamSection : flip mobile exclusif + démo
+
+- Une seule carte retournée (`flippedId`) ; retap = face avant ; autre carte = reset de la précédente.
+- Démo auto sur la 1re carte après le founder (intervalle `DEMO`) tant que l’user n’a pas tapé ; stop au 1er `activateCard`.
+- Démo uniquement hors desktop hover, section visible, sans `prefers-reduced-motion`.
+
+## 2026-08-27 — TeamSection : mobile
+
+- Mobile : `min-h-dvh` + hauteur auto (plus de 10 cartes compressées dans 100vh).
+- Founder `col-span-2` + max-height ; secondaires grille 2 cols `aspect-[3/4]` scrollable.
+- Tap pour flip (`TeamMemberCard` client) ; hint « Touchez une carte… » ; cibles sociales 44px.
+- Desktop `lg:` : grille asymétrique dynamique inchangée + `100dvh`.
+
+## 2026-08-27 — TeamSection : grille secondaire dynamique
+
+- `getSecondaryGrid(n)` calcule cols×rows selon le nb de membres hors founder (3→1×3, 7→4×2, 9→3×3…).
+- Colonne founder en `row-span` = rows ; largeur via `getFeaturedTrack`.
+- Typo secondaires en `cqw` (`@container`) pour suivre la taille de cellule.
+
+## 2026-08-27 — TeamSection : anti-slop desktop (flip conservé)
+
+- Grille asymétrique : Olivia `featured` (col 1, 3 rows) + 9 cartes à droite — plus de 5×2 clones.
+- Coupés : hint UI, brand dupliqué, pills skew, tags chips, socials `#`, float map, double aurora, stagger.
+- Tokens `brand-yellow` / `dark-green` / `brand-result` ; verso = bio + email seul ; flip hover/focus CSS.
+
+## 2026-08-27 — TeamSection : port React natif (pas de HTML)
+
+- Source `Back2Mboa_Section_Team Grok.html` → `components/sections/team/` + `data/team/` + `types/team.ts`.
+- Tailwind + flip 3D (hover desktop, tap mobile) ; Font Awesome remplacé par SVG / Lucide ; Great Vibes ajouté pour le titre.
+- Ancré `#team` juste après `BilletsPartenairesSection`.
+
 ## 2026-08-26 — Billets : 4 packs × 2, fonds distincts
 
 - Les deux sections montrent les 4 mêmes tickets (Growth → Prosperity). Copy packs inchangée.

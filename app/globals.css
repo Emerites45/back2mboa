@@ -199,6 +199,27 @@ html.lenis body {
   }
 }
 
+@keyframes team-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes team-float-map {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) scale(1.02);
+  }
+}
+
 .ticker-track {
   animation: ticker 36s linear infinite;
 }

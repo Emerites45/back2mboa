@@ -30,6 +30,7 @@ import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/Pre
 import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
 import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
+import { TeamSection } from "@/components/sections/team/TeamSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
 import { Button } from "@/components/ui/button";
 
@@ -69,6 +70,7 @@ export default function HomePage() {
       <AgendaSection />
       <BilletsSection />
       <BilletsPartenairesSection />
+      <TeamSection />
       {/* <RessourcesSection /> */}
 
 

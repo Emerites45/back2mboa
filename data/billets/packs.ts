@@ -11,6 +11,7 @@ export type BilletPack = {
   dispo: boolean;
   europe: string;
   position: string;
+  chips?: string[];
   inclus: string[];
   pourqui: string[];
   bottom: string;

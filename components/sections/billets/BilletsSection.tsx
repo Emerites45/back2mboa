@@ -7,78 +7,124 @@ import { PACKS, STUB_BG, type BilletPack } from "@/data/billets/packs";
 import "./BilletsSection.css";
 
 const DEFAULT_SEL = 0;
+const DEFAULT_CHIPS = ["Deal Rooms", "6 mairies", "500 décideurs"];
+
+export type BilletsSectionProps = {
+  id?: string;
+  title?: string;
+  when?: string;
+  under?: string;
+  eyebrow?: string;
+  packs?: BilletPack[];
+  stubBg?: readonly string[];
+  ariaLabel?: string;
+  tone?: "day" | "night";
+};
 
 function packVars(q: BilletPack): CSSProperties {
+  const darkCta = q.couleur === "#FFD506";
   return {
     "--sel": q.couleur,
     "--selTxt": q.texte,
-    "--ctaTxt": q.id === "vision" ? "#0A2B21" : "#fff",
-    "--ctaBg": q.id === "vision" ? q.couleur : q.texte,
+    "--ctaTxt": darkCta ? "#0A2B21" : "#fff",
+    "--ctaBg": darkCta ? q.couleur : q.texte,
   } as CSSProperties;
 }
 
-function TicketFace({ p, open }: { p: BilletPack; open: boolean }) {
+function TicketFace({
+  p,
+  open,
+  eyebrow,
+}: {
+  p: BilletPack;
+  open: boolean;
+  eyebrow: string;
+}) {
   const qr = BILLET_QR_PATHS[p.id];
+  const chips = p.chips ?? DEFAULT_CHIPS;
   return (
     <div className="face" inert={!open} aria-hidden={!open}>
+      <span className="notch tl" />
+      <span className="notch bl" />
+      <span className="notch tm" />
+      <span className="notch bm" />
+
       <div className="tier">
         <div className="dyn">
+          <div className="eyebrow">{eyebrow}</div>
           <div className="name">{p.nom}</div>
-          <div className="amount">{p.prix}</div>
-          <p className="unit">
-            <span>FCFA TTC</span>
-            {p.position}
-          </p>
+          <div className="amount">{p.prix}&nbsp;F</div>
+          <p className="unit">{p.position}</p>
           <div className={`avail ${p.dispo ? "dispo" : "clos"}`}>{p.statut}</div>
-          <div className="europe">{p.europe}</div>
         </div>
       </div>
 
-      <div className="body">
-        <p className="mast">Back2Mboa ASAP 2026</p>
-        <Link className="cta" href="/inscription">
-          Choisir {p.nom}
-        </Link>
-        <dl className="facts">
-          <div>
-            <dt>Lieu</dt>
-            <dd>Yaoundé</dd>
+      <div className="pass-right">
+        <div className="body">
+          <p className="mast">{p.complet}</p>
+          <div className="chips">
+            {chips.map((c) => (
+              <span className="chip" key={c}>
+                {c}
+              </span>
+            ))}
           </div>
-          <div>
-            <dt>Dates</dt>
-            <dd>16–17 décembre 2026</dd>
-          </div>
-          <div>
-            <dt>Durée</dt>
-            <dd>2 jours</dd>
-          </div>
-          <div>
-            <dt>Site</dt>
-            <dd>Musée National</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div className="qr-panel">
-        <span className="notch top" />
-        <span className="notch bot" />
-        <span className="qr-lab">Coupon</span>
-        <div
-          className="qr-box"
-          aria-hidden="true"
-          dangerouslySetInnerHTML={{ __html: qr }}
-        />
-        <div className="qr-ref">B2M-2026-{p.id.toUpperCase()}</div>
-        <div className="qr-fine">Non cessible</div>
+          <dl className="facts">
+            <div>
+              <dt>Lieu</dt>
+              <dd>Musée National, Yaoundé</dd>
+            </div>
+            <div>
+              <dt>Dates</dt>
+              <dd>16–17 déc. 2026</dd>
+            </div>
+            <div>
+              <dt>Ouverture</dt>
+              <dd>08:30</dd>
+            </div>
+            <div>
+              <dt>Europe</dt>
+              <dd>{p.europe}</dd>
+            </div>
+          </dl>
+          <Link className="cta" href="/inscription">
+            Choisir {p.nom}
+          </Link>
+        </div>
+        <div className="qr-panel">
+          <div
+            className="qr-box"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: qr }}
+          />
+          <div className="qr-lab">SCAN · CHECK-IN</div>
+        </div>
+        <div className="seat">
+          <span>
+            N° <b>B2M-2026-{p.id.toUpperCase()}</b>
+          </span>
+          <span>
+            Porte <b>{p.nom}</b>
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
-export function BilletsSection() {
+export function BilletsSection({
+  id = "billets",
+  title = "Packs entreprises",
+  when = "16 & 17 décembre 2026",
+  under = "500 participants sur sélection · Clôture le 30 novembre 2026 · Offres à la carte dès 50 000 F",
+  eyebrow = "Offre entreprise",
+  packs = PACKS,
+  stubBg = STUB_BG,
+  ariaLabel = "Packs entreprises",
+  tone = "day",
+}: BilletsSectionProps = {}) {
   const [sel, setSel] = useState(DEFAULT_SEL);
   const [live, setLive] = useState(false);
-  const p = PACKS[sel] ?? PACKS[DEFAULT_SEL];
 
   const pick = (i: number) => {
     if (i === sel) return;
@@ -87,22 +133,24 @@ export function BilletsSection() {
   };
 
   return (
-    <div className="b2m-billets" id="billets">
+    <div className="b2m-billets" id={id} data-tone={tone}>
       <header className="head">
-        <p className="when">16 &amp; 17 décembre 2026</p>
-        <h2>Offres de partenariat</h2>
+        <p className="when">{when}</p>
+        <h2>{title}</h2>
       </header>
 
       <section className="zone">
         <div
           className={`ticket${live ? " is-live" : ""}`}
-          id="ticket"
+          id={`${id}-ticket`}
           data-open={String(sel)}
+          data-count={String(packs.length)}
           role="group"
-          aria-label="Offres"
+          aria-label={ariaLabel}
         >
-          {PACKS.map((q, i) => {
+          {packs.map((q, i) => {
             const on = i === sel;
+            const darkCta = q.couleur === "#FFD506";
             return (
               <div
                 key={q.id}
@@ -115,12 +163,8 @@ export function BilletsSection() {
                   aria-expanded={on}
                   className={`stub${q.dispo ? "" : " clos"}`}
                   style={{
-                    background: on ? q.couleur : STUB_BG[i],
-                    color: on
-                      ? q.id === "vision"
-                        ? "#0A2B21"
-                        : "#fff"
-                      : q.texte,
+                    background: on ? q.couleur : stubBg[i],
+                    color: on ? (darkCta ? "#0A2B21" : "#fff") : q.texte,
                   }}
                   aria-label={`${q.complet}, ${q.prix} FCFA`}
                   onClick={() => pick(i)}
@@ -131,48 +175,28 @@ export function BilletsSection() {
                     <span className="state">{q.statut}</span>
                   </span>
                 </button>
-                <TicketFace p={q} open={on} />
+                <TicketFace p={q} open={on} eyebrow={eyebrow} />
               </div>
             );
           })}
         </div>
 
-        <div className="details" id="details" style={packVars(p)}>
-          <div className={live ? "is-swap" : undefined} key={p.id}>
-            <div className="det-head">
-              <span className="dn">{p.complet}</span>
-              <span className="dp">{p.prix} FCFA TTC</span>
-              <span className={`db${p.dispo ? " dispo" : ""}`}>{p.statut}</span>
-            </div>
-            <div className="det-grid">
-              <div className="det-col">
-                <h4>Ce que l&apos;offre comprend</h4>
-                <ul>
-                  {p.inclus.map((x) => (
-                    <li key={x} dangerouslySetInnerHTML={{ __html: x }} />
-                  ))}
-                </ul>
-              </div>
-              <div className="det-col who">
-                <h4>Pour qui</h4>
-                <ul>
-                  {p.pourqui.map((x) => (
-                    <li key={x} dangerouslySetInnerHTML={{ __html: x }} />
-                  ))}
-                </ul>
-                <blockquote className="det-bl">
-                  <p dangerouslySetInnerHTML={{ __html: p.bottom }} />
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p className="under">
-          500 participants sur sélection · Clôture le 30 novembre 2026 · Offres
-          à la carte dès 50 000 F
-        </p>
+        <p className="under">{under}</p>
       </section>
     </div>
+  );
+}
+
+export function BilletsPartenairesSection() {
+  return (
+    <BilletsSection
+      id="partenaires"
+      title="Packs partenaires"
+      eyebrow="Pack partenaire"
+      packs={PACKS}
+      stubBg={STUB_BG}
+      ariaLabel="Packs partenaires"
+      tone="night"
+    />
   );
 }

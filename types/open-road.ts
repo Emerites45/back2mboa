@@ -1,4 +1,7 @@
-export type OpenRoadKenBurns = "zoom-in-right" | "zoom-in-left" | "zoom-stars";
+export type OpenRoadKenBurns =
+  | "zoom-tea"
+  | "zoom-forest"
+  | "zoom-summit";
 
 export type OpenRoadProgram = {
   id: string;
@@ -9,12 +12,12 @@ export type OpenRoadProgram = {
   alt: string;
   objectPosition: string;
   kenBurns: OpenRoadKenBurns;
+  duration: string;
 };
 
 export type OpenRoadCopy = {
   brand: string;
   watchLabel: string;
-  viewAll: string;
   autoplayMs: number;
   programs: [OpenRoadProgram, OpenRoadProgram, OpenRoadProgram];
 };

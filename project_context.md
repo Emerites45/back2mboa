@@ -50,6 +50,6 @@ Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème mo
 ## État
 Branche `feat/section_paul_alain` synchronisée avec `origin/main` + `feat/section_williams` + `feat/parcours-liaison-musee` (sans `vue-globale`).
 
-Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Méthode → Parcours → Résultats / Preuve → Prélude → Liaison → Musée → Écosystème → Stories / Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets. Ports HTML `.b2m-*` disponibles (certains commentés). `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
+Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Méthode → Parcours → Résultats / Preuve → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories / Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets. Ports HTML `.b2m-*` disponibles (certains commentés). `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
 
-Sections Paul-Alain récentes : Pourquoi (`#pourquoi`), Partenaires (carte Cameroun / `cameroon-path.ts`), photos Modèle `secteurs/`.
+Sections Paul-Alain récentes : Pourquoi, Bonne Porte, Open Road, Homecoming, Prélude (`#prelude-mission`, Double flux), Éditions pilotes, Résultats (Rectangle 175).

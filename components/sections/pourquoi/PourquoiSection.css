@@ -237,22 +237,37 @@
 
 .pourquoi-row.is-head .pourquoi-cell.is-reco {
   justify-content: center;
-  background: var(--pq-green-deep);
+  align-items: center;
+  background: #121c18;
   border-left: 0;
+  padding-block: 0.7rem;
+  padding-inline: 0.65rem;
 }
 
-.pourquoi-badge {
+.pourquoi-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  line-height: 0;
+  filter: saturate(1.28) contrast(1.1) brightness(1.06)
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+.pourquoi-logo-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pourquoi-logo.is-head .pourquoi-logo-img {
+  width: clamp(5.25rem, 9vw, 6.75rem);
+  height: auto;
+}
+
+.pourquoi-logo.is-detail .pourquoi-logo-img {
+  width: clamp(7.5rem, 14vw, 9.5rem);
+  height: auto;
 }
 
 .pourquoi-stars {
@@ -278,7 +293,7 @@
   transition-delay: calc(var(--pq-si, 0) * 30ms);
 }
 
-/* Panneau détail — bandeau RECOMMANDÉ + contenu en fondu léger */
+/* Panneau détail — logo marque + contenu */
 .pourquoi-detail {
   position: relative;
   display: flex;
@@ -293,18 +308,15 @@
     0 18px 40px rgba(28, 28, 28, 0.07);
 }
 
-.pourquoi-detail-label {
+.pourquoi-detail-brand {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  padding: 0.72rem 1.4rem;
-  background: linear-gradient(90deg, var(--pq-green-deep) 0%, #147a48 55%, var(--pq-green) 100%);
-  color: #ffffff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1;
-  text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+  padding: 1rem 1.35rem 0.95rem;
+  background: #121c18;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.28);
 }
 
 .pourquoi-detail-inner {

@@ -8,7 +8,8 @@
   --ag-line: color-mix(in srgb, var(--ag-ink) 14%, transparent);
   --ag-sans: var(--font-bricolage), system-ui, sans-serif;
   --ag-mono: var(--font-ibm-mono), ui-monospace, monospace;
-  --ag-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ag-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ag-copy-ms: 720ms;
   isolation: isolate;
   position: relative;
   overflow: hidden;
@@ -34,6 +35,56 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+  transition: transform 1.15s var(--ag-ease);
+  will-change: transform;
+}
+
+.agenda-bg-layer {
+  transform-origin: 70% 40%;
+  transition: transform 1.25s var(--ag-ease), opacity 1s var(--ag-ease);
+}
+
+.agenda-bg.is-slide-0 {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+.agenda-bg.is-slide-1 {
+  transform: translate3d(-2.2%, 1.2%, 0) scale(1.03);
+}
+.agenda-bg.is-slide-2 {
+  transform: translate3d(-4%, -0.6%, 0) scale(1.05);
+}
+.agenda-bg.is-slide-3 {
+  transform: translate3d(-1.2%, 2%, 0) scale(1.02);
+}
+
+.agenda-bg.is-slide-0 .agenda-bg-layer.is-a {
+  transform: translate3d(0, 0, 0);
+}
+.agenda-bg.is-slide-1 .agenda-bg-layer.is-a {
+  transform: translate3d(-18px, 12px, 0) scale(1.04);
+}
+.agenda-bg.is-slide-2 .agenda-bg-layer.is-a {
+  transform: translate3d(-36px, -8px, 0) scale(1.07);
+}
+.agenda-bg.is-slide-3 .agenda-bg-layer.is-a {
+  transform: translate3d(-10px, 22px, 0) scale(1.03);
+}
+
+.agenda-bg.is-slide-0 .agenda-bg-layer.is-b {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.agenda-bg.is-slide-1 .agenda-bg-layer.is-b {
+  transform: translate3d(22px, -14px, 0) scale(0.97);
+  opacity: 0.95;
+}
+.agenda-bg.is-slide-2 .agenda-bg-layer.is-b {
+  transform: translate3d(34px, 10px, 0) scale(0.94);
+  opacity: 0.9;
+}
+.agenda-bg.is-slide-3 .agenda-bg-layer.is-b {
+  transform: translate3d(12px, -20px, 0) scale(0.98);
+  opacity: 0.96;
 }
 
 .agenda-stage {
@@ -59,7 +110,80 @@
   color: var(--ag-gold);
 }
 
-.agenda h2 {
+.agenda-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.agenda-title,
+.agenda-meta,
+.agenda-body,
+.agenda-btn {
+  animation-duration: var(--ag-copy-ms);
+  animation-timing-function: var(--ag-ease);
+  animation-fill-mode: both;
+}
+
+.agenda-copy.is-next .agenda-title {
+  animation-name: ag-in-next;
+}
+.agenda-copy.is-next .agenda-meta {
+  animation-name: ag-in-next;
+  animation-delay: 55ms;
+}
+.agenda-copy.is-next .agenda-body {
+  animation-name: ag-in-next;
+  animation-delay: 110ms;
+}
+.agenda-copy.is-next .agenda-btn {
+  animation-name: ag-in-next;
+  animation-delay: 165ms;
+}
+
+.agenda-copy.is-prev .agenda-title {
+  animation-name: ag-in-prev;
+}
+.agenda-copy.is-prev .agenda-meta {
+  animation-name: ag-in-prev;
+  animation-delay: 55ms;
+}
+.agenda-copy.is-prev .agenda-body {
+  animation-name: ag-in-prev;
+  animation-delay: 110ms;
+}
+.agenda-copy.is-prev .agenda-btn {
+  animation-name: ag-in-prev;
+  animation-delay: 165ms;
+}
+
+@keyframes ag-in-next {
+  from {
+    opacity: 0;
+    transform: translate3d(1.35rem, 0.35rem, 0);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes ag-in-prev {
+  from {
+    opacity: 0;
+    transform: translate3d(-1.35rem, 0.35rem, 0);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.agenda-title {
   margin: 0 0 0.85rem;
   max-width: 18ch;
   font-size: clamp(1.85rem, 4.4vw, 3.1rem);
@@ -100,11 +224,14 @@
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
-  transition: background-color 0.2s var(--ag-ease);
+  transition:
+    background-color 0.2s var(--ag-ease),
+    transform 0.2s var(--ag-ease);
 }
 
 .agenda-btn:hover {
   background: color-mix(in srgb, var(--ag-gold) 82%, #fff);
+  transform: translateY(-1px);
 }
 
 .agenda-btn:focus-visible {
@@ -132,11 +259,20 @@
   background: color-mix(in srgb, var(--ag-bg) 78%, transparent);
   color: var(--ag-ink);
   cursor: pointer;
+  transition:
+    border-color 0.2s var(--ag-ease),
+    background-color 0.2s var(--ag-ease),
+    transform 0.2s var(--ag-ease);
 }
 
 .agenda-nav button:hover {
   border-color: color-mix(in srgb, var(--ag-ink) 40%, transparent);
   background: color-mix(in srgb, var(--ag-ink) 6%, transparent);
+  transform: scale(1.04);
+}
+
+.agenda-nav button:active {
+  transform: scale(0.96);
 }
 
 .agenda-nav button:focus-visible {
@@ -167,7 +303,7 @@
   font-family: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background-color 0.2s var(--ag-ease);
+  transition: background-color 0.35s var(--ag-ease);
 }
 
 .agenda-tabs button::before {
@@ -234,6 +370,16 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--ag-ink);
+  transition:
+    border-color 0.3s var(--ag-ease),
+    color 0.3s var(--ag-ease),
+    background-color 0.3s var(--ag-ease);
+}
+
+.agenda-tabs button.is-active .agenda-thumb {
+  border-color: color-mix(in srgb, var(--ag-gold) 45%, var(--ag-line));
+  background: color-mix(in srgb, var(--ag-gold) 12%, transparent);
+  color: var(--ag-gold);
 }
 
 .agenda-tab-copy {
@@ -250,6 +396,11 @@
   letter-spacing: -0.02em;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: opacity 0.3s var(--ag-ease);
+}
+
+.agenda-tabs button:not(.is-active) .agenda-tab-copy strong {
+  opacity: 0.72;
 }
 
 .agenda-tab-copy span {
@@ -269,7 +420,7 @@
     padding: 1.5rem 4.5rem 1.25rem 1.25rem;
   }
 
-  .agenda h2 {
+  .agenda-title {
     max-width: none;
   }
 
@@ -298,12 +449,27 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .agenda-btn,
-  .agenda-tabs button {
-    transition: none;
+  .agenda.is-reduce .agenda-bg,
+  .agenda.is-reduce .agenda-bg-layer,
+  .agenda.is-reduce .agenda-btn,
+  .agenda.is-reduce .agenda-nav button,
+  .agenda.is-reduce .agenda-tabs button,
+  .agenda.is-reduce .agenda-thumb,
+  .agenda.is-reduce .agenda-tab-copy strong {
+    transition: none !important;
   }
 
-  .agenda-tab-fill {
+  .agenda.is-reduce .agenda-title,
+  .agenda.is-reduce .agenda-meta,
+  .agenda.is-reduce .agenda-body,
+  .agenda.is-reduce .agenda-btn {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .agenda.is-reduce .agenda-tab-fill {
     display: none;
   }
 }

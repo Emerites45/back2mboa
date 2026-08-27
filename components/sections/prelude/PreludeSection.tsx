@@ -1,133 +1,145 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { PRELUDE_COPY } from "@/data/prelude";
+import type { PreludeBlock } from "@/types/prelude";
 import "./PreludeSection.css";
 
-/** Carte image — `height` = plancher de ligne ; le texte peut l’allonger. */
-const CARD = {
-  width: 520,
-  height: 360,
-  radius: 10,
-} as const;
+function Tags({ tags }: { tags: PreludeBlock["tags"] }) {
+  if (!tags.length) return null;
+  return (
+    <ul className="prelude-tags">
+      {tags.map((tag) => (
+        <li key={tag.label} className={`prelude-tag is-${tag.tone}`}>
+          {tag.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-const cardVars = {
-  ["--prelude-card-w" as string]: `${CARD.width}px`,
-  ["--prelude-card-h" as string]: `${CARD.height}px`,
-  ["--prelude-card-r" as string]: `${CARD.radius}px`,
-} as CSSProperties;
+function BlockCard({ block }: { block: PreludeBlock }) {
+  const isCta = block.variant === "cta";
+
+  return (
+    <div className={`prelude-card${isCta ? " is-cta" : ""}`}>
+      <span className="prelude-badge" aria-hidden="true">
+        {block.index}
+      </span>
+      <h3 id={`prelude-${block.id}-title`} className="prelude-card-title">
+        {block.title}
+      </h3>
+      <p className="prelude-card-body">{block.body}</p>
+
+      {block.packs ? (
+        <div className="prelude-packs">
+          {block.packs.map((pack) => (
+            <div className="prelude-pack" key={pack.title}>
+              <strong>{pack.title}</strong>
+              <span>{pack.body}</span>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      <Tags tags={block.tags} />
+
+      {block.primaryCta || block.secondaryCta ? (
+        <div className="prelude-actions">
+          {block.primaryCta ? (
+            <Link className="prelude-btn is-primary" href={block.primaryCta.href}>
+              {block.primaryCta.label}
+            </Link>
+          ) : null}
+          {block.secondaryCta ? (
+            <Link className="prelude-btn is-ghost" href={block.secondaryCta.href}>
+              {block.secondaryCta.label}
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function BlockRow({ block }: { block: PreludeBlock }) {
+  const media = (
+    <div className="prelude-media">
+      <Image
+        src={block.image}
+        alt={block.imageAlt}
+        fill
+        sizes="(max-width: 900px) 100vw, 50vw"
+        className="prelude-media-img"
+      />
+    </div>
+  );
+  const card = <BlockCard block={block} />;
+
+  return (
+    <article
+      className={`prelude-row is-${block.layout}${block.variant === "cta" ? " is-cta-row" : ""}`}
+      aria-labelledby={`prelude-${block.id}-title`}
+    >
+      {block.layout === "media-left" ? (
+        <>
+          {media}
+          {card}
+        </>
+      ) : (
+        <>
+          {card}
+          {media}
+        </>
+      )}
+    </article>
+  );
+}
 
 export function PreludeSection() {
+  const copy = PRELUDE_COPY;
+
   return (
-    <div className="b2m-prelude" style={cardVars}>
-      <section className="prelude" id="prelude-mission" aria-labelledby="prelude-title">
-        <h2 id="prelude-title" className="prelude-title">
-          Avant Yaoundé : former, capter, signer.
-        </h2>
-        <p className="prelude-sub">
-          Masterclass d’octobre pour les mairies, puis mission et salon de la
-          diaspora en décembre — le premier sens de la flèche : les territoires
-          vont vers la diaspora.
-        </p>
+    <section
+      className="b2m-prelude"
+      id="prelude-mission"
+      aria-labelledby="prelude-title"
+    >
+      <div className="prelude-inner">
+        <header className="prelude-head">
+          <div className="prelude-head-copy">
+            <p className="prelude-eyebrow">{copy.eyebrow}</p>
+            <h2 id="prelude-title" className="prelude-title">
+              {copy.title}
+            </h2>
+            <p className="prelude-sub">{copy.subtitle}</p>
+          </div>
 
-        <article className="block lead">
-          <div className="block-media">
-            <Image
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80"
-              alt="Masterclass maires et équipes CTD"
-              fill
-              sizes="(max-width: 800px) 100vw, 50vw"
-            />
+          <div className="prelude-ring" aria-hidden="true">
+            <span className="prelude-ring-orbit" />
+            <span className="prelude-ring-thumb">
+              <Image
+                src={copy.ringImage}
+                alt=""
+                width={72}
+                height={72}
+                className="prelude-ring-img"
+              />
+            </span>
           </div>
-          <div className="block-body">
-            <p className="block-date">Octobre 2026</p>
-            <h3>Masterclass CTD</h3>
-            <p>
-              Masterclass pratique pour les maires et leurs équipes :
-              attractivité territoriale, mobilisation diaspora / investisseurs,
-              outils numériques pour augmenter les recettes, cartes
-              d’opportunités, pitch investisseur.
-            </p>
-          </div>
-        </article>
+        </header>
 
-        <article className="block reverse">
-          <div className="block-media">
-            <Image
-              src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80"
-              alt="Salon et networking diaspora"
-              fill
-              sizes="(max-width: 800px) 100vw, 50vw"
-            />
-          </div>
-          <div className="block-body">
-            <p className="block-date">1–7 décembre 2026 · salon le 4</p>
-            <h3>Salon de la Diaspora &amp; mission</h3>
-            <p>
-              Les territoires rencontrent la diaspora et les partenaires en
-              Europe. Point d’orgue : le salon le 4 décembre — visibilité,
-              deals, visites d’entreprises et d’infrastructures (ports, sites
-              industriels).
-            </p>
-          </div>
-        </article>
-
-        <article className="block block-cta">
-          <div className="block-media">
-            <Image
-              src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=900&q=80"
-              alt="Partenaires et sponsors"
-              fill
-              sizes="(max-width: 800px) 100vw, 50vw"
-            />
-          </div>
-          <div className="block-body">
-            <p className="block-date">Packs Vision &amp; Prosperity</p>
-            <h3>Partenaires : rejoignez le salon</h3>
-            <p>
-              L’accès au salon de la diaspora et à la mission est désormais
-              inclus dans les packs sponsors. Visibilité, networking décideurs,
-              démonstration terrain — tous frais de prise en charge selon le
-              niveau.
-            </p>
-            <div className="packs">
-              <div className="pack">
-                <strong>Prosperity Partner</strong>
-                <span>
-                  Prise en charge de <b>2 personnes</b>, tous frais payés —
-                  salon + activités mission.
-                </span>
-              </div>
-              <div className="pack">
-                <strong>Vision Partner</strong>
-                <span>
-                  Prise en charge d’<b>1 personne</b>, tous frais payés — salon
-                  + activités mission.
-                </span>
-              </div>
-            </div>
-            <div className="prelude-actions">
-              <Link className="btn-jaune" href="#billets">
-                Voir les packs partenaires
-              </Link>
-              <Link className="btn-ghost" href="#partenaires">
-                Nous contacter
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        <div className="prelude-foot">
-          <span>
-            <strong>Masterclass</strong> · octobre 2026
-          </span>
-          <span>
-            <strong>Mission / salon</strong> · 1–7 déc. (salon 4 déc.)
-          </span>
-          <span>
-            <strong>Back2Mboa</strong> · 16–17 déc. · Musée National, Yaoundé
-          </span>
+        <div className="prelude-stack">
+          {copy.blocks.map((block) => (
+            <BlockRow key={block.id} block={block} />
+          ))}
         </div>
-      </section>
-    </div>
+
+        <footer className="prelude-foot">
+          {copy.foot.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </footer>
+      </div>
+    </section>
   );
 }

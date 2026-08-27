@@ -1,5 +1,53 @@
 # Décisions
 
+## 2026-08-27 — Agenda : transitions slides
+
+Contenu (titre → meta → body → CTA) : entrée directionnelle staggered ~720 ms (next/prev), léger blur. Disques SVG : dérive/scale par slide. Tabs : fill or + pastille active. `prefers-reduced-motion` coupe les anims.
+
+## 2026-08-27 — Prélude : alignement maquette Double flux
+
+Refonte `prelude/` : eyebrow, anneau photo, grille alternée 01 salon → 02 masterclass → 03 packs CTA, pastilles, tags pills, footer dates. Assets locaux `public/images/prelude/*.webp`. Data/types externalisés. Dates event 16–18 déc.
+
+## 2026-08-27 — Résultats : image Rectangle 175
+
+Colonne gauche `ResultatsSection` : `Rectangle 175.png` (lauréat Meet Africa + partenaire) → `public/images/resultat_1.webp` (+ variantes 768/1280/1920). `object-position: center 22%` pour cadrer les visages. Alt mis à jour.
+
+## 2026-08-27 — Homecoming : 2e diaporama Ken Burns
+
+Nouveau `homecoming/` (`#homecoming`) : 01 Ariel Mbita (suite), 02 Édouard Tamba (grill), 03 Jakub Dziubak (bar) → `public/images/horizons/slide-0*.webp`. Même langage UI qu’Open Road. Autoplay au viewport (IO 0,35), reset slide 01, boucle 8 s, 3 Ken Burns. Monté après Éditions pilotes.
+
+## 2026-08-27 — Open Road : autoplay au viewport
+
+IntersectionObserver (seuil 0,35) : à l’entrée, reset slide 01 (Pexels thé) + relance Ken Burns / barre or / intervalle — sans clic. Pause hors écran. Boucle tant que visible.
+
+## 2026-08-27 — Open Road : diaporama 3 photos + Ken Burns
+
+Slides : thé Pexels, forêt Pascoa, sommets Siewe → `public/images/open-road/slide-0{1,2,3}-*.webp`. Boucle continue 8 s, crossfade ~1 s, 3 Ken Burns distincts (tea / forest / summit). UI maquette NG (brand, titre, Watch trailer + durée, barre 01–03 + progress or). `prefers-reduced-motion` respecté.
+
+## 2026-08-27 — Bonne Porte : 100svh
+
+Desktop (≥900px) `height/max-height: 100svh`, colonne flex (head → flux → tabs → panel fluide → foot). Cards gains en `flex:1`. Densité renforcée sous 820/720 px de hauteur. Mobile : hauteur auto, textes complets.
+
+## 2026-08-27 — Bonne Porte : fond Vector(2) opaque
+
+`Vector(2).png` source a un alpha uniforme ~25/255 → quasi invisible en CSS. Asset web aplati opaque + WebP `public/images/bonne-porte/vector-2.webp`, voile dégradé léger (arche visible), cards/tabs glass.
+
+## 2026-08-27 — Bonne Porte : fond Vector(2) + refactor
+
+Refonte `bonne-porte/` alignée maquette : fond `vector-2` (depuis `Vector(2).png`) + voile clair, bandeau double flux, tabs pills, cards Aujourd’hui / Avec Back2Mboa + bandeau Gain. Copy externalisée `data/bonne-porte` + `types/bonne-porte`. Montée après Impact (`#la-bonne-porte`). Dates event 16–18 déc. (contexte projet).
+
+## 2026-08-27 — Section Éditions pilotes
+
+Nouveau dossier `editions-pilotes/` (Tailwind, client). Maquette « Les éditions pilotes ont prouvé le modèle » : 3 colonnes hover « Rôle dans Back2Mboa » + photos locales (`Vector.png`, `Vector(1).png`, `Col_03_CTD.png` → `public/images/editions-pilotes/`). `id="editions-pilotes"`. Montée après Preuve chiffres. Port HTML `PreuvesPilotesSection` laissé commenté (évite doublon).
+
+## 2026-08-27 — Éditions pilotes : 100svh + formes
+
+Desktop `100svh` / `overflow-hidden`. Grille dans cadre `rounded-2xl`, index pastille, panneau rôle overlay soft, photos `rounded-t` + dégradé, footer compact avec filets. Mobile hauteur auto (stack).
+
+## 2026-08-27 — Éditions pilotes : carousels enrichis
+
+5 locales + 3 Unsplash / colonne (8 slides). Crossfade snappy 420 ms, hold 2,4 s, boucle RAF continue sans pause au hover colonne, points à progression.
+
 ## 2026-08-26 — ImpactSection : Lenis + reveal trop violent
 
 - Cause : `html { scroll-behavior: smooth }` combattait le lerp Lenis (CSS 1.3 sans override). `useScroll` lisait un scroll natif par à-coups. Offsets trop courts (~26–46 vh) + ease Material → stats plus rapides que le scroll.
@@ -97,9 +145,9 @@ Nouveau dossier isolé `pourquoi/` : tableau comparatif étoiles (Salons / Forum
 
 Sur le tableau comparatif : watermark « BACK2MBOA » + voile radial vert/rouge/or Cameroun très atténué. Lignes semi-transparentes pour laisser passer le filigrane sans nuire à la lecture.
 
-## 2026-08-25 — Pourquoi : bandeau RECOMMANDÉ
+## 2026-08-27 — Pourquoi : logo à la place de RECOMMANDÉ
 
-Panneau détail : filet vert remplacé par bande pleine (dégradé vert marque) avec « RECOMMANDÉ » en blanc à l’intérieur. Bandeau fixe hors animation de contenu.
+Colonne tableau + bandeau panneau détail : badge / fond vert « Recommandé » retirés. Remplacés par logo Back2Mboa (`public/images/pourquoi/logo-back2mboa.png`, fond noir détouré).
 
 ## 2026-08-25 — Modèle : photos secteurs projet
 

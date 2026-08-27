@@ -8,6 +8,7 @@ import { MethodeSection } from "@/components/sections/methode/MethodeSection";
 import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
+import { EditionsPilotesSection } from "@/components/sections/editions-pilotes/EditionsPilotesSection";
 import { LiaisonSection } from "@/components/sections/LiaisonSection";
 import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
@@ -20,6 +21,7 @@ import { PotentialitesSection } from "@/components/sections/potentialites/Potent
 import { EcosystemeSection } from "@/components/sections/ecosysteme/EcosystemeSection";
 import { PlateformeSection } from "@/components/sections/plateforme/PlateformeSection";
 import { OpenRoadSection } from "@/components/sections/open-road/OpenRoadSection";
+import { HomecomingSection } from "@/components/sections/homecoming/HomecomingSection";
 import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
 import { NecessiteSection } from "@/components/sections/necessite/NecessiteSection";
 import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
@@ -49,13 +51,15 @@ export default function HomePage() {
       <NecessiteSection />
       <PlateformeSection />
       <ImpactSection />
-      {/* <BonnePorteSection /> */}
+      <BonnePorteSection />
       <MethodeSection />
       <ParcoursSection />
       {/* <BeforeDuringAfterSection /> */}
       {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
+      <EditionsPilotesSection />
+      <HomecomingSection />
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />

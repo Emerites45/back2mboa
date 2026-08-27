@@ -1,24 +1,28 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { OPEN_ROAD_COPY } from "@/data/open-road";
 import "./OpenRoadSection.css";
 
 export function OpenRoadSection() {
-  const { programs, autoplayMs, brand, watchLabel, viewAll } = OPEN_ROAD_COPY;
+  const { programs, autoplayMs, brand, watchLabel } = OPEN_ROAD_COPY;
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [runId, setRunId] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const wasInView = useRef(false);
 
   const active = programs[index] ?? programs[0];
+  const len = programs.length;
+  const playing = inView && !reduceMotion;
 
   const go = useCallback(
     (next: number) => {
-      const len = programs.length;
       setIndex(((next % len) + len) % len);
     },
-    [programs.length],
+    [len],
   );
 
   useEffect(() => {
@@ -29,26 +33,43 @@ export function OpenRoadSection() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
+  /* Démarre dès que la section entre dans le viewport — sans clic */
   useEffect(() => {
-    if (paused || reduceMotion) return;
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const visible = Boolean(entry?.isIntersecting);
+        setInView(visible);
+
+        if (visible && !wasInView.current) {
+          /* Arrivée : slide 01 (Pexels) + Ken Burns relancés */
+          setIndex(0);
+          setRunId((n) => n + 1);
+        }
+        wasInView.current = visible;
+      },
+      { threshold: 0.35, rootMargin: "0px" },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!playing) return;
     const id = window.setInterval(() => go(index + 1), autoplayMs);
     return () => window.clearInterval(id);
-  }, [index, paused, reduceMotion, autoplayMs, go]);
+  }, [index, playing, autoplayMs, go]);
 
   return (
     <section
+      ref={sectionRef}
       id="open-road"
-      className={`open-road${paused ? " is-paused" : ""}`}
+      className={`open-road${playing ? " is-playing" : ""}`}
       aria-labelledby="open-road-title"
       aria-roledescription="carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
     >
       <div className="open-road-stage">
         {programs.map((program, i) => {
@@ -56,26 +77,24 @@ export function OpenRoadSection() {
           return (
             <div
               key={program.id}
-              className={`open-road-slide${on ? " is-active" : ""}${program.kenBurns === "zoom-stars" ? " is-stars" : ""}`}
+              className={`open-road-slide${on ? " is-active" : ""}`}
               aria-hidden={!on}
             >
               <div
-                key={`${program.id}-${on ? "on" : "off"}-${index === i ? index : "idle"}`}
-                className={`open-road-ken is-${program.kenBurns}${on && !reduceMotion ? " is-running" : ""}`}
+                key={`${program.id}-ken-${runId}-${on ? index : "idle"}`}
+                className={`open-road-ken is-${program.kenBurns}${on && playing ? " is-running" : ""}`}
               >
                 <Image
-                  className={`open-road-photo${program.kenBurns === "zoom-stars" ? " is-stars-photo" : ""}`}
+                  className="open-road-photo"
                   src={program.image}
                   alt={on ? program.alt : ""}
                   fill
                   priority={i === 0}
                   sizes="100vw"
+                  quality={88}
                   style={{ objectPosition: program.objectPosition }}
                 />
               </div>
-              {program.kenBurns === "zoom-stars" ? (
-                <span className="open-road-stars-veil" aria-hidden="true" />
-              ) : null}
             </div>
           );
         })}
@@ -88,16 +107,14 @@ export function OpenRoadSection() {
 
         <div className="open-road-footer">
           <div className="open-road-main">
-            <h2 id="open-road-title" key={active.id} className="open-road-title">
+            <h2 id="open-road-title" key={`${active.id}-${runId}`} className="open-road-title">
               {active.title}
             </h2>
             <div className="open-road-actions">
               <button type="button" className="open-road-watch">
                 <span className="open-road-play" aria-hidden="true" />
                 <span>{watchLabel}</span>
-              </button>
-              <button type="button" className="open-road-viewall">
-                {viewAll}
+                <span className="open-road-duration">{active.duration}</span>
               </button>
             </div>
           </div>
@@ -114,11 +131,11 @@ export function OpenRoadSection() {
                   aria-label={`${program.index} ${program.title}`}
                   onClick={() => go(i)}
                 >
-                  {selected && !reduceMotion ? (
+                  {selected && playing ? (
                     <span
                       className="open-road-progress"
                       style={{ animationDuration: `${autoplayMs}ms` }}
-                      key={`progress-${program.id}-${index}`}
+                      key={`progress-${program.id}-${index}-${runId}`}
                     />
                   ) : null}
                   <span className="open-road-index">{program.index}</span>

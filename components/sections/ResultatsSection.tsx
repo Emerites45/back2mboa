@@ -52,15 +52,26 @@ function ResultatImage({
   alt,
   className,
   sizes,
+  objectPosition = "center center",
 }: {
   src: string;
   alt: string;
   className: string;
   sizes: string;
+  objectPosition?: string;
 }) {
   return (
     <div className={cn("relative overflow-hidden bg-[#2a2a2a]", className)}>
-      <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        quality={90}
+        priority
+        className="object-cover"
+        style={{ objectPosition }}
+      />
     </div>
   );
 }
@@ -74,9 +85,10 @@ export function ResultatsSection() {
     >
       <Reveal className="grid h-full gap-2.5 p-2.5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
         <ResultatImage
-          src="/images/resultat_1-1920.webp"
-          alt="Participante d'une édition pilote Back2Mboa"
+          src="/images/resultat_1.webp"
+          alt="Lauréat Meet Africa et partenaire collaborant sur un laptop lors d’une édition pilote"
           sizes="(min-width: 1024px) 52vw, 100vw"
+          objectPosition="center 22%"
           className="h-full min-h-0 rounded-[30px]"
         />
 

@@ -1,9 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { POURQUOI_COPY } from "@/data/pourquoi";
 import type { PourquoiStars } from "@/types/pourquoi";
 import "./PourquoiSection.css";
+
+const LOGO_SRC = "/images/pourquoi/logo-back2mboa.png";
+
+function BrandLogo({ className }: { className?: string }) {
+  return (
+    <span className={className ?? "pourquoi-logo"}>
+      <Image
+        src={LOGO_SRC}
+        alt="Back2Mboa"
+        width={160}
+        height={58}
+        className="pourquoi-logo-img"
+        priority
+      />
+    </span>
+  );
+}
 
 function Stars({ value, label }: { value: PourquoiStars; label: string }) {
   return (
@@ -60,7 +78,7 @@ export function PourquoiSection() {
                   {copy.headers.forums}
                 </div>
                 <div className="pourquoi-cell is-reco" role="columnheader">
-                  <span className="pourquoi-badge">{copy.badge}</span>
+                  <BrandLogo className="pourquoi-logo is-head" />
                 </div>
               </div>
 
@@ -98,7 +116,9 @@ export function PourquoiSection() {
 
           {active ? (
             <aside className="pourquoi-detail" aria-live="polite">
-              <p className="pourquoi-detail-label">{copy.badge}</p>
+              <div className="pourquoi-detail-brand">
+                <BrandLogo className="pourquoi-logo is-detail" />
+              </div>
               <div className="pourquoi-detail-inner" key={active.id}>
                 <h3 className="pourquoi-detail-title">{active.title}</h3>
                 <p className="pourquoi-detail-question">{active.question}</p>

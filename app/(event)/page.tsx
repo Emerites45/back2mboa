@@ -9,6 +9,7 @@ import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
 import { EditionsPilotesSection } from "@/components/sections/editions-pilotes/EditionsPilotesSection";
+import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { LiaisonSection } from "@/components/sections/LiaisonSection";
 import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
@@ -26,17 +27,19 @@ import { NecessiteSection } from "@/components/sections/necessite/NecessiteSecti
 import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
 import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSection";
 import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
+import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
 import {
   BilletsSection,
   BilletsPartenairesSection,
 } from "@/components/sections/billets/BilletsSection";
+import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
 import { Button } from "@/components/ui/button";
 
 /**
  * Assemblage landing — Paul-Alain + Williams.
  * Williams : Preuve institutions, Billets ×2, Stories actif.
- * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Éditions pilotes, Prélude maquette…
+ * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Bâtisseurs, Éditions pilotes, Prélude…
  */
 export default function HomePage() {
   return (
@@ -53,10 +56,12 @@ export default function HomePage() {
       <PlateformeSection />
       <ImpactSection />
       <BonnePorteSection />
+      <BeforeDuringAfterSection />
       <MethodeSection />
       <ParcoursSection />
       <ResultatsSection />
       <PreuveChiffresImpact />
+      <BatisseursSection />
       <EditionsPilotesSection />
       <HomecomingSection />
       <PreludeSection />
@@ -69,6 +74,7 @@ export default function HomePage() {
       <HeroLandingSection />
       <AgendaSection />
       <PartenairesSection />
+      <RessourcesSection />
       <BilletsSection />
       <BilletsPartenairesSection />
 

@@ -1,5 +1,21 @@
 # Décisions
 
+## 2026-08-27 — Agenda : cover speaker + maquette ASAP
+
+Refonte `agenda/` : fond ambient Events + disques SVG, silhouette watermark, portrait `Back2Mboa Covers 9 1.png` → `public/images/agenda/cover-speaker.webp`. Contenu maquette (tag, titre bipolaire or, dual CTA, meta icônes). Autoplay 6,5 s (pause hover), pastilles couleur par slide, transitions directionnelles. Data/types enrichis.
+
+## 2026-08-27 — Ressources : fond Vector(5) + onglets itératifs
+
+Section `ressources/` (`#ressources`) : fond `Vector(5).png` → `public/images/ressources/vector-5.webp` (brighten + chroma), washes magenta/azure/vert en soft-light, veil lisible. FAQ accordion autoplay 4,2 s, aperçu cartes 5,6 s, onglets + panels. Data/types externalisés. Monté avant Billets.
+
+## 2026-08-27 — Bâtisseurs : preuves + équipe itérative
+
+Section `batisseurs/` (`#batisseurs`) : snapshot KPIs (count-up), profils Olivia / Solutionneurs (autoplay 4,8 s, pause hover/focus), quote mint + newsletter. Assets `Vector(3|4).png` → `public/images/batisseurs/{olivia,solutionneurs}.webp`. Data/types externalisés. Monté après Preuve chiffres, avant Éditions pilotes.
+
+## 2026-08-27 — Before / During / After : itératif + hover maquette
+
+Refonte `before-during-after/` : 3 cartes locales, barre outil jaune, voile clair au repos. Hover / focus / phase active : image nette, overlay texte disparaît, léger shade noir, barre jaune conservée. Autoplay viewport 4,2 s (pause au survol). Data/types externalisés. Monté après Bonne Porte (`#before-during-after`).
+
 ## 2026-08-27 — Sync Williams × Paul-Alain
 
 Merge `origin/feat/section_williams` dans `feat/section_paul_alain`. Conservé : Prélude maquette Paul-Alain. Intégré Williams : Billets + BilletsPartenaires, logos institutions Preuve, Stories actif. `page.tsx` assemble les deux piles sans sections commentées mortes.
@@ -185,6 +201,10 @@ Sur le tableau comparatif : watermark « BACK2MBOA » + voile radial vert/rouge/
 ## 2026-08-27 — Pourquoi : logo à la place de RECOMMANDÉ
 
 Colonne tableau + bandeau panneau détail : badge / fond vert « Recommandé » retirés. Remplacés par logo Back2Mboa (`public/images/pourquoi/logo-back2mboa.png`, fond noir détouré).
+
+## 2026-08-28 — Modèle : griffes drapeau Cameroun (v2 premium)
+
+Paire diamétrale TR/BL. Calque background. Motion vent sinusoïdal (3 bandes déphasées + enveloppe lente) déclenché au scroll.
 
 ## 2026-08-25 — Modèle : photos secteurs projet
 

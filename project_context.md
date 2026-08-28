@@ -50,4 +50,4 @@ Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème mo
 ## État
 Branche `feat/section_paul_alain` = sync `origin/main` + `origin/feat/section_williams` + travail Paul-Alain.
 
-Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Méthode → Parcours → Résultats → Preuve (logos institutions) → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories → Ticker → Boulevard → Hero landing → Agenda → Partenaires → Billets → Billets partenaires. Pas de backend.
+Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Before/During/After → Méthode → Parcours → Résultats → Preuve (logos institutions) → Bâtisseurs → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories → Ticker → Boulevard → Hero landing → Agenda → Partenaires → Ressources → Billets → Billets partenaires. Pas de backend.

@@ -66,47 +66,54 @@ export function ContrasteSection() {
           <p className="contraste-lead">{CONTRASTE_COPY.description}</p>
         </header>
 
-        <div
-          className="contraste-actors"
-          role="list"
-          onMouseLeave={() => setActiveActor(null)}
-        >
-          {CONTRASTE_ACTORS.map((actor) => {
-            const on = activeActor === actor.id;
-            const dimmed = activeActor !== null && !on;
-            return (
-              <article
-                key={actor.id}
-                role="listitem"
-                className={`contraste-card contraste-actor${on ? " is-on" : ""}${dimmed ? " is-dim" : ""}${bumpId === actor.id ? " is-bump" : ""}`}
-                tabIndex={0}
-                onPointerEnter={() => setActiveActor(actor.id)}
-                onPointerDown={() => {
-                  setActiveActor(actor.id);
-                  bump(actor.id);
-                }}
-                onFocus={() => {
-                  setActiveActor(actor.id);
-                  bump(actor.id);
-                }}
-                onBlur={() => setActiveActor(null)}
-                onClick={() => {
-                  setActiveActor(actor.id);
-                  bump(actor.id);
-                  setCostOpen(true);
-                  costRef.current?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                  });
-                }}
-                aria-pressed={on}
-              >
-                <h3 className="contraste-card-title">{actor.label}</h3>
-                <p className="contraste-card-quote">« {actor.quote} »</p>
-                <p className="contraste-card-tags">{actor.sentiments.join(" · ")}</p>
-              </article>
-            );
-          })}
+        <div className="contraste-frame contraste-frame--actors">
+          <div className="contraste-frame-glass" aria-hidden="true" />
+          <div className="contraste-frame-content">
+            <div
+              className="contraste-actors"
+              role="list"
+              onMouseLeave={() => setActiveActor(null)}
+            >
+            {CONTRASTE_ACTORS.map((actor) => {
+              const on = activeActor === actor.id;
+              const dimmed = activeActor !== null && !on;
+              return (
+                <article
+                  key={actor.id}
+                  role="listitem"
+                  className={`contraste-card contraste-actor${on ? " is-on" : ""}${dimmed ? " is-dim" : ""}${bumpId === actor.id ? " is-bump" : ""}`}
+                  tabIndex={0}
+                  onPointerEnter={() => setActiveActor(actor.id)}
+                  onPointerDown={() => {
+                    setActiveActor(actor.id);
+                    bump(actor.id);
+                  }}
+                  onFocus={() => {
+                    setActiveActor(actor.id);
+                    bump(actor.id);
+                  }}
+                  onBlur={() => setActiveActor(null)}
+                  onClick={() => {
+                    setActiveActor(actor.id);
+                    bump(actor.id);
+                    setCostOpen(true);
+                    costRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "nearest",
+                    });
+                  }}
+                  aria-pressed={on}
+                >
+                  <h3 className="contraste-card-title">{actor.label}</h3>
+                  <p className="contraste-card-quote">« {actor.quote} »</p>
+                  <p className="contraste-card-tags">
+                    {actor.sentiments.join(" · ")}
+                  </p>
+                </article>
+              );
+            })}
+            </div>
+          </div>
         </div>
 
         <div
@@ -115,25 +122,30 @@ export function ContrasteSection() {
         >
           <h3 className="contraste-cost-title">{CONTRASTE_COPY.costTitle}</h3>
 
-          <div className="contraste-costs" role="list">
-            {CONTRASTE_COSTS.map((cost, i) => {
-              const linked = activeCostId === cost.id;
-              return (
-                <article
-                  key={cost.id}
-                  role="listitem"
-                  className={`contraste-card contraste-cost${linked ? " is-linked" : ""}${bumpId === cost.id ? " is-bump" : ""}`}
-                  style={{ ["--ct-i" as string]: i }}
-                  tabIndex={0}
-                  onPointerDown={() => bump(cost.id)}
-                  onFocus={() => bump(cost.id)}
-                  onClick={() => bump(cost.id)}
-                >
-                  <h4 className="contraste-card-title">{cost.title}</h4>
-                  <p className="contraste-cost-body">{cost.body}</p>
-                </article>
-              );
-            })}
+          <div className="contraste-frame contraste-frame--costs">
+            <div className="contraste-frame-glass" aria-hidden="true" />
+            <div className="contraste-frame-content">
+              <div className="contraste-costs" role="list">
+                {CONTRASTE_COSTS.map((cost, i) => {
+                  const linked = activeCostId === cost.id;
+                  return (
+                    <article
+                      key={cost.id}
+                      role="listitem"
+                      className={`contraste-card contraste-cost${linked ? " is-linked" : ""}${bumpId === cost.id ? " is-bump" : ""}`}
+                      style={{ ["--ct-i" as string]: i }}
+                      tabIndex={0}
+                      onPointerDown={() => bump(cost.id)}
+                      onFocus={() => bump(cost.id)}
+                      onClick={() => bump(cost.id)}
+                    >
+                      <h4 className="contraste-card-title">{cost.title}</h4>
+                      <p className="contraste-cost-body">{cost.body}</p>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <p

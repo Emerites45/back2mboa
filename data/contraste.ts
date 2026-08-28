@@ -3,7 +3,7 @@ import type { ContrasteActor, ContrasteCopy, ContrasteCost } from "@/types/contr
 /** Copy figée — Le contraste.png */
 export const CONTRASTE_COPY: ContrasteCopy = {
   kicker: "Le Contraste",
-  titleLines: ["Avant Back2Mboa :", "5 acteurs, la même", "impasse."],
+  titleLines: ["Avant Back2Mboa : 5 acteurs, la même", "impasse."],
   description:
     "Ce que vivent aujourd'hui les maires, la diaspora, les investisseurs, la jeunesse locale et les institutions, avant qu'un chemin ne s'ouvre.",
   costTitle: "Le coût de l'inaction",

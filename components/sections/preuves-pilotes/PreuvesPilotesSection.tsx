@@ -1,150 +1,153 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  PREUVES_PILOTES_COLUMNS,
+  PREUVES_PILOTES_COPY,
+} from "@/data/preuves-pilotes";
+import type { PreuvesPilotesColumn, PreuvesPilotesSlide } from "@/types/preuves-pilotes";
 import "./PreuvesPilotesSection.css";
 
-type Slide = { src: string; alt: string };
+/** Typo section — tailles. */
+const TYPE = {
+  eyebrowSize: "0.72rem",
+  titleSize: "clamp(1.5rem, 3.2vw, 2.35rem)",
+  subSize: "0.92rem",
+  leadSize: "0.86rem",
+  headlineSize: "clamp(0.95rem, 1.5vw, 1.2rem)",
+  bodySize: "0.84rem",
+  linkSize: "0.84rem",
+  hintSize: "0.76rem",
+  footSize: "0.84rem",
+} as const;
 
-type Col = {
-  num: string;
-  label: string;
-  headline: string;
-  text: ReactNode;
-  href: string;
-  link: string;
-  hint: ReactNode;
-  slides: Slide[];
-};
+/** Section — viewport + espacements header / footer. */
+const SECTION = {
+  height: "100dvh",
+  headPaddingY: "clamp(20px, 3.5vh, 40px)",
+  headPaddingX: "clamp(20px, 4vw, 48px)",
+  headPaddingBottom: "clamp(12px, 2vh, 20px)",
+  headMaxWidth: "52rem",
+  footPaddingY: "clamp(12px, 1.8vh, 18px)",
+  footPaddingX: "clamp(20px, 4vw, 48px)",
+} as const;
 
-const COLS: Col[] = [
-  {
-    num: "1",
-    label: "Bâtisseurs-Solutionneurs™",
-    headline: "Entrepreneurs & diaspora qui construisent",
-    text: (
-      <>
-        35 (2022) puis 70 (2023) entrepreneurs et Solutionneurs diaspora : agro,
-        finance, tech, énergie, habitat. 97&nbsp;% de satisfaction.
-      </>
-    ),
-    href: "#salon",
-    link: "Voir les profils",
-    hint: (
-      <>
-        <strong>Rôle dans Back2Mboa</strong>
-        Les Bâtisseurs-Solutionneurs™ apportent l’expertise, les technologies et
-        les modèles d’affaires. Ils répondent aux Mayor Calls™, co-construisent
-        les Opportunity Cards™ et entrent en Deal Room™ avec les territoires.
-      </>
-    ),
-    slides: [
-      { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85", alt: "Équipe entrepreneurs" },
-      { src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=85", alt: "Networking entrepreneurs" },
-      { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=85", alt: "Collaboration" },
-      { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=85", alt: "Atelier diaspora" },
-      { src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=85", alt: "Pitch solution" },
-    ],
-  },
-  {
-    num: "2",
-    label: "Écosystème & confiance",
-    headline: "Régulateurs, PTF, investisseurs & médias",
-    text: (
-      <>
-        MINREX, MINDDEVEL, FEICOM, AFD, UE, GIZ, APME, CCIMA, CARPA… +
-        influenceurs (60&nbsp;000+ de portée) et Team Back2Mboa.
-      </>
-    ),
-    href: "#partenaires",
-    link: "Voir les partenaires",
-    hint: (
-      <>
-        <strong>Rôle dans Back2Mboa</strong>
-        Régulateurs et PTF sécurisent le cadre ; investisseurs et entreprises
-        financent et déploient ; médias d’influence amplifient ; Team Back2Mboa
-        orchestre matching, qualification CAP™ et suivi jusqu’à la mise en
-        œuvre.
-      </>
-    ),
-    slides: [
-      { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=85", alt: "Conférence institutionnelle" },
-      { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&q=85", alt: "Panel investisseurs" },
-      { src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=85", alt: "Médias" },
-      { src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=85", alt: "Partenariat" },
-      { src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=85", alt: "Équipe projet" },
-    ],
-  },
-  {
-    num: "3",
-    label: "Intendants territoriaux · CTD",
-    headline: "Maires & collectivités engagées",
-    text: (
-      <>
-        40 mairies (10 régions) en 2022, 20 mairies (6 régions) en 2023.
-        89&nbsp;% de satisfaction. 10 recommandations portées par les maires.
-      </>
-    ),
-    href: "#mairies-championnes",
-    link: "Voir les territoires",
-    hint: (
-      <>
-        <strong>Rôle dans Back2Mboa</strong>
-        Les intendants territoriaux (maires &amp; CTD) portent les besoins du
-        terrain, publient les Mayor Calls™, accueillent les Solutionneurs et
-        pilotent la mise en œuvre locale — du diagnostic CAP™ jusqu’aux recettes
-        et services aux citoyens.
-      </>
-    ),
-    slides: [
-      { src: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=1200&q=85", alt: "Réunion territoriale" },
-      { src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=85", alt: "Élus CTD" },
-      { src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85", alt: "Table ronde" },
-      { src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&q=85", alt: "Terrain communal" },
-      { src: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=1200&q=85", alt: "Assemblée locale" },
-    ],
-  },
-];
+/** Colonne + carousel. */
+const CARD = {
+  paddingY: "clamp(14px, 2vh, 20px)",
+  paddingX: "clamp(16px, 1.8vw, 24px)",
+  bodyMinHeight: "10.5rem",
+  carouselMinHeight: "12rem",
+  imageOverlay: "0.24",
+  imageOverlayHover: "0.12",
+  dotsBottom: "14px",
+  slideIntervalMs: 4000,
+} as const;
 
-function PilotCarousel({ slides, paused }: { slides: Slide[]; paused: boolean }) {
-  const [i, setI] = useState(0);
+/** Survol — carte rôle overlay. */
+const HOVER = {
+  roleHintMaxHeight: "9rem",
+} as const;
+
+const PILOTES_VARS = {
+  "--pilotes-height": SECTION.height,
+  "--pilotes-head-py": SECTION.headPaddingY,
+  "--pilotes-head-px": SECTION.headPaddingX,
+  "--pilotes-head-pb": SECTION.headPaddingBottom,
+  "--pilotes-head-max-w": SECTION.headMaxWidth,
+  "--pilotes-foot-py": SECTION.footPaddingY,
+  "--pilotes-foot-px": SECTION.footPaddingX,
+  "--pilotes-col-py": CARD.paddingY,
+  "--pilotes-col-px": CARD.paddingX,
+  "--pilotes-body-min-h": CARD.bodyMinHeight,
+  "--pilotes-carousel-min-h": CARD.carouselMinHeight,
+  "--pilotes-image-overlay": CARD.imageOverlay,
+  "--pilotes-image-overlay-hover": CARD.imageOverlayHover,
+  "--pilotes-dots-bottom": CARD.dotsBottom,
+  "--pilotes-hint-max-h": HOVER.roleHintMaxHeight,
+  "--pilotes-type-eyebrow": TYPE.eyebrowSize,
+  "--pilotes-type-title": TYPE.titleSize,
+  "--pilotes-type-sub": TYPE.subSize,
+  "--pilotes-type-lead": TYPE.leadSize,
+  "--pilotes-type-headline": TYPE.headlineSize,
+  "--pilotes-type-body": TYPE.bodySize,
+  "--pilotes-type-link": TYPE.linkSize,
+  "--pilotes-type-hint": TYPE.hintSize,
+  "--pilotes-type-foot": TYPE.footSize,
+} as CSSProperties;
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return reduced;
+}
+
+function PilotCarousel({
+  columnId,
+  slides,
+  active,
+  ariaLabel,
+}: {
+  columnId: string;
+  slides: PreuvesPilotesSlide[];
+  active: boolean;
+  ariaLabel: string;
+}) {
+  const [index, setIndex] = useState(0);
+  const reduced = usePrefersReducedMotion();
+  const live = slides[index]?.alt ?? "";
 
   useEffect(() => {
-    if (paused) return;
-    const t = window.setInterval(() => {
-      setI((cur) => (cur + 1) % slides.length);
-    }, 3000);
-    return () => window.clearInterval(t);
-  }, [paused, slides.length]);
+    setIndex(0);
+  }, [columnId]);
+
+  useEffect(() => {
+    if (!active || reduced || slides.length < 2) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % slides.length);
+    }, CARD.slideIntervalMs);
+    return () => window.clearInterval(timer);
+  }, [active, reduced, slides.length]);
 
   return (
-    <div className="carousel" data-carousel="" data-interval="3000">
-      {slides.map((s, k) => (
+    <div
+      className="carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={ariaLabel}
+    >
+      {slides.map((slide, k) => (
         <Image
-          key={s.src}
-          src={s.src}
-          alt={s.alt}
+          key={slide.src}
+          src={slide.src}
+          alt={slide.alt}
           fill
           sizes="(max-width: 900px) 100vw, 33vw"
-          className={k === i ? "active" : undefined}
+          className={k === index ? "active" : undefined}
+          aria-hidden={k !== index}
         />
       ))}
-      <div className="carousel-dots">
-        {slides.map((s, k) => (
-          <span
-            key={s.src}
-            className={k === i ? "on" : undefined}
-            role="button"
-            tabIndex={0}
-            aria-label={`Slide ${k + 1}`}
-            onClick={() => setI(k)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setI(k);
-              }
-            }}
+      <p className="carousel-live" aria-live="polite" aria-atomic="true">
+        {live}
+      </p>
+      <div className="carousel-dots" role="tablist" aria-label={`Slides — ${ariaLabel}`}>
+        {slides.map((slide, k) => (
+          <button
+            key={slide.src}
+            type="button"
+            role="tab"
+            className={k === index ? "on" : undefined}
+            aria-selected={k === index}
+            aria-label={`Image ${k + 1} sur ${slides.length} — ${slide.alt}`}
+            onClick={() => setIndex(k)}
           />
         ))}
       </div>
@@ -152,59 +155,78 @@ function PilotCarousel({ slides, paused }: { slides: Slide[]; paused: boolean })
   );
 }
 
-function ColCard({ col }: { col: Col }) {
-  const [paused, setPaused] = useState(false);
+function ColCard({
+  col,
+  roleKicker,
+  active,
+  onActivate,
+}: {
+  col: PreuvesPilotesColumn;
+  roleKicker: string;
+  active: boolean;
+  onActivate: () => void;
+}) {
   return (
-    <article
-      className="col"
-      tabIndex={0}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-    >
-      <div className="role-hint">{col.hint}</div>
-      <div className="col-num">{col.num}</div>
-      <div className="col-label">{col.label}</div>
-      <h3 className="col-headline">{col.headline}</h3>
-      <p className="col-text">{col.text}</p>
-      <Link className="col-link" href={col.href}>
-        {col.link}
-      </Link>
-      <PilotCarousel slides={col.slides} paused={paused} />
+    <article className="col" tabIndex={0} onMouseEnter={onActivate} onFocus={onActivate}>
+      <div className="role-hint">
+        <strong>{roleKicker}</strong>
+        {col.role}
+      </div>
+      <div className="col-body">
+        <h3 className="col-headline">{col.title}</h3>
+        <p className="col-text">{col.body}</p>
+        <Link className="col-link" href={col.href}>
+          {col.linkLabel}
+        </Link>
+      </div>
+      <PilotCarousel
+        columnId={col.id}
+        slides={col.slides}
+        active={active}
+        ariaLabel={col.title}
+      />
     </article>
   );
 }
 
 export function PreuvesPilotesSection() {
+  const copy = PREUVES_PILOTES_COPY;
+  const [activeId, setActiveId] = useState(PREUVES_PILOTES_COLUMNS[0]?.id ?? "");
+
   return (
-    <div className="b2m-pilotes">
+    <div className="b2m-pilotes" style={PILOTES_VARS}>
       <section className="proof-section" aria-label="Preuves des éditions pilotes">
         <header className="proof-head">
-          <div className="proof-eyebrow">Back2Mboa ASAP™ · Preuve par l’action</div>
-          <h2 className="proof-title">Les éditions pilotes ont prouvé le modèle.</h2>
-          <p className="proof-sub">
-            MEET Administrations 2022 (Douala) et MEET Écosystème 2023 (Musée
-            National, Yaoundé). Survolez chaque colonne pour comprendre le rôle
-            de ces acteurs dans Back2Mboa.
-          </p>
+          <div className="proof-eyebrow">{copy.kicker}</div>
+          <h2 className="proof-title">{copy.title}</h2>
+          <p className="proof-sub">{copy.subtitle}</p>
+          <p className="proof-lead">{copy.lead}</p>
         </header>
 
-        <div className="cols">
-          {COLS.map((col) => (
-            <ColCard key={col.num} col={col} />
+        <div
+          className="cols"
+          onMouseLeave={() => setActiveId(PREUVES_PILOTES_COLUMNS[0]?.id ?? "")}
+        >
+          {PREUVES_PILOTES_COLUMNS.map((col) => (
+            <ColCard
+              key={col.id}
+              col={col}
+              roleKicker={copy.roleKicker}
+              active={activeId === col.id}
+              onActivate={() => setActiveId(col.id)}
+            />
           ))}
         </div>
 
         <footer className="proof-foot">
-          <span className="badge">Preuve · pas promesse</span>
+          <span className="badge">{copy.badge}</span>
           <span>
-            <strong>2022</strong> — 90 acteurs · 60+ mises en relation
+            <strong>{copy.foot2022.year}</strong> — {copy.foot2022.detail}
           </span>
           <span>
-            <strong>2023</strong> — 400+ participants · SG MINREX · FEICOM
+            <strong>{copy.foot2023.year}</strong> — {copy.foot2023.detail}
           </span>
-          <span>16 · 17 décembre 2026 — Musée National, Yaoundé</span>
+          <span>{copy.footDate}</span>
         </footer>
       </section>
     </div>

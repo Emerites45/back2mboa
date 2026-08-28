@@ -32,6 +32,8 @@ import { PartenairesSection } from "@/components/sections/partenaires/Partenaire
 import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
 import { TeamSection } from "@/components/sections/team/TeamSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
+import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
+import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
@@ -66,9 +68,10 @@ export default function HomePage() {
       <StoriesSection />
       <RessourcesSection />
       <AgendaSection />
-      <BilletsSection />
+      {/* <BilletsSection /> */}
       <BilletsPartenairesSection />
- 
+      <NewsletterGateSection />
+      <FooterRevealZone />
       {/* <NecessiteSection /> */}
       {/* <PlateformeSection /> */}
       {/* <OpenRoadSection /> */}

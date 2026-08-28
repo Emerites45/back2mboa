@@ -11,8 +11,7 @@ export const METHODE_COPY: MethodeCopy = {
       title: "C'est crédible !",
       description:
         "Compréhensible, documentée, portée par des acteurs identifiés et reliée à des données, des responsabilités et des résultats attendus.",
-      image:
-        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80",
+      image: "/images/cap-1-1210.webp",
       imageAlt: "Équipe en réunion autour d'une table de conférence",
     },
     {
@@ -20,8 +19,7 @@ export const METHODE_COPY: MethodeCopy = {
       title: "C'est accessible !",
       description:
         "Découverte, comprise et rejointe par les acteurs pertinents. Accès au décideur, au régulateur, au financement, au marché.",
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80",
+      image: "/images/cap-2-1210.webp",
       imageAlt: "Professionnelle sur un chantier, casque blanc",
     },
     {
@@ -29,8 +27,7 @@ export const METHODE_COPY: MethodeCopy = {
       title: "C'est possible !",
       description:
         "Un chemin crédible vers l'exécution : de l'idée au partenariat, du financement à l'impact durable.",
-      image:
-        "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80",
+      image: "/images/cap-3-1210.webp",
       imageAlt: "Groupe de femmes marchant ensemble en extérieur",
     },
   ],

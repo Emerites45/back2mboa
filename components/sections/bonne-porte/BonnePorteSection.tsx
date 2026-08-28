@@ -1,16 +1,219 @@
 "use client";
 
-import { useId, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeftRight } from "lucide-react";
 import {
   BONNE_PORTE_BG,
   BONNE_PORTE_COPY,
   BONNE_PORTE_PANELS,
 } from "@/data/bonne-porte";
-import type { BonnePortePanelId } from "@/types/bonne-porte";
+import type { BonnePorteGain, BonnePortePanel, BonnePortePanelId } from "@/types/bonne-porte";
 import "./BonnePorteSection.css";
+
+/**
+ * TYPE — tailles de police par zone de la section.
+ * Injectées en CSS via `--porte-type-*` dans PORTE_VARS.
+ */
+const TYPE = {
+  kicker: "0.82rem", // amorce sous le titre (pas d’eyebrow caps)
+  title: "clamp(1.45rem, 2.8vw + 0.5vh, 2.35rem)",
+  sub: "clamp(0.82rem, 1.05vw, 0.95rem)",
+  tab: "0.76rem",
+  panelTitle: "clamp(1.15rem, 1.8vw, 1.55rem)",
+  lead: "clamp(0.82rem, 1.05vw, 0.92rem)",
+  btn: "0.84rem",
+  gainSituation: "clamp(0.78rem, 0.95vw, 0.86rem)",
+  gainPath: "clamp(0.8rem, 1vw, 0.88rem)",
+  gainPayoff: "clamp(0.78rem, 0.95vw, 0.86rem)",
+  fluxLabel: "0.82rem",
+  fluxBody: "0.84rem",
+  foot: "0.72rem",
+} as const;
+
+/** FLUX — double séquence diaspora / territoires (trait éditorial, pas bloc SaaS). */
+const FLUX = {
+  gap: "clamp(0.75rem, 2vw, 1.25rem)",
+  paddingY: "clamp(0.65rem, 1.2vh, 0.9rem)",
+  marginTop: "clamp(0.65rem, 1.4vh, 1rem)",
+  marginBottom: "clamp(0.55rem, 1.2vh, 0.85rem)",
+  dividerMinWidth: "3rem",
+} as const;
+
+/** TABS — largeur au libellé ; scroll horizontal si besoin. */
+const TABS = {
+  gap: "0.35rem",
+  marginBottom: "clamp(0.55rem, 1.2vh, 0.85rem)",
+  paddingY: "0.45rem",
+  paddingX: "0.85rem",
+  radius: "9999px",
+} as const;
+
+const SECTION = {
+  height: "100svh",
+  maxWidth: "85%",
+  paddingY: "clamp(1rem, 2.2vh, 1.75rem)",
+  paddingX: "clamp(1rem, 3.5vw, 1.75rem)",
+  panelGapX: "clamp(1rem, 2.2vw, 2rem)",
+  panelSurfacePad: "clamp(1rem, 2vw, 1.35rem)",
+  panelSurfaceRadius: "12px",
+  footMarginTop: "clamp(0.45rem, 1vh, 0.75rem)",
+  footPaddingTop: "0.55rem",
+  footGap: "0.35rem 1rem",
+} as const;
+
+/** GAIN — liste numérotée (pas de cartes before/after). */
+const GAIN = {
+  gap: "clamp(0.65rem, 1.4vh, 0.9rem)",
+  itemPadTop: "clamp(0.55rem, 1vh, 0.75rem)",
+} as const;
+
+const HOVER = {
+  tabLift: "-1px",
+  btnLift: "-1px",
+  panelFadeMs: "320ms",
+} as const;
+
+/** Voile lisible — teinte neutre froide, centre plus opaque (pas cream wash). */
+const VEIL = {
+  rgb: "250, 252, 251",
+  top: 0.88,
+  at28: 0.72,
+  mid: 0.58,
+  at78: 0.75,
+  bottom: 0.85,
+  radialLight: 0.04,
+  radialDark: 0.06,
+} as const;
+
+const PORTE_VARS = {
+  "--porte-height": SECTION.height,
+  "--porte-type-kicker": TYPE.kicker,
+  "--porte-type-title": TYPE.title,
+  "--porte-type-sub": TYPE.sub,
+  "--porte-flux-gap": FLUX.gap,
+  "--porte-flux-py": FLUX.paddingY,
+  "--porte-flux-mt": FLUX.marginTop,
+  "--porte-flux-mb": FLUX.marginBottom,
+  "--porte-flux-divider-min-w": FLUX.dividerMinWidth,
+  "--porte-type-flux-label": TYPE.fluxLabel,
+  "--porte-type-flux-body": TYPE.fluxBody,
+  "--porte-type-tab": TYPE.tab,
+  "--porte-type-panel-title": TYPE.panelTitle,
+  "--porte-type-lead": TYPE.lead,
+  "--porte-type-btn": TYPE.btn,
+  "--porte-type-gain-situation": TYPE.gainSituation,
+  "--porte-type-gain-path": TYPE.gainPath,
+  "--porte-type-gain-payoff": TYPE.gainPayoff,
+  "--porte-type-foot": TYPE.foot,
+  "--porte-max-w": SECTION.maxWidth,
+  "--porte-py": SECTION.paddingY,
+  "--porte-px": SECTION.paddingX,
+  "--porte-tabs-gap": TABS.gap,
+  "--porte-tabs-mb": TABS.marginBottom,
+  "--porte-tab-py": TABS.paddingY,
+  "--porte-tab-px": TABS.paddingX,
+  "--porte-tab-radius": TABS.radius,
+  "--porte-panel-gap-x": SECTION.panelGapX,
+  "--porte-panel-surface-pad": SECTION.panelSurfacePad,
+  "--porte-panel-surface-radius": SECTION.panelSurfaceRadius,
+  "--porte-gain-gap": GAIN.gap,
+  "--porte-gain-item-pt": GAIN.itemPadTop,
+  "--porte-foot-mt": SECTION.footMarginTop,
+  "--porte-foot-pt": SECTION.footPaddingTop,
+  "--porte-foot-gap": SECTION.footGap,
+  "--porte-hover-tab-lift": HOVER.tabLift,
+  "--porte-hover-btn-lift": HOVER.btnLift,
+  "--porte-panel-fade": HOVER.panelFadeMs,
+  "--porte-veil-rgb": VEIL.rgb,
+  "--porte-veil-top": String(VEIL.top),
+  "--porte-veil-28": String(VEIL.at28),
+  "--porte-veil-mid": String(VEIL.mid),
+  "--porte-veil-78": String(VEIL.at78),
+  "--porte-veil-bottom": String(VEIL.bottom),
+  "--porte-veil-radial-light": String(VEIL.radialLight),
+  "--porte-veil-radial-dark": String(VEIL.radialDark),
+} as CSSProperties;
+
+function GainList({ gains }: { gains: BonnePorteGain[] }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  useEffect(() => {
+    setOpenIndex(0);
+  }, [gains]);
+
+  return (
+    <div className="porte-gains-col">
+      <ol
+        className="porte-gain-list"
+        data-count={gains.length}
+        data-compact={gains.length > 1 || undefined}
+        aria-label="Gains par profil"
+      >
+      {gains.map((gain, i) => {
+        const open = openIndex === i;
+        const num = String(i + 1).padStart(2, "0");
+        return (
+          <li
+            key={i}
+            className={`porte-gain-item${open ? " is-open" : " is-collapsed"}`}
+            tabIndex={0}
+            onMouseEnter={() => setOpenIndex(i)}
+            onFocus={() => setOpenIndex(i)}
+          >
+            <div className="porte-gain-trigger">
+              <span className="porte-gain-num" aria-hidden="true">
+                {num}
+              </span>
+              <span className="porte-gain-headline">{gain.now}</span>
+              <ChevronDown
+                className="porte-gain-chevron"
+                size={16}
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
+            </div>
+            <div className="porte-gain-body" aria-hidden={!open}>
+              <div className="porte-gain-body-inner">
+                <p className="porte-gain-path">{gain.next}</p>
+                <p className="porte-gain-payoff">{gain.impact}</p>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+      </ol>
+    </div>
+  );
+}
+
+function PanelContent({ panel }: { panel: BonnePortePanel }) {
+  return (
+    <div className="porte-panel-surface">
+      <div className="porte-panel-grid">
+        <div className="porte-panel-intro">
+          <h3>
+            {panel.titleLines ? (
+              <>
+                {panel.titleLines[0]}
+                <br />
+                {panel.titleLines[1]}
+              </>
+            ) : (
+              panel.title
+            )}
+          </h3>
+          <p className="porte-lead">{panel.lead}</p>
+          <Link className="porte-btn" href={panel.ctaHref}>
+            {panel.cta}
+          </Link>
+        </div>
+        <GainList gains={panel.gains} />
+      </div>
+    </div>
+  );
+}
 
 export function BonnePorteSection() {
   const uid = useId();
@@ -19,7 +222,12 @@ export function BonnePorteSection() {
   const copy = BONNE_PORTE_COPY;
 
   return (
-    <section className="b2m-porte" id="la-bonne-porte" aria-labelledby={`${uid}-title`}>
+    <section
+      className="b2m-porte"
+      id="la-bonne-porte"
+      aria-labelledby={`${uid}-title`}
+      style={PORTE_VARS}
+    >
       <div className="porte-bg" aria-hidden="true">
         <Image
           src={BONNE_PORTE_BG}
@@ -34,36 +242,35 @@ export function BonnePorteSection() {
 
       <div className="porte-inner">
         <header className="porte-head">
-          <p className="porte-eyebrow">{copy.eyebrow}</p>
           <h2 className="porte-title" id={`${uid}-title`}>
             {copy.title}
           </h2>
+          <p className="porte-kicker">{copy.eyebrow}</p>
           <p className="porte-sub">{copy.subtitle}</p>
         </header>
 
-        <div className="flux-banner" role="note">
-          <div className="flux-leg">
-            <strong>{copy.fluxLeft.kicker}</strong>
-            <span>{copy.fluxLeft.body}</span>
+        <div className="porte-flux" role="note">
+          <div className="porte-flux-leg">
+            <p className="porte-flux-label">{copy.fluxLeft.kicker}</p>
+            <p className="porte-flux-body">{copy.fluxLeft.body}</p>
           </div>
-          <div className="flux-mid" aria-hidden="true">
-            <ArrowLeftRight size={16} strokeWidth={2.25} />
+          <div className="porte-flux-divider" aria-hidden="true">
             <span>{copy.fluxMid}</span>
           </div>
-          <div className="flux-leg">
-            <strong>{copy.fluxRight.kicker}</strong>
-            <span>{copy.fluxRight.body}</span>
+          <div className="porte-flux-leg">
+            <p className="porte-flux-label">{copy.fluxRight.kicker}</p>
+            <p className="porte-flux-body">{copy.fluxRight.body}</p>
           </div>
         </div>
 
-        <div className="tabs" role="tablist" aria-label="Choisir votre profil">
+        <div className="porte-tabs" role="tablist" aria-label="Choisir votre profil">
           {BONNE_PORTE_PANELS.map((p) => {
             const active = panelId === p.id;
             return (
               <button
                 key={p.id}
                 type="button"
-                className={`tab${active ? " is-active" : ""}`}
+                className={`porte-tab${active ? " is-active" : ""}`}
                 role="tab"
                 aria-selected={active}
                 id={`${uid}-tab-${p.id}`}
@@ -78,58 +285,27 @@ export function BonnePorteSection() {
         </div>
 
         <div
-          className="panel"
+          className="porte-panel is-active"
           id={`${uid}-panel`}
           role="tabpanel"
           aria-labelledby={`${uid}-tab-${panel.id}`}
           key={panel.id}
         >
-          <div className="panel-grid">
-            <div className="panel-left">
-              <h3>
-                {panel.titleLines
-                  ? panel.titleLines.map((line) => (
-                      <span key={line} className="panel-title-line">
-                        {line}
-                      </span>
-                    ))
-                  : panel.title}
-              </h3>
-              <p className="lead">{panel.lead}</p>
-              <Link className="btn-dark" href={panel.ctaHref}>
-                {panel.cta}
-              </Link>
-            </div>
-
-            <div className="gains">
-              {panel.gains.map((g) => (
-                <article className="gain" key={g.now}>
-                  <div className="gain-cols">
-                    <div className="gain-now">
-                      <span className="gain-label is-now">Aujourd’hui</span>
-                      <p>{g.now}</p>
-                    </div>
-                    <div className="gain-next">
-                      <span className="gain-label is-next">Avec Back2Mboa</span>
-                      <p>
-                        <span className="arrow" aria-hidden="true">
-                          →
-                        </span>{" "}
-                        {g.next}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="gain-impact">{g.impact}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+          <PanelContent panel={panel} />
         </div>
 
         <footer className="porte-foot">
-          {copy.foot.map((line) => (
-            <span key={line}>{line}</span>
-          ))}
+          <span>
+            <strong>{copy.footMission.label}</strong>
+            {copy.footMission.text}
+          </span>
+          <span>
+            <strong>{copy.footEvent.label}</strong>
+            {copy.footEvent.text}
+          </span>
+          <Link className="porte-foot-link" href={copy.footProsperityHref}>
+            {copy.footProsperity}
+          </Link>
         </footer>
       </div>
     </section>

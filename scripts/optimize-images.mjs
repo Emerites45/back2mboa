@@ -10,16 +10,39 @@ const OUT = path.resolve("public/images");
  * `opaque` = le canal alpha du source est inutile, on le retire.
  */
 const PLAN = [
-  { file: "sky.png", widths: [768, 1280, 1920, 2560], quality: 76, opaque: true },
-  { file: "mount_1.png", widths: [768, 1280, 1920, 2560], quality: 80 },
-  { file: "mount_2.png", widths: [768, 1280, 1920, 2560], quality: 80 },
-  { file: "resultat_1.png", widths: [768, 1280, 1920], quality: 80, opaque: true },
-  { file: "resultat_2.png", widths: null, quality: 80, opaque: true },
-  
+{
+    file: "portail-back2mboa.jpg.jpeg",
+    widths: [768, 992],
+    quality: 82,
+    opaque: true,
+    out: "partenaires",
+    as: "portail-back2mboa",
+  },
+  { file: "gate_orange.png", widths: [480, 640, 795], quality: 85, as: "gate_orange" },
+  {
+    file: "Back2Mboa_logo_transparent_footer_1.png",
+    widths: [200],
+    quality: 88,
+    as: "back2mboa-logo-footer",
+  },
+  {
+    file: "Back2Mboa_logo_transparent_footer_2.png",
+    widths: [200, 280, 400, 768, 1200, 1920],
+    quality: 88,
+    as: "back2mboa-logo-footer-v2",
+  },
+  {
+    file: "mount_2.png",
+    widths: [768, 1200, 1920, 2560],
+    quality: 85,
+    as: "mount-2",
+  },
 ];
 
-const outName = (file, width) =>
-  `${path.basename(file, path.extname(file))}${width ? `-${width}` : ""}.webp`;
+const outName = (entry, width) => {
+  const base = entry.as ?? path.basename(entry.file, path.extname(entry.file));
+  return `${base}${width ? `-${width}` : ""}.webp`;
+};
 
 async function run() {
   await mkdir(OUT, { recursive: true });
@@ -37,9 +60,13 @@ async function run() {
   let srcTotal = 0;
   let outTotal = 0;
 
-  for (const { file, widths, quality, opaque } of PLAN) {
+  for (const entry of PLAN) {
+    const { file, widths, quality, opaque, out } = entry;
     const input = path.join(SRC, file);
     srcTotal += (await stat(input)).size;
+
+    const outDir = out ? path.join(OUT, out) : OUT;
+    await mkdir(outDir, { recursive: true });
 
     const meta = await sharp(input).metadata();
     const targets = (widths ?? [null]).filter((w) => w === null || w <= meta.width);
@@ -48,7 +75,7 @@ async function run() {
       if (opaque) pipeline = pipeline.removeAlpha();
       if (width) pipeline = pipeline.resize({ width, withoutEnlargement: true });
 
-      const dest = path.join(OUT, outName(file, width));
+      const dest = path.join(outDir, outName(entry, width));
       const { size } = await pipeline.webp({ quality, effort: 6 }).toFile(dest);
       outTotal += size;
       console.log(`${path.basename(dest).padEnd(42)} ${(size / 1024).toFixed(0).padStart(6)} Ko`);

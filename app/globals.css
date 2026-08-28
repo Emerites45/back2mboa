@@ -236,3 +236,25 @@ aside:has(.ticker-track):hover .ticker-track {
     transform: translate3d(0, -14px, 0) scale(1.02);
   }
 }
+
+@keyframes nl-tray-pulse {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scaleX(1.03);
+  }
+}
+
+.nl-tray-type-pulse {
+  animation: nl-tray-pulse 1.25s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nl-tray-type-pulse {
+    animation: none;
+  }
+}

@@ -1,54 +1,98 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 
 const COLORS = {
-  forest: "#0A2B21",
-  jaune: "#FFD506",
-  aqua: "#00C2A8",
+  forest: "var(--color-dark-green)",
+  jaune: "var(--color-brand-yellow)",
+  aqua: "var(--color-brand-teal)",
+  ink: "var(--color-text-white)",
 } as const;
 
 /** Typo — ajuster ici. */
 const TYPE = {
-  eyebrowSize: "0.68rem",
-  eyebrowWeight: 600,
-  titleSize: "clamp(1.9rem, 3.9vw, 3rem)",
+  titleSize: "clamp(1.55rem, 2.6vw + 0.8vh, 2.5rem)",
   titleWeight: 700,
   titleFont: "var(--font-bricolage)",
-  subtitleSize: "1.02rem",
+  subtitleSize: "0.95rem",
   subtitleWeight: 400,
   subtitleFont: "var(--font-roboto)",
-  statSize: "clamp(1.9rem, 4vw, 3rem)",
-  statWeight: 700,
-  statLabelSize: "0.78rem",
-  statLabelWeight: 400,
-  tableHeadSize: "0.75rem",
-  tableHeadWeight: 700,
-  yearSize: "1.28rem",
+  tableHeadSize: "0.8rem",
+  tableHeadWeight: 600,
+  yearSize: "1.15rem",
   yearWeight: 700,
   rowLabelSize: "0.8rem",
   rowLabelWeight: 400,
-  cellSize: "0.92rem",
+  cellSize: "0.85rem",
   cellWeight: 400,
-  valSize: "1.02rem",
+  valSize: "0.95rem",
   valWeight: 700,
-  punchSize: "clamp(1.2rem, 2.5vw, 1.9rem)",
-  punchWeight: 700,
 } as const;
 
-/** Carte tableau — position, arrondi, taille. */
-const TABLE_CARD = {
-  maxWidth: "100%",
-  borderRadius: "18px",
-  offsetX: "0px",
-  offsetY: "0px",
+/** Section — 1 écran desktop, hauteur auto sous `md`. */
+const SECTION = {
+  paddingY: "clamp(0.85rem, 2.4vh, 1.75rem)",
+  headerMaxWidth: "40rem",
+  headerMargin: "clamp(0.85rem, 2vh, 1.5rem)",
+  cellPadX: "1rem",
+  cellPadY: "clamp(0.4rem, 1.1vh, 0.7rem)",
 } as const;
 
-const HERO_STATS = [
-  { value: "97 %", label: "Satisfaction entrepreneurs" },
-  { value: "89 %", label: "Satisfaction CTD" },
-  { value: "60 000+", label: "Personnes touchées" },
-  { value: "60+", label: "Mises en relation" },
-] as const;
+/** Pastilles logo institutions. */
+const LOGO = {
+  size: 32,
+  wide: 48,
+  radius: "6px",
+  pad: "4px",
+  gap: "0.35rem",
+} as const;
+
+const INSTITUTIONS = {
+  MINREX: {
+    src: "/images/institutions/minrex.svg",
+    label: "MINREX — Relations extérieures",
+  },
+  MINDDEVEL: {
+    src: "/images/institutions/minddevel.svg",
+    label: "MINDDEVEL — Développement local",
+  },
+  APME: {
+    src: "/images/institutions/apme.svg",
+    label: "APME — Promotion des PME",
+  },
+  FEICOM: {
+    src: "/images/institutions/feicom.svg",
+    label: "FEICOM — Financement des communes",
+  },
+  CARPA: {
+    src: "/images/institutions/carpa.svg",
+    label: "CARPA — Partenariats public-privé",
+  },
+  CVUC: {
+    src: "/images/institutions/cvuc.svg",
+    label: "CVUC — Communes et villes unies",
+  },
+  GIZ: {
+    src: "/images/institutions/giz.svg",
+    label: "GIZ — Coopération allemande",
+    wide: true,
+  },
+  AFD: {
+    src: "/images/institutions/afd.svg",
+    label: "AFD — Agence française de développement",
+    wide: true,
+  },
+  UE: {
+    src: "/images/institutions/ue.svg",
+    label: "Union européenne",
+  },
+  CCIMA: {
+    src: "/images/institutions/ccima.svg",
+    label: "CCIMA — Chambre de commerce",
+  },
+} as const;
+
+type InstId = keyof typeof INSTITUTIONS;
 
 const INST_2022 = [
   "MINREX",
@@ -58,7 +102,7 @@ const INST_2022 = [
   "CARPA",
   "CVUC",
   "GIZ",
-] as const;
+] as const satisfies readonly InstId[];
 
 const INST_2023 = [
   "MINREX",
@@ -69,12 +113,12 @@ const INST_2023 = [
   "GIZ",
   "APME",
   "CCIMA",
-] as const;
+] as const satisfies readonly InstId[];
 
 type Cell =
-  | { kind: "text"; strong: string; rest?: string; tone?: "aqua" | "jaune" }
+  | { kind: "text"; strong: string; rest?: string }
   | { kind: "na" }
-  | { kind: "tags"; tags: readonly string[] };
+  | { kind: "tags"; tags: readonly InstId[] };
 
 const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
   {
@@ -85,21 +129,21 @@ const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
   {
     label: "Entrepreneurs diaspora",
     y22: { kind: "text", strong: "35" },
-    y23: { kind: "text", strong: "70", tone: "jaune" },
+    y23: { kind: "text", strong: "70" },
   },
   {
     label: "Satisfaction CTD",
-    y22: { kind: "text", strong: "89 %", tone: "aqua" },
+    y22: { kind: "text", strong: "89 %" },
     y23: { kind: "na" },
   },
   {
     label: "Satisfaction entrepreneurs",
-    y22: { kind: "text", strong: "97 %", tone: "aqua" },
+    y22: { kind: "text", strong: "97 %" },
     y23: { kind: "na" },
   },
   {
     label: "Renforcement de capacité",
-    y22: { kind: "text", strong: "91 %", tone: "aqua" },
+    y22: { kind: "text", strong: "91 %" },
     y23: { kind: "na" },
   },
   {
@@ -110,7 +154,7 @@ const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
   {
     label: "Portée numérique",
     y22: { kind: "na" },
-    y23: { kind: "text", strong: "60 000+", tone: "jaune" },
+    y23: { kind: "text", strong: "60 000+" },
   },
   {
     label: "Institutions",
@@ -119,25 +163,15 @@ const ROWS: { label: string; y22: Cell; y23: Cell }[] = [
   },
 ];
 
-function Val({
-  strong,
-  rest,
-  tone,
-}: {
-  strong: string;
-  rest?: string;
-  tone?: "aqua" | "jaune";
-}) {
-  const color =
-    tone === "aqua" ? COLORS.aqua : tone === "jaune" ? COLORS.jaune : "#fff";
+function Val({ strong, rest }: { strong: string; rest?: string }) {
   return (
     <>
       <span
-        className="font-[family-name:var(--font-bricolage)]"
+        className="font-[family-name:var(--font-bricolage)] tabular-nums"
         style={{
           fontSize: TYPE.valSize,
           fontWeight: TYPE.valWeight,
-          color,
+          color: COLORS.ink,
         }}
       >
         {strong}
@@ -153,67 +187,171 @@ function Val({
 
 function CellContent({ cell }: { cell: Cell }) {
   if (cell.kind === "na") {
-    return <span className="text-white/30">—</span>;
+    return (
+      <span className="text-white/35" aria-label="Non mesuré">
+        —
+      </span>
+    );
   }
   if (cell.kind === "tags") {
     return (
-      <div className="flex flex-wrap gap-1.5">
-        {cell.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 font-[family-name:var(--font-ibm-plex-mono)] text-[0.68rem] whitespace-nowrap text-white/80"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+      <ul className="m-0 flex list-none flex-wrap p-0" style={{ gap: LOGO.gap }}>
+        {cell.tags.map((id) => {
+          const inst = INSTITUTIONS[id];
+          const w = "wide" in inst && inst.wide ? LOGO.wide : LOGO.size;
+          return (
+            <li key={id}>
+              <span
+                className="inline-flex items-center justify-center bg-white"
+                style={{
+                  height: LOGO.size,
+                  width: w,
+                  borderRadius: LOGO.radius,
+                  padding: LOGO.pad,
+                }}
+                title={inst.label}
+              >
+                <Image
+                  src={inst.src}
+                  alt={inst.label}
+                  width={w}
+                  height={LOGO.size}
+                  unoptimized
+                  className="h-full w-full object-contain"
+                />
+              </span>
+            </li>
+          );
+        })}
+      </ul>
     );
   }
-  return <Val strong={cell.strong} rest={cell.rest} tone={cell.tone} />;
+  return <Val strong={cell.strong} rest={cell.rest} />;
 }
 
 function Td({ children }: { children: ReactNode }) {
   return (
     <td
-      className="border-b border-white/12 px-[18px] py-[15px] align-top text-white/80"
-      style={{ fontSize: TYPE.cellSize, fontWeight: TYPE.cellWeight }}
+      className="border-b border-white/15 align-top text-white/80"
+      style={{
+        fontSize: TYPE.cellSize,
+        fontWeight: TYPE.cellWeight,
+        padding: `${SECTION.cellPadY} ${SECTION.cellPadX}`,
+      }}
     >
       {children}
     </td>
   );
 }
 
+function YearHead({
+  edition,
+  year,
+  accent,
+}: {
+  edition: string;
+  year: string;
+  accent: string;
+}) {
+  return (
+    <th
+      scope="col"
+      className="border-b border-white/20 text-left font-[family-name:var(--font-bricolage)] text-white/70"
+      style={{
+        fontSize: TYPE.tableHeadSize,
+        fontWeight: TYPE.tableHeadWeight,
+        padding: `${SECTION.cellPadY} ${SECTION.cellPadX}`,
+      }}
+    >
+      {edition}
+      <span
+        className="mt-0.5 block tracking-[-0.03em]"
+        style={{
+          fontSize: TYPE.yearSize,
+          fontWeight: TYPE.yearWeight,
+          color: accent,
+        }}
+      >
+        {year}
+      </span>
+    </th>
+  );
+}
+
+function YearStack({
+  edition,
+  year,
+  accent,
+  cells,
+}: {
+  edition: string;
+  year: string;
+  accent: string;
+  cells: "y22" | "y23";
+}) {
+  return (
+    <section>
+      <h3
+        className="mb-3 font-[family-name:var(--font-bricolage)] tracking-[-0.03em]"
+        style={{ color: accent, fontSize: TYPE.yearSize, fontWeight: TYPE.yearWeight }}
+      >
+        <span className="block text-[0.8rem] font-medium text-white/65">
+          {edition}
+        </span>
+        {year}
+      </h3>
+      <dl className="m-0">
+        {ROWS.map((row) => (
+          <div
+            key={row.label}
+            className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-3 border-t border-white/15 py-3"
+          >
+            <dt
+              className="text-white/55"
+              style={{
+                fontFamily: TYPE.subtitleFont,
+                fontSize: TYPE.rowLabelSize,
+                fontWeight: TYPE.rowLabelWeight,
+              }}
+            >
+              {row.label}
+            </dt>
+            <dd className="m-0 text-white/85">
+              <CellContent cell={row[cells]} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 export function PreuveChiffresSection() {
+  const cellPad = `${SECTION.cellPadY} ${SECTION.cellPadX}`;
+
   return (
     <section
       id="preuve-chiffres"
-      className="px-[var(--page-gutter)] py-[clamp(3.5rem,7vw,6.875rem)] text-white/85"
-      style={{ backgroundColor: COLORS.forest }}
+      className="flex h-auto min-h-dvh flex-col overflow-x-hidden px-[var(--page-gutter)] text-white/85 md:h-dvh md:overflow-hidden"
+      style={{
+        backgroundColor: COLORS.forest,
+        paddingTop: SECTION.paddingY,
+        paddingBottom: SECTION.paddingY,
+      }}
       aria-labelledby="preuve-chiffres-heading"
     >
-      <div className="mx-auto max-w-[1240px]">
-        <header className="mb-[clamp(2rem,4vw,3.25rem)] max-w-[760px]">
-          <Reveal as="span" className="mb-4 inline-flex items-center gap-2.5">
-            <span
-              className="inline-flex items-center gap-2.5 font-[family-name:var(--font-ibm-plex-mono)] tracking-[0.18em] uppercase"
-              style={{
-                fontSize: TYPE.eyebrowSize,
-                fontWeight: TYPE.eyebrowWeight,
-                color: COLORS.jaune,
-              }}
-            >
-              <span
-                className="inline-block h-[1.5px] w-[26px] bg-current"
-                aria-hidden
-              />
-              2.6 — Les résultats des éditions pilotes
-            </span>
-          </Reveal>
-
-          <Reveal delay={0.08}>
+      <div className="mx-auto h-full min-h-0 w-full max-w-[1240px] overflow-y-auto">
+        <Reveal y={0} className="flex min-h-full flex-col justify-center">
+          <header
+            className="shrink-0"
+            style={{
+              maxWidth: SECTION.headerMaxWidth,
+              marginBottom: SECTION.headerMargin,
+            }}
+          >
             <h2
               id="preuve-chiffres-heading"
-              className="mb-3.5 tracking-[-0.03em] text-balance text-white"
+              className="mb-2 tracking-[-0.03em] text-balance text-white"
               style={{
                 fontFamily: TYPE.titleFont,
                 fontSize: TYPE.titleSize,
@@ -221,15 +359,8 @@ export function PreuveChiffresSection() {
                 lineHeight: 1.07,
               }}
             >
-              La preuve{" "}
-              <em className="not-italic" style={{ color: COLORS.jaune }}>
-                par les chiffres
-              </em>
-              .
+              La preuve par les chiffres.
             </h2>
-          </Reveal>
-
-          <Reveal delay={0.14}>
             <p
               className="max-w-[62ch] text-pretty text-white/70"
               style={{
@@ -238,123 +369,74 @@ export function PreuveChiffresSection() {
                 fontWeight: TYPE.subtitleWeight,
               }}
             >
-              Deux éditions pilotes, en 2022 à Douala et en 2023 au Musée
-              National de Yaoundé. Voici ce qu&apos;elles ont produit — mesuré,
-              pas estimé.
+              Douala, 2022. Musée National de Yaoundé, 2023.
             </p>
-          </Reveal>
-        </header>
+          </header>
 
-        <Reveal
-          delay={0.1}
-          className="mb-[clamp(1.875rem,3.6vw,2.875rem)] grid grid-cols-2 gap-[clamp(0.875rem,2vw,1.625rem)] md:grid-cols-4"
-        >
-          {HERO_STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="border-t-2 border-white/20 pt-[18px]"
-            >
-              <p
-                className="font-[family-name:var(--font-bricolage)] leading-none tracking-[-0.04em] tabular-nums"
-                style={{
-                  fontSize: TYPE.statSize,
-                  fontWeight: TYPE.statWeight,
-                  color: COLORS.jaune,
-                }}
-              >
-                {stat.value}
-              </p>
-              <p
-                className="mt-2.5 uppercase tracking-[0.06em] text-white/60"
-                style={{
-                  fontSize: TYPE.statLabelSize,
-                  fontWeight: TYPE.statLabelWeight,
-                }}
-              >
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </Reveal>
+          <div className="flex flex-col gap-10 md:hidden">
+            <YearStack
+              edition="Meet Administrations"
+              year="2022"
+              accent={COLORS.aqua}
+              cells="y22"
+            />
+            <YearStack
+              edition="Meet Écosystème"
+              year="2023"
+              accent={COLORS.jaune}
+              cells="y23"
+            />
+          </div>
 
-        <Reveal delay={0.16}>
-          <div
-            className="overflow-x-auto border border-white/15 bg-white/[0.04]"
-            style={
-              {
-                maxWidth: TABLE_CARD.maxWidth,
-                borderRadius: TABLE_CARD.borderRadius,
-                transform: `translate(${TABLE_CARD.offsetX}, ${TABLE_CARD.offsetY})`,
-              } as CSSProperties
-            }
-          >
-            <table className="w-full min-w-[680px] border-collapse text-left">
+          <div className="hidden min-w-0 md:block">
+            <table className="w-full border-collapse text-left">
+              <caption className="sr-only">
+                Comparaison des éditions pilotes Meet Administrations 2022 et
+                Meet Écosystème 2023
+              </caption>
               <thead>
-                <tr className="bg-white/[0.07]">
+                <tr>
                   <th
-                    className="px-[18px] py-[15px] font-[family-name:var(--font-bricolage)] tracking-[0.08em] text-white uppercase"
+                    scope="col"
+                    className="border-b border-white/20 font-[family-name:var(--font-bricolage)] text-white/70"
                     style={{
                       fontSize: TYPE.tableHeadSize,
                       fontWeight: TYPE.tableHeadWeight,
+                      padding: cellPad,
                     }}
                   >
                     Indicateur
                   </th>
-                  <th
-                    className="px-[18px] py-[15px] font-[family-name:var(--font-bricolage)] tracking-[0.08em] text-white uppercase"
-                    style={{
-                      fontSize: TYPE.tableHeadSize,
-                      fontWeight: TYPE.tableHeadWeight,
-                    }}
-                  >
-                    MEET Administrations
-                    <span
-                      className="mt-1 block tracking-[-0.03em] normal-case"
-                      style={{
-                        fontSize: TYPE.yearSize,
-                        fontWeight: TYPE.yearWeight,
-                        color: COLORS.aqua,
-                      }}
-                    >
-                      2022
-                    </span>
-                  </th>
-                  <th
-                    className="px-[18px] py-[15px] font-[family-name:var(--font-bricolage)] tracking-[0.08em] text-white uppercase"
-                    style={{
-                      fontSize: TYPE.tableHeadSize,
-                      fontWeight: TYPE.tableHeadWeight,
-                    }}
-                  >
-                    MEET Écosystème
-                    <span
-                      className="mt-1 block tracking-[-0.03em] normal-case"
-                      style={{
-                        fontSize: TYPE.yearSize,
-                        fontWeight: TYPE.yearWeight,
-                        color: COLORS.jaune,
-                      }}
-                    >
-                      2023
-                    </span>
-                  </th>
+                  <YearHead
+                    edition="Meet Administrations"
+                    year="2022"
+                    accent={COLORS.aqua}
+                  />
+                  <YearHead
+                    edition="Meet Écosystème"
+                    year="2023"
+                    accent={COLORS.jaune}
+                  />
                 </tr>
               </thead>
               <tbody>
                 {ROWS.map((row) => (
                   <tr
                     key={row.label}
-                    className="hover:bg-white/[0.04] [&:last-child>td]:border-b-0"
+                    className="[&:last-child>td]:border-b-0 [&:last-child>th]:border-b-0"
                   >
-                    <td
-                      className="w-[26%] border-b border-white/12 px-[18px] py-[15px] align-top font-[family-name:var(--font-ibm-plex-mono)] text-white/60"
+                    <th
+                      scope="row"
+                      className="w-[26%] border-b border-white/15 text-left align-top font-normal text-white/55"
                       style={{
+                        fontFamily: TYPE.subtitleFont,
                         fontSize: TYPE.rowLabelSize,
                         fontWeight: TYPE.rowLabelWeight,
+                        padding: cellPad,
                       }}
                     >
                       {row.label}
-                    </td>
+                    </th>
                     <Td>
                       <CellContent cell={row.y22} />
                     </Td>
@@ -367,22 +449,6 @@ export function PreuveChiffresSection() {
             </table>
           </div>
         </Reveal>
-
-          <Reveal delay={0.22}>
-            <p
-              className="mt-[clamp(1.5rem,3vw,2.25rem)] text-center tracking-[-0.03em] text-balance text-white"
-              style={{
-                fontFamily: TYPE.titleFont,
-                fontSize: TYPE.punchSize,
-                fontWeight: TYPE.punchWeight,
-              }}
-            >
-              Ces chiffres ne sont pas des promesses.{" "}
-              <em className="not-italic" style={{ color: COLORS.jaune }}>
-                Ce sont des preuves.
-              </em>
-            </p>
-          </Reveal>
       </div>
     </section>
   );

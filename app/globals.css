@@ -115,11 +115,9 @@
   --brand-copy: #6b7280;
   --brand-teal: #45b3a9;
   --brand-teal-deep: #2b4c59;
-  --brand-result: #4fa4a5;
+  --brand-result: #0e3b2d;
   --brand-glow-blue: #b7e8ee;
   --brand-glow-mint: #c8eee6;
-  --brand-result-from: #4fa4a5;
-  --brand-result-to: #2b4c59;
   --brand-yellow: #fbbf24;
   --brand-play: #e11d48;
   --brand-pin: #4c0519;
@@ -127,7 +125,6 @@
   --brand-cream: #f9f7f0;
   --brand-mint: #e6f4f1;
   --card-glass: rgb(0 0 0 / 0.15);
-  --grad-result: linear-gradient(90deg, var(--brand-result-from) 0%, var(--brand-result-to) 100%);
   --grad-section: linear-gradient(to bottom right, var(--brand-paper) 18%, var(--brand-mint) 100%);
   --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
 }
@@ -167,18 +164,24 @@
 }
 @layer base {
   html {
-    scroll-behavior: smooth;
     /* Décale l'ancrage sous le header fixe (environ 80px) */
-    scroll-padding-top: 5rem; 
+    scroll-padding-top: 5rem;
+  }
+
+  html:not(.lenis) {
+    scroll-behavior: smooth;
   }
 }
 
+/* Lenis 1.3 n’override plus scroll-behavior : le smooth CSS combat le lerp. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
+
 .text-grad-result {
-  background-image: var(--grad-result);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: var(--brand-result);
+  -webkit-text-fill-color: var(--brand-result);
 }
 
 .title-ink {

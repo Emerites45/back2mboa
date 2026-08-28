@@ -50,6 +50,6 @@ Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème mo
 ## État
 Branche `feat/section_paul_alain` fusionnée avec `origin/main` (parcours, liaison, musée, ticker, SmoothScroll).
 
-Landing : Hero + Hero landing HTML, puis Contraste, Comparatif, Bonne porte, Mairies, Modèle, Boulevard, Potentialités, Nécessité, Plateforme, Open Road, Parcours, BDA, Prélude, Salon, Impact / Résultats / Preuves, Bâtisseurs, Écosystème, Stories / Ticker, Liaison, Musée, Agenda, Partenaires, Billets, Ressources. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
+Landing : Hero + Hero landing HTML, puis Contraste, Comparatif, Bonne porte, Mairies, Modèle, Boulevard, Potentialités, Nécessité, Plateforme, Open Road, Parcours, BDA, Prélude, Salon, Impact / Résultats / Preuves (`100dvh`, table 2022/2023 sans KPIs ni punch), Bâtisseurs, Écosystème, Stories / Ticker, Liaison, Musée, Agenda, Partenaires, Billets, Ressources. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
 
 Ports HTML Back2Mboa assemblés dans `page.tsx` (CSS wrappers `.b2m-*`).

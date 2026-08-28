@@ -3,167 +3,200 @@
 import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { BILLET_QR_PATHS } from "@/data/billets/qr-paths";
-import { PACKS, STUB_BG } from "@/data/billets/packs";
-import { TicketDesign } from "./TicketDesign";
+import { PACKS, STUB_BG, type BilletPack } from "@/data/billets/packs";
 import "./BilletsSection.css";
 
-const DEFAULT_SEL = 2;
+const DEFAULT_SEL = 0;
+const DEFAULT_CHIPS = ["Deal Rooms", "6 mairies", "500 décideurs"];
 
-export function BilletsSection() {
-  const [sel, setSel] = useState(DEFAULT_SEL);
-  const p = PACKS[sel] ?? PACKS[DEFAULT_SEL];
-  const qr = BILLET_QR_PATHS[p.id];
+export type BilletsSectionProps = {
+  id?: string;
+  title?: string;
+  when?: string;
+  under?: string;
+  eyebrow?: string;
+  packs?: BilletPack[];
+  stubBg?: readonly string[];
+  ariaLabel?: string;
+  tone?: "day" | "night";
+};
 
-  const vars = {
-    "--sel": p.couleur,
-    "--selTxt": p.texte,
-    "--ctaTxt": p.id === "vision" ? "#0A2B21" : "#fff",
-    "--ctaBg": p.id === "vision" ? p.couleur : p.texte,
+function packVars(q: BilletPack): CSSProperties {
+  const darkCta = q.couleur === "#FFD506";
+  return {
+    "--sel": q.couleur,
+    "--selTxt": q.texte,
+    "--ctaTxt": darkCta ? "#0A2B21" : "#fff",
+    "--ctaBg": darkCta ? q.couleur : q.texte,
   } as CSSProperties;
+}
 
+function TicketFace({
+  p,
+  open,
+  eyebrow,
+}: {
+  p: BilletPack;
+  open: boolean;
+  eyebrow: string;
+}) {
+  const qr = BILLET_QR_PATHS[p.id];
+  const chips = p.chips ?? DEFAULT_CHIPS;
   return (
-    <>
-      <div className="b2m-billets" id="billets">
-        <header className="head">
-          <div className="ghost" aria-hidden="true">
-            BACK2MBOA
-          </div>
-          <h1>BILLETS</h1>
-          <div className="sub">Offres de partenariat — 16 &amp; 17 décembre</div>
-          <p className="note">
-            Cliquez sur une souche à gauche pour découvrir le détail de chaque offre.
-          </p>
-        </header>
+    <div className="face" inert={!open} aria-hidden={!open}>
+      <span className="notch tl" />
+      <span className="notch bl" />
+      <span className="notch tm" />
+      <span className="notch bm" />
 
-        <section className="zone">
-          <div className="ticket" id="ticket" style={vars}>
-            <div className="stubs" id="stubs">
-              {PACKS.map((q, i) =>
-                i === sel ? null : (
-                  <button
-                    key={q.id}
-                    type="button"
-                    className={`stub${q.dispo ? "" : " clos"}`}
-                    style={{ background: STUB_BG[i], color: q.texte }}
-                    aria-label={`Voir l'offre ${q.complet}`}
-                    onClick={() => setSel(i)}
-                  >
-                    <div className="stub-in">
-                      {q.complet}
-                      <span className="price">{q.prix} F</span>
-                      <span className="state">{q.statut}</span>
-                    </div>
-                    <span className="hint" aria-hidden="true">
-                      ＋
-                    </span>
-                  </button>
-                ),
-              )}
-            </div>
-
-            <div className="tier" id="tier">
-              <span className="notch top" style={{ left: -14 }} />
-              <span className="notch bot" style={{ left: -14 }} />
-              <div className="dyn fade" key={p.id}>
-                <div className="name">{p.nom}</div>
-                <div className="amount">
-                  {p.prix}{" "}
-                  <small>
-                    FCFA TTC — {p.position}
-                  </small>
-                </div>
-                <div className={`state ${p.dispo ? "dispo" : "clos"}`}>{p.statut}</div>
-                <div className="europe">{p.europe}</div>
-              </div>
-            </div>
-
-            <div className="body">
-              <span className="notch top" style={{ right: -14 }} />
-              <span className="notch bot" style={{ right: -14 }} />
-              <h2>BACK2MBOA ASAP 2026</h2>
-              <div className="cta-row">
-                <span className="arrow" aria-hidden="true">
-                  ➜
-                </span>
-                <Link className="cta" href="/inscription">
-                  ◷ Choisir {p.nom}
-                </Link>
-                <span className="arrow" aria-hidden="true" style={{ transform: "scaleX(-1)" }}>
-                  ➜
-                </span>
-              </div>
-              <div className="facts">
-                <div className="fact">YAOUNDÉ</div>
-                <div className="fact">DÉC. · 16 – 17 · 2026</div>
-                <div className="fact">2 JOURS</div>
-                <div className="fact">MUSÉE NATIONAL</div>
-              </div>
-            </div>
-
-            <div className="qr-panel">
-              <div
-                className="qr-box"
-                id="qrBox"
-                dangerouslySetInnerHTML={{ __html: qr }}
-              />
-              <div className="qr-cap">
-                Scannez pour
-                <br />
-                cette offre
-              </div>
-              <div className="qr-ref" id="qrRef">
-                B2M-2026-{p.nom.slice(0, 4)}
-              </div>
-            </div>
-          </div>
-
-          <div className="details" id="details" style={vars}>
-            <div className="det-head fade" key={`head-${p.id}`}>
-              <span className="dn">{p.complet}</span>
-              <span className="dp">{p.prix} FCFA TTC</span>
-              <span className={`db${p.dispo ? " dispo" : ""}`}>{p.statut}</span>
-            </div>
-            <div className="det-grid fade" key={`grid-${p.id}`}>
-              <div className="det-col">
-                <h4>Ce que l&apos;offre comprend</h4>
-                <ul>
-                  {p.inclus.map((x) => (
-                    <li key={x} dangerouslySetInnerHTML={{ __html: x }} />
-                  ))}
-                </ul>
-              </div>
-              <div className="det-col">
-                <h4>Pour qui</h4>
-                <ul>
-                  {p.pourqui.map((x) => (
-                    <li key={x} dangerouslySetInnerHTML={{ __html: x }} />
-                  ))}
-                </ul>
-                <div className="det-bl">
-                  <div className="lab">En une phrase</div>
-                  <p dangerouslySetInnerHTML={{ __html: p.bottom }} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="under">
-            <span className="chip">
-              <b>500</b> participants sur sélection
-            </span>
-            <span className="chip">
-              Clôture le <b>30 novembre 2026</b>
-            </span>
-            <span className="chip">
-              Offres à la carte dès <b>50 000 F</b>
-            </span>
-          </div>
-        </section>
+      <div className="tier">
+        <div className="dyn">
+          <div className="eyebrow">{eyebrow}</div>
+          <div className="name">{p.nom}</div>
+          <div className="amount">{p.prix}&nbsp;F</div>
+          <p className="unit">{p.position}</p>
+          <div className={`avail ${p.dispo ? "dispo" : "clos"}`}>{p.statut}</div>
+        </div>
       </div>
 
-      <TicketDesign />
-    </>
+      <div className="pass-right">
+        <div className="body">
+          <p className="mast">{p.complet}</p>
+          <div className="chips">
+            {chips.map((c) => (
+              <span className="chip" key={c}>
+                {c}
+              </span>
+            ))}
+          </div>
+          <dl className="facts">
+            <div>
+              <dt>Lieu</dt>
+              <dd>Musée National, Yaoundé</dd>
+            </div>
+            <div>
+              <dt>Dates</dt>
+              <dd>16–17 déc. 2026</dd>
+            </div>
+            <div>
+              <dt>Ouverture</dt>
+              <dd>08:30</dd>
+            </div>
+            <div>
+              <dt>Europe</dt>
+              <dd>{p.europe}</dd>
+            </div>
+          </dl>
+          <Link className="cta" href="/inscription">
+            Choisir {p.nom}
+          </Link>
+        </div>
+        <div className="qr-panel">
+          <div
+            className="qr-box"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: qr }}
+          />
+          <div className="qr-lab">SCAN · CHECK-IN</div>
+        </div>
+        <div className="seat">
+          <span>
+            N° <b>B2M-2026-{p.id.toUpperCase()}</b>
+          </span>
+          <span>
+            Porte <b>{p.nom}</b>
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export { TicketDesign };
+export function BilletsSection({
+  id = "billets",
+  title = "Packs entreprises",
+  when = "16 & 17 décembre 2026",
+  under = "500 participants sur sélection · Clôture le 30 novembre 2026 · Offres à la carte dès 50 000 F",
+  eyebrow = "Offre entreprise",
+  packs = PACKS,
+  stubBg = STUB_BG,
+  ariaLabel = "Packs entreprises",
+  tone = "day",
+}: BilletsSectionProps = {}) {
+  const [sel, setSel] = useState(DEFAULT_SEL);
+  const [live, setLive] = useState(false);
+
+  const pick = (i: number) => {
+    if (i === sel) return;
+    setLive(true);
+    setSel(i);
+  };
+
+  return (
+    <div className="b2m-billets" id={id} data-tone={tone}>
+      <header className="head">
+        <p className="when">{when}</p>
+        <h2>{title}</h2>
+      </header>
+
+      <section className="zone">
+        <div
+          className={`ticket${live ? " is-live" : ""}`}
+          id={`${id}-ticket`}
+          data-open={String(sel)}
+          data-count={String(packs.length)}
+          role="group"
+          aria-label={ariaLabel}
+        >
+          {packs.map((q, i) => {
+            const on = i === sel;
+            const darkCta = q.couleur === "#FFD506";
+            return (
+              <div
+                key={q.id}
+                className={`lane${on ? " on" : ""}`}
+                style={packVars(q)}
+              >
+                <button
+                  type="button"
+                  aria-pressed={on}
+                  aria-expanded={on}
+                  className={`stub${q.dispo ? "" : " clos"}`}
+                  style={{
+                    background: on ? q.couleur : stubBg[i],
+                    color: on ? (darkCta ? "#0A2B21" : "#fff") : q.texte,
+                  }}
+                  aria-label={`${q.complet}, ${q.prix} FCFA`}
+                  onClick={() => pick(i)}
+                >
+                  <span className="stub-in">
+                    {q.nom}
+                    <span className="price">{q.prix} F</span>
+                    <span className="state">{q.statut}</span>
+                  </span>
+                </button>
+                <TicketFace p={q} open={on} eyebrow={eyebrow} />
+              </div>
+            );
+          })}
+        </div>
+
+        <p className="under">{under}</p>
+      </section>
+    </div>
+  );
+}
+
+export function BilletsPartenairesSection() {
+  return (
+    <BilletsSection
+      id="partenaires"
+      title="Packs partenaires"
+      eyebrow="Pack partenaire"
+      packs={PACKS}
+      stubBg={STUB_BG}
+      ariaLabel="Packs partenaires"
+      tone="night"
+    />
+  );
+}

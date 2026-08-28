@@ -1,19 +1,35 @@
 "use client";
 
-import type { CSSProperties, FocusEvent } from "react";
+import type { CSSProperties } from "react";
 import { CARTES, SECTEURS, type BoulevardCarte } from "@/data/boulevard";
 import "./BoulevardSection.css";
 
-function setTrackPlay(e: FocusEvent<HTMLElement>, state: "paused" | "running") {
-  const track = e.currentTarget.closest(".col-track");
-  if (track instanceof HTMLElement) {
-    track.style.animationPlayState = state;
-  }
-}
-
+/** Intercale les secteurs dans chaque voie : pas deux cartes de la même filière à la suite (y compris la boucle marquee). */
 function toColumns(lot: BoulevardCarte[], n = 3): BoulevardCarte[][] {
+  const bySector: BoulevardCarte[][] = [];
+  const index = new Map<string, number>();
+  for (const c of lot) {
+    const key = c.s.court;
+    let i = index.get(key);
+    if (i === undefined) {
+      i = bySector.length;
+      index.set(key, i);
+      bySector.push([]);
+    }
+    bySector[i].push(c);
+  }
+
+  const sectors = bySector.length;
+  const rows = bySector[0]?.length ?? 0;
   const cols: BoulevardCarte[][] = Array.from({ length: n }, () => []);
-  lot.forEach((c, i) => cols[i % n].push(c));
+  if (!sectors || !rows) return cols;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < n; c++) {
+      const card = bySector[(c + r) % sectors][r];
+      if (card) cols[c].push(card);
+    }
+  }
   return cols;
 }
 
@@ -23,21 +39,23 @@ function Carte({ c, dup }: { c: BoulevardCarte; dup: "a" | "b" }) {
       className="card"
       style={{ ["--sc" as string]: `var(${c.s.v})` } as CSSProperties}
       tabIndex={0}
-      aria-label={`${c.s.court} — ${c.e}`}
+      aria-label={`${c.s.court} — ${c.e}. Six maillons.`}
       data-n={c.n}
       data-dup={dup}
-      onFocus={(e) => setTrackPlay(e, "paused")}
-      onBlur={(e) => setTrackPlay(e, "running")}
     >
-      <span className="ico">
-        <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: c.s.ico }} />
-      </span>
-      <span className="sec">{c.s.court}</span>
-      <span className="step">{c.e}</span>
-      <div className="reveal">
-        <div className="rt">
-          {c.s.court} · {c.e}
+      <div className="face">
+        <div className="row">
+          <span className="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: c.s.ico }} />
+          </span>
+          <span className="sec">{c.s.court}</span>
         </div>
+        <span className="step">{c.e}</span>
+      </div>
+      <div className="reveal">
+        <p className="rt">
+          {c.s.court} · {c.e}
+        </p>
         <ol>
           {c.s.maillons.map((m) => (
             <li key={m}>{m}</li>
@@ -73,25 +91,25 @@ export function BoulevardSection() {
     <div className="b2m-blvd">
       <section className="blvd" id="boulevard">
         <div className="wrap">
-          <div className="head">
-            <span className="eyebrow">Le boulevard d&apos;opportunités</span>
-            <h2>
-              6 secteurs × 6 cycles de vie = <em>36 portes d&apos;entrée</em>.
-            </h2>
+          <header className="head">
+            <h2>Six filières, une route.</h2>
             <p>
-              Chaque carte croise un secteur prioritaire et une étape du cycle de
-              vie d&apos;un projet. Survolez-en une pour voir ses 6 maillons de
-              chaîne de valeur — soit 216 points d&apos;entrée au total.
+              Chaque carte croise un secteur prioritaire et une étape du cycle
+              de vie. Trente-six portes, deux cent seize maillons.
             </p>
             <div className="legend" id="legend">
               {SECTEURS.map((s) => (
                 <span className="lg" key={s.court}>
-                  <i style={{ background: `var(${s.v})` }} />
+                  <span
+                    className="swatch"
+                    style={{ background: `var(${s.v})` }}
+                    aria-hidden="true"
+                  />
                   {s.court}
                 </span>
               ))}
             </div>
-          </div>
+          </header>
         </div>
 
         <div className="road-zone">
@@ -108,10 +126,7 @@ export function BoulevardSection() {
         </div>
 
         <div className="foot">
-          <div className="big">
-            36 cartes. 216 maillons. <em>Une seule route.</em>
-          </div>
-          <p>Passez le curseur sur une carte pour arrêter la colonne et lire le détail.</p>
+          <p className="big">Les deux sens de la prospérité.</p>
         </div>
       </section>
     </div>

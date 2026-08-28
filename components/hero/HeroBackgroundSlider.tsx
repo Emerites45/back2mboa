@@ -14,7 +14,6 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
   const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   
-  // États de l'animation en direct
   const [revealRadius, setRevealRadius] = useState(0);
   const [gateScale, setGateScale] = useState(1);
   const [gateBlur, setGateBlur] = useState(0);
@@ -55,13 +54,11 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
       let currentOpacity = 1;
 
       if (p < 0.3) {
-        // Recul préparatoire
         const subP = p / 0.3;
         currentScale = 1 - 0.06 * subP;
         currentBlur = 0;
         currentOpacity = 1;
       } else {
-        // Zoom fulgurant vers la caméra
         const subP = (p - 0.3) / 0.7;
         const easedZoom = Math.pow(subP, 3);
         currentScale = 0.94 + (20 - 0.94) * easedZoom;
@@ -82,7 +79,6 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
       setGateOpacity(currentOpacity);
       setRevealRadius(easedRadius * 180);
 
-      // Notifier le changement de contenu textuel au milieu de la transition (portail grand ouvert)
       if (p >= 0.5 && targetIndex !== currentIndex && onSlideChange) {
         onSlideChange(targetIndex);
       }
@@ -90,7 +86,6 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
       if (p < 1) {
         animationFrameRef.current = requestAnimationFrame(animatePortal);
       } else {
-        // Finalisation
         setCurrentIndex(targetIndex);
         setNextIndex(null);
         setIsTransitioning(false);
@@ -115,7 +110,18 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-black select-none pointer-events-none">
       
-      {}
+      {/* ========== COVER EN FOND (toujours visible) ========== */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Image
+  src="/images/back2mboa-cover.png"
+  alt="Cover Back2Mboa"
+  fill
+  className="object-cover scale-100"   // ← plus de scale-105
+  priority
+/>s
+      </div>
+
+      {/* ========== SLIDES (vidéo / images) ========== */}
       {SLIDES_DATA.map((slide, index) => {
         const isActive = index === currentIndex;
         const isNext = index === nextIndex;
@@ -147,29 +153,44 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover scale-105"
               />
-            ) : (
+            ) : slide.posterUrl ? (
               <div 
-                className="absolute inset-0 w-full h-full bg-cover bg-center scale-105 transition-transform duration-1000"
-                style={{ backgroundImage: `url(${slide.posterUrl || '/images/hero-bg-forest.jpg'})` }}
+                className="absolute inset-0 w-full h-full bg-cover bg-center scale-105"
+                style={{
+  background: `
+    radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.35) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.65) 100%)
+  `
+}}
               />
-            )}
+            ) : null}
           </div>
         );
       })}
 
-      {}
+      {/* ========== SOLEIL — CÔTÉ GAUCHE + PLUS PETIT ========== */}
+     <div className="absolute top-[-20px] left-[-40px] w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[480px] md:h-[480px] pointer-events-none z-[2] opacity-90">
+  <Image
+    src="/images/sun.png"
+    alt="Soleil"
+    fill
+    className="object-contain"
+    priority
+  />
+</div>
+
+      {/* ========== OVERLAY (plus léger pour garder la luminosité) ========== */}
       <div 
         className="absolute inset-0 pointer-events-none z-[3]"
         style={{
           background: `
-            radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.65) 100%),
-            linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 30%, transparent 65%, rgba(0,0,0,0.85) 100%)
+            radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%),
+            linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 55%, rgba(0,0,0,0.7) 100%)
           `
         }}
       />
 
-      {}
-      {/* Positionné légèrement plus bas (top-[54%]) pour s'aligner sous l'en-tête sans le toucher */}
+      {/* ========== PORTAIL TERRE CUITE ========== */}
       <div 
         onClick={handleNext}
         className="absolute left-1/2 top-[53%] -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer group pointer-events-auto"
@@ -179,22 +200,21 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
           className="relative w-[220px] h-[300px] sm:w-[280px] sm:h-[370px] md:w-[320px] md:h-[420px] flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
           style={{
             transform: `scale(${gateScale})`,
-            filter: `blur(${gateBlur}px) drop-shadow(0 0 ${30 + gateBlur * 4}px rgba(243, 204, 19, 0.4))`,
+            filter: `blur(${gateBlur}px) drop-shadow(0 0 ${30 + gateBlur * 4}px rgba(243, 140, 80, 0.45))`,
             opacity: gateOpacity,
             willChange: 'transform, filter, opacity',
             transformOrigin: 'center 60%'
           }}
         >
           <Image 
-            src="/images/gate.png" 
+            src="/images/portail-terre-cuite.png" 
             alt="Portail Back2Mboa"
             width={380}
             height={480}
             priority
-            className="w-full h-full object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
+            className="w-full h-full object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.85)]"
           />
 
-          {/* Bouton Play au centre du portail */}
           <div 
             className={`absolute z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300 shadow-2xl ${
               isTransitioning ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
@@ -204,7 +224,6 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
           </div>
         </div>
       </div>
-
     </div>
   );
 }

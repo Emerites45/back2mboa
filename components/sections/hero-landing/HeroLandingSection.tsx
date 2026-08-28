@@ -8,31 +8,26 @@ const HERO_BG = buildSceneSvg("hero", 77, "hero");
 export function HeroLandingSection() {
   return (
     <div className="b2m-hero">
-      <section className="hero" id="hero" style={{ paddingTop: "5rem" }}>
+      <section className="hero" id="hero">
         <div
           className="bg"
           id="bg"
           dangerouslySetInnerHTML={{ __html: HERO_BG }}
         />
         <div className="veil" />
-        <div className="veil-b" />
 
         <div className="grid">
-          <div>
-            <div className="pill">
-              <b>Salon de la Diaspora — 1er au 7 décembre, Europe</b>
-              <Link href="#salon">
-                Découvrir <span className="arw">→</span>
-              </Link>
-            </div>
+          <div className="copy">
+            <p className="kicker">
+              Europe, 1–7 décembre · Yaoundé, 16–17 décembre 2026
+            </p>
 
             <h1>
-              Deux jours pour transformer un besoin en <em>contrat signé</em>.
+              Deux jours pour transformer un besoin en contrat signé.
             </h1>
 
             <p className="lede">
-              16 et 17 décembre 2026, Musée National du Cameroun, Yaoundé. Six
-              mairies championnes présentent leurs Mayor Calls devant 500
+              Musée National du Cameroun. Six mairies championnes, 500
               décideurs. Vous repartez avec des protocoles, pas des cartes de
               visite.
             </p>
@@ -42,14 +37,12 @@ export function HeroLandingSection() {
                 Demander une invitation
               </Link>
               <Link className="btn btn-2" href="#agenda">
-                <span className="tri">▶</span> Voir le programme
+                Voir le programme
               </Link>
             </div>
           </div>
 
-          <div>
-            <BottomLinesWheel />
-          </div>
+          <BottomLinesWheel />
         </div>
 
         <div className="strip">

@@ -27,8 +27,8 @@ export const SLIDES_DATA: SlideData[] = [
     quote: "Babadjou — Région de l’Ouest, Cameroun.",
     description: "Le Maire de Babadjou fait face à une réalité : sa commune produit 4 000 tonnes de pommes de terre, mais cette richesse pourrait créer beaucoup plus de valeur si elle était transformée localement.\n\nBACK2MBOA le connecte à un Bâtisseur-Solutionneur camerounais basé en Arizona, aux États-Unis, qui travaille chez Pringles, dans l’industrie des chips de pomme de terre, et peut lui apporter les partenaires, la technicité et les solutions de micro-industrialisation nécessaires.",
     extraText: "BACK2MBOA active également les bailleurs de fonds qui investissent dans l’agriculture et les régulateurs tels que l’ANOR, le MINADER et le PAD, afin de faciliter le transfert des ressources, des compétences, des équipements et des financements vers son territoire.\n\nSIX MOIS PLUS TARD…\n\nBabadjou ne se contente plus de produire des pommes de terre : une dynamique de transformation locale est enclenchée, créant de nouveaux débouchés, de la valeur et des emplois sur le territoire.",
-    videoUrl: "/videos/canyon-final.mp4",
-    posterUrl: "/images/canyon-final_225.jpeg",
+    videoUrl: null,
+    posterUrl: "/images/back2mboa-cover.png",
     stats: {
       stat1: "4 000 T",
       label1: "Pommes de terre / an",

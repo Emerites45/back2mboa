@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroLandingSection } from "@/components/sections/hero-landing/HeroLandingSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
 import { StoriesSection } from "@/components/sections/StoriesSection";
+import { MethodeSection } from "@/components/sections/methode/MethodeSection";
 import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
@@ -28,8 +29,8 @@ import { SalonDiasporaSection } from "@/components/sections/salon-diaspora/Salon
 import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
 import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
-import { BilletsSection } from "@/components/sections/billets/BilletsSection";
 import { TerritorySection  } from "@/components/sections/territory-section";
+import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
 import { Button } from "@/components/ui/button";
 
@@ -40,38 +41,46 @@ export default function HomePage() {
       <HeroSection />
       <HeroLandingSection />
       <TerritorySection />
-      <ContrasteSection />
-      <ComparatifSection />
-      <BonnePorteSection />
-      <MairiesChampionnesSection />
-      <ModeleSection />
+    
       <BoulevardSection />
       <PotentialitesSection />
       <NecessiteSection />
       <PlateformeSection />
       <OpenRoadSection />
-      <ParcoursSection />
-      <BeforeDuringAfterSection />
       <PreludeSection />
-      <SalonDiasporaSection />
+      {/* <ContrasteSection /> */}
+      {/* <ComparatifSection /> */}
       <ImpactSection />
+      {/* <BonnePorteSection /> */}
+      {/* <MairiesChampionnesSection /> */}
+      {/* <ModeleSection /> */}
+      {/* <PotentialitesSection /> */} 
+      {/* <NecessiteSection /> */}
+      {/* <PlateformeSection /> */}
+      {/* <OpenRoadSection /> */}
+      <MethodeSection />
+      <ParcoursSection />
+      {/* <BeforeDuringAfterSection /> */}
+      {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
-      <PreuvesPilotesSection />
-      <BatisseursSection />
-      <EcosystemeSection />
-      <div className="bg-brand-paper text-brand-ink [font-family:var(--font-roboto),ui-sans-serif,sans-serif]">
-        <StoriesSection />
-        {/* <LiaisonSection />
-        <MuseeSection /> */}
-        <TickerSection />
-      </div>
+      {/* <ImpactSection /> */}
+      <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
+      {/* <PreuvesPilotesSection /> */}
+      {/* <BatisseursSection /> */}
+      {/* <EcosystemeSection /> */}
+      <StoriesSection />
+      <TickerSection />
+      {/* <PartenairesSection /> */}
+      <BoulevardSection />
+      <HeroLandingSection />
       <AgendaSection />
-      <PartenairesSection />
       <BilletsSection />
-      <RessourcesSection />
+      <BilletsPartenairesSection />
+      {/* <RessourcesSection /> */}
+
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

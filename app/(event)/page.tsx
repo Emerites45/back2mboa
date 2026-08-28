@@ -39,39 +39,40 @@ export default function HomePage() {
     <>
       <SmoothScroll />
       <HeroSection />
-      {/* <ContrasteSection /> */}
-      {/* <ComparatifSection /> */}
+      <PreuvesPilotesSection />
       <ImpactSection />
-      {/* <BonnePorteSection /> */}
-      {/* <MairiesChampionnesSection /> */}
-      {/* <ModeleSection /> */}
-      {/* <PotentialitesSection /> */} 
-      {/* <NecessiteSection /> */}
-      {/* <PlateformeSection /> */}
-      {/* <OpenRoadSection /> */}
+      <ContrasteSection />
+      <ComparatifSection />
+      <BonnePorteSection />
+      <OpenRoadSection />
       <MethodeSection />
+      <MairiesChampionnesSection />
+      <ModeleSection />
+      <PotentialitesSection />
       <ParcoursSection />
-      {/* <BeforeDuringAfterSection /> */}
-      {/* <SalonDiasporaSection /> */}
       <ResultatsSection />
       <PreuveChiffresImpact />
-      {/* <ImpactSection /> */}
+      <EcosystemeSection />
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
-      {/* <PreuvesPilotesSection /> */}
-      {/* <BatisseursSection /> */}
-      {/* <EcosystemeSection /> */}
-      <StoriesSection />
       <TickerSection />
-      {/* <PartenairesSection /> */}
       <BoulevardSection />
       <HeroLandingSection />
+      <BeforeDuringAfterSection />
+      <BatisseursSection />
+      <TeamSection />
+      <PartenairesSection />
+      <StoriesSection />
+      <RessourcesSection />
       <AgendaSection />
       <BilletsSection />
       <BilletsPartenairesSection />
-      <TeamSection />
-      {/* <RessourcesSection /> */}
+ 
+      {/* <NecessiteSection /> */}
+      {/* <PlateformeSection /> */}
+      {/* <OpenRoadSection /> */}
+      {/* <SalonDiasporaSection /> */}
 
 
       <div className="fixed bottom-12 right-6 z-50">

@@ -218,22 +218,24 @@ export function BatisseursSection() {
                     </Link>
                   </div>
 
-                  <div className="bat-row-body">
-                    <ul>
-                      {profile.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div className="bat-row-content">
+                    <div className="bat-row-body">
+                      <ul>
+                        {profile.bullets.map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="bat-row-media">
-                    <Image
-                      src={profile.image}
-                      alt={profile.imageAlt}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 28vw"
-                      className="bat-row-img"
-                    />
+                    <div className="bat-row-media">
+                      <Image
+                        src={profile.image}
+                        alt={profile.imageAlt}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 28vw"
+                        className="bat-row-img"
+                      />
+                    </div>
                   </div>
                 </article>
               );

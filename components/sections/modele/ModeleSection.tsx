@@ -1,9 +1,17 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { MODELE_CARDS, MODELE_COPY, metricsForSector } from "@/data/modele";
+import {
+  MODELE_CARDS,
+  MODELE_COPY,
+  SECTOR_ACCENT,
+  maillonsForSector,
+  metricsForSector,
+} from "@/data/modele";
 import { ModeleClawsDecor } from "./ModeleClawsDecor";
 import { SectorVisual } from "./SectorVisual";
 import "./ModeleSection.css";
+
 function TitleWithAmp({ title }: { title: string }) {
   const idx = title.lastIndexOf(" & ");
   if (idx === -1) return title;
@@ -21,13 +29,10 @@ export function ModeleSection() {
       <ModeleClawsDecor />
       <div className="modele-inner">
         <header className="modele-header">
-          <p className="modele-kicker">
-            <span className="modele-kicker-line" aria-hidden="true" />
-            {MODELE_COPY.kicker}
-          </p>
+          <p className="modele-kicker">{MODELE_COPY.kicker}</p>
           <h2 id="modele-title" className="modele-title">
-            <span>{MODELE_COPY.titleLead}</span>{" "}
-            <em>{MODELE_COPY.titleAccent}</em>
+            {MODELE_COPY.titleLead}{" "}
+            {MODELE_COPY.titleAccent}
           </h2>
           <p className="modele-subtitle">{MODELE_COPY.subtitle}</p>
         </header>
@@ -35,12 +40,20 @@ export function ModeleSection() {
         <ul className="modele-grid">
           {MODELE_CARDS.map((card) => {
             const metrics = metricsForSector(card.id);
+            const maillons = maillonsForSector(card.id);
+            const accent = SECTOR_ACCENT[card.id];
+
             return (
               <li key={card.id}>
                 <Link
                   href="#potentialites"
                   className="modele-card"
-                  aria-label={`${card.title}. ${metrics.communeCount} ${metrics.communeLabel}. Explorer les opportunités.`}
+                  style={
+                    {
+                      "--mod-sector": accent,
+                    } as CSSProperties
+                  }
+                  aria-label={`${card.title}. ${maillons.length} maillons de valeur. ${metrics.communeCount} ${metrics.communeLabel}. Explorer les opportunités.`}
                 >
                   <SectorVisual
                     visual={card.visual}
@@ -51,7 +64,8 @@ export function ModeleSection() {
                   <span className="modele-expand" aria-hidden="true">
                     <ArrowUpRight size={16} strokeWidth={1.75} />
                   </span>
-                  <span className="modele-card-body">
+
+                  <span className="modele-card-body modele-card-face">
                     <span className="modele-badge">
                       {card.index} / {card.category}
                     </span>
@@ -69,6 +83,36 @@ export function ModeleSection() {
                         <strong>{metrics.habitantsValue}</strong>
                         <small>habitants</small>
                       </span>
+                    </span>
+                  </span>
+
+                  <span className="modele-card-reveal" aria-hidden="true">
+                    <span className="modele-reveal-head">
+                      <span className="modele-reveal-kicker">
+                        Chaîne de valeur
+                      </span>
+                      <span className="modele-reveal-title">
+                        <TitleWithAmp title={card.title} />
+                      </span>
+                    </span>
+
+                    <ul className="modele-rows">
+                      {maillons.map((maillon, i) => (
+                        <li
+                          className="modele-row"
+                          key={maillon}
+                          style={{ ["--mi" as string]: i } as CSSProperties}
+                        >
+                          <span className="modele-row-inner">
+                            <span className="modele-row-mark" aria-hidden="true" />
+                            <span className="modele-row-label">{maillon}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <span className="modele-reveal-foot">
+                      Voir les opportunités
                     </span>
                   </span>
                 </Link>

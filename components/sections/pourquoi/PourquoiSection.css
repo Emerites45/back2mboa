@@ -238,8 +238,8 @@
 .pourquoi-row.is-head .pourquoi-cell.is-reco {
   justify-content: center;
   align-items: center;
-  background: #121c18;
-  border-left: 0;
+  background: #ffffff;
+  border-left: 1px solid var(--pq-line);
   padding-block: 0.7rem;
   padding-inline: 0.65rem;
 }
@@ -249,8 +249,7 @@
   align-items: center;
   justify-content: center;
   line-height: 0;
-  filter: saturate(1.28) contrast(1.1) brightness(1.06)
-    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  filter: saturate(1.12) contrast(1.05);
 }
 
 .pourquoi-logo-img {
@@ -315,8 +314,8 @@
   justify-content: center;
   margin: 0;
   padding: 1rem 1.35rem 0.95rem;
-  background: #121c18;
-  border-bottom: 1px solid rgba(212, 160, 23, 0.28);
+  background: #ffffff;
+  border-bottom: 1px solid var(--pq-line);
 }
 
 .pourquoi-detail-inner {

@@ -2,15 +2,42 @@ import {
   communesForSector,
   parsePopulation,
 } from "@/data/potentialites";
+import { SECTEURS } from "@/data/boulevard";
 import type { ModeleCard, ModeleCopy } from "@/types/modele";
 import type { SectorId } from "@/types/potentialites";
 
+/** Ordre aligné sur MODELE_CARDS et SECTEURS (Boulevard). */
+const SECTOR_IDS: SectorId[] = [
+  "agriculture",
+  "finance",
+  "foncier",
+  "tourisme",
+  "eau-energie",
+  "sante",
+];
+
+/** Couleurs filières — source Boulevard (`BoulevardSection.css`). */
+export const SECTOR_ACCENT: Record<SectorId, string> = {
+  agriculture: "#119d63",
+  finance: "#2e6be6",
+  foncier: "#ae3c3a",
+  tourisme: "#d9a21b",
+  "eau-energie": "#00a896",
+  sante: "#d8212e",
+};
+
+/** Sous-domaines / maillons de chaîne de valeur par secteur. */
+export function maillonsForSector(id: SectorId): string[] {
+  const index = SECTOR_IDS.indexOf(id);
+  return index >= 0 ? [...SECTEURS[index].maillons] : [];
+}
+
 export const MODELE_COPY: ModeleCopy = {
   kicker: "Le modèle",
-  titleLead: "6 secteurs.",
-  titleAccent: "216 maillons de valeur.",
+  titleLead: "6 secteurs et",
+  titleAccent: "216 opportunités d'affaires.",
   subtitle:
-    "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Cliquez un secteur pour explorer ses opportunités.",
+    "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Survolez une carte pour voir les sous-domaines.",
 };
 
 /** Copy UI maquette. Photos = `image secteur/` → `public/images/modele/secteurs/`. */

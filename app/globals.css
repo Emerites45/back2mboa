@@ -199,6 +199,23 @@ html.lenis body {
   }
 }
 
+.ticker-track {
+  animation: ticker 36s linear infinite;
+}
+
+.ticker-track.is-paused,
+aside:has(.ticker-track):hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes team-fade-up {
   from {
     opacity: 0;
@@ -218,21 +235,4 @@ html.lenis body {
   50% {
     transform: translate3d(0, -14px, 0) scale(1.02);
   }
-}
-
-.ticker-track {
-  animation: ticker 36s linear infinite;
-}
-
-.ticker-track.is-paused,
-aside:has(.ticker-track):hover .ticker-track {
-  animation-play-state: paused;
-}
-
-.scrollbar-none {
-  scrollbar-width: none;
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
 }

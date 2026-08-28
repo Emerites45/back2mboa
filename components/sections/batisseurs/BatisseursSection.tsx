@@ -1,186 +1,294 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BATISSEURS_COPY } from "@/data/batisseurs";
 import "./BatisseursSection.css";
 
-export function BatisseursSection() {
+function useCountUp(target: number, run: boolean, duration = 1200) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!run) return;
+    let raf = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(Math.round(target * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [run, target, duration]);
+
+  return value;
+}
+
+function MetricCell({
+  numeric,
+  suffix,
+  label,
+  run,
+}: {
+  numeric: number;
+  suffix: string;
+  label: string;
+  run: boolean;
+}) {
+  const n = useCountUp(numeric, run);
+  const display =
+    numeric >= 1000 ? `${n.toLocaleString("fr-FR")}${suffix}` : `${n}${suffix}`;
+
   return (
-    <div className="b2m-bat">
-      <section className="snap" id="preuves-chiffres">
-        <div className="snap-inner">
-          <div className="snap-grid">
-            <div className="snap-left">
-              <h2>Des Bâtisseurs qui ont déjà fait leurs preuves</h2>
-              <p>
-                Back2Mboa n’est pas une idée sur papier. C’est une équipe avec
-                15 ans de terrain, et deux éditions pilotes déjà mesurées.
-              </p>
-              <p className="note">
-                Preuves 2022–2023 · MEET Administrations &amp; MEET Écosystème ·
-                Continuité institutionnelle et diaspora.
-              </p>
+    <div className="bat-metric">
+      <b>{display}</b>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+export function BatisseursSection() {
+  const copy = BATISSEURS_COPY;
+  const rootRef = useRef<HTMLElement | null>(null);
+  const [inView, setInView] = useState(false);
+  const [activeProfile, setActiveProfile] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [reduce, setReduce] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduce(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(Boolean(entry?.isIntersecting)),
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView || paused || reduce) return;
+    const id = window.setInterval(() => {
+      setActiveProfile((i) => (i + 1) % copy.profiles.length);
+    }, copy.autoplayMs);
+    return () => window.clearInterval(id);
+  }, [inView, paused, reduce, copy.autoplayMs, copy.profiles.length]);
+
+  const onSubscribe = useCallback((e: FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubscribed(true);
+  }, [email]);
+
+  const heroCount = useCountUp(5, inView && !reduce, 900);
+
+  return (
+    <section
+      ref={rootRef}
+      className="b2m-bat"
+      id="batisseurs"
+      aria-labelledby="bat-snap-title"
+    >
+      {/* —— Snapshot KPIs —— */}
+      <div className="bat-snap">
+        <div className="bat-snap-inner">
+          <div className="bat-snap-grid">
+            <div className="bat-snap-left">
+              <h2 id="bat-snap-title">{copy.snapTitle}</h2>
+              <p>{copy.snapBody}</p>
+              <p className="bat-note">{copy.snapNote}</p>
             </div>
 
-            <div className="snap-right">
-              <div className="snap-meta">
+            <div className="bat-card">
+              <div className="bat-card-meta">
                 <span>
                   <strong>Back2Mboa</strong> — trajectoire consolidée
                 </span>
-                <span>Indicateurs clés</span>
+                <span>{copy.cardMeta}</span>
               </div>
 
-              <div className="hero-num">
-                5<span>Md FCFA</span>
-              </div>
-              <p
-                style={{
-                  fontSize: ".95rem",
-                  color: "var(--muted)",
-                  marginBottom: 8,
-                }}
-              >
-                mobilisés autour des initiatives portées
+              <p className="bat-hero-num" aria-label={`${copy.heroValue} ${copy.heroUnit}`}>
+                <span className="bat-hero-value">{reduce || !inView ? copy.heroValue : heroCount}</span>
+                <span className="bat-hero-unit">{copy.heroUnit}</span>
               </p>
+              <p className="bat-hero-label">{copy.heroLabel}</p>
 
-              <div className="metrics">
-                <div className="metric">
-                  <b>5 000+</b>
-                  <span>Membres diaspora mobilisables</span>
-                </div>
-                <div className="metric">
-                  <b>50+</b>
-                  <span>Institutions partenaires</span>
-                </div>
-                <div className="metric">
-                  <b>15+</b>
-                  <span>Années d’expérience</span>
-                </div>
-                <div className="metric">
-                  <b>2 000+</b>
-                  <span>Entrepreneurs en réseau</span>
-                </div>
+              <div className="bat-metrics">
+                {copy.metrics.map((m) => (
+                  <MetricCell
+                    key={m.label}
+                    numeric={m.numeric}
+                    suffix={m.suffix}
+                    label={m.label}
+                    run={inView && !reduce}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className="proof" id="preuves-equipe">
-        <div className="proof-inner">
-          <div className="proof-head">
-            <div className="proof-eyebrow">L’équipe derrière la promesse</div>
-            <h2>Pas une structure improvisée — un parcours tracé</h2>
-            <p>
-              Des femmes et des hommes qui ont déjà mobilisé des réseaux, formé
-              des milliers de jeunes et conduit des projets complexes à fort
-              impact.
-            </p>
+      {/* —— Team —— */}
+      <div className="bat-team" id="preuves-equipe">
+        <div className="bat-team-inner">
+          <header className="bat-team-head">
+            <p className="bat-eyebrow">{copy.teamEyebrow}</p>
+            <h2>{copy.teamTitle}</h2>
+            <p>{copy.teamLead}</p>
+          </header>
+
+          <div
+            className="bat-dots"
+            role="tablist"
+            aria-label="Profils Bâtisseurs"
+          >
+            {copy.profiles.map((profile, i) => (
+              <button
+                key={profile.id}
+                type="button"
+                role="tab"
+                aria-selected={i === activeProfile}
+                aria-controls={`bat-profile-${profile.id}`}
+                className={`bat-dot${i === activeProfile ? " is-active" : ""}`}
+                onClick={() => {
+                  setActiveProfile(i);
+                  setPaused(true);
+                }}
+              >
+                <span className="sr-only">{profile.name}</span>
+              </button>
+            ))}
           </div>
 
-          <article className="row">
-            <div>
-              <h3 className="row-title">Olivia Mukam Wandji</h3>
-              <p
-                style={{
-                  fontSize: ".88rem",
-                  fontWeight: 600,
-                  color: "var(--vert)",
-                  marginTop: 6,
-                }}
-              >
-                Présidente Fondatrice
-              </p>
-              <Link className="row-cta" href="#ressources" aria-label="En savoir plus">
-                →
-              </Link>
-            </div>
-            <div className="row-body">
-              <ul>
-                <li>
-                  Fondatrice de Harambe-Cameroun (2008), devenue Solutionneurs
-                  Initiative
-                </li>
-                <li>Certifiée PMP — 10+ ans de gestion de projets</li>
-                <li>
-                  A géré des projets de plus de 2 M$ avec des équipes de 300+
-                  personnes
-                </li>
-                <li>Conseillère en Investissement Pays, Afrilanthropy</li>
-                <li>Conseil consultatif Microsoft Afrique (2013–2016)</li>
-                <li>
-                  Projets pour le Département d’État américain au Cameroun
-                  (2013–2017)
-                </li>
-              </ul>
-            </div>
-            <div className="row-img">
-              <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-                alt="Leadership et direction de projet"
-                width={480}
-                height={300}
-              />
-            </div>
-          </article>
+          <div className="bat-profiles" role="list">
+            {copy.profiles.map((profile, i) => {
+              const active = i === activeProfile;
+              return (
+                <article
+                  key={profile.id}
+                  id={`bat-profile-${profile.id}`}
+                  role="listitem"
+                  className={`bat-row${active ? " is-active" : ""}`}
+                  aria-current={active ? "true" : undefined}
+                  tabIndex={0}
+                  onClick={() => setActiveProfile(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveProfile(i);
+                    }
+                  }}
+                  onMouseEnter={() => {
+                    setPaused(true);
+                    setActiveProfile(i);
+                  }}
+                  onMouseLeave={() => setPaused(false)}
+                  onFocusCapture={() => {
+                    setPaused(true);
+                    setActiveProfile(i);
+                  }}
+                  onBlurCapture={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                      setPaused(false);
+                    }
+                  }}
+                >
+                  <div className="bat-row-lead">
+                    <h3>{profile.name}</h3>
+                    <p className="bat-role">{profile.role}</p>
+                    <Link
+                      className="bat-arrow"
+                      href={profile.href}
+                      aria-label={`En savoir plus — ${profile.name}`}
+                    >
+                      →
+                    </Link>
+                  </div>
 
-          <article className="row">
-            <div>
-              <h3 className="row-title">Solutionneurs Initiative</h3>
-              <p
-                style={{
-                  fontSize: ".88rem",
-                  fontWeight: 600,
-                  color: "var(--vert)",
-                  marginTop: 6,
-                }}
-              >
-                ex-Harambe-Cameroun
-              </p>
-              <Link
-                className="row-cta"
-                href="#salon"
-                aria-label="En savoir plus"
-              >
-                →
-              </Link>
-            </div>
-            <div className="row-body">
-              <ul>
-                <li>7 000 jeunes formés dans les 10 régions du Cameroun</li>
-                <li>
-                  7 entreprises créées via le concours annuel de plans
-                  d’affaires
-                </li>
-                <li>10 à 15 emplois créés par entreprise lauréate</li>
-                <li>
-                  Partenaire reconnu du Fonds Fiduciaire d’Urgence de l’UE pour
-                  l’Afrique
-                </li>
-              </ul>
-            </div>
-            <div className="row-img">
-              <Image
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
-                alt="Communauté et formation de jeunes"
-                width={480}
-                height={300}
-              />
-            </div>
-          </article>
+                  <div className="bat-row-body">
+                    <ul>
+                      {profile.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
 
-          <blockquote className="quote-block">
-            <p>
-              « Plus qu’une équipe organisatrice, Back2Mboa est porté par des
-              femmes et des hommes qui ont déjà démontré leur capacité à
-              mobiliser des réseaux, fédérer des communautés et conduire des
-              initiatives complexes à fort impact. »
-            </p>
-            <footer>
-              — Équipe Back2Mboa · 15 ans de terrain · 2 éditions pilotes
-              mesurées
-            </footer>
-          </blockquote>
+                  <div className="bat-row-media">
+                    <Image
+                      src={profile.image}
+                      alt={profile.imageAlt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 28vw"
+                      className="bat-row-img"
+                    />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* —— Quote + newsletter —— */}
+          <div className="bat-quote">
+            <Image
+              src="/images/fly.webp"
+              alt=""
+              width={48}
+              height={48}
+              className="bat-plane is-a"
+              aria-hidden="true"
+            />
+            <Image
+              src="/images/fly_yellow.webp"
+              alt=""
+              width={40}
+              height={40}
+              className="bat-plane is-b"
+              aria-hidden="true"
+            />
+
+            <blockquote>
+              <p>{copy.quote}</p>
+            </blockquote>
+
+            <form className="bat-form" onSubmit={onSubscribe}>
+              <label className="sr-only" htmlFor="bat-email">
+                Email
+              </label>
+              <div className="bat-input-wrap">
+                <span className="bat-mail" aria-hidden="true">
+                  ✉
+                </span>
+                <input
+                  id="bat-email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder={copy.emailPlaceholder}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="bat-subscribe">
+                {subscribed ? "Merci ✓" : copy.subscribeLabel}
+              </button>
+            </form>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

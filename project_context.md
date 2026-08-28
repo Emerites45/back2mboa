@@ -48,8 +48,6 @@ Sections HTML Back2Mboa montées dans `app/(event)/page.tsx` (wrappers `.b2m-*`)
 Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème montés. Écosystème : grille resserrée + orbit CSS 48s (`#digital-twin`).
 
 ## État
-Branche `feat/section_paul_alain` fusionnée avec `origin/main` (parcours, liaison, musée, ticker, SmoothScroll).
+Branche `feat/section_paul_alain` = sync `origin/main` + `origin/feat/section_williams` + travail Paul-Alain.
 
-Landing : Hero + Hero landing HTML, puis Contraste, Comparatif, Bonne porte, Mairies, Modèle, Boulevard, Potentialités, Nécessité, Plateforme, Open Road, Parcours, BDA, Prélude, Salon, Impact / Résultats / Preuves (`100dvh`, table 2022/2023 sans KPIs ni punch), Bâtisseurs, Écosystème, Stories / Ticker, Liaison, Musée, Agenda, Partenaires, Billets, Ressources. `ActorsSection` existe encore à la racine `sections/` (non isolé, non monté). Pas de backend.
-
-Ports HTML Back2Mboa assemblés dans `page.tsx` (CSS wrappers `.b2m-*`).
+Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Before/During/After → Méthode → Parcours → Résultats → Preuve (logos institutions) → Bâtisseurs → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories → Ticker → Boulevard → Hero landing → Agenda → Partenaires → Ressources → Billets → Billets partenaires. Pas de backend.

@@ -1,0 +1,475 @@
+.pourquoi {
+  --pq-bg: #f4f1ea;
+  --pq-card: #ffffff;
+  --pq-ink: #1c1c1c;
+  --pq-muted: #6b6b6b;
+  --pq-line: #e6e1d8;
+  --pq-green: #1a7a4c;
+  --pq-green-soft: #e8f5ee;
+  --pq-green-deep: #0f5c38;
+  --pq-gold: #d4a017;
+  --pq-gold-soft: #fbf3d8;
+  --pq-star-off: #c8c2b8;
+  --pq-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  --pq-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --pq-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --pq-ease-soft: cubic-bezier(0.33, 0.1, 0.2, 1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100svh;
+  padding: clamp(1.25rem, 3.5vh, 2.5rem) 0;
+  background: var(--pq-bg);
+  color: var(--pq-ink);
+  font-family: var(--pq-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pourquoi *,
+.pourquoi *::before,
+.pourquoi *::after {
+  box-sizing: border-box;
+}
+
+.pourquoi-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 2vh, 1.35rem);
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 1.75rem);
+}
+
+.pourquoi-head {
+  max-width: 44rem;
+}
+
+.pourquoi-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--pq-green);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pourquoi-title {
+  margin: 0 0 0.55rem;
+  font-family: var(--pq-display);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.pourquoi-sub {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--pq-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.pourquoi-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.9fr);
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  align-items: stretch;
+}
+
+.pourquoi-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--pq-line);
+  border-radius: 1rem;
+  background: var(--pq-card);
+  box-shadow: 0 10px 28px rgba(28, 28, 28, 0.05);
+}
+
+/* Filigrane BACK2MBOA — drapeau Cameroun atténué */
+.pourquoi-card-mark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pourquoi-card-mark::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 55% 45% at 18% 72%, rgba(15, 92, 56, 0.045) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 52% 40%, rgba(166, 28, 35, 0.035) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 40% at 82% 28%, rgba(196, 155, 28, 0.04) 0%, transparent 70%);
+}
+
+.pourquoi-card-mark span {
+  position: relative;
+  max-width: 100%;
+  font-family: var(--pq-display);
+  font-size: clamp(2.75rem, 9.5vw, 5.75rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
+  transform: rotate(-16deg) translateY(0.15rem);
+  background-image: linear-gradient(
+    100deg,
+    rgba(15, 92, 56, 0.13) 0%,
+    rgba(22, 110, 62, 0.11) 26%,
+    rgba(166, 28, 35, 0.1) 48%,
+    rgba(166, 28, 35, 0.09) 56%,
+    rgba(184, 148, 32, 0.12) 78%,
+    rgba(184, 148, 32, 0.09) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.85;
+}
+
+.pourquoi-table {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pourquoi-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1.4fr) 0.75fr 0.75fr 0.7fr;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--pq-line);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  transition: background-color 200ms var(--pq-ease), box-shadow 200ms var(--pq-ease);
+}
+
+.pourquoi-row:last-child {
+  border-bottom: 0;
+}
+
+.pourquoi-row.is-head {
+  background: rgba(250, 248, 244, 0.78);
+  cursor: default;
+  backdrop-filter: blur(2px);
+}
+
+.pourquoi-row.is-body {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pourquoi-row.is-body:hover {
+  background: rgba(255, 252, 246, 0.72);
+}
+
+.pourquoi-row.is-body.is-on {
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: inset 3px 0 0 var(--pq-green);
+}
+
+.pourquoi-row.is-body.is-on .pourquoi-cell.is-reco {
+  background: rgba(223, 243, 232, 0.92);
+}
+
+.pourquoi-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+}
+
+.pourquoi-row.is-head .pourquoi-cell {
+  padding-block: 0.7rem;
+  color: var(--pq-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pourquoi-cell.is-crit strong {
+  display: block;
+  font-family: var(--pq-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.pourquoi-cell.is-crit span {
+  color: var(--pq-muted);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.pourquoi-cell.is-score,
+.pourquoi-cell.is-reco {
+  align-items: center;
+}
+
+.pourquoi-cell.is-reco {
+  background: rgba(232, 245, 238, 0.72);
+  border-left: 1px solid rgba(26, 122, 76, 0.12);
+  transition: background-color 200ms var(--pq-ease);
+}
+
+.pourquoi-row.is-head .pourquoi-cell.is-reco {
+  justify-content: center;
+  align-items: center;
+  background: #121c18;
+  border-left: 0;
+  padding-block: 0.7rem;
+  padding-inline: 0.65rem;
+}
+
+.pourquoi-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  filter: saturate(1.28) contrast(1.1) brightness(1.06)
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+.pourquoi-logo-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pourquoi-logo.is-head .pourquoi-logo-img {
+  width: clamp(5.25rem, 9vw, 6.75rem);
+  height: auto;
+}
+
+.pourquoi-logo.is-detail .pourquoi-logo-img {
+  width: clamp(7.5rem, 14vw, 9.5rem);
+  height: auto;
+}
+
+.pourquoi-stars {
+  display: inline-flex;
+  gap: 0.1rem;
+  line-height: 1;
+}
+
+.pourquoi-star {
+  color: var(--pq-star-off);
+  font-size: 1rem;
+  text-shadow: 0 0 0 transparent;
+  transition: color 160ms var(--pq-ease), transform 160ms var(--pq-ease);
+}
+
+.pourquoi-star.is-on {
+  color: var(--pq-gold);
+  text-shadow: 0 1px 0 rgba(180, 120, 0, 0.15);
+}
+
+.pourquoi-row.is-on .pourquoi-cell.is-reco .pourquoi-star.is-on {
+  transform: scale(1.1);
+  transition-delay: calc(var(--pq-si, 0) * 30ms);
+}
+
+/* Panneau détail — logo marque + contenu */
+.pourquoi-detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(28, 28, 28, 0.06);
+  border-radius: 1.25rem;
+  background: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 18px 40px rgba(28, 28, 28, 0.07);
+}
+
+.pourquoi-detail-brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 1rem 1.35rem 0.95rem;
+  background: #121c18;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.28);
+}
+
+.pourquoi-detail-inner {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0;
+  padding: 1.2rem 1.4rem 1.5rem;
+  animation: pourquoi-content-in 640ms var(--pq-ease-soft) both;
+}
+
+.pourquoi-detail-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--pq-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--pq-ink);
+  animation: pourquoi-fade-up 560ms var(--pq-ease-soft) both;
+  animation-delay: 40ms;
+}
+
+.pourquoi-detail-question {
+  margin: 0 0 0.85rem;
+  color: var(--pq-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  animation: pourquoi-fade-up 560ms var(--pq-ease-soft) both;
+  animation-delay: 80ms;
+}
+
+.pourquoi-detail-stars {
+  margin: 0 0 1.15rem;
+  animation: pourquoi-fade-up 560ms var(--pq-ease-soft) both;
+  animation-delay: 120ms;
+}
+
+/* Bannière éditoriale — vert marque, sans jaune « alerte » */
+.pourquoi-note {
+  position: relative;
+  margin: 0;
+  padding: 1.05rem 1.15rem 1.15rem 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 92, 56, 0.12);
+  border-radius: 1rem;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(26, 122, 76, 0.09) 0%, transparent 55%),
+    linear-gradient(165deg, #f5faf7 0%, #eef6f1 48%, #e8f2ec 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.75) inset,
+    0 10px 28px rgba(15, 92, 56, 0.06);
+  animation: pourquoi-fade-up 620ms var(--pq-ease-soft) both;
+  animation-delay: 190ms;
+}
+
+.pourquoi-note::after {
+  content: "“";
+  position: absolute;
+  top: 0.35rem;
+  right: 0.85rem;
+  color: rgba(26, 122, 76, 0.14);
+  font-family: var(--pq-display);
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pourquoi-note-eyebrow {
+  display: inline-block;
+  margin: 0 0 0.55rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(26, 122, 76, 0.1);
+  color: var(--pq-green-deep);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pourquoi-note p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 36ch;
+  color: #24352c;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+.pourquoi-footer {
+  margin: 0;
+  color: var(--pq-muted);
+  font-size: 0.78rem;
+}
+
+@keyframes pourquoi-content-in {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pourquoi-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .pourquoi-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pourquoi-row,
+  .pourquoi-row.is-head {
+    grid-template-columns: 1fr 0.7fr;
+  }
+
+  .pourquoi-row.is-head .pourquoi-cell.is-score:nth-child(2),
+  .pourquoi-row.is-body .pourquoi-cell.is-score:nth-child(2),
+  .pourquoi-row.is-head .pourquoi-cell.is-score:nth-child(3),
+  .pourquoi-row.is-body .pourquoi-cell.is-score:nth-child(3) {
+    display: none;
+  }
+
+  .pourquoi-detail {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pourquoi-row,
+  .pourquoi-star,
+  .pourquoi-detail-inner,
+  .pourquoi-detail-title,
+  .pourquoi-detail-question,
+  .pourquoi-detail-stars,
+  .pourquoi-note {
+    animation: none !important;
+    transition: none;
+  }
+}

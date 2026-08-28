@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import {
-  ArrowLeftRight,
   BookOpen,
   Briefcase,
-  CalendarDays,
   Camera,
   Check,
   CircleQuestionMark,
@@ -20,7 +19,6 @@ import {
   Image as ImageIcon,
   Landmark,
   Languages,
-  Lightbulb,
   Mail,
   MapPinned,
   Plus,
@@ -33,272 +31,233 @@ import {
   Wifi,
   type LucideIcon,
 } from "lucide-react";
+import { RESSOURCES_COPY } from "@/data/ressources";
+import type { RessourcesPanelId } from "@/types/ressources";
 import "./RessourcesSection.css";
 
-type PanelId = "faq" | "acces" | "guide" | "code" | "media" | "guides";
+const TAB_ICONS: Record<RessourcesPanelId, LucideIcon> = {
+  faq: CircleQuestionMark,
+  acces: MapPinned,
+  guide: Briefcase,
+  code: Scale,
+  media: Camera,
+  guides: BookOpen,
+};
 
-const TABS: { id: PanelId; label: string; Icon: LucideIcon }[] = [
-  { id: "faq", label: "FAQ", Icon: CircleQuestionMark },
-  { id: "acces", label: "Accès", Icon: MapPinned },
-  { id: "guide", label: "Guide pratique", Icon: Briefcase },
-  { id: "code", label: "Code de conduite", Icon: Scale },
-  { id: "media", label: "Dossier média", Icon: Camera },
-  { id: "guides", label: "Guides acteurs", Icon: BookOpen },
-];
-
-type FaqItem = { id: string; q: string; a: ReactNode };
-
-const FAQ_GROUPS: { id: string; title: string; Icon: LucideIcon; items: FaqItem[] }[] = [
-  {
-    id: "org",
-    title: "Organisation & concept",
-    Icon: Lightbulb,
-    items: [
-      {
-        id: "org-0",
-        q: "Qu’est-ce que Back2Mboa ?",
-        a: (
-          <>
-            Back2Mboa (African Solutions Accelerating Prosperity) est une{" "}
-            <strong>plateforme de prospérité territoriale</strong> qui identifie,
-            structure, rend visibles et connecte des opportunités économiques
-            réelles avec les personnes capables de les transformer en projets
-            concrets. Ce n’est{" "}
-            <strong>pas un salon traditionnel ni un forum de discours</strong>.
-          </>
-        ),
-      },
-      {
-        id: "org-1",
-        q: "Qu’est-ce qui différencie Back2Mboa d’un salon classique ?",
-        a: (
-          <>
-            Matching sur des <strong>besoins territoriaux qualifiés</strong>{" "}
-            (Mayor Calls, méthode CAP), Deal Rooms orientées signature, et{" "}
-            <strong>continuité après l’événement</strong> via la plateforme. On
-            mesure les deals, les PPP et les recettes — pas le nombre de selfies.
-          </>
-        ),
-      },
-      {
-        id: "org-2",
-        q: "Qu’est-ce qu’un Mayor Call ?",
-        a: (
-          <>
-            Un <strong>appel structuré d’une mairie</strong> sur un besoin
-            territorial précis (secteur, enjeu, critères). Il sert de base au
-            matching avec les Solutionneurs et à la qualification CAP avant les
-            Deal Rooms.
-          </>
-        ),
-      },
-      {
-        id: "org-3",
-        q: "C’est quoi le double flux ?",
-        a: (
-          <>
-            <strong>1–7 décembre</strong> : les territoires vont vers la diaspora
-            (mission + <strong>salon le 4 décembre</strong>).{" "}
-            <strong>16–17 décembre</strong> : la diaspora vient aux territoires
-            (Back2Mboa, Musée National, Yaoundé). Prospérité à double sens.
-          </>
-        ),
-      },
-    ],
-  },
-  {
-    id: "dates",
-    title: "Dates, lieu & participation",
-    Icon: CalendarDays,
-    items: [
-      {
-        id: "dates-0",
-        q: "Quand et où a lieu Back2Mboa 2026 ?",
-        a: (
-          <>
-            <strong>16 et 17 décembre 2026</strong>,{" "}
-            <strong>Musée National du Cameroun</strong>, Yaoundé (Boulevard du 20
-            Mai, centre-ville). Objectif : environ <strong>500 participants</strong>
-            , 30 médias & influenceurs, 100 entrepreneurs locaux.
-          </>
-        ),
-      },
-      {
-        id: "dates-1",
-        q: "Qui peut participer ?",
-        a: (
-          <>
-            <strong>Mairies / CTD</strong>, Solutionneurs locaux et diaspora,
-            investisseurs & PTF, régulateurs, médias, entreprises, mécènes
-            culturels & touristiques. Chaque profil a une « bonne porte » sur le
-            site.
-          </>
-        ),
-      },
-      {
-        id: "dates-2",
-        q: "Comment s’inscrire ?",
-        a: (
-          <>
-            Via le bouton d’inscription du site selon votre profil (territoire,
-            Solutionneur, investisseur, partenaire, presse). Les places sont
-            limitées pour garantir la qualité des Deal Rooms.
-          </>
-        ),
-      },
-      {
-        id: "dates-3",
-        q: "Qu’est-ce que la Masterclass CTD d’octobre ?",
-        a: (
-          <>
-            Formation pratique pour maires et équipes : attractivité territoriale,
-            mobilisation diaspora / investisseurs, outils numériques et IA pour
-            les recettes, pitch investisseur. Préparation au salon et à Back2Mboa.
-          </>
-        ),
-      },
-    ],
-  },
-  {
-    id: "part",
-    title: "Partenaires & sponsors",
-    Icon: Handshake,
-    items: [
-      {
-        id: "part-0",
-        q: "Comment les sponsors accèdent-ils au salon de la diaspora ?",
-        a: (
-          <>
-            Inclus dans les packs : <strong>Prosperity Partner</strong> — prise en
-            charge de <strong>2 personnes</strong>, tous frais payés ;{" "}
-            <strong>Vision Partner</strong> — prise en charge d’
-            <strong>1 personne</strong>, tous frais payés (salon + activités
-            mission 1–7 déc.).
-          </>
-        ),
-      },
-      {
-        id: "part-1",
-        q: "Quels sont les 6 secteurs et mairies championnes ?",
-        a: (
-          <>
-            <strong>Babadjou</strong> — Agriculture · <strong>Douala III</strong> —
-            Finance / digital · <strong>Mbalmayo</strong> — Foncier / habitat ·{" "}
-            <strong>Limbé I</strong> — Tourisme / mobilité ·{" "}
-            <strong>Fundong</strong> — Eau & énergie · <strong>Guider</strong> —
-            Santé / environnement.
-          </>
-        ),
-      },
-    ],
-  },
-];
-
-const FIRST_FAQ = FAQ_GROUPS[0].items[0].id;
-
-function Ico({ children }: { children: ReactNode }) {
-  return (
-    <i
-      aria-hidden="true"
-      style={{ fontStyle: "normal", display: "inline-flex", alignItems: "center" }}
-    >
-      {children}
-    </i>
-  );
-}
+const ALL_FAQ_IDS = RESSOURCES_COPY.faqGroups.flatMap((g) =>
+  g.items.map((i) => i.id),
+);
 
 export function RessourcesSection() {
-  const [panel, setPanel] = useState<PanelId>("faq");
-  const [openFaq, setOpenFaq] = useState<string | null>(FIRST_FAQ);
+  const copy = RESSOURCES_COPY;
+  const rootRef = useRef<HTMLElement | null>(null);
+  const [panel, setPanel] = useState<RessourcesPanelId>("faq");
+  const [openFaq, setOpenFaq] = useState<string | null>(ALL_FAQ_IDS[0] ?? null);
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reduce, setReduce] = useState(false);
+  const [featuredPreview, setFeaturedPreview] = useState(0);
 
-  function toggleFaq(id: string) {
+  const faqIndex = useMemo(
+    () => Math.max(0, ALL_FAQ_IDS.indexOf(openFaq ?? "")),
+    [openFaq],
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduce(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(Boolean(entry?.isIntersecting)),
+      { threshold: 0.22 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  /* FAQ accordion autoplay */
+  useEffect(() => {
+    if (!inView || paused || reduce || panel !== "faq") return;
+    const id = window.setInterval(() => {
+      setOpenFaq((cur) => {
+        const i = ALL_FAQ_IDS.indexOf(cur ?? "");
+        const next = (i + 1) % ALL_FAQ_IDS.length;
+        return ALL_FAQ_IDS[next] ?? ALL_FAQ_IDS[0] ?? null;
+      });
+    }, copy.autoplayFaqMs);
+    return () => window.clearInterval(id);
+  }, [inView, paused, reduce, panel, copy.autoplayFaqMs]);
+
+  /* Preview cards highlight cycle (FAQ view) */
+  useEffect(() => {
+    if (!inView || paused || reduce || panel !== "faq") return;
+    const id = window.setInterval(() => {
+      setFeaturedPreview((i) => (i + 1) % copy.previewCards.length);
+    }, copy.autoplayTabMs);
+    return () => window.clearInterval(id);
+  }, [inView, paused, reduce, panel, copy.autoplayTabMs, copy.previewCards.length]);
+
+  const goPanel = useCallback((id: RessourcesPanelId) => {
+    setPanel(id);
+    setPaused(true);
+    if (id !== "faq") {
+      const idx = copy.previewCards.findIndex((c) => c.id === id);
+      if (idx >= 0) setFeaturedPreview(idx);
+    }
+  }, [copy.previewCards]);
+
+  const toggleFaq = useCallback((id: string) => {
+    setPaused(true);
     setOpenFaq((cur) => (cur === id ? null : id));
-  }
+  }, []);
 
   return (
-    <div className="b2m-res">
-      <section className="res" id="ressources">
-        <div className="res-eyebrow">Ressources</div>
-        <h2 className="res-title">On te rassure. On te guide.</h2>
-        <p className="res-sub">
-          FAQ, plan d’accès, guide pratique, code de conduite, dossier média et
-          guides acteurs — tout ce qu’il faut pour arriver prêt et jouer le jeu
-          Back2Mboa.
-        </p>
+    <section
+      ref={rootRef}
+      className="b2m-res"
+      id="ressources"
+      aria-labelledby="res-title"
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="res-bg" aria-hidden="true">
+        <Image
+          src="/images/ressources/vector-5.webp"
+          alt=""
+          fill
+          priority={false}
+          sizes="100vw"
+          className="res-bg-img"
+        />
+        <div className="res-bg-wash" />
+        <div className="res-bg-veil" />
+      </div>
 
-        <div className="tabs" role="tablist">
-          {TABS.map(({ id, label, Icon }) => {
+      <div className="res">
+        <p className="res-eyebrow">{copy.eyebrow}</p>
+        <h2 id="res-title" className="res-title">
+          {copy.title}
+        </h2>
+        <p className="res-sub">{copy.sub}</p>
+
+        <div className="tabs" role="tablist" aria-label="Ressources">
+          {copy.tabs.map(({ id, label }) => {
             const active = panel === id;
+            const Icon = TAB_ICONS[id];
             return (
               <button
                 key={id}
                 type="button"
-                className={`tab${active ? " active" : ""}`}
-                data-panel={id}
+                className={`tab${active ? " is-active" : ""}`}
                 role="tab"
                 aria-selected={active}
                 aria-controls={`panel-${id}`}
                 id={`tab-${id}`}
-                onClick={() => setPanel(id)}
+                onClick={() => goPanel(id)}
               >
-                <Ico>
-                  <Icon size={14} strokeWidth={2} />
-                </Ico>{" "}
+                <Icon size={14} strokeWidth={2} aria-hidden="true" />
                 {label}
               </button>
             );
           })}
         </div>
 
+        {/* —— FAQ —— */}
         <div
-          className={`panel${panel === "faq" ? " active" : ""}`}
+          className={`panel${panel === "faq" ? " is-active" : ""}`}
           id="panel-faq"
           role="tabpanel"
           aria-labelledby="tab-faq"
+          hidden={panel !== "faq"}
+          onMouseEnter={() => setPaused(true)}
         >
-          <p className="section-lead">
-            Tout ce que tu dois savoir sur l’organisation, le lieu et les
-            modalités. Une question absente ? Écris-nous.
-          </p>
+          <p className="section-lead">{copy.faqLead}</p>
 
-          {FAQ_GROUPS.map((group) => (
+          <div className="faq-progress" aria-hidden="true">
+            <span
+              className="faq-progress-bar"
+              style={{
+                width: `${((faqIndex + 1) / Math.max(1, ALL_FAQ_IDS.length)) * 100}%`,
+              }}
+            />
+          </div>
+
+          {copy.faqGroups.map((group) => (
             <div className="faq-group" key={group.id}>
-              <h3 className="faq-group-title">
-                <Ico>
-                  <group.Icon size={16} strokeWidth={2} />
-                </Ico>{" "}
-                {group.title}
-              </h3>
+              <h3 className="faq-group-title">{group.title}</h3>
               <div className="faq-list">
                 {group.items.map((item) => {
                   const open = openFaq === item.id;
                   return (
-                    <div className={`faq-item${open ? " open" : ""}`} key={item.id}>
+                    <div
+                      className={`faq-item${open ? " is-open" : ""}`}
+                      key={item.id}
+                    >
                       <button
                         type="button"
                         className="faq-q"
                         aria-expanded={open}
                         onClick={() => toggleFaq(item.id)}
                       >
-                        {item.q}{" "}
-                        <Ico>
-                          <Plus size={16} strokeWidth={2} />
-                        </Ico>
+                        <span>{item.q}</span>
+                        <Plus size={16} strokeWidth={2.25} aria-hidden="true" />
                       </button>
-                      <div className="faq-a">{item.a}</div>
+                      <div className="faq-a" hidden={!open}>
+                        <p>{item.a}</p>
+                        {item.highlights && item.highlights.length > 0 ? (
+                          <ul className="faq-chips">
+                            {item.highlights.map((h) => (
+                              <li key={h}>{h}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
                     </div>
                   );
                 })}
               </div>
             </div>
           ))}
+
+          <div className="res-preview">
+            <p className="res-preview-eyebrow">{copy.previewEyebrow}</p>
+            <div className="preview-grid">
+              {copy.previewCards.map((card, i) => {
+                const featured = i === featuredPreview;
+                return (
+                  <button
+                    key={card.id}
+                    type="button"
+                    className={`preview-card tone-${card.tone}${featured ? " is-featured" : ""}`}
+                    onClick={() => goPanel(card.id)}
+                  >
+                    <span className="preview-label">{card.label}</span>
+                    <span className="preview-title">{card.title}</span>
+                    <ul>
+                      {card.lines.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
+        {/* —— Accès —— */}
         <div
-          className={`panel${panel === "acces" ? " active" : ""}`}
+          className={`panel${panel === "acces" ? " is-active" : ""}`}
           id="panel-acces"
           role="tabpanel"
           aria-labelledby="tab-acces"
+          hidden={panel !== "acces"}
         >
           <p className="section-lead">
             Comment se rendre au Musée National de Yaoundé : transport,
@@ -312,109 +271,68 @@ export function RessourcesSection() {
               de l’Hôtel de Ville et des principales ambassades.
             </p>
           </div>
-          <h3 className="faq-group-title" style={{ marginBottom: 14 }}>
-            <Ico>
-              <Route size={16} strokeWidth={2} />
-            </Ico>{" "}
-            Modes de transport
+          <h3 className="faq-group-title">
+            <Route size={16} strokeWidth={2} aria-hidden="true" /> Modes de
+            transport
           </h3>
-          <div className="grid-2">
-            <div className="info-card">
-              <div className="label">Taxi / VTC</div>
-              <h3>Le plus simple en ville</h3>
-              <p>
-                Indiquez « Musée National, Boulevard du 20 Mai ». Temps de trajet
-                variable selon le trafic (comptez 20–45 min depuis la plupart des
-                quartiers hôteliers).
-              </p>
-            </div>
-            <div className="info-card">
-              <div className="label">Voiture personnelle</div>
-              <h3>Stationnement</h3>
-              <p>
-                Parkings à proximité du musée et des axes du centre-ville.
-                Arrivez en avance les matins d’événement. Un plan de circulation
-                pourra être communiqué aux inscrits.
-              </p>
-            </div>
-            <div className="info-card">
-              <div className="label">Navettes Back2Mboa</div>
-              <h3>Depuis les hôtels partenaires</h3>
-              <p>
-                Des navettes seront organisées aux heures de pointe depuis les
-                hôtels partenaires. Horaires précisés dans le mail de
-                confirmation d’inscription.
-              </p>
-            </div>
-            <div className="info-card">
-              <div className="label">Aéroport · Nsimalen</div>
-              <h3>Arrivée internationale</h3>
-              <p>
-                Aéroport international de Yaoundé-Nsimalen. Taxi ou transfert
-                hôtel recommandé. Prévoir le trafic entre Nsimalen et le
-                centre-ville.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={`panel${panel === "guide" ? " active" : ""}`}
-          id="panel-guide"
-          role="tabpanel"
-          aria-labelledby="tab-guide"
-        >
-          <p className="section-lead">
-            Tout ce qu’il faut savoir pour arriver au Musée National, se loger et
-            profiter pleinement des deux jours Back2Mboa.
-          </p>
-          <div className="venue-banner">
-            <div className="addr">Yaoundé · Centre-ville · Cameroun</div>
-            <h3>Musée National du Cameroun</h3>
-            <p>
-              Facilement accessible en taxi, en bus ou en voiture. Des navettes
-              seront organisées depuis les hôtels partenaires aux heures de
-              pointe.
-            </p>
-          </div>
           <div className="grid-2">
             {[
               {
-                Icon: Hotel,
-                title: "Hébergement",
-                body: "Privilégiez le centre-ville ou les hôtels partenaires pour bénéficier des navettes. Une liste indicative sera partagée aux inscrits (pas d’obligation de réservation via Back2Mboa).",
+                label: "Taxi / VTC",
+                title: "Le plus simple en ville",
+                body: "Indiquez « Musée National, Boulevard du 20 Mai ». Comptez 20–45 min depuis la plupart des quartiers hôteliers.",
               },
               {
-                Icon: IdCard,
-                title: "Accueil & badges",
-                body: "Présentez-vous à l’accueil avec votre confirmation. Badges nominatifs pour accéder aux salles, Deal Rooms et zones partenaires.",
+                label: "Voiture personnelle",
+                title: "Stationnement",
+                body: "Parkings à proximité. Arrivez en avance les matins d’événement. Un plan de circulation pourra être communiqué aux inscrits.",
               },
               {
-                Icon: Shirt,
-                title: "Tenue",
-                body: "Business casual ou tenue professionnelle. L’événement mêle institutions, investisseurs et entrepreneurs : visez le sérieux sans rigidité inutile.",
+                label: "Navettes Back2Mboa",
+                title: "Depuis les hôtels partenaires",
+                body: "Navettes aux heures de pointe. Horaires précisés dans le mail de confirmation d’inscription.",
               },
               {
-                Icon: Languages,
-                title: "Langues",
-                body: "Français et anglais. Interventions et supports prévus dans les deux langues officielles du Cameroun autant que possible.",
+                label: "Aéroport · Nsimalen",
+                title: "Arrivée internationale",
+                body: "Taxi ou transfert hôtel recommandé. Prévoir le trafic entre Nsimalen et le centre-ville.",
               },
-              {
-                Icon: Wifi,
-                title: "Connexion & outils",
-                body: "Wi-Fi sur site (selon disponibilité). Prévoyez powerbank et version hors-ligne de vos pitchs / fiches CAP.",
-              },
-              {
-                Icon: HeartHandshake,
-                title: "Accessibilité",
-                body: "Signalez tout besoin spécifique (mobilité, interprétation, autre) à l’inscription : l’équipe fera son possible pour vous accueillir correctement.",
-              },
-            ].map(({ Icon, title, body }) => (
+            ].map((c) => (
+              <div className="info-card" key={c.title}>
+                <div className="label">{c.label}</div>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* —— Guide —— */}
+        <div
+          className={`panel${panel === "guide" ? " is-active" : ""}`}
+          id="panel-guide"
+          role="tabpanel"
+          aria-labelledby="tab-guide"
+          hidden={panel !== "guide"}
+        >
+          <p className="section-lead">
+            Tout ce qu’il faut savoir pour arriver prêt et profiter pleinement
+            des deux jours Back2Mboa.
+          </p>
+          <div className="grid-2">
+            {(
+              [
+                [Hotel, "Hébergement", "Centre-ville ou hôtels partenaires pour les navettes. Liste indicative partagée aux inscrits."],
+                [IdCard, "Accueil & badges", "Confirmation + badges nominatifs pour salles, Deal Rooms et zones partenaires."],
+                [Shirt, "Tenue", "Business casual ou tenue professionnelle — institutions et entrepreneurs réunis."],
+                [Languages, "Langues", "Français et anglais. Supports bilingues autant que possible."],
+                [Wifi, "Connexion & outils", "Wi-Fi sur site selon dispo. Powerbank + pitchs / fiches CAP hors-ligne."],
+                [HeartHandshake, "Accessibilité", "Signalez tout besoin à l’inscription : l’équipe s’adapte."],
+              ] as const
+            ).map(([Icon, title, body]) => (
               <div className="info-card" key={title}>
                 <div className="icon-box">
-                  <Ico>
-                    <Icon size={18} strokeWidth={2} />
-                  </Ico>
+                  <Icon size={18} strokeWidth={2} aria-hidden="true" />
                 </div>
                 <h3>{title}</h3>
                 <p>{body}</p>
@@ -423,76 +341,47 @@ export function RessourcesSection() {
           </div>
         </div>
 
+        {/* —— Code —— */}
         <div
-          className={`panel${panel === "code" ? " active" : ""}`}
+          className={`panel${panel === "code" ? " is-active" : ""}`}
           id="panel-code"
           role="tabpanel"
           aria-labelledby="tab-code"
+          hidden={panel !== "code"}
         >
           <p className="section-lead">
-            Back2Mboa est un espace de confiance. Ce code définit les valeurs et
-            les comportements attendus de tous les participants, sans exception.
+            Back2Mboa est un espace de confiance. Valeurs et comportements
+            attendus de tous les participants.
           </p>
-          <h3 className="faq-group-title" style={{ marginBottom: 14 }}>
-            Nos valeurs
-          </h3>
           <div className="grid-3" style={{ marginBottom: 24 }}>
-            <div className="value-card">
-              <div className="icon-box">
-                <Ico>
-                  <Heart size={18} strokeWidth={2} />
-                </Ico>
+            {(
+              [
+                [Heart, "Respect", "Dignité et considération pour chaque participant, sans exception."],
+                [Handshake, "Intégrité", "Engagements tenus, informations véridiques et vérifiables."],
+                [Users, "Inclusivité", "Ouvert à toutes générations, genres, origines et niveaux."],
+              ] as const
+            ).map(([Icon, title, body]) => (
+              <div className="value-card" key={title}>
+                <div className="icon-box">
+                  <Icon size={18} strokeWidth={2} aria-hidden="true" />
+                </div>
+                <h3>{title}</h3>
+                <p>{body}</p>
               </div>
-              <h3>Respect</h3>
-              <p>
-                Le respect mutuel est non négociable. Chaque participant, quelle
-                que soit sa fonction ou son origine, est traité avec dignité et
-                considération.
-              </p>
-            </div>
-            <div className="value-card">
-              <div className="icon-box">
-                <Ico>
-                  <Handshake size={18} strokeWidth={2} />
-                </Ico>
-              </div>
-              <h3>Intégrité</h3>
-              <p>
-                Les engagements pris pendant l’événement doivent être tenus. Les
-                informations présentées doivent être véridiques et vérifiables.
-              </p>
-            </div>
-            <div className="value-card">
-              <div className="icon-box">
-                <Ico>
-                  <Users size={18} strokeWidth={2} />
-                </Ico>
-              </div>
-              <h3>Inclusivité</h3>
-              <p>
-                Back2Mboa est ouvert à toutes les générations, genres, origines
-                et niveaux d’expérience. La diversité est une force, pas un
-                obstacle.
-              </p>
-            </div>
+            ))}
           </div>
-          <h3 className="faq-group-title" style={{ marginBottom: 8 }}>
-            Comportements attendus
-          </h3>
           <div className="info-card">
             <ul className="rules-list">
               {[
                 "Présenter des projets et chiffres honnêtes — pas de survente trompeuse en Deal Room.",
                 "Respecter le temps des autres (ponctualité, tours de parole, créneaux de matching).",
-                "Zéro harcèlement, discrimination ou comportement abusif — physique, verbal ou en ligne.",
-                "Ne pas détourner les données ou contacts obtenus via la plateforme à des fins non autorisées.",
-                "Signaler tout incident à l’équipe d’organisation : un référent sera identifié sur site.",
-                "Tout manquement grave peut entraîner l’exclusion immédiate de l’événement et de la plateforme.",
+                "Zéro harcèlement, discrimination ou comportement abusif.",
+                "Ne pas détourner les données ou contacts de la plateforme.",
+                "Signaler tout incident à l’équipe d’organisation sur site.",
+                "Manquement grave = exclusion de l’événement et de la plateforme.",
               ].map((rule) => (
                 <li key={rule}>
-                  <Ico>
-                    <Check size={16} strokeWidth={2.5} />
-                  </Ico>{" "}
+                  <Check size={16} strokeWidth={2.5} aria-hidden="true" />
                   <span>{rule}</span>
                 </li>
               ))}
@@ -500,168 +389,96 @@ export function RessourcesSection() {
           </div>
         </div>
 
+        {/* —— Média —— */}
         <div
-          className={`panel${panel === "media" ? " active" : ""}`}
+          className={`panel${panel === "media" ? " is-active" : ""}`}
           id="panel-media"
           role="tabpanel"
           aria-labelledby="tab-media"
+          hidden={panel !== "media"}
         >
           <p className="section-lead">
-            Assets presse, faits clés et contacts pour couvrir la masterclass, le
-            salon diaspora et Back2Mboa.
+            Assets presse, faits clés et contacts pour couvrir Back2Mboa.
           </p>
           <div className="grid-3">
-            {[
-              {
-                Icon: FileText,
-                title: "Kit presse PDF",
-                body: "Communiqué type, chiffres 2022–2023, angles, calendrier, contacts.",
-                href: "#download-kit",
-                label: "Télécharger",
-              },
-              {
-                Icon: ImageIcon,
-                title: "Logos & charte",
-                body: "Logo, variantes, palette forest / jaune, règles d’usage.",
-                href: "#download-brand",
-                label: "Télécharger",
-              },
-              {
-                Icon: Camera,
-                title: "Photos & visuels",
-                body: "Sélection éditions pilotes MEET, lieux, portraits (droits presse).",
-                href: "#download-photos",
-                label: "Télécharger",
-              },
-              {
-                Icon: Quote,
-                title: "Faits & citations",
-                body: "89 % satisfaction CTD · 97 % entrepreneurs · 60 000+ portée 2023.",
-                href: "#download-facts",
-                label: "Télécharger",
-              },
-              {
-                Icon: CalendarDays,
-                title: "Calendrier médias",
-                body: "Masterclass octobre · mission 1–7 déc. (salon 4) · event 16–17 déc.",
-                href: "#download-calendar",
-                label: "Télécharger",
-              },
-            ].map(({ Icon, title, body, href, label }) => (
+            {(
+              [
+                [FileText, "Kit presse PDF", "Communiqué type, chiffres, angles, calendrier.", "#download-kit"],
+                [ImageIcon, "Logos & charte", "Logo, variantes, palette forest / jaune.", "#download-brand"],
+                [Camera, "Photos & visuels", "Éditions pilotes MEET, lieux, portraits.", "#download-photos"],
+                [Quote, "Faits & citations", "89 % CTD · 97 % entrepreneurs · 60 000+ portée.", "#download-facts"],
+                [Mail, "Contact presse", "presse@back2mboa.org", "mailto:presse@back2mboa.org"],
+              ] as const
+            ).map(([Icon, title, body, href]) => (
               <div className="media-card" key={title}>
                 <div className="icon-box">
-                  <Ico>
-                    <Icon size={18} strokeWidth={2} />
-                  </Ico>
+                  <Icon size={18} strokeWidth={2} aria-hidden="true" />
                 </div>
                 <h3>{title}</h3>
                 <p>{body}</p>
                 <a href={href}>
-                  {label}{" "}
-                  <Ico>
-                    <Download size={14} strokeWidth={2} />
-                  </Ico>
+                  {href.startsWith("mailto:") ? "Écrire" : "Télécharger"}{" "}
+                  {href.startsWith("mailto:") ? (
+                    <ExternalLink size={14} strokeWidth={2} aria-hidden="true" />
+                  ) : (
+                    <Download size={14} strokeWidth={2} aria-hidden="true" />
+                  )}
                 </a>
               </div>
             ))}
-            <div className="media-card">
-              <div className="icon-box">
-                <Ico>
-                  <Mail size={18} strokeWidth={2} />
-                </Ico>
-              </div>
-              <h3>Contact presse</h3>
-              <p>Accréditations, interviews, demandes exclusives.</p>
-              <a href="mailto:presse@back2mboa.org">
-                presse@back2mboa.org{" "}
-                <Ico>
-                  <ExternalLink size={14} strokeWidth={2} />
-                </Ico>
-              </a>
-            </div>
           </div>
         </div>
 
+        {/* —— Guides —— */}
         <div
-          className={`panel${panel === "guides" ? " active" : ""}`}
+          className={`panel${panel === "guides" ? " is-active" : ""}`}
           id="panel-guides"
           role="tabpanel"
           aria-labelledby="tab-guides"
+          hidden={panel !== "guides"}
         >
           <p className="section-lead">
             Guides opérationnels par profil : mairie, Solutionneur, investisseur,
             sponsor, attractivité, double flux.
           </p>
           <div className="grid-2">
-            {[
-              {
-                href: "#guide-maire",
-                Icon: Landmark,
-                title: "Guide mairie — Publier un Mayor Call",
-                body: "Structurer le besoin, critères CAP, modèles de fiche, validation avant mise en ligne.",
-              },
-              {
-                href: "#guide-sol",
-                Icon: Rocket,
-                title: "Guide Solutionneur — Répondre à un Call",
-                body: "Éligibilité, dossier type, matching, préparation Deal Room et suite post-événement.",
-              },
-              {
-                href: "#guide-inv",
-                Icon: Briefcase,
-                title: "Guide investisseur / PTF",
-                body: "Lire un pipeline CAP, due diligence légère, accès Deal Rooms, indicateurs de suivi.",
-              },
-              {
-                href: "#guide-sponsor",
-                Icon: Handshake,
-                title: "Guide partenaire / sponsor",
-                body: "Packs Vision & Prosperity, inclusion salon 1–7 déc., visibilité, ROI par secteur.",
-              },
-              {
-                href: "#guide-attract",
-                Icon: MapPinned,
-                title: "Guide attractivité territoriale",
-                body: "Outils masterclass : site diaspora-friendly, cartes de revenus, pitch investisseur.",
-              },
-              {
-                href: "#guide-flux",
-                Icon: ArrowLeftRight,
-                title: "Guide double flux (mission ↔ event)",
-                body: "Enchaîner 1–7 décembre et 16–17 décembre pour maximiser les deals.",
-              },
-            ].map(({ href, Icon, title, body }) => (
-              <div className="guide" key={href}>
+            {(
+              [
+                [Landmark, "Guide mairie — Publier un Mayor Call", "Besoin, critères CAP, fiche type.", "#guide-maire"],
+                [Rocket, "Guide Solutionneur — Répondre à un Call", "Éligibilité, matching, Deal Room.", "#guide-sol"],
+                [Briefcase, "Guide investisseur / PTF", "Pipeline CAP, due diligence légère.", "#guide-inv"],
+                [Handshake, "Guide partenaire / sponsor", "Packs Vision & Prosperity, ROI.", "#guide-sponsor"],
+                [MapPinned, "Guide attractivité territoriale", "Site diaspora-friendly, pitch investisseur.", "#guide-attract"],
+                [Route, "Guide double flux", "Enchaîner 1–7 déc. et 16–17 déc.", "#guide-flux"],
+              ] as const
+            ).map(([Icon, title, body, href]) => (
+              <a className="guide" key={href} href={href}>
                 <div className="icon-box dark">
-                  <Ico>
-                    <Icon size={18} strokeWidth={2} />
-                  </Ico>
+                  <Icon size={18} strokeWidth={2} aria-hidden="true" />
                 </div>
                 <div>
                   <h3>{title}</h3>
                   <p>{body}</p>
-                  <a href={href}>Ouvrir le guide →</a>
+                  <span className="guide-link">Ouvrir le guide →</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
 
         <div className="res-foot">
-          <a className="btn-jaune" href="mailto:contact@back2mboa.org">
-            <Ico>
-              <Mail size={16} strokeWidth={2} />
-            </Ico>{" "}
-            Une question ? Écrivez-nous
+          <a className="btn-jaune" href={copy.ctaHref}>
+            <Mail size={16} strokeWidth={2} aria-hidden="true" />
+            {copy.ctaLabel}
           </a>
           <span>
-            <strong>Event</strong> 16–17 déc. 2026 · Musée National, Yaoundé
+            <strong>Event</strong> {copy.footEvent.replace(/^Event\s+/i, "")}
           </span>
           <span>
-            <strong>Salon</strong> 4 déc. · mission 1–7 déc.
+            <strong>Salon</strong> {copy.footSalon.replace(/^Salon\s+/i, "")}
           </span>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

@@ -8,7 +8,15 @@
   --mod-font: var(--font-inter), Inter, system-ui, sans-serif;
   --mod-serif: var(--font-fraunces), Fraunces, Georgia, serif;
   --mod-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --mod-claw-size: min(440px, 46vw);
+  --mod-claw-outset-x: 12%;
+  --mod-claw-outset-y: 8%;
+  --mod-claw-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mod-claw-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mod-claw-bg-opacity: 0.9;
+  --mod-claw-wind-delay: 1.35s;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   box-sizing: border-box;
   padding: 88px 32px;
@@ -28,42 +36,328 @@
   z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
+  background: transparent;
+}
+
+/* ── Griffes décoratives — calque background (sous le contenu) ── */
+.modele-claws-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .modele-claws {
   position: absolute;
-  top: -8%;
-  right: -6%;
-  z-index: 0;
-  width: min(820px, 78vw);
-  height: auto;
+  width: var(--mod-claw-size);
+  height: var(--mod-claw-size);
+  overflow: visible;
+  opacity: var(--mod-claw-bg-opacity);
+}
+
+.modele-claws-pivot {
+  filter: var(--claw-ambient);
+}
+
+.modele-claws.is-corner-tr {
+  top: 0;
+  right: 0;
+  transform: translate(var(--mod-claw-outset-x), calc(var(--mod-claw-outset-y) * -1));
+  transform-origin: top right;
+  will-change: transform;
+}
+
+.modele-claws.is-corner-bl {
+  bottom: 0;
+  left: 0;
+  transform: translate(calc(var(--mod-claw-outset-x) * -1), var(--mod-claw-outset-y));
+  transform-origin: bottom left;
+  will-change: transform;
+}
+
+/* Motion — griffure depuis le coin, décalée vert · rouge · jaune */
+.modele-claw-motion {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  opacity: 0;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-green {
+  animation: modele-claw-slash 1.08s var(--mod-claw-ease-out) 0.08s both;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-red {
+  animation: modele-claw-slash 1.18s var(--mod-claw-ease-out) 0.26s both;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-yellow {
+  animation: modele-claw-slash 1.06s var(--mod-claw-ease-out) 0.44s both;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-green .modele-claw-lip {
+  animation: modele-claw-lip 0.72s var(--mod-claw-ease) 0.38s both;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-red .modele-claw-lip {
+  animation: modele-claw-lip 0.82s var(--mod-claw-ease) 0.56s both;
+}
+
+.modele-claws-decor.is-visible .modele-claw-motion.is-yellow .modele-claw-lip {
+  animation: modele-claw-lip 0.74s var(--mod-claw-ease) 0.72s both;
+}
+
+@keyframes modele-claw-slash {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.02) translateY(-18px);
+    filter: blur(4px);
+  }
+
+  40% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  72% {
+    transform: scaleY(1.025) translateY(3px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes modele-claw-lip {
+  from {
+    stroke-dashoffset: 1;
+    opacity: 0.2;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.modele-claw-wind {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+.modele-claws-decor.is-visible .modele-claw-wind.is-green {
+  animation: modele-claw-wind-green 7.4s linear var(--mod-claw-wind-delay) infinite;
+}
+
+.modele-claws-decor.is-visible .modele-claw-wind.is-red {
+  animation: modele-claw-wind-red 6.8s linear calc(var(--mod-claw-wind-delay) + 0.12s) infinite;
+}
+
+.modele-claws-decor.is-visible .modele-claw-wind.is-yellow {
+  animation: modele-claw-wind-yellow 7.9s linear calc(var(--mod-claw-wind-delay) + 0.24s) infinite;
+}
+
+.modele-claws-decor.is-visible .modele-claws.is-corner-tr {
+  animation:
+    modele-claw-corner-in 0.01s linear 0s both,
+    modele-claw-wind-tr 10.5s linear var(--mod-claw-wind-delay) infinite;
+}
+
+.modele-claws-decor.is-visible .modele-claws.is-corner-bl {
+  animation:
+    modele-claw-corner-in 0.01s linear 0s both,
+    modele-claw-wind-bl 11.2s linear calc(var(--mod-claw-wind-delay) + 0.18s) infinite;
+}
+
+@keyframes modele-claw-corner-in {
+  to {
+    opacity: var(--mod-claw-bg-opacity);
+  }
+}
+
+/* Vent sinusoïdal — chaque bande ondule avec un déphasage distinct */
+@keyframes modele-claw-wind-green {
+  0% { transform: rotate(0deg) translate(1px, 0.9px); }
+  12.5% { transform: rotate(0.6deg) translate(1.8px, 0.65px); }
+  25% { transform: rotate(0.85deg) translate(1.5px, 0px); }
+  37.5% { transform: rotate(0.6deg) translate(0.35px, -0.65px); }
+  50% { transform: rotate(0deg) translate(-1px, -0.9px); }
+  62.5% { transform: rotate(-0.6deg) translate(-1.8px, -0.65px); }
+  75% { transform: rotate(-0.85deg) translate(-1.5px, 0px); }
+  87.5% { transform: rotate(-0.6deg) translate(-0.35px, 0.65px); }
+  100% { transform: rotate(0deg) translate(1px, 0.9px); }
+}
+
+@keyframes modele-claw-wind-red {
+  0% { transform: rotate(0.9deg) translate(1px, -0.55px); }
+  12.5% { transform: rotate(0.28deg) translate(-0.7px, -1.05px); }
+  25% { transform: rotate(-0.52deg) translate(-2px, -0.95px); }
+  37.5% { transform: rotate(-1deg) translate(-2.1px, -0.3px); }
+  50% { transform: rotate(-0.9deg) translate(-1px, 0.55px); }
+  62.5% { transform: rotate(-0.28deg) translate(0.7px, 1.05px); }
+  75% { transform: rotate(0.52deg) translate(2px, 0.95px); }
+  87.5% { transform: rotate(1deg) translate(2.1px, 0.3px); }
+  100% { transform: rotate(0.9deg) translate(1px, -0.55px); }
+}
+
+@keyframes modele-claw-wind-yellow {
+  0% { transform: rotate(-0.65deg) translate(-1.6px, -0.4px); }
+  12.5% { transform: rotate(-0.72deg) translate(-1px, 0.2px); }
+  25% { transform: rotate(-0.37deg) translate(0.1px, 0.7px); }
+  37.5% { transform: rotate(0.2deg) translate(1.2px, 0.75px); }
+  50% { transform: rotate(0.65deg) translate(1.6px, 0.4px); }
+  62.5% { transform: rotate(0.72deg) translate(1px, -0.2px); }
+  75% { transform: rotate(0.37deg) translate(-0.1px, -0.7px); }
+  87.5% { transform: rotate(-0.2deg) translate(-1.2px, -0.75px); }
+  100% { transform: rotate(-0.65deg) translate(-1.6px, -0.4px); }
+}
+
+/* Enveloppe globale — rafale lente depuis le coin */
+@keyframes modele-claw-wind-tr {
+  0% {
+    transform: translate(var(--mod-claw-outset-x), calc(var(--mod-claw-outset-y) * -1))
+      rotate(0deg);
+  }
+
+  12.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) + 4px), calc(var(--mod-claw-outset-y) * -1 - 1px))
+      rotate(0.45deg);
+  }
+
+  25% {
+    transform: translate(calc(var(--mod-claw-outset-x) + 3px), calc(var(--mod-claw-outset-y) * -1 - 2px))
+      rotate(0.55deg);
+  }
+
+  37.5% {
+    transform: translate(var(--mod-claw-outset-x), calc(var(--mod-claw-outset-y) * -1 - 2.5px))
+      rotate(0.25deg);
+  }
+
+  50% {
+    transform: translate(calc(var(--mod-claw-outset-x) - 3px), calc(var(--mod-claw-outset-y) * -1 - 2px))
+      rotate(-0.15deg);
+  }
+
+  62.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) - 4px), calc(var(--mod-claw-outset-y) * -1 - 1px))
+      rotate(-0.45deg);
+  }
+
+  75% {
+    transform: translate(calc(var(--mod-claw-outset-x) - 3px), calc(var(--mod-claw-outset-y) * -1 + 1px))
+      rotate(-0.55deg);
+  }
+
+  87.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) + 1px), calc(var(--mod-claw-outset-y) * -1 + 2px))
+      rotate(-0.2deg);
+  }
+
+  100% {
+    transform: translate(var(--mod-claw-outset-x), calc(var(--mod-claw-outset-y) * -1))
+      rotate(0deg);
+  }
+}
+
+@keyframes modele-claw-wind-bl {
+  0% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1), var(--mod-claw-outset-y))
+      rotate(0deg);
+  }
+
+  12.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 - 4px), calc(var(--mod-claw-outset-y) - 1px))
+      rotate(-0.45deg);
+  }
+
+  25% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 - 3px), calc(var(--mod-claw-outset-y) - 2px))
+      rotate(-0.55deg);
+  }
+
+  37.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1), calc(var(--mod-claw-outset-y) - 2.5px))
+      rotate(-0.25deg);
+  }
+
+  50% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 + 3px), calc(var(--mod-claw-outset-y) - 2px))
+      rotate(0.15deg);
+  }
+
+  62.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 + 4px), calc(var(--mod-claw-outset-y) - 1px))
+      rotate(0.45deg);
+  }
+
+  75% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 + 3px), calc(var(--mod-claw-outset-y) + 1px))
+      rotate(0.55deg);
+  }
+
+  87.5% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1 - 1px), calc(var(--mod-claw-outset-y) + 2px))
+      rotate(0.2deg);
+  }
+
+  100% {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1), var(--mod-claw-outset-y))
+      rotate(0deg);
+  }
+}
+
+.modele-claw-wrap.is-green {
+  opacity: 0.97;
+}
+
+.modele-claw-wrap.is-red {
+  opacity: 1;
+}
+
+.modele-claw-wrap.is-yellow {
+  opacity: 0.98;
+}
+
+.modele-claw-depth {
+  fill: rgba(0, 0, 0, 0.16);
+}
+
+.modele-claw-rim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.96);
+  stroke-width: 2.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+.modele-claw-body {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 0.35;
+  stroke-linejoin: round;
+}
+
+.modele-claw-sheen {
+  mix-blend-mode: overlay;
   pointer-events: none;
 }
 
-.modele-claws.is-opposite {
-  top: auto;
-  right: auto;
-  bottom: -8%;
-  left: -6%;
-  transform: rotate(180deg);
-}
-
-.modele-claw.is-green {
-  fill: #1a4a3a;
-  opacity: 0.55;
-}
-
-.modele-claw.is-red {
-  fill: #e85a3c;
-  opacity: 0.62;
-}
-
-.modele-claw.is-yellow {
-  fill: #e3a73b;
-  opacity: 0.7;
+.modele-claw-lip {
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  vector-effect: non-scaling-stroke;
 }
 
 .modele-header {
+  position: relative;
+  z-index: 1;
   max-width: 720px;
   margin-bottom: 48px;
 }
@@ -111,6 +405,8 @@
 }
 
 .modele-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -171,6 +467,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 30%;
 }
 
 .modele-chart {
@@ -282,6 +579,30 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .modele-claw-motion,
+  .modele-claw-lip,
+  .modele-claw-wind,
+  .modele-claws.is-corner-tr,
+  .modele-claws.is-corner-bl {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .modele-claw-motion {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .modele-claw-lip {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  .modele-claws {
+    opacity: 1;
+  }
+
   .modele-card,
   .modele-card::after {
     transition: none;
@@ -301,7 +622,18 @@
 
 @media (max-width: 640px) {
   .modele {
+    --mod-claw-size: min(320px, 68vw);
+    --mod-claw-outset-x: 10%;
+    --mod-claw-outset-y: 8%;
     padding: 64px 20px;
+  }
+
+  .modele-claws.is-corner-tr {
+    transform: translate(var(--mod-claw-outset-x), calc(var(--mod-claw-outset-y) * -1));
+  }
+
+  .modele-claws.is-corner-bl {
+    transform: translate(calc(var(--mod-claw-outset-x) * -1), var(--mod-claw-outset-y));
   }
 
   .modele-grid {

@@ -43,7 +43,7 @@ const ibmMono = IBM_Plex_Mono({
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-bricolage',
 });
 

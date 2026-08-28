@@ -1,72 +1,45 @@
-export type Partenaire = [nom: string, sous: string];
-export type AfricaPoint = [x: number, y: number];
+import type { PartenairesCopy } from "@/types/partenaires";
 
-/** Polygone Afrique en % (viewBox 1600×900). */
-export const AFRICA: AfricaPoint[] = [
-  [52, 12],
-  [57, 17],
-  [60, 26],
-  [62, 38],
-  [59, 46],
-  [57, 55],
-  [53, 62],
-  [48, 70],
-  [44, 79],
-  [38, 88],
-  [31, 93],
-  [24, 90],
-  [20, 82],
-  [17, 72],
-  [14, 62],
-  [11, 52],
-  [9, 42],
-  [12, 33],
-  [18, 26],
-  [26, 20],
-  [34, 15],
-  [43, 11],
-];
+/** Copy extraite de Back2Mboa_Section_Partenaires.html. */
+export const PARTENAIRES_COPY: PartenairesCopy = {
+  eyebrow: "Ils font circuler la prospérité",
+  titleBefore: "Les uns entrent. Les autres ",
+  titleAccent: "en ressortent transformés",
+  body: "D'un côté ceux qui franchissent la porte pour bâtir. De l'autre ceux qui en sortent avec un projet, un contrat, un territoire. La même porte, dans les deux sens.",
+  enterTitle: "Bâtisseurs de prospérité",
+  exitTitle: "Visionnaires",
+  legendEnterTitle: "↗ Ils entrent — les Bâtisseurs de Prospérité",
+  legendEnterBody:
+    "Ministères, agences et collectivités qui ouvrent les portes : ils apportent le cadre, les autorisations et la caution institutionnelle.",
+  legendExitTitle: "↘ Ils sortent — les Visionnaires",
+  legendExitBody:
+    "Bailleurs, partenaires techniques et financiers, entreprises : ils ressortent avec des projets instruits et des engagements signés.",
+  enter: [
+    { nom: "MINREX", sous: "Relations extérieures" },
+    { nom: "MINDDEVEL", sous: "Développement local" },
+    { nom: "FEICOM", sous: "Financement des communes" },
+    { nom: "CVUC", sous: "Communes et villes unies" },
+    { nom: "APME", sous: "Promotion des PME" },
+    { nom: "CARPA", sous: "Partenariats public-privé" },
+    { nom: "MINADER", sous: "Agriculture" },
+    { nom: "CCIMA", sous: "Chambre de commerce" },
+  ],
+  exit: [
+    { nom: "GIZ", sous: "Coopération allemande" },
+    { nom: "AFD", sous: "Agence française de développement" },
+    { nom: "UNION EUROPÉENNE", sous: "Délégation au Cameroun" },
+    { nom: "PAD", sous: "Port autonome de Douala" },
+    { nom: "ANOR", sous: "Normes et qualité" },
+    { nom: "MINSANTÉ", sous: "Santé publique" },
+    { nom: "MINEE", sous: "Eau et énergie" },
+    { nom: "SOLUTIONNEURS", sous: "Initiative" },
+  ],
+};
 
-export const ENTRENT: Partenaire[] = [
-  ["MINREX", "Relations extérieures"],
-  ["MINDDEVEL", "Développement local"],
-  ["FEICOM", "Financement communes"],
-  ["CVUC", "Communes & villes unies"],
-  ["APME", "Promotion des PME"],
-  ["CARPA", "PPP"],
-  ["MINADER", "Agriculture"],
-  ["CCIMA", "Chambre de commerce"],
-];
-
-export const SORTENT: Partenaire[] = [
-  ["GIZ", "Coopération allemande"],
-  ["AFD", "Agence française de développement"],
-  ["UNION EUROPÉENNE", "Délégation Cameroun"],
-  ["PAD", "Port autonome de Douala"],
-  ["ANOR", "Normes & qualité"],
-  ["MINSANTÉ", "Santé publique"],
-  ["MINEE", "Eau & énergie"],
-  ["SOLUTIONNEURS", "Initiative"],
-];
-
-export function initiales(nom: string): string {
+export function partenaireInitiales(nom: string) {
   return nom
     .split(/[\s-]+/)
-    .map((w) => w[0])
+    .map((word) => word[0] ?? "")
     .join("")
     .slice(0, 3);
-}
-
-export function inPoly(x: number, y: number, poly: AfricaPoint[]): boolean {
-  let inside = false;
-  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    const xi = poly[i][0];
-    const yi = poly[i][1];
-    const xj = poly[j][0];
-    const yj = poly[j][1];
-    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
 }

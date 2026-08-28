@@ -1,35 +1,72 @@
 # Décisions
 
-## 2026-08-27 — TeamSection : flip mobile exclusif + démo
+## 2026-08-27 — Agenda : cover speaker + maquette ASAP
 
-- Une seule carte retournée (`flippedId`) ; retap = face avant ; autre carte = reset de la précédente.
-- Démo auto sur la 1re carte après le founder (intervalle `DEMO`) tant que l’user n’a pas tapé ; stop au 1er `activateCard`.
-- Démo uniquement hors desktop hover, section visible, sans `prefers-reduced-motion`.
+Refonte `agenda/` : fond ambient Events + disques SVG, silhouette watermark, portrait `Back2Mboa Covers 9 1.png` → `public/images/agenda/cover-speaker.webp`. Contenu maquette (tag, titre bipolaire or, dual CTA, meta icônes). Autoplay 6,5 s (pause hover), pastilles couleur par slide, transitions directionnelles. Data/types enrichis.
 
-## 2026-08-27 — TeamSection : mobile
+## 2026-08-27 — Ressources : fond Vector(5) + onglets itératifs
 
-- Mobile : `min-h-dvh` + hauteur auto (plus de 10 cartes compressées dans 100vh).
-- Founder `col-span-2` + max-height ; secondaires grille 2 cols `aspect-[3/4]` scrollable.
-- Tap pour flip (`TeamMemberCard` client) ; hint « Touchez une carte… » ; cibles sociales 44px.
-- Desktop `lg:` : grille asymétrique dynamique inchangée + `100dvh`.
+Section `ressources/` (`#ressources`) : fond `Vector(5).png` → `public/images/ressources/vector-5.webp` (brighten + chroma), washes magenta/azure/vert en soft-light, veil lisible. FAQ accordion autoplay 4,2 s, aperçu cartes 5,6 s, onglets + panels. Data/types externalisés. Monté avant Billets.
 
-## 2026-08-27 — TeamSection : grille secondaire dynamique
+## 2026-08-27 — Bâtisseurs : preuves + équipe itérative
 
-- `getSecondaryGrid(n)` calcule cols×rows selon le nb de membres hors founder (3→1×3, 7→4×2, 9→3×3…).
-- Colonne founder en `row-span` = rows ; largeur via `getFeaturedTrack`.
-- Typo secondaires en `cqw` (`@container`) pour suivre la taille de cellule.
+Section `batisseurs/` (`#batisseurs`) : snapshot KPIs (count-up), profils Olivia / Solutionneurs (autoplay 4,8 s, pause hover/focus), quote mint + newsletter. Assets `Vector(3|4).png` → `public/images/batisseurs/{olivia,solutionneurs}.webp`. Data/types externalisés. Monté après Preuve chiffres, avant Éditions pilotes.
 
-## 2026-08-27 — TeamSection : anti-slop desktop (flip conservé)
+## 2026-08-27 — Before / During / After : itératif + hover maquette
 
-- Grille asymétrique : Olivia `featured` (col 1, 3 rows) + 9 cartes à droite — plus de 5×2 clones.
-- Coupés : hint UI, brand dupliqué, pills skew, tags chips, socials `#`, float map, double aurora, stagger.
-- Tokens `brand-yellow` / `dark-green` / `brand-result` ; verso = bio + email seul ; flip hover/focus CSS.
+Refonte `before-during-after/` : 3 cartes locales, barre outil jaune, voile clair au repos. Hover / focus / phase active : image nette, overlay texte disparaît, léger shade noir, barre jaune conservée. Autoplay viewport 4,2 s (pause au survol). Data/types externalisés. Monté après Bonne Porte (`#before-during-after`).
 
-## 2026-08-27 — TeamSection : port React natif (pas de HTML)
+## 2026-08-27 — Sync Williams × Paul-Alain
 
-- Source `Back2Mboa_Section_Team Grok.html` → `components/sections/team/` + `data/team/` + `types/team.ts`.
-- Tailwind + flip 3D (hover desktop, tap mobile) ; Font Awesome remplacé par SVG / Lucide ; Great Vibes ajouté pour le titre.
-- Ancré `#team` juste après `BilletsPartenairesSection`.
+Merge `origin/feat/section_williams` dans `feat/section_paul_alain`. Conservé : Prélude maquette Paul-Alain. Intégré Williams : Billets + BilletsPartenaires, logos institutions Preuve, Stories actif. `page.tsx` assemble les deux piles sans sections commentées mortes.
+
+## 2026-08-27 — Agenda : transitions slides
+
+Contenu (titre → meta → body → CTA) : entrée directionnelle staggered ~720 ms (next/prev), léger blur. Disques SVG : dérive/scale par slide. Tabs : fill or + pastille active. `prefers-reduced-motion` coupe les anims.
+
+## 2026-08-27 — Prélude : alignement maquette Double flux
+
+Refonte `prelude/` : eyebrow, anneau photo, grille alternée 01 salon → 02 masterclass → 03 packs CTA, pastilles, tags pills, footer dates. Assets locaux `public/images/prelude/*.webp`. Data/types externalisés. Dates event 16–18 déc.
+
+## 2026-08-27 — Résultats : image Rectangle 175
+
+Colonne gauche `ResultatsSection` : `Rectangle 175.png` (lauréat Meet Africa + partenaire) → `public/images/resultat_1.webp` (+ variantes 768/1280/1920). `object-position: center 22%` pour cadrer les visages. Alt mis à jour.
+
+## 2026-08-27 — Homecoming : 2e diaporama Ken Burns
+
+Nouveau `homecoming/` (`#homecoming`) : 01 Ariel Mbita (suite), 02 Édouard Tamba (grill), 03 Jakub Dziubak (bar) → `public/images/horizons/slide-0*.webp`. Même langage UI qu’Open Road. Autoplay au viewport (IO 0,35), reset slide 01, boucle 8 s, 3 Ken Burns. Monté après Éditions pilotes.
+
+## 2026-08-27 — Open Road : autoplay au viewport
+
+IntersectionObserver (seuil 0,35) : à l’entrée, reset slide 01 (Pexels thé) + relance Ken Burns / barre or / intervalle — sans clic. Pause hors écran. Boucle tant que visible.
+
+## 2026-08-27 — Open Road : diaporama 3 photos + Ken Burns
+
+Slides : thé Pexels, forêt Pascoa, sommets Siewe → `public/images/open-road/slide-0{1,2,3}-*.webp`. Boucle continue 8 s, crossfade ~1 s, 3 Ken Burns distincts (tea / forest / summit). UI maquette NG (brand, titre, Watch trailer + durée, barre 01–03 + progress or). `prefers-reduced-motion` respecté.
+
+## 2026-08-27 — Bonne Porte : 100svh
+
+Desktop (≥900px) `height/max-height: 100svh`, colonne flex (head → flux → tabs → panel fluide → foot). Cards gains en `flex:1`. Densité renforcée sous 820/720 px de hauteur. Mobile : hauteur auto, textes complets.
+
+## 2026-08-27 — Bonne Porte : fond Vector(2) opaque
+
+`Vector(2).png` source a un alpha uniforme ~25/255 → quasi invisible en CSS. Asset web aplati opaque + WebP `public/images/bonne-porte/vector-2.webp`, voile dégradé léger (arche visible), cards/tabs glass.
+
+## 2026-08-27 — Bonne Porte : fond Vector(2) + refactor
+
+Refonte `bonne-porte/` alignée maquette : fond `vector-2` (depuis `Vector(2).png`) + voile clair, bandeau double flux, tabs pills, cards Aujourd’hui / Avec Back2Mboa + bandeau Gain. Copy externalisée `data/bonne-porte` + `types/bonne-porte`. Montée après Impact (`#la-bonne-porte`). Dates event 16–18 déc. (contexte projet).
+
+## 2026-08-27 — Section Éditions pilotes
+
+Nouveau dossier `editions-pilotes/` (Tailwind, client). Maquette « Les éditions pilotes ont prouvé le modèle » : 3 colonnes hover « Rôle dans Back2Mboa » + photos locales (`Vector.png`, `Vector(1).png`, `Col_03_CTD.png` → `public/images/editions-pilotes/`). `id="editions-pilotes"`. Montée après Preuve chiffres. Port HTML `PreuvesPilotesSection` laissé commenté (évite doublon).
+
+## 2026-08-27 — Éditions pilotes : 100svh + formes
+
+Desktop `100svh` / `overflow-hidden`. Grille dans cadre `rounded-2xl`, index pastille, panneau rôle overlay soft, photos `rounded-t` + dégradé, footer compact avec filets. Mobile hauteur auto (stack).
+
+## 2026-08-27 — Éditions pilotes : carousels enrichis
+
+5 locales + 3 Unsplash / colonne (8 slides). Crossfade snappy 420 ms, hold 2,4 s, boucle RAF continue sans pause au hover colonne, points à progression.
 
 ## 2026-08-26 — Billets : 4 packs × 2, fonds distincts
 
@@ -42,6 +79,7 @@
 - Ligne 2 : image SVG museum + copy Masterclass de SalonDiaspora (accent terre).
 - Clôture : paragraphe « même route » centré au-dessus de la barre ; CTA jaune « Nous rejoindre » → `/inscription`.
 - Bloc partenaires (packs Vision / Prosperity) retiré.
+- *Note sync 2026-08-27* : version Paul-Alain maquette Double flux a repris la priorité sur cette variante Williams.
 
 ## 2026-08-26 — BilletsSection : boarding pass HTML
 
@@ -85,6 +123,10 @@
 - Fond : SVG cercles forest + pin, pas d’orbes CSS. Onglets : pastille chiffrée (01–04) dans un carré à filet couleur.
 - Flèches prev/next (SVG inline, pas Lucide). Barre or de l’onglet actif = timer 6,5 s ; `animationend` → slide suivant. Pause hors viewport / `prefers-reduced-motion` (plus de pause hover).
 - Conservé : anti-slop (Bricolage, un CTA, pas de ghost / Inter / fade / `<em>`), desktop `100svh`.
+
+## 2026-08-25 — Contraste recalibré Le contraste.png
+
+Copy acteurs mise à jour + bloc « Le coût de l'inaction » (4 cartes) + closing. Cartes blanches, fond `#061a14`. Interactif : hover/focus acteur → lift + lien coût ; révélation scroll du bloc coût.
 
 ## 2026-08-25 — AgendaSection : anti-slop + 100svh
 
@@ -148,6 +190,30 @@
 - Pas de fade opacity sur les stats : occlusion uniquement via l’alpha des `mount_*.webp` (ciel transparent, relief opaque).
 - `TEXT_Y_HIDDEN_1/2` calés sous la crête opaque la plus basse de chaque calque pour que la rangée parte vraiment derrière l’image.
 
+## 2026-08-25 — Section Pourquoi Back2Mboa
+
+Nouveau dossier isolé `pourquoi/` : tableau comparatif étoiles (Salons / Forums / Recommandé). Copy maquette. `id="pourquoi"`. Montée après Contraste.
+
+## 2026-08-25 — Pourquoi : filigrane BACK2MBOA
+
+Sur le tableau comparatif : watermark « BACK2MBOA » + voile radial vert/rouge/or Cameroun très atténué. Lignes semi-transparentes pour laisser passer le filigrane sans nuire à la lecture.
+
+## 2026-08-27 — Pourquoi : logo à la place de RECOMMANDÉ
+
+Colonne tableau + bandeau panneau détail : badge / fond vert « Recommandé » retirés. Remplacés par logo Back2Mboa (`public/images/pourquoi/logo-back2mboa.png`, fond noir détouré).
+
+## 2026-08-28 — Modèle : griffes drapeau Cameroun (v2 premium)
+
+Paire diamétrale TR/BL. Calque background. Motion vent sinusoïdal (3 bandes déphasées + enveloppe lente) déclenché au scroll.
+
+## 2026-08-25 — Modèle : photos secteurs projet
+
+Cartes `#modele` : 5 photos depuis `image secteur/` servies sous `public/images/modele/secteurs/` (nouveaux chemins anti-cache). Finance : pas de fichier source → image existante conservée. Cadrage `object-position` par carte.
+
+## 2026-08-25 — Open Road diaporama Ken Burns
+
+Open Road en carousel 3 slides (`slide-01/02/03.jpg`) : monument, forêt, voie lactée. Crossfade, Ken Burns directionnel, autoplay 7,8 s, barre de progression or, pause au hover.
+
 ## 2026-08-25 — Sections natives : Tailwind first
 
 - AGENTS.md : Tailwind obligatoire pour sections TSX natives ; CSS fichier réservé aux ports HTML `.b2m-*`.
@@ -172,6 +238,18 @@
 ## 2026-08-24 — Assemblage HTML dans page.tsx
 
 - Tous les ports HTML sont montés dans `app/(event)/page.tsx` sans retirer les sections déjà en production.
-- `OpenRoadSection` n’apparaît qu’une fois (après Plateforme), pour éviter le doublon d’ancrage.
+- `OpenRoadSection` n’apparaît qu’une fois, pour éviter le doublon d’ancrage.
 - Liens HTML `#inscrire` / `#partenariat` → `/inscription` et `#partenaires` / `#billets`.
 - Logo comparatif : wordmark texte (PNG absent du repo).
+
+## 2026-08-25 — Section Partenaires
+
+Nouveau dossier isolé `partenaires/` : portage de `Back2Mboa_Section_Partenaires.html`. Portail PNG local, marquee bâtisseurs / visionnaires. `id="partenaires"`. Montée après Agenda.
+
+## 2026-08-25 — Partenaires fond Cameroun + 1 viewport
+
+Fond Afrique pointillée retiré. Remplacé par contour Cameroun pointillé (`cameroon-path.ts`). Layout resserré en `100svh` pour tenir intro + 2 bandes + légende sans scroll interne (desktop).
+
+## 2026-08-27 — Sync branches équipe (sans vue-globale)
+
+`feat/section_paul_alain` a intégré `origin/main`, `feat/section_williams`, `feat/parcours-liaison-musee`. `vue-globale` exclue.

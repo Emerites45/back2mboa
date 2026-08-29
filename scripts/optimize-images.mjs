@@ -37,6 +37,14 @@ const PLAN = [
     quality: 85,
     as: "mount-2",
   },
+  {
+    file: "background_herolanding.png",
+    widths: [768, 1280, 1920, 2560],
+    quality: 80,
+    opaque: true,
+    out: "herolanding",
+    as: "background_herolanding",
+  },
 ];
 
 const outName = (entry, width) => {

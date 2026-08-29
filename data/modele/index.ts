@@ -26,7 +26,21 @@ export const SECTOR_ACCENT: Record<SectorId, string> = {
   sante: "#d8212e",
 };
 
-/** Copy UI maquette. Photos = `image secteur/` → `public/images/modele/secteurs/`. */
+/** Sous-domaines / maillons de chaîne de valeur par secteur. */
+export function maillonsForSector(id: SectorId): string[] {
+  const index = SECTOR_IDS.indexOf(id);
+  return index >= 0 ? [...SECTEURS[index].maillons] : [];
+}
+
+export const MODELE_COPY: ModeleCopy = {
+  kicker: "Le modèle",
+  titleLead: "6 secteurs et",
+  titleAccent: "216 opportunités d'affaires.",
+  subtitle:
+    "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Survolez une carte pour voir les sous-domaines.",
+};
+
+/** Copy UI maquette. Photos source = `image_secteur/` → `public/images/modele/secteurs/`. */
 export const MODELE_CARDS: ModeleCard[] = [
   {
     id: "agriculture",

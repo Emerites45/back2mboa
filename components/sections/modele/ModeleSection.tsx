@@ -1,7 +1,13 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { MODELE_CARDS, MODELE_COPY, metricsForSector } from "@/data/modele";
+import {
+  MODELE_CARDS,
+  MODELE_COPY,
+  metricsForSector,
+  maillonsForSector,
+  SECTOR_ACCENT,
+} from "@/data/modele";
 import { ModeleClawsDecor } from "./ModeleClawsDecor";
 import { SectorVisual } from "./SectorVisual";
 import "./ModeleSection.css";

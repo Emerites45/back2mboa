@@ -35,6 +35,8 @@ import { RessourcesSection } from "@/components/sections/ressources/RessourcesSe
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
+import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
+import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 
 /**
  * Assemblage landing — Paul-Alain + Williams.
@@ -76,6 +78,8 @@ export default function HomePage() {
       <AgendaSection />
       {/* <BilletsSection /> */}
       <BilletsPartenairesSection />
+      <PourquoiSection />
+      {/* <EditionsPilotesSection /> */}
       <NewsletterGateSection />
       <FooterRevealZone />
       {/* <NecessiteSection /> */}
@@ -89,7 +93,6 @@ export default function HomePage() {
         <PourquoiSection />
         <NecessiteSection />
         <PlateformeSection />
-        <EditionsPilotesSection />
         <HomecomingSection />
       */}
 

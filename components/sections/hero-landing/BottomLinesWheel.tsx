@@ -19,8 +19,8 @@ export function BottomLinesWheel() {
   const indexRef = useRef(0);
   const ihRef = useRef(56);
   const animatingRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const unlockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef = useRef<number | null>(null);
+  const unlockRef = useRef<number | null>(null);
   const [logical, setLogical] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduceMotion = useRef(false);
@@ -61,7 +61,7 @@ export function BottomLinesWheel() {
       if (i === prev) return;
 
       if (unlockRef.current) {
-        clearTimeout(unlockRef.current);
+        window.clearTimeout(unlockRef.current);
         unlockRef.current = null;
       }
 
@@ -121,7 +121,7 @@ export function BottomLinesWheel() {
 
   useEffect(() => {
     if (timerRef.current) {
-      clearTimeout(timerRef.current);
+      window.clearTimeout(timerRef.current);
       timerRef.current = null;
     }
     if (reduceMotion.current || paused) return;
@@ -136,13 +136,13 @@ export function BottomLinesWheel() {
     loop();
 
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, [go, paused]);
 
   useEffect(
     () => () => {
-      if (unlockRef.current) clearTimeout(unlockRef.current);
+      if (unlockRef.current) window.clearTimeout(unlockRef.current);
     },
     [],
   );

@@ -233,12 +233,13 @@ export function StoriesSection() {
 
   useEffect(() => {
     if (!api) return
-    syncActive(api)
+    const frame = requestAnimationFrame(() => syncActive(api))
     api.on("select", syncActive)
     api.on("settle", syncActive)
     api.on("scroll", syncActive)
     api.on("reInit", syncActive)
     return () => {
+      cancelAnimationFrame(frame)
       api.off("select", syncActive)
       api.off("settle", syncActive)
       api.off("scroll", syncActive)

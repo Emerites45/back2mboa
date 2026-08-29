@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -32,7 +31,7 @@ export function Navbar() {
             Double Flux
           </Link>
           <Link href="#evenement" className="hover:text-amber-400 transition-colors">
-            L'Événement
+            L’Événement
           </Link>
           <Link href="#unlock-millions" className="hover:text-amber-400 transition-colors">
             Unlock Millions™
@@ -48,7 +47,7 @@ export function Navbar() {
             asChild
             className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-xs px-6 py-5 rounded-md"
           >
-            <Link href="/inscription">Je m'inscris</Link>
+            <Link href="/inscription">Je m’inscris</Link>
           </Button>
         </div>
       </div>

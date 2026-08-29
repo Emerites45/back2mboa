@@ -1,9 +1,28 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { NEWSLETTER_GATE_COPY, NEWSLETTER_GATE_IMAGE } from "@/data/newsletter-gate";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+import { SendHorizontal } from "lucide-react";
+import { Check } from "@/components/animate-ui/icons/check";
+import { useIsInView } from "@/hooks/use-is-in-view";
+import {
+  NEWSLETTER_GATE_COPY,
+  NEWSLETTER_GATE_IMAGE,
+} from "@/data/newsletter-gate";
 import { cn } from "@/lib/utils";
 
 /** Section — hauteur viewport + espacements header. */
@@ -103,13 +122,30 @@ const TRAY_FILLED = {
 
 type FieldKey = "first" | "last" | "email";
 
-/** Bouton S'inscrire — pill sombre + flèche. */
+/** Bouton S'inscrire — pill sombre + avion (flottement si prêt, traversée à l'envoi). */
 const BUTTON = {
   width: "70%",
   height: "2.35rem",
   fontSize: "0.875rem",
-  bg: "#2d2d2d",
-  arrowSize: 15,
+  bg: "#f8f4ec",
+  textColor: "#0a0a0a",
+  inactiveBg: "#d9d4c9",
+  inactiveText: "rgba(0, 0, 0, 0.38)",
+  planeSize: 15,
+  planePadLeft: "0.3rem",
+  zoneSize: "1.8rem",
+  borderColor: "#119d63",
+  labelFadeMs: 250,
+  sendDurationMs: 900,
+} as const;
+
+/** Boule de confirmation — remplace le formulaire après l'envoi. */
+const SUCCESS = {
+  ballSize: "7.5rem",
+  ballBg: "#119d63",
+  checkStrokeWidth: 3,
+  textFontSize: "0.9rem",
+  gap: "1rem",
 } as const;
 
 /** Consentement — typo et espacement sous le bouton. */
@@ -154,6 +190,7 @@ const gateCssVars = {
   "--nl-btn-w": BUTTON.width,
   "--nl-btn-h": BUTTON.height,
   "--nl-btn-fs": BUTTON.fontSize,
+  "--nl-ball-size": SUCCESS.ballSize,
   "--nl-consent-fs": CONSENT.fontSize,
   "--nl-consent-lh": CONSENT.lineHeight,
   "--nl-consent-max-w": CONSENT.maxWidth,
@@ -235,17 +272,22 @@ function TrayField({
 
 export function NewsletterGateSection() {
   const copy = NEWSLETTER_GATE_COPY;
+  const sectionRef = useRef<HTMLElement>(null);
+  const { isInView } = useIsInView(sectionRef);
+  const reduceMotion = useReducedMotion();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
-  const [done, setDone] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "sending" | "success">("idle");
   const [typingField, setTypingField] = useState<FieldKey | null>(null);
   const typingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const phaseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(
     () => () => {
       if (typingTimer.current) clearTimeout(typingTimer.current);
+      if (phaseTimer.current) clearTimeout(phaseTimer.current);
     },
     [],
   );
@@ -253,11 +295,14 @@ export function NewsletterGateSection() {
   const markTyping = useCallback((field: FieldKey) => {
     setTypingField(field);
     if (typingTimer.current) clearTimeout(typingTimer.current);
-    typingTimer.current = setTimeout(() => setTypingField(null), TRAY_TYPING.idleMs);
+    typingTimer.current = setTimeout(
+      () => setTypingField(null),
+      TRAY_TYPING.idleMs,
+    );
   }, []);
 
   const canSubmit =
-    !done &&
+    phase === "idle" &&
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
     email.trim().length > 0 &&
@@ -266,11 +311,38 @@ export function NewsletterGateSection() {
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
-      if (!canSubmit) return;
-      setDone(true);
+      if (phase !== "idle") return;
+      if (
+        firstName.trim().length === 0 ||
+        lastName.trim().length === 0 ||
+        email.trim().length === 0 ||
+        !consent
+      ) {
+        return;
+      }
+      setPhase("sending");
+      phaseTimer.current = setTimeout(
+        () => setPhase("success"),
+        BUTTON.sendDurationMs,
+      );
     },
-    [canSubmit],
+    [phase, firstName, lastName, email, consent],
   );
+
+  const entranceContainer: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: reduceMotion ? 0 : 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const entranceItem: Variants = {
+    hidden: { opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 14 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
 
   const fieldClass = cn(
     "relative z-[1] w-full border-0 bg-transparent outline-none",
@@ -292,6 +364,7 @@ export function NewsletterGateSection() {
   return (
     <section
       id="newsletter"
+      ref={sectionRef}
       className="flex flex-col overflow-hidden text-black"
       style={{
         ...gateCssVars,
@@ -304,13 +377,16 @@ export function NewsletterGateSection() {
       }}
       aria-labelledby="newsletter-title"
     >
-      <header
+      <motion.header
         className="mx-auto shrink-0 text-center"
         style={{
           maxWidth: SECTION.headerMaxWidth,
           paddingTop: SECTION.headerPaddingTop,
           marginBottom: SECTION.headerGap,
         }}
+        initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <h2
           id="newsletter-title"
@@ -319,10 +395,13 @@ export function NewsletterGateSection() {
         >
           {copy.title}
         </h2>
-        <p className="leading-relaxed text-black/60" style={{ fontSize: TYPE.subtitleSize }}>
+        <p
+          className="leading-relaxed text-black/60"
+          style={{ fontSize: TYPE.subtitleSize }}
+        >
           {copy.subtitle}
         </p>
-      </header>
+      </motion.header>
 
       <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden">
         <div
@@ -361,122 +440,267 @@ export function NewsletterGateSection() {
             }}
             onSubmit={onSubmit}
           >
-            <TrayField filled={firstName.trim().length > 0} typing={typingField === "first"}>
-              <label className="sr-only" htmlFor="newsletter-first">
-                {copy.firstNamePlaceholder}
-              </label>
-              <input
-                id="newsletter-first"
-                type="text"
-                name="firstName"
-                autoComplete="given-name"
-                placeholder={copy.firstNamePlaceholder}
-                value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                  markTyping("first");
-                }}
-                className={fieldClass}
-                style={inputStyle}
-                required
-              />
-            </TrayField>
-
-            <TrayField filled={lastName.trim().length > 0} typing={typingField === "last"}>
-              <label className="sr-only" htmlFor="newsletter-last">
-                {copy.lastNamePlaceholder}
-              </label>
-              <input
-                id="newsletter-last"
-                type="text"
-                name="lastName"
-                autoComplete="family-name"
-                placeholder={copy.lastNamePlaceholder}
-                value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                  markTyping("last");
-                }}
-                className={fieldClass}
-                style={inputStyle}
-                required
-              />
-            </TrayField>
-
-            <TrayField filled={email.trim().length > 0} typing={typingField === "email"}>
-              <label className="sr-only" htmlFor="newsletter-email">
-                {copy.emailPlaceholder}
-              </label>
-              <input
-                id="newsletter-email"
-                type="email"
-                name="email"
-                autoComplete="email"
-                placeholder={copy.emailPlaceholder}
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  markTyping("email");
-                }}
-                className={fieldClass}
-                style={inputStyle}
-                required
-              />
-            </TrayField>
-
-            <button
-              type="submit"
-              disabled={!canSubmit}
-              className="flex shrink-0 items-center justify-center gap-2 rounded-full font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-              style={{
-                ...controlBlockStyle,
-                width: "var(--nl-btn-w)",
-                height: "var(--nl-btn-h)",
-                fontSize: "var(--nl-btn-fs)",
-                backgroundColor: BUTTON.bg,
-              }}
-            >
-              {done ? (
-                copy.submitDone
+            <AnimatePresence mode="wait" initial={false}>
+              {phase === "success" ? (
+                <motion.div
+                  key="success"
+                  className="flex w-full flex-1 flex-col items-center justify-center"
+                  style={{ gap: SUCCESS.gap }}
+                  initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.35, ease: [0.2, 0, 0, 1] }}
+                >
+                  <div
+                    className="flex items-center justify-center rounded-full"
+                    style={{
+                      width: "var(--nl-ball-size)",
+                      height: "var(--nl-ball-size)",
+                      backgroundColor: SUCCESS.ballBg,
+                    }}
+                  >
+                    <Check
+                      size={58}
+                      strokeWidth={SUCCESS.checkStrokeWidth}
+                      className="text-white"
+                      animate
+                    />
+                  </div>
+                  <motion.p
+                    className="text-center font-semibold text-black/70"
+                    style={{ fontSize: SUCCESS.textFontSize }}
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3, ease: "easeOut" }}
+                  >
+                    {copy.submitDone}
+                  </motion.p>
+                </motion.div>
               ) : (
-                <>
-                  {copy.submitLabel}
-                  <ArrowRight size={BUTTON.arrowSize} strokeWidth={2.25} aria-hidden="true" />
-                </>
-              )}
-            </button>
+                <motion.div
+                  key="form"
+                  className="flex w-full flex-1 flex-col items-center justify-start"
+                  style={{ gap: "var(--nl-form-gap)" }}
+                  variants={entranceContainer}
+                  initial="hidden"
+                  animate={isInView ? "show" : "hidden"}
+                >
+                  <motion.div
+                    className="flex w-full flex-1 flex-col items-center justify-start"
+                    style={{ gap: "var(--nl-form-gap)" }}
+                    animate={{
+                      opacity: phase === "sending" ? 0 : 1,
+                      y: phase === "sending" ? -6 : 0,
+                    }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  >
+                    <motion.div variants={entranceItem} className="w-full">
+                      <TrayField
+                        filled={firstName.trim().length > 0}
+                        typing={typingField === "first"}
+                      >
+                        <label className="sr-only" htmlFor="newsletter-first">
+                          {copy.firstNamePlaceholder}
+                        </label>
+                        <input
+                          id="newsletter-first"
+                          type="text"
+                          name="firstName"
+                          autoComplete="given-name"
+                          placeholder={copy.firstNamePlaceholder}
+                          value={firstName}
+                          onChange={(e) => {
+                            setFirstName(e.target.value);
+                            markTyping("first");
+                          }}
+                          className={fieldClass}
+                          style={inputStyle}
+                          required
+                        />
+                      </TrayField>
+                    </motion.div>
 
-            <div
-              className="mt-auto flex w-full justify-center"
-              style={{ paddingTop: "var(--nl-consent-pt)" }}
-            >
-              <label
-                className="flex cursor-pointer flex-col items-center gap-1.5 text-center text-black/65 motion-reduce:transition-none"
-                style={{
-                  maxWidth: "var(--nl-consent-max-w)",
-                  fontSize: "var(--nl-consent-fs)",
-                  lineHeight: "var(--nl-consent-lh)",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
-                  className={cn(
-                    "shrink-0 appearance-none rounded-[3px] border border-black/30 bg-transparent",
-                    "transition-[background-color,border-color,box-shadow] duration-200",
-                    "checked:border-[#10b981] checked:bg-[#10b981]",
-                    "focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:outline-none",
-                  )}
-                  style={{
-                    width: "var(--nl-consent-check)",
-                    height: "var(--nl-consent-check)",
-                  }}
-                  required
-                />
-                <span>{copy.consentLabel}</span>
-              </label>
-            </div>
+                    <motion.div variants={entranceItem} className="w-full">
+                      <TrayField
+                        filled={lastName.trim().length > 0}
+                        typing={typingField === "last"}
+                      >
+                        <label className="sr-only" htmlFor="newsletter-last">
+                          {copy.lastNamePlaceholder}
+                        </label>
+                        <input
+                          id="newsletter-last"
+                          type="text"
+                          name="lastName"
+                          autoComplete="family-name"
+                          placeholder={copy.lastNamePlaceholder}
+                          value={lastName}
+                          onChange={(e) => {
+                            setLastName(e.target.value);
+                            markTyping("last");
+                          }}
+                          className={fieldClass}
+                          style={inputStyle}
+                          required
+                        />
+                      </TrayField>
+                    </motion.div>
+
+                    <motion.div variants={entranceItem} className="w-full">
+                      <TrayField
+                        filled={email.trim().length > 0}
+                        typing={typingField === "email"}
+                      >
+                        <label className="sr-only" htmlFor="newsletter-email">
+                          {copy.emailPlaceholder}
+                        </label>
+                        <input
+                          id="newsletter-email"
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          placeholder={copy.emailPlaceholder}
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            markTyping("email");
+                          }}
+                          className={fieldClass}
+                          style={inputStyle}
+                          required
+                        />
+                      </TrayField>
+                    </motion.div>
+
+                    <motion.div variants={entranceItem} className="w-full">
+                      <button
+                        type="submit"
+                        disabled={!canSubmit}
+                        className={cn(
+                          "group relative flex shrink-0 items-center justify-center overflow-hidden rounded-full font-semibold",
+                          "transition-[background-color,box-shadow,transform,opacity] duration-200 ease-out",
+                          "motion-reduce:transition-none",
+                          // Inactif — gris assumé, texte atténué
+                          phase === "idle" &&
+                            !canSubmit &&
+                            "cursor-not-allowed",
+                          // Actif — micro-interactions
+                          phase === "idle" &&
+                            canSubmit &&
+                            "cursor-pointer hover:-translate-y-px hover:shadow-[0_6px_18px_rgba(17,157,99,0.28)] active:translate-y-0 active:scale-[0.97] motion-reduce:transform-none",
+                        )}
+                        style={{
+                          ...controlBlockStyle,
+                          width: "var(--nl-btn-w)",
+                          height: "var(--nl-btn-h)",
+                          fontSize: "var(--nl-btn-fs)",
+                          backgroundColor:
+                            phase === "idle" && !canSubmit
+                              ? BUTTON.inactiveBg
+                              : BUTTON.bg,
+                          color:
+                            phase === "idle" && !canSubmit
+                              ? BUTTON.inactiveText
+                              : BUTTON.textColor,
+                          boxShadow:
+                            phase === "idle" && canSubmit
+                              ? `inset 0 0 0 1.6px ${BUTTON.borderColor}`
+                              : undefined,
+                        }}
+                      >
+                        {/* Remplissage progressif — colorie le bouton pendant l'envoi */}
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "absolute inset-0 origin-left bg-[#119d63]",
+                            phase === "sending" && "nl-btn-fill",
+                          )}
+                          style={{ transform: "scaleX(0)" }}
+                        />
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "absolute inset-0 flex items-center",
+                            phase === "idle" && canSubmit && "nl-plane-ready",
+                            phase === "sending" && "nl-plane-send",
+                          )}
+                          style={{ paddingLeft: BUTTON.planePadLeft }}
+                        >
+                          <span
+                            className={cn(
+                              "flex items-center justify-center rounded-full bg-[#119d63]",
+                              "transition-[transform,opacity] duration-200 ease-out motion-reduce:transition-none",
+                              phase === "idle" &&
+                                !canSubmit &&
+                                "scale-75 opacity-0",
+                              phase === "idle" && canSubmit && "nl-zone-in",
+                              // Hover — la pastille grandit et l'avion avance d'un cran
+                              phase === "idle" &&
+                                canSubmit &&
+                                "group-hover:scale-110 group-active:scale-100 motion-reduce:transform-none",
+                            )}
+                            style={{
+                              width: BUTTON.zoneSize,
+                              height: BUTTON.zoneSize,
+                            }}
+                          >
+                            <SendHorizontal
+                              size={BUTTON.planeSize}
+                              strokeWidth={2.25}
+                              aria-hidden="true"
+                              className="transition-transform duration-200 ease-out group-hover:translate-x-[2px] motion-reduce:transition-none motion-reduce:transform-none"
+                            />
+                          </span>
+                        </span>
+                        <span
+                          className={cn(
+                            "transition-opacity duration-[var(--nl-btn-label-fade)] ease-out motion-reduce:transition-none",
+                            phase === "sending" && "opacity-0",
+                          )}
+                          style={{
+                            ["--nl-btn-label-fade" as string]: `${BUTTON.labelFadeMs}ms`,
+                          }}
+                        >
+                          {copy.submitLabel}
+                        </span>
+                      </button>
+                    </motion.div>
+
+                    <motion.div
+                      variants={entranceItem}
+                      className="mt-auto flex w-full justify-center"
+                      style={{ paddingTop: "var(--nl-consent-pt)" }}
+                    >
+                      <label
+                        className="flex cursor-pointer flex-col items-center gap-1.5 text-center text-black/65 motion-reduce:transition-none"
+                        style={{
+                          maxWidth: "var(--nl-consent-max-w)",
+                          fontSize: "var(--nl-consent-fs)",
+                          lineHeight: "var(--nl-consent-lh)",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={consent}
+                          onChange={(e) => setConsent(e.target.checked)}
+                          className={cn(
+                            "shrink-0 appearance-none rounded-[3px] border border-black/30 bg-transparent",
+                            "transition-[background-color,border-color,box-shadow] duration-200",
+                            "checked:border-[#10b981] checked:bg-[#10b981]",
+                            "focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:outline-none",
+                          )}
+                          style={{
+                            width: "var(--nl-consent-check)",
+                            height: "var(--nl-consent-check)",
+                          }}
+                          required
+                        />
+                        <span>{copy.consentLabel}</span>
+                      </label>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </form>
         </div>
       </div>

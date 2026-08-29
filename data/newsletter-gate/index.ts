@@ -8,7 +8,7 @@ export const NEWSLETTER_GATE_COPY: NewsletterGateCopy = {
   lastNamePlaceholder: "Nom",
   emailPlaceholder: "Votre email",
   submitLabel: "S'inscrire",
-  submitDone: "Merci ✓",
+  submitDone: "Inscription confirmée !",
   consentLabel:
     "J'accepte de recevoir les communications Back2Mboa. Désinscription à tout moment.",
 };
@@ -18,5 +18,6 @@ export const NEWSLETTER_GATE_IMAGE = {
   src: "/images/gate_orange-640.webp",
   width: 640,
   height: 665,
-  srcSet: "/images/gate_orange-480.webp 480w, /images/gate_orange-640.webp 640w, /images/gate_orange-795.webp 795w",
+  srcSet:
+    "/images/gate_orange-480.webp 480w, /images/gate_orange-640.webp 640w, /images/gate_orange-795.webp 795w",
 } as const;

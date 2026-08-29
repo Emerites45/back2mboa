@@ -40,7 +40,7 @@ export const MODELE_COPY: ModeleCopy = {
     "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Survolez une carte pour voir les sous-domaines.",
 };
 
-/** Copy UI maquette. Photos = `image secteur/` → `public/images/modele/secteurs/`. */
+/** Copy UI maquette. Photos source = `image_secteur/` → `public/images/modele/secteurs/`. */
 export const MODELE_CARDS: ModeleCard[] = [
   {
     id: "agriculture",

@@ -102,7 +102,7 @@ export function ContrasteSection() {
                       block: "nearest",
                     });
                   }}
-                  aria-current={on ? "true" : undefined}
+                  aria-pressed={on}
                 >
                   <h3 className="contraste-card-title">{actor.label}</h3>
                   <p className="contraste-card-quote">« {actor.quote} »</p>

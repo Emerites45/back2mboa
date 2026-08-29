@@ -16,7 +16,6 @@ export type BdaPhase = {
 export type BdaCopy = {
   eyebrow: string;
   title: string;
-  titleAccent?: string;
   subtitle: string;
   foot: string;
   autoplayMs: number;

@@ -18,19 +18,29 @@ const TEXT_Y_HIDDEN_2 = "48vh";
 const REVEAL_MOUNT_1 = ["start end", "start 0.18"] as const;
 const REVEAL_MOUNT_2 = ["start end", "start 0.32"] as const;
 
+const IMPACT = {
+  title: "2026 : Nous passons à l'échelle !",
+  tagline: ["Des milliards", "de FCFA en perspective."],
+} as const;
+
 const STATS_MOUNT_1 = [
-  { value: "100+", label: "Investisseurs diaspora" },
-  { value: "50+", label: "Décideurs publics" },
-  { value: "70+", label: "Entrepreneurs locaux" },
-  { value: "40+", label: "Projets matchés qualifiés" },
+  { value: "100+", label: "Investisseurs" },
+  { value: "50+", label: "Décideurs & Intendants territoriaux" },
+  { value: "70+", label: "Régulateurs" },
+  { value: "40+", label: "Investisseurs & PTF" },
+  { value: "40+", label: "Entreprises" },
 ] as const;
 
 const STATS_MOUNT_2 = [
-  { value: "50+", label: "Décideurs publics" },
-  { value: "70+", label: "Entrepreneurs locaux" },
+  { value: "40+", label: "Projets matchés qualifiés" },
+  { value: "50+", label: "Médias référencés" },
+  { value: "10", label: "Chefs traditionnels" },
 ] as const;
 
 const TYPE = {
+  titleSize: "clamp(2rem, 5.5vw, 4rem)",
+  titleWeight: 800,
+  titleTop: "6%",
   figureSize: "clamp(2.75rem, 8vw, 6rem)",
   figureWeight: 700,
   labelSize: "clamp(0.75rem, 1.4vw, 1.5rem)",
@@ -77,20 +87,15 @@ function StatRow({
   stats,
   className,
   style,
-  firstItemClassName,
 }: {
   stats: readonly { value: string; label: string }[];
   className: string;
   style: { y: MotionValue<string> | string };
-  firstItemClassName?: string;
 }) {
   return (
     <motion.ul style={style} className={className}>
-      {stats.map((stat, index) => (
-        <li
-          key={stat.label}
-          className={index === 0 ? `text-center ${firstItemClassName ?? ""}` : "text-center"}
-        >
+      {stats.map((stat) => (
+        <li key={stat.label} className="text-center">
           <p
             className="font-[family-name:var(--font-oswald)] leading-none tracking-[-0.04em] text-white tabular-nums [text-shadow:0_2px_28px_rgb(0_0_0_/_0.35)]"
             style={{ fontSize: TYPE.figureSize, fontWeight: TYPE.figureWeight }}
@@ -98,7 +103,7 @@ function StatRow({
             {stat.value}
           </p>
           <p
-            className="mx-auto mt-2 max-w-[16ch] text-pretty font-[family-name:var(--font-ibm-plex-mono)] leading-snug text-[#2c3d34]"
+            className="mx-auto mt-2 max-w-[22ch] text-pretty font-[family-name:var(--font-ibm-plex-mono)] leading-snug text-[#2c3d34]"
             style={{ fontSize: TYPE.labelSize, fontWeight: TYPE.labelWeight }}
           >
             {stat.label}
@@ -131,10 +136,21 @@ export function ImpactSection() {
         />
       </div>
 
+      <h2
+        className="pointer-events-none absolute inset-x-0 z-[15] px-[var(--page-gutter)] text-center font-[family-name:var(--font-bricolage)] leading-[1.05] tracking-[-0.03em] text-balance text-white [text-shadow:0_2px_32px_rgb(0_0_0_/_0.4)]"
+        style={{
+          top: TYPE.titleTop,
+          fontSize: TYPE.titleSize,
+          fontWeight: TYPE.titleWeight,
+        }}
+      >
+        {IMPACT.title}
+      </h2>
+
       <StatRow
         stats={STATS_MOUNT_1}
         style={reveal1.style}
-        className="absolute inset-x-0 top-[18%] z-10 mx-auto grid max-w-[90rem] grid-cols-2 gap-x-6 gap-y-8 px-[var(--page-gutter)] md:grid-cols-4 md:gap-x-10"
+        className="absolute inset-x-0 top-[22%] z-10 mx-auto grid max-w-[90rem] grid-cols-2 gap-x-4 gap-y-8 px-[var(--page-gutter)] sm:grid-cols-3 md:grid-cols-5 md:gap-x-6"
       />
 
       <div
@@ -153,8 +169,7 @@ export function ImpactSection() {
       <StatRow
         stats={STATS_MOUNT_2}
         style={reveal2.style}
-        firstItemClassName="md:col-start-2"
-        className="absolute inset-x-0 top-[38%] z-[25] mx-auto grid max-w-[90rem] grid-cols-2 gap-x-6 px-[var(--page-gutter)] md:grid-cols-4 md:gap-x-10"
+        className="absolute inset-x-0 top-[38%] z-[25] mx-auto grid max-w-[52rem] grid-cols-1 gap-y-8 px-[var(--page-gutter)] sm:grid-cols-3 sm:gap-x-6 md:gap-x-10"
       />
 
       <div
@@ -180,9 +195,9 @@ export function ImpactSection() {
               marginBottom: BAND.gap,
             }}
           >
-            Des milliards
+            {IMPACT.tagline[0]}
             <br />
-            de FCFA en perspective.
+            {IMPACT.tagline[1]}
           </h2>
           <div
             className="flex items-center justify-around bg-white/25 px-6 py-4 md:px-16"

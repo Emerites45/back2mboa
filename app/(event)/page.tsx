@@ -29,12 +29,14 @@ import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSecti
 import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
 import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
-import {
-  BilletsSection,
-  BilletsPartenairesSection,
-} from "@/components/sections/billets/BilletsSection";
+import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
+import { TeamSection } from "@/components/sections/team/TeamSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
+import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
+import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
+import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
+import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 
 /**
  * Assemblage landing — Paul-Alain + Williams.
@@ -46,37 +48,53 @@ export default function HomePage() {
     <>
       <SmoothScroll />
       <HeroSection />
+      <PreuvesPilotesSection />
+      <ImpactSection />
       <ContrasteSection />
-      <PourquoiSection />
+      <ComparatifSection />
+      <BonnePorteSection />
       <OpenRoadSection />
+      <MethodeSection />
       <MairiesChampionnesSection />
       <ModeleSection />
       <PotentialitesSection />
-      <NecessiteSection />
-      <PlateformeSection />
-      <ImpactSection />
-      <BonnePorteSection />
-      <BeforeDuringAfterSection />
-      <MethodeSection />
       <ParcoursSection />
       <ResultatsSection />
       <PreuveChiffresImpact />
-      <BatisseursSection />
-      <EditionsPilotesSection />
-      <HomecomingSection />
+      <EcosystemeSection />
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
-      <EcosystemeSection />
-      <StoriesSection />
+
       <TickerSection />
       <BoulevardSection />
       <HeroLandingSection />
-      <AgendaSection />
+      <BeforeDuringAfterSection />
+      <BatisseursSection />
+      <TeamSection />
       <PartenairesSection />
+      <StoriesSection />
       <RessourcesSection />
-      <BilletsSection />
+      <AgendaSection />
+      {/* <BilletsSection /> */}
       <BilletsPartenairesSection />
+      <PourquoiSection />
+      {/* <EditionsPilotesSection /> */}
+      <NewsletterGateSection />
+      <FooterRevealZone />
+      {/* <NecessiteSection /> */}
+      {/* <PlateformeSection /> */}
+      {/* <OpenRoadSection /> */}
+      {/* <SalonDiasporaSection /> */}
+
+      {/*
+        Sections présentes chez new-paul-alain mais absentes de ton agencement (Williams) :
+        décommenter si souhaité.
+        <PourquoiSection />
+        <NecessiteSection />
+        <PlateformeSection />
+        <HomecomingSection />
+      */}
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

@@ -7,23 +7,16 @@ import type { BdaPhaseId } from "@/types/before-during-after";
 import "./BeforeDuringAfterSection.css";
 
 export function BeforeDuringAfterSection() {
-  const { eyebrow, title, titleAccent, subtitle, foot, phases, autoplayMs } =
-    BDA_COPY;
+  const { eyebrow, title, subtitle, foot, phases, autoplayMs } = BDA_COPY;
   const rootRef = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const [inView, setInView] = useState(false);
   const [reduce, setReduce] = useState(false);
-  const [runId, setRunId] = useState(0);
-
-  const playing = inView && !paused && !reduce;
-  const activePhase = phases[active];
 
   const go = useCallback(
     (i: number) => {
       setActive(((i % phases.length) + phases.length) % phases.length);
-      setRunId((current) => current + 1);
     },
     [phases.length],
   );
@@ -41,72 +34,57 @@ export function BeforeDuringAfterSection() {
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => setInView(Boolean(entry?.isIntersecting)),
-      { threshold: 0.28 },
+      { threshold: 0.35 },
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
-  /* Boucle circulaire infinie — 4 s par carte, visible dans le viewport */
+  /* Itération automatique des phases tant que visible et non pausée */
   useEffect(() => {
-    if (!playing) return;
+    if (!inView || paused || reduce) return;
     const id = window.setInterval(() => go(active + 1), autoplayMs);
     return () => window.clearInterval(id);
-  }, [active, playing, autoplayMs, go]);
-
-  const sectionClass = [
-    "b2m-bda",
-    playing ? "is-playing" : "",
-    hovered ? "is-hovered" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  }, [active, inView, paused, reduce, autoplayMs, go]);
 
   return (
     <section
       ref={rootRef}
-      className={sectionClass}
+      className="b2m-bda"
       id="before-during-after"
       aria-labelledby="bda-title"
-      aria-roledescription="carousel"
     >
       <div className="bda-inner">
         <header className="bda-head">
           <p className="bda-eyebrow">{eyebrow}</p>
           <h2 id="bda-title" className="bda-title">
             {title}
-            {titleAccent ? (
-              <>
-                {" "}
-                <em>{titleAccent}</em>
-              </>
-            ) : null}
           </h2>
           <p className="bda-sub">{subtitle}</p>
         </header>
 
-        <p className="bda-live" aria-live="polite" aria-atomic="true">
-          {activePhase.phase} — {activePhase.title}
-        </p>
-
-        <div
-          className="bda-grid"
-          role="list"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => {
-            setHovered(false);
-            setPaused(false);
-          }}
-        >
+        <div className="bda-grid" role="list">
           {phases.map((phase, i) => {
             const isActive = i === active;
-
             return (
               <div
                 key={phase.id}
-                className={`bda-item${isActive ? " is-active" : ""}${isActive && playing ? " is-timing" : ""}`}
+                className={`bda-item${isActive ? " is-active" : ""}`}
                 role="listitem"
-                onMouseEnter={() => setPaused(true)}
+                onMouseEnter={() => {
+                  setPaused(true);
+                  go(i);
+                }}
+                onMouseLeave={() => setPaused(false)}
+                onFocusCapture={() => {
+                  setPaused(true);
+                  go(i);
+                }}
+                onBlurCapture={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                    setPaused(false);
+                  }
+                }}
               >
                 <article
                   className="bda-card"
@@ -115,12 +93,6 @@ export function BeforeDuringAfterSection() {
                   aria-current={isActive ? "step" : undefined}
                   data-phase={phase.id as BdaPhaseId}
                   onClick={() => go(i)}
-                  onFocus={() => setPaused(true)}
-                  onBlur={(e) => {
-                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-                      setPaused(false);
-                    }
-                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
@@ -155,54 +127,24 @@ export function BeforeDuringAfterSection() {
 
                   <div className="bda-veil" aria-hidden="true" />
 
-                  <div className="bda-rest" aria-hidden="true">
-                    <span className="bda-rest-phase">{phase.phase}</span>
-                    <span className="bda-rest-title">{phase.title}</span>
+                  <div className="bda-overlay">
+                    <h3 className="bda-overlay-title">{phase.title}</h3>
+                    <ul className="bda-overlay-list">
+                      {phase.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <div
-                    className="bda-overlay"
-                    id={`bda-overlay-${phase.id}`}
-                    aria-hidden="true"
-                  >
-                    <div className="bda-overlay-inner">
-                      <p className="bda-overlay-kicker">
-                        {phase.phase}
-                        <span className="bda-overlay-date">{phase.date}</span>
-                      </p>
-                      <h3 className="bda-overlay-title">{phase.title}</h3>
-                      <ul className="bda-rows">
-                        {phase.items.map((item, itemIndex) => (
-                          <li
-                            className="bda-row"
-                            key={item}
-                            style={{ ["--bi" as string]: itemIndex }}
-                          >
-                            <span className="bda-row-mark" aria-hidden="true" />
-                            <span className="bda-row-label">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="bda-overlay-tool">{phase.tool}</p>
-                    </div>
-                  </div>
-
-                  <div className="bda-foot-strip" aria-hidden="true">
-                    {phase.tool.replace(/^Outil\s*:\s*/i, "")}
-                  </div>
+                  <div className="bda-tool">{phase.tool}</div>
+                  <div className="bda-shade" aria-hidden="true" />
                 </article>
 
                 <div className="bda-caption">
                   <div className="bda-caption-meta">
                     <span className="bda-indicator" aria-hidden="true">
-                      {isActive && playing ? (
-                        <span
-                          className="bda-progress"
-                          style={{ animationDuration: `${autoplayMs}ms` }}
-                          key={`bda-progress-${phase.id}-${active}-${runId}`}
-                        />
-                      ) : null}
                       <span className="bda-dot" />
+                      <span className="bda-bar" />
                     </span>
                     <span className="bda-date">{phase.date}</span>
                   </div>

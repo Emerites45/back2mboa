@@ -9,11 +9,6 @@
   --mod-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
   --mod-serif: var(--font-fraunces), Fraunces, Georgia, serif;
   --mod-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --mod-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
-  --mod-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --mod-reveal-in: 440ms;
-  --mod-reveal-out: 320ms;
-  --mod-stagger: 42ms;
   --mod-claw-size: min(440px, 46vw);
   --mod-claw-outset-x: 12%;
   --mod-claw-outset-y: 8%;
@@ -463,12 +458,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  transition: transform 560ms var(--mod-ease-reveal);
-}
-
-.modele-card:is(:hover, :focus-visible) .modele-photo,
-.modele-card:is(:hover, :focus-visible) .modele-landscape {
-  transform: scale(1.07);
 }
 
 .modele-chart {

@@ -4,14 +4,13 @@ import { ArrowUpRight } from "lucide-react";
 import {
   MODELE_CARDS,
   MODELE_COPY,
-  SECTOR_ACCENT,
-  maillonsForSector,
   metricsForSector,
+  maillonsForSector,
+  SECTOR_ACCENT,
 } from "@/data/modele";
 import { ModeleClawsDecor } from "./ModeleClawsDecor";
 import { SectorVisual } from "./SectorVisual";
 import "./ModeleSection.css";
-
 function TitleWithAmp({ title }: { title: string }) {
   const idx = title.lastIndexOf(" & ");
   if (idx === -1) return title;

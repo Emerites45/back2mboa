@@ -17,7 +17,7 @@ export const BATISSEURS_COPY: BatisseursCopy = {
     { value: "2 000+", numeric: 2000, suffix: "+", label: "Mentors mobilisés" },
   ],
   teamEyebrow: "L’équipe derrière la promesse",
-  teamTitle: "Pas une structure improvisée , un parcours tracé",
+  teamTitle: "Pas une structure improvisée — un parcours tracé",
   teamLead:
     "Des femmes et des hommes qui ont déjà mobilisé des réseaux, formé des milliers de jeunes et conduit des projets complexes à fort impact.",
   profiles: [
@@ -27,8 +27,8 @@ export const BATISSEURS_COPY: BatisseursCopy = {
       role: "Présidente Fondatrice",
       href: "#inscription",
       bullets: [
-        "Fondatrice de Harambe Cameroun (2008), devenue Solutionneurs Initiative",
-        "Certifiée PMP ,plus de  10 ans de gestion de projets",
+        "Fondatrice de Harambe-Cameroun (2008), devenue Solutionneurs Initiative",
+        "Certifiée PMP — 10+ ans de gestion de projets",
         "A géré des projets de plus de 2 M$ avec des équipes de 300+ personnes",
         "Conseillère en Investissement Pays, Afrilanthropy",
         "Conseil consultatif Microsoft Afrique (2013–2016)",

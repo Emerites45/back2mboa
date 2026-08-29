@@ -63,10 +63,10 @@ const CARD = {
   gap: "1.5rem",
   shadow: "0 8px 28px rgb(11 31 51 / 0.03), 0 2px 8px rgb(11 31 51 / 0.06)",
   border: "1px solid rgb(11 31 51 / 0.08)",
-  imageHeight: "65%",
   imageBg: "#e8ebef",
-  bodyHeight: "42%",
   bodyBg: "#ffffff",
+  /** Zone texte identique sur les 3 cartes (pavé le plus long = crédible). */
+  bodyHeight: "clamp(9.75rem, 22vh, 11rem)",
   bodyPaddingX: "1.25rem",
   bodyPaddingTop: "1.15rem",
   bodyPaddingBottom: "1.35rem",
@@ -215,25 +215,23 @@ export function MethodeSection() {
                   }
                 >
                   <div
-                    className="relative w-full shrink-0 overflow-hidden"
-                    style={{
-                      height: CARD.imageHeight,
-                      background: CARD.imageBg,
-                    }}
+                    className="relative min-h-0 w-full flex-1 overflow-hidden"
+                    style={{ background: CARD.imageBg }}
                   >
                     <Image
                       src={pillar.image}
                       alt={pillar.imageAlt}
                       fill
                       sizes="(min-width: 640px) 30vw, 90vw"
-                      className="object-cover"
+                      className="absolute inset-0 size-full object-cover object-center"
                     />
                   </div>
 
                   <CardContent
-                    className="flex min-h-0 flex-col overflow-hidden px-0"
+                    className="flex shrink-0 flex-col px-0"
                     style={{
                       height: CARD.bodyHeight,
+                      minHeight: CARD.bodyHeight,
                       paddingLeft: CARD.bodyPaddingX,
                       paddingRight: CARD.bodyPaddingX,
                       paddingTop: CARD.bodyPaddingTop,

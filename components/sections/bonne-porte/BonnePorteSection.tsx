@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useId, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeftRight } from "lucide-react";
 import {
   BONNE_PORTE_BG,
   BONNE_PORTE_COPY,

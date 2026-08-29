@@ -31,7 +31,7 @@ export function ActorsSection() {
             DANS LA TÊTE DE NOS ACTEURS
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight">
-            CE QU'ILS PENSENT,<br />
+            CE QU’ILS PENSENT,<br />
             <span className="text-amber-500">RESSENTENT, VIVENT.</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto">
@@ -190,10 +190,10 @@ export function ActorsSection() {
         {/* 6. CALL TO ACTION BAS DE SECTION */}
         <div className="text-center space-y-3 pt-6 border-t border-gray-200/60">
           <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-            Tu te reconnais dans l'une de ces histoires ?
+            Tu te reconnais dans l’une de ces histoires ?
           </h4>
           <p className="text-xs sm:text-sm text-gray-600">
-            C'est exactement pour toi que Back2Mboa existe. Et maintenant — la plateforme qui change tout.
+            C’est exactement pour toi que Back2Mboa existe. Et maintenant — la plateforme qui change tout.
           </p>
           <div className="w-12 h-1 bg-amber-400 mx-auto rounded-full mt-4" />
         </div>

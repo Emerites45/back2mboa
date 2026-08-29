@@ -6,6 +6,7 @@
   --mod-serif-accent: #1a1a1a;
   --mod-card-shadow: 0 10px 28px rgba(26, 26, 26, 0.08);
   --mod-font: var(--font-inter), Inter, system-ui, sans-serif;
+  --mod-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
   --mod-serif: var(--font-fraunces), Fraunces, Georgia, serif;
   --mod-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
   --mod-claw-size: min(440px, 46vw);
@@ -363,9 +364,6 @@
 }
 
 .modele-kicker {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   margin: 0 0 20px;
   color: var(--mod-accent);
   font-size: 12px;
@@ -374,24 +372,14 @@
   text-transform: uppercase;
 }
 
-.modele-kicker-line {
-  width: 28px;
-  height: 1.5px;
-  background: var(--mod-accent);
-}
-
 .modele-title {
   margin: 0 0 16px;
+  font-family: var(--mod-serif);
   font-size: clamp(32px, 4.2vw, 48px);
-  font-weight: 700;
+  font-weight: 600;
+  font-style: italic;
   line-height: 1.15;
   letter-spacing: -0.03em;
-}
-
-.modele-title em {
-  font-family: var(--mod-serif);
-  font-style: italic;
-  font-weight: 600;
   color: var(--mod-serif-accent);
 }
 
@@ -444,14 +432,16 @@
 .modele-card:hover,
 .modele-card:focus-visible {
   transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 22px 48px rgba(26, 26, 26, 0.16);
 }
 
 .modele-card:hover::after,
 .modele-card:focus-visible::after {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.18) 22%,
-    rgba(0, 0, 0, 0.82) 100%
+    color-mix(in srgb, var(--mod-sector) 18%, transparent) 0%,
+    rgba(0, 0, 0, 0.52) 38%,
+    rgba(0, 0, 0, 0.92) 100%
   );
 }
 
@@ -485,7 +475,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 3;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -496,6 +486,16 @@
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(8px);
   color: #fff;
+  transition:
+    transform var(--mod-reveal-in) var(--mod-ease-reveal),
+    background var(--mod-reveal-out) var(--mod-ease-out),
+    border-color var(--mod-reveal-out) var(--mod-ease-out);
+}
+
+.modele-card:is(:hover, :focus-visible) .modele-expand {
+  transform: rotate(45deg) scale(1.06);
+  border-color: color-mix(in srgb, var(--mod-sector) 55%, white);
+  background: color-mix(in srgb, var(--mod-sector) 28%, rgba(255, 255, 255, 0.12));
 }
 
 .modele-card-body {
@@ -508,6 +508,155 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
+}
+
+.modele-card-face {
+  transition: opacity var(--mod-reveal-out) var(--mod-ease-out);
+}
+
+.modele-card:is(:hover, :focus-visible) .modele-card-face {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Norme overlay « reveal » — sous-domaines au survol ── */
+.modele-card-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 22px 22px 24px;
+  opacity: 0;
+  visibility: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 14, 12, 0.08) 0%,
+    rgba(8, 14, 12, 0.55) 36%,
+    rgba(8, 14, 12, 0.94) 100%
+  );
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition:
+    opacity var(--mod-reveal-in) var(--mod-ease-reveal),
+    visibility var(--mod-reveal-in) var(--mod-ease-reveal),
+    backdrop-filter var(--mod-reveal-in) var(--mod-ease-reveal);
+  pointer-events: none;
+}
+
+.modele-card:is(:hover, :focus-visible) .modele-card-reveal {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modele-reveal-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modele-reveal-kicker {
+  color: var(--mod-sector);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.modele-reveal-title {
+  font-family: var(--mod-serif);
+  font-size: 22px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.modele-rows {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--mod-display);
+}
+
+.modele-row {
+  padding: 11px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 380ms var(--mod-ease-reveal),
+    transform 380ms var(--mod-ease-reveal);
+  transition-delay: calc(var(--mi) * var(--mod-stagger) + 50ms);
+}
+
+.modele-row:first-child {
+  padding-top: 0;
+}
+
+.modele-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modele-row-inner {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  column-gap: 11px;
+  width: 100%;
+}
+
+.modele-row-mark {
+  justify-self: center;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mod-sector);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--mod-sector) 35%, transparent);
+}
+
+.modele-row-label {
+  font-family: var(--mod-display);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: left;
+}
+
+.modele-card:is(:hover, :focus-visible) .modele-row {
+  opacity: 1;
+  transform: none;
+}
+
+.modele-reveal-foot {
+  margin-top: 6px;
+  font-family: var(--mod-display);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.58);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 360ms var(--mod-ease-reveal) 280ms,
+    transform 360ms var(--mod-ease-reveal) 280ms;
+}
+
+.modele-card:is(:hover, :focus-visible) .modele-reveal-foot {
+  opacity: 1;
+  transform: none;
 }
 
 .modele-badge {
@@ -604,8 +753,41 @@
   }
 
   .modele-card,
-  .modele-card::after {
-    transition: none;
+  .modele-card::after,
+  .modele-photo,
+  .modele-landscape,
+  .modele-expand,
+  .modele-card-face,
+  .modele-card-reveal,
+  .modele-row,
+  .modele-reveal-foot {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .modele-card:is(:hover, :focus-visible) .modele-card-face {
+    opacity: 0;
+  }
+
+  .modele-card:is(:hover, :focus-visible) .modele-photo,
+  .modele-card:is(:hover, :focus-visible) .modele-landscape {
+    transform: none;
+  }
+
+  .modele-card:is(:hover, :focus-visible) .modele-card-reveal {
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: none;
+  }
+
+  .modele-card:is(:hover, :focus-visible) .modele-row {
+    opacity: 1;
+    transform: none;
+  }
+
+  .modele-card:is(:hover, :focus-visible) .modele-reveal-foot {
+    opacity: 1;
+    transform: none;
   }
 
   .modele-card:hover,

@@ -8,26 +8,26 @@ import { MethodeSection } from "@/components/sections/methode/MethodeSection";
 import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
+import { EditionsPilotesSection } from "@/components/sections/editions-pilotes/EditionsPilotesSection";
+import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { LiaisonSection } from "@/components/sections/LiaisonSection";
 import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
 import { ContrasteSection } from "@/components/sections/contraste/ContrasteSection";
-import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
+import { PourquoiSection } from "@/components/sections/pourquoi/PourquoiSection";
 import { ModeleSection } from "@/components/sections/modele/ModeleSection";
 import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
 import { PotentialitesSection } from "@/components/sections/potentialites/PotentialitesSection";
 import { EcosystemeSection } from "@/components/sections/ecosysteme/EcosystemeSection";
 import { PlateformeSection } from "@/components/sections/plateforme/PlateformeSection";
 import { OpenRoadSection } from "@/components/sections/open-road/OpenRoadSection";
+import { HomecomingSection } from "@/components/sections/homecoming/HomecomingSection";
 import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
 import { NecessiteSection } from "@/components/sections/necessite/NecessiteSection";
 import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
 import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSection";
-import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
 import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
-import { SalonDiasporaSection } from "@/components/sections/salon-diaspora/SalonDiasporaSection";
-import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
-import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
+import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
 import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
 import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
 import { TeamSection } from "@/components/sections/team/TeamSection";
@@ -36,6 +36,11 @@ import { NewsletterGateSection } from "@/components/sections/newsletter-gate/New
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Assemblage landing — Paul-Alain + Williams.
+ * Williams : Preuve institutions, Billets ×2, Stories actif.
+ * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Bâtisseurs, Éditions pilotes, Prélude…
+ */
 export default function HomePage() {
   return (
     <>
@@ -58,6 +63,7 @@ export default function HomePage() {
       <PreludeSection />
       <LiaisonSection />
       <MuseeSection />
+
       <TickerSection />
       <BoulevardSection />
       <HeroLandingSection />
@@ -77,6 +83,15 @@ export default function HomePage() {
       {/* <OpenRoadSection /> */}
       {/* <SalonDiasporaSection /> */}
 
+      {/*
+        Sections présentes chez new-paul-alain mais absentes de ton agencement (Williams) :
+        décommenter si souhaité.
+        <PourquoiSection />
+        <NecessiteSection />
+        <PlateformeSection />
+        <EditionsPilotesSection />
+        <HomecomingSection />
+      */}
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

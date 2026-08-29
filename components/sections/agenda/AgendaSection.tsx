@@ -120,7 +120,10 @@ export function AgendaSection() {
   const event = events[active] ?? events[0];
   const autoplay = inView && !reduce && !paused;
   const activeRef = useRef(active);
-  activeRef.current = active;
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   const goTo = useCallback(
     (next: number, forcedDir?: 1 | -1) => {

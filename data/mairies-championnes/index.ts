@@ -2,10 +2,12 @@ import type { ChampionCopy, ChampionMairie } from "@/types/mairies-championnes";
 
 /** Copy SVG maquette + HTML fourni. Ne pas inventer hors de ces sources.
  *  Photos : Wikimedia Commons (Cameroun), hébergées en local.
- *  Babadjou — Ouest Cameroun2.jpg (hauts plateaux)
- *  Douala III — Douala-Vue aérienne (27).jpg (ville + port)
- *  Limbé I — Down Beach Limbe vue aérienne, Ndongere
- *  Guider — Hôpital Général de Yaoundé.jpg (infrastructure de soins)
+ *  Babadjou — terroir Pexels (Ali Musoke) + poster Wikimedia pour fond vidéo
+ *  Douala III — Yoco/Unsplash paiement mobile (fond vidéo + carte GovTech)
+ *  Mbalmayo — Unsplash Divaris Shirichena (chantier fond) + patrimoine brique carte
+ *  Limbé I — Unsplash Edouard Tamba (port) + plage tropicale palmiers
+ *  Fundong — Pexels Botan (irrigation) + Unsplash Steward Masweneng (chantier)
+ *  Guider — Pexels MK Photoz (soins carte) + Unsplash William Veitch (zèbre savane fond)
  */
 export const CHAMPION_COPY: ChampionCopy = {
   kicker: "Back2Mboa ASAP™  ·  Édition 2026",
@@ -17,7 +19,8 @@ export const CHAMPION_COPY: ChampionCopy = {
   ],
   ctaPrimary: "Voir le Mayor Call™",
   ctaSecondary: "Je peux répondre",
-  autoHint: "Défilement auto · survolez pour pause",
+  autoHint: "Défilement auto · 12 s · survolez la scène pour pause",
+  autoplayMs: 12_000,
   legend: [
     { value: "500", label: "participants visés" },
     { value: "100", label: "entrepreneurs locaux" },
@@ -48,10 +51,14 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     visualCaption: "Hauts plateaux de l'Ouest",
     theme: "agri",
     image: "/images/mairies-championnes/babadjou.jpg",
+    video: "/videos/mairies-championnes/babadjou-wavebreak.mp4",
+    visualImage: "/images/mairies-championnes/babadjou-terroir.jpg",
+    visualPosition: "center 38%",
   },
   {
     id: "douala3",
     nom: "Douala III",
+    nomPill: "Douala 2",
     region: "Littoral",
     statut: "Commune urbaine",
     dot: "#1F4E79",
@@ -65,10 +72,13 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyTitle: "Success story en construction.",
     storyBody:
       "Établissements financiers, opérateurs de paiement et régulateurs réunis autour d'une solution conforme.",
-    visualKicker: "Ville",
-    visualCaption: "Douala — port, assiette fiscale, marchés",
+    visualKicker: "GovTech",
+    visualCaption: "Paiement mobile · marchés · recettes",
     theme: "city",
-    image: "/images/mairies-championnes/douala-iii.jpg",
+    image: "/images/mairies-championnes/douala-paiement-stage.jpg",
+    video: "/videos/mairies-championnes/douala-paiement.mp4",
+    visualImage: "/images/mairies-championnes/douala-paiement-card.jpg",
+    visualPosition: "center 40%",
   },
   {
     id: "mbalmayo",
@@ -87,15 +97,19 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyBody:
       "Urbanistes, géomètres, promoteurs et banques — avec le MINDCAF, le MINDHU et le FEICOM.",
     visualKicker: "Foncier",
-    visualCaption: "Bois tropicaux du corridor",
+    visualCaption: "Patrimoine brique · centre Mbalmayo",
     theme: "savanna",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Timber_transport_near_Libongo%2C_Cameroon_2014.jpg/1280px-Timber_transport_near_Libongo%2C_Cameroon_2014.jpg",
+    image: "/images/mairies-championnes/mbalmayo-chantier-stage.jpg",
+    video: "/videos/mairies-championnes/mbalmayo-chantier.mp4",
+    visualImage: "/images/mairies-championnes/mbalmayo-patrimoine.jpg",
+    visualPosition: "center 38%",
   },
   {
     id: "limbe1",
     nom: "Limbé I",
+    nomPill: "Limbé",
     region: "Sud-Ouest",
+    regionPill: "Sud",
     statut: "Commune urbaine",
     dot: "#F2B632",
     secteur: "Tourisme, Mobilité & Marketing Territorial",
@@ -109,9 +123,12 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyBody:
       "Marketing territorial, hébergement, accès et mobilité : tout est à structurer ensemble.",
     visualKicker: "Côte",
-    visualCaption: "Down Beach — pêche et sable volcanique",
+    visualCaption: "Down Beach · plage & hôtellerie",
     theme: "ocean",
-    image: "/images/mairies-championnes/limbe-i.jpg",
+    image: "/images/mairies-championnes/limbe-port-stage.jpg",
+    video: "/videos/mairies-championnes/limbe-port.mp4",
+    visualImage: "/images/mairies-championnes/limbe-tropical-palm.jpg",
+    visualPosition: "center 48%",
   },
   {
     id: "fundong",
@@ -130,10 +147,12 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyBody:
       "Solutionneurs de l'adduction d'eau et des mini-réseaux, MINEE, CAMWATER, ARSEL.",
     visualKicker: "Énergie",
-    visualCaption: "Hydro des Grassfields — chutes Menchum",
+    visualCaption: "Chantier · adduction & mini-réseaux",
     theme: "water",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Menchum_Falls_NWprovince_Cameroon.jpg/1280px-Menchum_Falls_NWprovince_Cameroon.jpg",
+    image: "/images/mairies-championnes/fundong-irrigation-stage.jpg",
+    video: "/videos/mairies-championnes/fundong-irrigation.mp4",
+    visualImage: "/images/mairies-championnes/fundong-chantier-card.jpg",
+    visualPosition: "center 40%",
   },
   {
     id: "guider",
@@ -152,8 +171,11 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyBody:
       "Des médecins camerounais exerçant en France, en Belgique et au Canada, autour d'un centre de dialyse et de diagnostic.",
     visualKicker: "Santé",
-    visualCaption: "Infrastructure de soins au Cameroun",
+    visualCaption: "Soins de proximité · dialyse & diagnostic",
     theme: "health",
-    image: "/images/mairies-championnes/guider.jpg",
+    image: "/images/mairies-championnes/guider-savanna-stage.jpg",
+    video: "/videos/mairies-championnes/guider-savanna.mp4",
+    visualImage: "/images/mairies-championnes/guider-soins-card-fill.jpg",
+    visualPosition: "center center",
   },
 ];

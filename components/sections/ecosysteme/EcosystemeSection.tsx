@@ -1,116 +1,126 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
+import {
+  BarChart2,
+  ClipboardList,
+  Droplet,
+  FileText,
+  Globe,
+  Home,
+  Landmark,
+  LayoutGrid,
+  LineChart,
+  Mountain,
+  Sprout,
+  Zap,
+} from "lucide-react";
 import { ECOSYSTEME_COPY } from "@/data/ecosysteme";
-import { EcosystemeHubDial } from "@/components/sections/ecosysteme/EcosystemeHubDial";
-import { cn } from "@/lib/utils";
+import "./EcosystemeSection.css";
 
-const SECTION = {
-  padding: "py-12 px-6 lg:py-14 lg:px-8",
-  maxWidth: "max-w-[1080px]",
-} as const;
-
-const TYPE = {
-  titleFont: "var(--font-fraunces)",
-  titleSize: "text-[clamp(2rem,4.2vw,3rem)]",
-  bodyFont: "var(--font-inter)",
-  bodySize: "text-[1.0625rem] lg:text-[1.125rem]",
-} as const;
-
-function EcosystemeCta({
-  href,
-  children,
-  variant = "dark",
-}: {
-  href: string;
-  children: string;
-  variant?: "dark" | "light";
-}) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "inline-flex items-center rounded-full border-[1.5px] px-5 py-2.5 text-sm font-medium no-underline transition-colors duration-200",
-        "focus-visible:outline-2 focus-visible:outline-offset-[3px]",
-        variant === "dark" &&
-          "border-[#0a2b21] text-[#0a2b21] hover:bg-[#0a2b21] hover:text-white focus-visible:outline-[#0a2b21]",
-        variant === "light" &&
-          "border-white/90 text-white hover:bg-white hover:text-[#0a2b21] focus-visible:outline-white",
-      )}
-    >
-      {children}
-    </Link>
-  );
-}
+/** Sens horaire depuis le sommet — maquette orbit. */
+const ORBIT_ICONS = [
+  Landmark,
+  Globe,
+  LineChart,
+  Sprout,
+  Droplet,
+  Zap,
+  LayoutGrid,
+  Home,
+  Mountain,
+  FileText,
+] as const;
 
 export function EcosystemeSection() {
-  const copy = ECOSYSTEME_COPY;
-
   return (
     <section
       id="digital-twin"
-      className={cn("bg-[#fbf7ef] text-[#0a2b21]", SECTION.padding)}
+      className="ecosysteme"
       aria-labelledby="ecosysteme-title"
-      style={{ fontFamily: TYPE.bodyFont }}
     >
-      <div className={cn("mx-auto flex flex-col gap-6", SECTION.maxWidth)}>
-        <h2
-          id="ecosysteme-title"
-          className={cn("leading-[1.1] font-bold tracking-[-0.02em]", TYPE.titleSize)}
-          style={{ fontFamily: TYPE.titleFont }}
-        >
-          <span className="block">
-            {copy.titleBefore}{" "}
-            <span className="text-[#e3a73b]">{copy.highlight}</span>
-          </span>
-          <span className="block">{copy.titleAfter}</span>
-        </h2>
+      <div className="ecosysteme-inner">
+        <div className="ecosysteme-left">
+          <p className="ecosysteme-kicker">
+            <span className="ecosysteme-kicker-line" aria-hidden="true" />
+            {ECOSYSTEME_COPY.kicker}
+          </p>
+          <h2 id="ecosysteme-title" className="ecosysteme-title">
+            {ECOSYSTEME_COPY.titleLines.map((line) => (
+              <span key={line}>
+                {line}
+                <br />
+              </span>
+            ))}
+            <em>{ECOSYSTEME_COPY.highlight}</em>
+            <br />
+            {ECOSYSTEME_COPY.titleEnd}
+          </h2>
+          <p className="ecosysteme-lead">{ECOSYSTEME_COPY.paragraphs[0]}</p>
+          <p className="ecosysteme-lead">{ECOSYSTEME_COPY.paragraphs[1]}</p>
+        </div>
 
-        <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-8">
-          <div className="flex min-w-0 flex-col gap-6 lg:min-h-0">
-            <div className={cn("space-y-4 leading-[1.65] text-[#5a6b63]", TYPE.bodySize)}>
-              {copy.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+        <article className="ecosysteme-phone" aria-labelledby="twin-title">
+          <div className="orbit-wrapper" aria-hidden="true">
+            {/* Roue GPU-only : le parent tourne, le visage reverse pour rester droit. */}
+            <div className="orbit">
+              {ORBIT_ICONS.map((Icon, index) => (
+                <div
+                  key={index}
+                  className="orbit-item"
+                  style={{ "--i": index } as CSSProperties}
+                >
+                  <span className="orbit-spoke" />
+                  <span className="orbit-face">
+                    <span className="orbit-upright">
+                      <Icon size={16} strokeWidth={1.7} />
+                    </span>
+                  </span>
+                </div>
               ))}
             </div>
-
-            <article
-              className="mt-auto rounded-[24px] bg-[#f0ebe1] p-5 lg:p-6"
-              aria-labelledby="mayor-title"
-            >
-              <ul className="mb-4 flex flex-wrap gap-2 list-none p-0">
-                {copy.mayorBullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="rounded-full border border-[#e3a73b]/50 bg-white/70 px-3 py-1 text-[0.75rem] font-medium leading-snug text-[#0a2b21]"
-                  >
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-              <h3
-                id="mayor-title"
-                className="mb-2 text-base font-bold uppercase tracking-[0.06em]"
-              >
-                {copy.mayorTitle}
-              </h3>
-              <p className="mb-4 text-sm leading-relaxed text-[#5a6b63]">{copy.mayorBody}</p>
-              <EcosystemeCta href={copy.mayorCtaHref}>{copy.mayorCta}</EcosystemeCta>
-            </article>
+            <div className="central-card">
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" aria-hidden="true">
+                <path
+                  d="M7 23 C13 23 18 10 25 9"
+                  stroke="#F5F1E9"
+                  strokeWidth="1.5"
+                  strokeDasharray="2.4 2.2"
+                  strokeLinecap="round"
+                />
+                <circle cx="7" cy="23" r="2.3" fill="#C94C3A" />
+                <circle cx="16.5" cy="16.5" r="1.15" fill="#7CB89A" />
+                <circle cx="25" cy="9" r="2.3" fill="#E3A73B" />
+              </svg>
+            </div>
           </div>
+          <h3 id="twin-title">{ECOSYSTEME_COPY.twinTitle}</h3>
+          <p>{ECOSYSTEME_COPY.twinBody}</p>
+          <Link href="/potentialites" className="ecosysteme-btn">
+            {ECOSYSTEME_COPY.twinCta}
+          </Link>
+        </article>
 
-          <article
-            className="flex w-full flex-col rounded-[28px] bg-[#e3a73b] px-5 py-6 shadow-[0_20px_40px_-14px_rgba(10,43,33,0.28)]"
-            aria-labelledby="twin-title"
-          >
-            <EcosystemeHubDial compact />
-            <h3 id="twin-title" className="mb-2 text-base font-bold uppercase tracking-[0.08em]">
-              {copy.twinTitle}
-            </h3>
-            <p className="mb-4 text-sm leading-snug text-[#0a2b21]/90">{copy.twinBody}</p>
-            <EcosystemeCta href={copy.twinCtaHref} variant="dark">
-              {copy.twinCta}
-            </EcosystemeCta>
-          </article>
-        </div>
+        <article className="ecosysteme-right" aria-labelledby="mayor-title">
+          <div className="ecosysteme-minis">
+            <div className="ecosysteme-mini">
+              <span className="ecosysteme-mini-icon is-gold">
+                <BarChart2 size={22} strokeWidth={1.75} />
+              </span>
+              <p>{ECOSYSTEME_COPY.capCard}</p>
+            </div>
+            <div className="ecosysteme-mini">
+              <span className="ecosysteme-mini-icon is-dark">
+                <ClipboardList size={20} strokeWidth={1.75} />
+              </span>
+              <p>{ECOSYSTEME_COPY.decidersCard}</p>
+            </div>
+          </div>
+          <h3 id="mayor-title">{ECOSYSTEME_COPY.mayorTitle}</h3>
+          <p>{ECOSYSTEME_COPY.mayorBody}</p>
+          <Link href="#plateforme" className="ecosysteme-btn">
+            {ECOSYSTEME_COPY.mayorCta}
+          </Link>
+        </article>
       </div>
     </section>
   );

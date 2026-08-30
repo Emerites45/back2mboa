@@ -1,26 +1,22 @@
 import type { EcosystemeCopy } from "@/types/ecosysteme";
 
 export const ECOSYSTEME_COPY: EcosystemeCopy = {
-  titleBefore: "Une plateforme qui met les",
+  kicker: "L'écosystème",
+  titleLines: ["Une plateforme", "qui met les"],
   highlight: "territoires",
-  titleAfter: "au centre",
+  titleEnd: "au centre",
   paragraphs: [
-    "Votre secteur, votre commune, le partenaire qui manque : on repère le maillon absent et on le connecte.",
-    "Chaque opportunité qualifiée fait venir maires, diaspora, investisseurs, régulateurs et financeurs autour du même dossier. Pas une rencontre de plus, un projet qui avance.",
-    "Le Digital Twin™ rend visible ce qui se prépare. Les Mayor Calls™ portent le besoin du terrain. Les deux avancent ensemble, avant même l'ouverture des portes à Yaoundé.",
+    "Quel que soit votre secteur, où que se trouve votre commune, quel que soit le partenaire qu'il vous manque — nous faisons la connexion.",
+    "Autour de chaque opportunité qualifiée, Back2Mboa active un écosystème complet : maires, diaspora, investisseurs, régulateurs, entreprises et financeurs. Là où les autres s'arrêtent à la rencontre, nous allons jusqu'au projet exécuté.",
   ],
   twinTitle: "Digital Twin™",
   twinBody:
-    "Avant les trois jours à Yaoundé, le jumeau numérique rend les opportunités visibles, publie les Mayor Calls™ et prépare les rendez-vous.",
-  twinCta: "Explorer les potentialités",
-  twinCtaHref: "#potentialites",
+    "Le jumeau numérique de l'écosystème : les opportunités sont visibles, les Mayor Calls™ publiés et les rencontres préparées — avant même les trois jours.",
+  twinCta: "Explorer le Digital Twin →",
   mayorTitle: "Mayor Calls™",
   mayorBody:
-    "Un besoin territorial documenté, adressé aux bonnes personnes, avec les régulateurs là où il faut pour débloquer le dossier.",
-  mayorBullets: [
-    "Qualifié selon la méthode CAP™",
-    "Décideurs identifiés",
-  ],
-  mayorCta: "Voir les mairies championnes",
-  mayorCtaHref: "#mairies-championnes",
+    "Le besoin d'un territoire, documenté et diffusé aux bons interlocuteurs — avec l'accès aux régulateurs qui fluidifient son atterrissage.",
+  mayorCta: "Découvrir les Mayor Calls →",
+  capCard: "Opportunités qualifiées selon la méthode CAP™",
+  decidersCard: "Accès direct aux décideurs",
 };

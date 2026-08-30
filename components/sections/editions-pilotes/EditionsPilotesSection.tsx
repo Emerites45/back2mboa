@@ -93,7 +93,11 @@ function ColumnCarousel({
   );
 
   useEffect(() => {
-    const t = window.setTimeout(() => setReady(true), Math.max(0, startDelayMs));
+    if (startDelayMs <= 0) {
+      setReady(true);
+      return;
+    }
+    const t = window.setTimeout(() => setReady(true), startDelayMs);
     return () => window.clearTimeout(t);
   }, [startDelayMs]);
 

@@ -1,8 +1,28 @@
 {
-    "workbench.editorAssociations": {
-        "*.parquet": "duckdb.dataFileViewer",
-        "*.csv": "duckdb.dataFileViewer",
-        "*.tsv": "duckdb.dataFileViewer",
-        "*.xlsx": "duckdb.dataFileViewer"
+  "workbench.editorAssociations": {
+    "*.parquet": "duckdb.dataFileViewer",
+    "*.csv": "duckdb.dataFileViewer",
+    "*.tsv": "duckdb.dataFileViewer",
+    "*.xlsx": "duckdb.dataFileViewer"
+  },
+  "cSpell.language": "en,fr",
+  "cSpell.enabled": true,
+  "cSpell.diagnosticLevel": "Hint",
+  "cSpell.allowCompoundWords": true,
+  "cSpell.customDictionaries": {
+    "back2mboa-fr": {
+      "name": "back2mboa-fr",
+      "path": "${workspaceFolder}/cspell-fr-project.txt",
+      "addWords": true,
+      "scope": "workspace"
     }
+  },
+  "cSpell.dictionaries": ["back2mboa-fr"],
+  "cSpell.ignorePaths": [
+    "node_modules/**",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "public/**"
+  ]
 }

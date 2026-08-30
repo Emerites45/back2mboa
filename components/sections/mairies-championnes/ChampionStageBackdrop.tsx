@@ -17,7 +17,7 @@ export function ChampionStageBackdrop({
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
-  const [readyVideo, setReadyVideo] = useState<string | undefined>();
+  const [videoReady, setVideoReady] = useState(false);
   const [reduce, setReduce] = useState(false);
 
   const useVideo = Boolean(video) && !reduce;
@@ -44,6 +44,10 @@ export function ChampionStageBackdrop({
   }, []);
 
   useEffect(() => {
+    setVideoReady(false);
+  }, [video]);
+
+  useEffect(() => {
     const el = videoRef.current;
     if (!el || !useVideo) return;
 
@@ -59,9 +63,9 @@ export function ChampionStageBackdrop({
     }
 
     el.pause();
-  }, [active, inView, useVideo, video]);
+  }, [active, inView, useVideo, video, videoReady]);
 
-  const showVideo = useVideo && readyVideo === video;
+  const showVideo = useVideo && videoReady;
 
   return (
     <div ref={rootRef} className="champ-stage-backdrop" aria-hidden="true">
@@ -85,9 +89,9 @@ export function ChampionStageBackdrop({
           playsInline
           autoPlay
           preload="auto"
-          onLoadedData={() => setReadyVideo(video)}
-          onCanPlay={() => setReadyVideo(video)}
-          onCanPlayThrough={() => setReadyVideo(video)}
+          onLoadedData={() => setVideoReady(true)}
+          onCanPlay={() => setVideoReady(true)}
+          onCanPlayThrough={() => setVideoReady(true)}
         />
       ) : null}
     </div>

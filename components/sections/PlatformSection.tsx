@@ -60,7 +60,7 @@ export function PlatformSection() {
               qui identifie, structure, rend visibles et connecte des opportunités économiques réelles avec les personnes capables de les transformer en projets concrets.
             </p>
             <p>
-              Là où les problèmes rencontrent leurs Solutionneurs.™ Nous ouvrons les voies, levons les obstacles, connectons les bonnes personnes et accompagnons les projets jusqu’à la prospérité durable.
+              Là où les problèmes rencontrent leurs Solutionneurs.™ Nous ouvrons les voies, levons les obstacles, connectons les bonnes personnes et accompagnons les projets jusqu'à la prospérité durable.
             </p>
           </div>
         </div>
@@ -94,7 +94,7 @@ export function PlatformSection() {
         {/* Bloc Citation Sombre / Dark Banner */}
         <div className="bg-[#051124] text-white rounded-2xl p-8 sm:p-12 text-center shadow-xl border border-slate-800 space-y-6">
           <blockquote className="text-lg sm:text-2xl font-bold max-w-3xl mx-auto leading-snug">
-            « Du besoin à la solution, de la solution au partenariat, du partenariat à l’investissement, de l’investissement à l’impact. »
+            "Du besoin à la solution, de la solution au partenariat, du partenariat à l'investissement, de l'investissement à l'impact."
           </blockquote>
 
           <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest">

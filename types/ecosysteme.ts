@@ -1,15 +1,15 @@
 export type EcosystemeCopy = {
-  titleBefore: string;
+  kicker: string;
+  titleLines: string[];
   highlight: string;
-  titleAfter: string;
-  paragraphs: [string, string, string];
+  titleEnd: string;
+  paragraphs: [string, string];
   twinTitle: string;
   twinBody: string;
   twinCta: string;
-  twinCtaHref: string;
   mayorTitle: string;
   mayorBody: string;
-  mayorBullets: [string, string];
   mayorCta: string;
-  mayorCtaHref: string;
+  capCard: string;
+  decidersCard: string;
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { POURQUOI_COPY } from "@/data/pourquoi";
 import type { PourquoiStars } from "@/types/pourquoi";
@@ -46,6 +46,10 @@ export function PourquoiSection() {
 
   const active = copy.rows.find((row) => row.id === activeId) ?? copy.rows[0];
 
+  useEffect(() => {
+    if (!activeId && copy.rows[0]) setActiveId(copy.rows[0].id);
+  }, [activeId, copy.rows]);
+
   return (
     <section id="pourquoi" className="pourquoi" aria-labelledby="pourquoi-title">
       <div className="pourquoi-inner">
@@ -86,7 +90,7 @@ export function PourquoiSection() {
                     type="button"
                     className={`pourquoi-row is-body${on ? " is-on" : ""}`}
                     role="row"
-                    data-active={on}
+                    aria-pressed={on}
                     onClick={() => setActiveId(row.id)}
                     onMouseEnter={() => setActiveId(row.id)}
                     onFocus={() => setActiveId(row.id)}

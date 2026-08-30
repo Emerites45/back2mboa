@@ -17,7 +17,7 @@ export type BonnePortePanel = {
   id: BonnePortePanelId;
   tabLabel: string;
   title: string;
-  titleLines?: [string, string];
+  titleLines?: string[];
   lead: string;
   ctaHref: string;
   cta: string;
@@ -36,8 +36,5 @@ export type BonnePorteCopy = {
   fluxLeft: BonnePorteFluxLeg;
   fluxRight: BonnePorteFluxLeg;
   fluxMid: string;
-  footMission: { label: string; text: string };
-  footEvent: { label: string; text: string };
-  footProsperity: string;
-  footProsperityHref: string;
+  foot: string[];
 };

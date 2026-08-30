@@ -2,30 +2,25 @@ import type { BonnePorteCopy, BonnePortePanel } from "@/types/bonne-porte";
 
 export const BONNE_PORTE_BG = "/images/bonne-porte/vector-2.webp";
 
-/** Copy — Figma + HTML (contenu panels) */
 export const BONNE_PORTE_COPY: BonnePorteCopy = {
   eyebrow: "La bonne porte",
   title: "La Bonne Porte, Le Bon Gain.",
-  subtitle: "Qui êtes-vous ?",
+  subtitle:
+    "Six profils, six réalités. Pour chacun : le gain d’abord — puis comment Back2Mboa le débloque. Prospérité à double sens entre territoires et diaspora.",
   fluxLeft: {
     kicker: "1 → Diaspora (1–7 déc.)",
-    body: "Les territoires vont vers la diaspora : salon le 4 déc., visites d’entreprises, ports, deals. Mission 1–7 décembre.",
+    body: "Les territoires vont vers la diaspora : salon le 4 déc., visites d’entreprises, ports, deals. Mission élargie Back2Mboa du 1er au 7 décembre.",
   },
   fluxRight: {
-    kicker: "2 → Territoires (16–17 déc.)",
-    body: "La diaspora vient aux territoires : Musée National, Yaoundé. Mayor Calls, Deal Rooms, signatures.",
+    kicker: "2 → Territoires (16–18 déc.)",
+    body: "La diaspora vient aux territoires : Back2Mboa au Musée National, Yaoundé. Mayor Calls, Deal Rooms, signatures.",
   },
   fluxMid: "Double flux",
-  footMission: {
-    label: "Mission / salon diaspora",
-    text: " : 1–7 décembre 2026 (salon le 4)",
-  },
-  footEvent: {
-    label: "Back2Mboa",
-    text: " : 16–17 décembre 2026 — Musée National, Yaoundé",
-  },
-  footProsperity: "Prospérité à double sens : Territoires ↔ Diaspora",
-  footProsperityHref: "#impact",
+  foot: [
+    "Mission / salon diaspora : 1–7 décembre 2026 (salon le 4)",
+    "Back2Mboa : 16–18 décembre 2026 — Musée National, Yaoundé",
+    "Prospérité à double sens · Territoires ⇄ Diaspora",
+  ],
 };
 
 export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
@@ -38,19 +33,19 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     cta: "Je publie mon territoire",
     gains: [
       {
-        now: "Opportunités invisibles, pas d’investisseurs sérieux",
-        next: "Fiches CAP, pitchs, mission 1–7 + évent. 10–17 déc.",
+        now: "Opportunités invisibles, peu d’investisseurs sérieux",
+        next: "Fiches CAP, pitchs, mission 1–7 déc. + event 16–18 déc.",
         impact:
-          "Gain : projets financés et recettes municipales (fiscalité, PPP, services).",
+          "Gain : projets financés et recettes municipales (fiscalité, PPP, services) qui rentrent enfin.",
       },
       {
         now: "Fiscalité locale sous-optimale, contribuables mal mappés",
-        next: "Cartographie des revenus, collecte digitale",
+        next: "Cartographie des revenus, collecte digitale, outils prêts à l’emploi",
         impact: "Gain : plus de cash en caisse sans attendre une réforme nationale.",
       },
       {
         now: "Peu de visibilité auprès de la diaspora et des PTF",
-        next: "Site diaspora-friendly, marketing territorial, mission + salon",
+        next: "Site diaspora-friendly, marketing territorial, présence mission + salon",
         impact:
           "Gain : territoire « choisissable » — les bons partenaires viennent à vous.",
       },
@@ -77,7 +72,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
       },
       {
         now: "La mission diaspora / event se limitent souvent au discours",
-        next: "1–7 déc. (visites, salon 4 déc.) puis 16–17 déc. (closing)",
+        next: "1–7 déc. (visites, salon 4 déc.) puis 16–18 déc. (closing)",
         impact:
           "Gain : un pipeline réel Europe → Cameroun, avec des dates et des interlocuteurs.",
       },
@@ -105,7 +100,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
       },
       {
         now: "Visibilité limitée sur les allers-retours diaspora",
-        next: "Mission 1–7 déc. + event 16–17 déc. : deux portes d’entrée",
+        next: "Mission 1–7 déc. + event 16–18 déc. : deux portes d’entrée",
         impact: "Gain : double fenêtre pour sourcer, rencontrer, signer.",
       },
     ],
@@ -130,7 +125,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
       },
       {
         now: "Missions et salons peu reliés aux deals territoriaux",
-        next: "1–7 déc. (salon 4 déc.) branché sur 16–17 déc. Yaoundé",
+        next: "1–7 déc. (salon 4 déc.) branché sur 16–18 déc. Yaoundé",
         impact:
           "Gain : une séquence diplomatique et économique cohérente, mesurable.",
       },
@@ -146,7 +141,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     gains: [
       {
         now: "Sujets diaspora souvent émotionnels, peu de preuves économiques",
-        next: "Angles deals, mairies, mission 1–7 déc., signatures 16–17 déc.",
+        next: "Angles deals, mairies, mission 1–7 déc., signatures 16–18 déc.",
         impact:
           "Gain : contenus différenciants, audience engagée, partenaires médias valorisés.",
       },
@@ -174,7 +169,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     gains: [
       {
         now: "Sponsoring événementiel à faible ROI mesurable",
-        next: "Visibilité mission 1–7 déc. + event 16–17 déc. + plateforme",
+        next: "Visibilité mission 1–7 déc. + event 16–18 déc. + plateforme",
         impact:
           "Gain : leads qualifiés, image « bâtisseur », accès décideurs CTD et diaspora.",
       },
@@ -202,7 +197,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     gains: [
       {
         now: "Mécénat dispersé, peu relié aux territoires et aux flux touristiques",
-        next: "Ancrage Limbé I (tourisme) + mission 1–7 déc. + event 16–17 déc.",
+        next: "Ancrage Limbé I (tourisme) + mission 1–7 déc. + event 16–18 déc.",
         impact:
           "Gain : visibilité premium + retombées mesurables (visiteurs, nuitées, recettes locales).",
       },
@@ -217,12 +212,6 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
         next: "Mayor Calls tourisme / culture, Deal Rooms, co-financement privé",
         impact:
           "Gain : projets patrimoniaux et touristiques portés à l’investissement — mécénat qui ouvre des deals.",
-      },
-      {
-        now: "Image de marque peu associée au développement territorial africain",
-        next: "Naming, parcours visiteurs, contenus, invitations VIP mission + salon 4 déc.",
-        impact:
-          "Gain : positionnement « bâtisseur » auprès des décideurs, de la diaspora et des médias d’influence.",
       },
     ],
   },

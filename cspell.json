@@ -1,0 +1,34 @@
+{
+  "version": "0.2",
+  "language": "en,fr",
+  "dictionaryDefinitions": [
+    {
+      "name": "back2mboa-fr",
+      "path": "./cspell-fr-project.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["back2mboa-fr"],
+  "words": [
+    "Back2Mboa",
+    "Mboa",
+    "Yaoundé",
+    "CTD",
+    "Solutionneurs",
+    "Harambe",
+    "Mukam",
+    "Wandji",
+    "Afrilanthropy",
+    "glassmorphism"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "public/**"
+  ],
+  "allowCompoundWords": true
+}

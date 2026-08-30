@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Bricolage_Grotesque, Fraunces, Great_Vibes, IBM_Plex_Mono, IBM_Plex_Sans, Inter, JetBrains_Mono, Manrope, Oswald, Roboto } from 'next/font/google';
+import { Bricolage_Grotesque, Fraunces, IBM_Plex_Mono, IBM_Plex_Sans, Inter, JetBrains_Mono, Manrope, Oswald, Roboto } from 'next/font/google';
 import './globals.css';
 
 const manrope = Manrope({
@@ -54,17 +54,11 @@ const fraunces = Fraunces({
   variable: '--font-fraunces',
 });
 
-const greatVibes = Great_Vibes({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-great-vibes',
-});
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="fr"
-      className={`${manrope.variable} ${oswald.variable} ${roboto.variable} ${inter.variable} ${jetbrains.variable} ${ibmSans.variable} ${ibmMono.variable} ${bricolage.variable} ${fraunces.variable} ${greatVibes.variable}`}
+      className={`${manrope.variable} ${oswald.variable} ${roboto.variable} ${inter.variable} ${jetbrains.variable} ${ibmSans.variable} ${ibmMono.variable} ${bricolage.variable} ${fraunces.variable}`}
       style={{ ['--font-ibm-plex-mono' as string]: 'var(--font-ibm-mono)' }}
     >
       <body className="bg-black text-white font-sans antialiased overflow-x-hidden">

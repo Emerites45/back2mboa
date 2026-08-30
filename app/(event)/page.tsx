@@ -8,12 +8,15 @@ import { MethodeSection } from "@/components/sections/methode/MethodeSection";
 import { ParcoursSection } from "@/components/sections/ParcoursSection";
 import { ResultatsSection } from "@/components/sections/ResultatsSection";
 import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
+import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
 import { EditionsPilotesSection } from "@/components/sections/editions-pilotes/EditionsPilotesSection";
 import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
+import { TeamSection } from "@/components/sections/team/TeamSection";
 import { LiaisonSection } from "@/components/sections/LiaisonSection";
 import { MuseeSection } from "@/components/sections/MuseeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
 import { ContrasteSection } from "@/components/sections/contraste/ContrasteSection";
+import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 import { PourquoiSection } from "@/components/sections/pourquoi/PourquoiSection";
 import { ModeleSection } from "@/components/sections/modele/ModeleSection";
 import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
@@ -34,17 +37,27 @@ import {
   BilletsPartenairesSection,
 } from "@/components/sections/billets/BilletsSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
+import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
+import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
 
 /**
- * Assemblage landing — Paul-Alain + Williams.
- * Williams : Preuve institutions, Billets ×2, Stories actif.
- * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Bâtisseurs, Éditions pilotes, Prélude…
+ * Assemblage landing — Paul-Alain (haut) × Williams (bas).
+ *
+ * Haut : parcours Paul-Alain (versions finales).
+ * Bas : blocs signature Williams (Preuves, Comparatif, Team, Gate, Footer).
+ *
+ * Note intégration : Bonne Porte + Écosystème restent dans le parcours haut
+ * mais utilisent le code retravaillé Williams (restauré depuis a1edd76).
  */
 export default function HomePage() {
   return (
     <>
       <SmoothScroll />
+
+      {/* ═══════════════════════════════════════════════
+          PAUL-ALAIN — parcours final (toutes sections)
+          ═══════════════════════════════════════════════ */}
       <HeroSection />
       <ContrasteSection />
       <PourquoiSection />
@@ -77,6 +90,15 @@ export default function HomePage() {
       <RessourcesSection />
       <BilletsSection />
       <BilletsPartenairesSection />
+
+      {/* ═══════════════════════════════════════════════
+          WILLIAMS — sections signature
+          ═══════════════════════════════════════════════ */}
+      <PreuvesPilotesSection />
+      <ComparatifSection />
+      <TeamSection />
+      <NewsletterGateSection />
+      <FooterRevealZone />
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

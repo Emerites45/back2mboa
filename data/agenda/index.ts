@@ -17,8 +17,9 @@ export const AGENDA_COPY: AgendaCopy = {
       tabTitle: "Masterclass CTD",
       date: "08 octobre 2026",
       location: "Europe (Paris / Lyon / Bordeaux)",
-      body: "Préparer les maires et leurs équipes : marketing territorial, cartes de revenus, pitch investisseur façon Shark Tank, outils numériques prêts-à-l’emploi pour accroître les recettes.",
+      body: "Préparer les maires et leurs équipes : marketing territorial, cartes de revenus, pitch investisseur façon Shark Tank, outils numériques prêts-à-l'emploi pour accroître les recettes.",
       accent: "#2f9e6a",
+      image: "/images/agenda/slide-1-900.webp",
     },
     {
       id: "mission",
@@ -31,6 +32,7 @@ export const AGENDA_COPY: AgendaCopy = {
       location: "Europe",
       body: "Les territoires vont vers la diaspora : matching Solutionneurs et communes, visites, dossiers CAP prêts pour Yaoundé.",
       accent: "#3b82f6",
+      image: "/images/agenda/slide-2-900.webp",
     },
     {
       id: "webinar",
@@ -41,8 +43,9 @@ export const AGENDA_COPY: AgendaCopy = {
       tabTitle: "Webinaire Digital Twin™",
       date: "Novembre 2026",
       location: "En ligne",
-      body: "Le jumeau numérique de l’écosystème : opportunités visibles, Mayor Calls publiés, rencontres préparées — avant les deux jours de décembre.",
+      body: "Le jumeau numérique de l'écosystème : opportunités visibles, Mayor Calls publiés, rencontres préparées — avant les deux jours de décembre.",
       accent: "#14b8a6",
+      image: "/images/agenda/slide-3-900.webp",
     },
     {
       id: "event",
@@ -55,6 +58,7 @@ export const AGENDA_COPY: AgendaCopy = {
       location: "Musée National, Yaoundé",
       body: "Cinq cents participants. Deal Rooms mairies × Solutionneurs × financeurs. Six mairies championnes, six secteurs.",
       accent: "#c45c4a",
+      image: "/images/agenda/slide-4-900.webp",
     },
   ],
 };

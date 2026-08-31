@@ -10,6 +10,8 @@ export type AgendaEvent = {
   body: string;
   /** Couleur pastille onglet */
   accent: string;
+  /** Image de couverture de la slide */
+  image?: string;
 };
 
 export type AgendaCopy = {

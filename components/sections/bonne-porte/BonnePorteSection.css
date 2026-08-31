@@ -136,8 +136,9 @@
 .porte-flux-body {
   margin: 0;
   font-size: var(--porte-type-flux-body, 0.84rem);
+  font-weight: 500;
   line-height: 1.45;
-  color: var(--porte-muted);
+  color: var(--porte-ink);
 }
 
 .porte-flux-divider {

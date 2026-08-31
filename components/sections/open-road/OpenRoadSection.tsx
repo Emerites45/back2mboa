@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { OPEN_ROAD_COPY } from "@/data/open-road";
 import "./OpenRoadSection.css";
 
 export function OpenRoadSection() {
-  const { programs, autoplayMs, brand, watchLabel } = OPEN_ROAD_COPY;
+  const { programs, autoplayMs, watchLabel } = OPEN_ROAD_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
@@ -101,9 +102,14 @@ export function OpenRoadSection() {
       </div>
 
       <div className="open-road-ui">
-        <p className="open-road-brand" aria-label={brand}>
-          BACK <span>2</span> MBOA
-        </p>
+        <button
+          type="button"
+          className="open-road-next"
+          onClick={() => go(index + 1)}
+          aria-label="Programme suivant"
+        >
+          <ArrowUpRight size={20} strokeWidth={2.4} aria-hidden="true" />
+        </button>
 
         <div className="open-road-footer">
           <div className="open-road-main">

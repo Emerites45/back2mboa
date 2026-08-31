@@ -32,7 +32,7 @@ export function HeroLandingSection() {
               visite.
             </p>
 
-            <div className="acts">
+            <div className="acts" role="group" aria-label="Actions principales">
               <Link className="btn btn-1" href="/inscription">
                 Demander une invitation
               </Link>

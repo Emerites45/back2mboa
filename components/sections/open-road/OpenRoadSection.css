@@ -124,36 +124,40 @@
 }
 
 .open-road-ui .open-road-watch,
-.open-road-ui .open-road-item {
+.open-road-ui .open-road-item,
+.open-road-ui .open-road-next {
   pointer-events: auto;
 }
 
-.open-road-brand {
+/* Bouton flèche — même DA que Stories (pastille jaune, flèche en haut à droite) */
+.open-road-next {
   position: absolute;
   top: max(var(--or-pad-y), env(safe-area-inset-top));
-  left: max(var(--or-pad-x), env(safe-area-inset-left));
+  right: max(var(--or-pad-x), env(safe-area-inset-right));
   z-index: 2;
-  margin: 0;
-  font-family: var(--or-display);
-  font-size: clamp(1.05rem, 1.8vw, 1.28rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--brand-yellow);
+  color: var(--brand-ink);
+  cursor: pointer;
+  transition: transform 0.18s var(--or-ease);
 }
 
-.open-road-brand span {
-  display: inline-block;
-  margin-inline: 0.06em;
-  font-family: var(--or-script);
-  font-size: 1.55em;
-  font-style: italic;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 0.7;
-  text-transform: none;
-  transform: translateY(0.08em);
+.open-road-next:hover {
+  transform: scale(1.08);
+}
+
+.open-road-next:active {
+  transform: scale(0.94);
+}
+
+.open-road-next:focus-visible {
+  outline: 2px solid var(--or-ink);
+  outline-offset: 3px;
 }
 
 .open-road-footer {
@@ -417,7 +421,8 @@
   .open-road-title,
   .open-road-item,
   .open-road-slide,
-  .open-road-progress {
+  .open-road-progress,
+  .open-road-next {
     animation: none !important;
     transition: none !important;
   }

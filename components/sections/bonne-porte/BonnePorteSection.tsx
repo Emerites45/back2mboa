@@ -285,15 +285,15 @@ export function BonnePorteSection() {
           })}
         </div>
 
-        <div
+            <div
           className="porte-panel is-active"
           id={`${uid}-panel`}
-          role="tabpanel"
+              role="tabpanel"
           aria-labelledby={`${uid}-tab-${panel.id}`}
           key={panel.id}
         >
           <PanelContent panel={panel} />
-        </div>
+            </div>
 
         <footer className="porte-foot">
           <span>
@@ -308,7 +308,7 @@ export function BonnePorteSection() {
             {copy.footProsperity}
           </Link>
         </footer>
-      </div>
-    </section>
+        </div>
+      </section>
   );
 }

@@ -1,100 +1,154 @@
 import Link from "next/link";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { HeroLandingSection } from "@/components/sections/hero-landing/HeroLandingSection";
-import { ImpactSection } from "@/components/sections/ImpactSection";
-import { StoriesSection } from "@/components/sections/StoriesSection";
-import { MethodeSection } from "@/components/sections/methode/MethodeSection";
-import { ParcoursSection } from "@/components/sections/ParcoursSection";
-import { ResultatsSection } from "@/components/sections/ResultatsSection";
-import { PreuveChiffresSection as PreuveChiffresImpact } from "@/components/sections/PreuveChiffresSection";
+import { TerritorySection } from "@/components/sections/territory-section";
 import { EditionsPilotesSection } from "@/components/sections/editions-pilotes/EditionsPilotesSection";
-import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
-import { LiaisonSection } from "@/components/sections/LiaisonSection";
-import { MuseeSection } from "@/components/sections/MuseeSection";
-import { TickerSection } from "@/components/sections/TickerSection";
+import { ImpactSection } from "@/components/sections/ImpactSection";
 import { ContrasteSection } from "@/components/sections/contraste/ContrasteSection";
 import { PourquoiSection } from "@/components/sections/pourquoi/PourquoiSection";
-import { ModeleSection } from "@/components/sections/modele/ModeleSection";
-import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
-import { PotentialitesSection } from "@/components/sections/potentialites/PotentialitesSection";
-import { EcosystemeSection } from "@/components/sections/ecosysteme/EcosystemeSection";
-import { PlateformeSection } from "@/components/sections/plateforme/PlateformeSection";
-import { OpenRoadSection } from "@/components/sections/open-road/OpenRoadSection";
-import { HomecomingSection } from "@/components/sections/homecoming/HomecomingSection";
-import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
-import { NecessiteSection } from "@/components/sections/necessite/NecessiteSection";
-import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
-import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSection";
-import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
-import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
-import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
-import { BilletsSection, BilletsPartenairesSection } from "@/components/sections/billets/BilletsSection";
+import { BatisseursSection } from "@/components/sections/batisseurs/BatisseursSection";
 import { TeamSection } from "@/components/sections/team/TeamSection";
+import { BonnePorteSection } from "@/components/sections/bonne-porte/BonnePorteSection";
+import { OpenRoadSection } from "@/components/sections/open-road/OpenRoadSection";
+import { MethodeSection } from "@/components/sections/methode/MethodeSection";
+import { MairiesChampionnesSection } from "@/components/sections/mairies-championnes/MairiesChampionnesSection";
+import { ModeleSection } from "@/components/sections/modele/ModeleSection";
+import { PotentialitesSection } from "@/components/sections/potentialites/PotentialitesSection";
+import { HomecomingSection } from "@/components/sections/homecoming/HomecomingSection";
+import { ParcoursSection } from "@/components/sections/ParcoursSection";
+import { ResultatsSection } from "@/components/sections/ResultatsSection";
+import { EcosystemeSection } from "@/components/sections/ecosysteme/EcosystemeSection";
+import { PreludeSection } from "@/components/sections/prelude/PreludeSection";
+import { LiaisonSection } from "@/components/sections/LiaisonSection";
+import { PassageSection } from "@/components/sections/passage/PassageSection";
+import { BoulevardSection } from "@/components/sections/boulevard/BoulevardSection";
+import { TickerSection } from "@/components/sections/TickerSection";
+import { HeroLandingSection } from "@/components/sections/hero-landing/HeroLandingSection";
+import { MuseeSection } from "@/components/sections/MuseeSection";
+import { PartenairesSection } from "@/components/sections/partenaires/PartenairesSection";
+import { BeforeDuringAfterSection } from "@/components/sections/before-during-after/BeforeDuringAfterSection";
+import { StoriesSection } from "@/components/sections/StoriesSection";
+import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
+import {
+  BilletsPartenairesSection,
+} from "@/components/sections/billets/BilletsSection";
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
-import { PreuvesPilotesSection } from "@/components/sections/preuves-pilotes/PreuvesPilotesSection";
-import { ComparatifSection } from "@/components/sections/comparatif/ComparatifSection";
 
 /**
- * Assemblage landing — Paul-Alain + Williams.
- * Williams : Preuve institutions, Billets ×2, Stories actif.
- * Paul-Alain : Pourquoi, Open Road, Homecoming, Bonne Porte, Bâtisseurs, Éditions pilotes, Prélude…
+ * Landing — architecture produit (slots 1→30 + pauses + footer).
+ * Ordre = brief produit Back2Mboa (affichage = ordre JSX ci-dessous).
  */
 export default function HomePage() {
   return (
     <>
       <SmoothScroll />
+
+      {/* ── 1. Hero ─────────────────────────────────────── */}
       <HeroSection />
-      <PreuvesPilotesSection />
+
+      {/* ── 2. Territoires / Paris ↔ Guider ─────────────── */}
+      <TerritorySection />
+
+      {/* ── 3. Les éditions pilotes ont prouvé le modèle ─ */}
+      <EditionsPilotesSection />
+
+      {/* ── 4. Chiffres principaux (montagnes) ─────────── */}
       <ImpactSection />
+
+      {/* ── 5. Avant Back2Mboa : 5 acteurs ─────────────── */}
       <ContrasteSection />
-      <ComparatifSection />
+
+      {/* ── 6. Tableau — pas un salon de plus ──────────── */}
+      <PourquoiSection />
+
+      {/* ── 7. Chiffres Mme Olivia / Bâtisseurs ────────── */}
+      <BatisseursSection />
+
+      {/* ── 8. Présentation de l’équipe ────────────────── */}
+      <TeamSection />
+
+      {/* ── 9. Qui êtes-vous ? (Bonne porte) ───────────── */}
       <BonnePorteSection />
+
+      {/* ── PAUSE — diapo images / pop-up ──────────────── */}
       <OpenRoadSection />
+
+      {/* ── 10. Méthode CAP™ ───────────────────────────── */}
       <MethodeSection />
+
+      {/* ── 11. 6 mairies championnes ──────────────────── */}
       <MairiesChampionnesSection />
+
+      {/* ── 12. 6 secteurs (cartes) ────────────────────── */}
       <ModeleSection />
+
+      {/* ── 13. Carte interactive Cameroun ─────────────── */}
       <PotentialitesSection />
+
+      {/* ── PAUSE — diapo images / pop-up ──────────────── */}
+      <HomecomingSection />
+
+      {/* ── 14. 7 étapes jusqu’au résultat ─────────────── */}
       <ParcoursSection />
+
+      {/* ── 15. Résultats des éditions pilotes ─────────── */}
       <ResultatsSection />
-      <PreuveChiffresImpact />
+
+      {/* ── 16. Digital Twin & Mayor Calls ─────────────── */}
       <EcosystemeSection />
+
+      {/* ── 17. Salon Diaspora PARIS — MINREX ──────────── */}
+      {/* ── 18. Masterclass — Demo Day MINREX ──────────── */}
       <PreludeSection />
+
+      {/* ── 19. La Prospérité à Double Sens ────────────── */}
       <LiaisonSection />
+
+      {/* ── PAUSE — diapo images / pop-up ──────────────── */}
+      <PassageSection />
+
+      {/* ── 20. Boulevard d’opportunités ───────────────── */}
+      <BoulevardSection />
+      <TickerSection />
+
+      {/* ── 21. Introduction édition B2M 2026 ──────────── */}
+      <HeroLandingSection />
+
+      {/* ── 22. Musée National ─────────────────────────── */}
       <MuseeSection />
 
-      <TickerSection />
-      <BoulevardSection />
-      <HeroLandingSection />
-      <BeforeDuringAfterSection />
-      <BatisseursSection />
-      <TeamSection />
-      <PartenairesSection />
-      <StoriesSection />
-      <RessourcesSection />
-      <AgendaSection />
-      {/* <BilletsSection /> */}
-      <BilletsPartenairesSection />
-      <PourquoiSection />
-      {/* <EditionsPilotesSection /> */}
-      <NewsletterGateSection />
-      <FooterRevealZone />
-      {/* <NecessiteSection /> */}
-      {/* <PlateformeSection /> */}
-      {/* <OpenRoadSection /> */}
-      {/* <SalonDiasporaSection /> */}
+      {/* ── 23. Édition 2026 & Partenaires ─────────────── */}
+      {/* Slot 23 : contenu dédié à brancher (Franck / combo). */}
 
-      {/*
-        Sections présentes chez new-paul-alain mais absentes de ton agencement (Williams) :
-        décommenter si souhaité.
-        <PourquoiSection />
-        <NecessiteSection />
-        <PlateformeSection />
-        <HomecomingSection />
-      */}
+      {/* ── 24. Partenaires ───────────────────────────── */}
+      <PartenairesSection />
+
+      {/* ── 25. Before · During · After ────────────────── */}
+      <BeforeDuringAfterSection />
+
+      {/* ── 26. Real stories ───────────────────────────── */}
+      <StoriesSection />
+
+      {/* ── 27. Events ─────────────────────────────────── */}
+      <AgendaSection />
+
+      {/* ── 28. FAQ · Dossier média · Guides ───────────── */}
+      <RessourcesSection />
+
+      {/* ── Billets partenaires (hors slots 1–30) ─────── */}
+      <BilletsPartenairesSection />
+
+      {/* ── 29. Carousel Articles ──────────────────────── */}
+      {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
+
+      {/* ── 30. Inscription Newsletter ─────────────────── */}
+      <NewsletterGateSection />
+
+      {/* ── FOOTER + CTA rôles ─────────────────────────── */}
+      <FooterRevealZone />
 
       <div className="fixed bottom-12 right-6 z-50">
         <Button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import {
   CONTRASTE_ACTORS,
   CONTRASTE_COPY,
@@ -8,12 +8,24 @@ import {
 } from "@/data/contraste";
 import "./ContrasteSection.css";
 
+function setCardPointerVars(e: PointerEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  if (r.width <= 0 || r.height <= 0) return;
+  const x = ((e.clientX - r.left) / r.width) * 100;
+  const y = ((e.clientY - r.top) / r.height) * 100;
+  el.style.setProperty("--ct-mx", `${x}%`);
+  el.style.setProperty("--ct-my", `${y}%`);
+}
+
 export function ContrasteSection() {
+  const rootRef = useRef<HTMLElement>(null);
+  const costRef = useRef<HTMLDivElement>(null);
+  const bumpTimer = useRef<number | null>(null);
+  const [inView, setInView] = useState(false);
   const [activeActor, setActiveActor] = useState<string | null>(null);
   const [bumpId, setBumpId] = useState<string | null>(null);
   const [costOpen, setCostOpen] = useState(false);
-  const costRef = useRef<HTMLDivElement>(null);
-  const bumpTimer = useRef<number | null>(null);
 
   const activeCostId =
     CONTRASTE_ACTORS.find((actor) => actor.id === activeActor)?.costId ?? null;
@@ -21,8 +33,28 @@ export function ContrasteSection() {
   const bump = (id: string) => {
     if (bumpTimer.current) window.clearTimeout(bumpTimer.current);
     setBumpId(id);
-    bumpTimer.current = window.setTimeout(() => setBumpId(null), 420);
+    bumpTimer.current = window.setTimeout(() => setBumpId(null), 520);
   };
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setInView(true);
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -6% 0px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const node = costRef.current;
@@ -48,8 +80,9 @@ export function ContrasteSection() {
 
   return (
     <section
+      ref={rootRef}
       id="contraste"
-      className="contraste-section"
+      className={`contraste-section${inView ? " is-inview" : ""}`}
       aria-labelledby="contraste-title"
     >
       <div className="contraste-container">
@@ -74,44 +107,46 @@ export function ContrasteSection() {
               role="list"
               onMouseLeave={() => setActiveActor(null)}
             >
-            {CONTRASTE_ACTORS.map((actor) => {
-              const on = activeActor === actor.id;
-              const dimmed = activeActor !== null && !on;
-              return (
-                <article
-                  key={actor.id}
-                  role="listitem"
-                  className={`contraste-card contraste-actor${on ? " is-on" : ""}${dimmed ? " is-dim" : ""}${bumpId === actor.id ? " is-bump" : ""}`}
-                  tabIndex={0}
-                  onPointerEnter={() => setActiveActor(actor.id)}
-                  onPointerDown={() => {
-                    setActiveActor(actor.id);
-                    bump(actor.id);
-                  }}
-                  onFocus={() => {
-                    setActiveActor(actor.id);
-                    bump(actor.id);
-                  }}
-                  onBlur={() => setActiveActor(null)}
-                  onClick={() => {
-                    setActiveActor(actor.id);
-                    bump(actor.id);
-                    setCostOpen(true);
-                    costRef.current?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "nearest",
-                    });
-                  }}
-                  aria-pressed={on}
-                >
-                  <h3 className="contraste-card-title">{actor.label}</h3>
-                  <p className="contraste-card-quote">« {actor.quote} »</p>
-                  <p className="contraste-card-tags">
-                    {actor.sentiments.join(" · ")}
-                  </p>
-                </article>
-              );
-            })}
+              {CONTRASTE_ACTORS.map((actor, i) => {
+                const on = activeActor === actor.id;
+                const dimmed = activeActor !== null && !on;
+                return (
+                  <article
+                    key={actor.id}
+                    role="listitem"
+                    className={`contraste-card contraste-actor${on ? " is-on" : ""}${dimmed ? " is-dim" : ""}${bumpId === actor.id ? " is-bump" : ""}`}
+                    style={{ ["--ct-i" as string]: i }}
+                    tabIndex={0}
+                    onPointerEnter={() => setActiveActor(actor.id)}
+                    onPointerMove={setCardPointerVars}
+                    onPointerDown={() => {
+                      setActiveActor(actor.id);
+                      bump(actor.id);
+                    }}
+                    onFocus={() => {
+                      setActiveActor(actor.id);
+                      bump(actor.id);
+                    }}
+                    onBlur={() => setActiveActor(null)}
+                    onClick={() => {
+                      setActiveActor(actor.id);
+                      bump(actor.id);
+                      setCostOpen(true);
+                      costRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest",
+                      });
+                    }}
+                    aria-pressed={on}
+                  >
+                    <h3 className="contraste-card-title">{actor.label}</h3>
+                    <p className="contraste-card-quote">« {actor.quote} »</p>
+                    <p className="contraste-card-tags">
+                      {actor.sentiments.join(" · ")}
+                    </p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -135,6 +170,7 @@ export function ContrasteSection() {
                       className={`contraste-card contraste-cost${linked ? " is-linked" : ""}${bumpId === cost.id ? " is-bump" : ""}`}
                       style={{ ["--ct-i" as string]: i }}
                       tabIndex={0}
+                      onPointerMove={setCardPointerVars}
                       onPointerDown={() => bump(cost.id)}
                       onFocus={() => bump(cost.id)}
                       onClick={() => bump(cost.id)}

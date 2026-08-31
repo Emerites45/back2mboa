@@ -21,13 +21,13 @@ export interface SlideData {
 export const SLIDES_DATA: SlideData[] = [
   {
     id: 1,
-    subtitle: "Fundong - Hauts-Plateaux Du Nord-Ouest",
-    titleTop: "LE MATIN OÙ",
-    titleMain: "LA DIASPORA EST REVENUE",
-    quote: "« Monsieur Le Maire, J'ai Analysé Vos Données, Je Pense Que Nous Pouvons Monter Un Projet PPP Avec Des Investisseurs De La Diaspora. Je Serai Chez Vous Dans Deux Semaines, Avec Une Équipe D'ingénieurs. »",
-    description: "Un Maire Ouvre Sa Boite Mail. Un Ingénieur Camerounais Installé À Paris A Lu Les Données De Sa Commune - Et Propose De Venir. Avec Une Équipe.",
-    extraText: "Six Mois Plus Tard, L'eau Coule Dans Douze Villages. L'électricité S'allume Dans Les Centres De Santé. Des Emplois Sont Nés. Ce N'est Pas Un Miracle : C'est Un Mécanisme.\n\nCe Mécanisme, C'est Back2Mboa. Il Transforme Une Opportunité Invisible En Dossier Crédible, Puis En Partenariat, Puis En Projet Exécuté.",
-    videoUrl: "/videos/canyon-final.mp4",
+    subtitle: "African Solutions Activating Prosperity (ASAP)",
+    titleTop: "LE RETOUR",
+    titleMain: "Des BÂTISSEURS-SOLUTIONNEURS",
+    quote: "Le Maire de Babadjou :",
+    description: "Ma commune produit 4.000 tonnes de pommes de terre par an, mais 40% pourrissent sur place, le petit commerce n’arrive pas à absorber ce stock, les agriculteurs ne s’en sortent pas et quelle gâchis pour les recettes communales!",
+    extraText: "Back2Mboa\n\nLe connecte à un Bâtisseur-Solutionneur Camerounais qui travaille chez Pringles (industrie de chips de pomme de terre Arizona, USA), qui apporte partenaires, technicité et solutions de micro-industrialisation.\n\nLes investisseurs & PTF, les régulateurs et le PAK, s’embarquent, les chips s’exportent.",
+    videoUrl: "/videos/Back2Mboa_Covers_hero.mp4",
     posterUrl: "/images/canyon-final_225.jpeg",
     stats: {
       stat1: "12",

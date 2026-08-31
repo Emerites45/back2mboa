@@ -1,23 +1,41 @@
-/* Before / During / After — Approche Back2Mboa */
+/* Before / During / After — norme CARD-REVEAL™ (alignée Modèle · Mairies) */
 
 .b2m-bda {
   --bda-jaune: #ffd506;
-  --bda-jaune-soft: rgba(255, 213, 6, 0.88);
   --bda-vert: #119d63;
   --bda-forest: #0a2b21;
-  --bda-canvas: #fafaf8;
-  --bda-ink: #141816;
-  --bda-muted: #6b736c;
+  --bda-canvas: #f9f9f9;
+  --bda-ink: #1a1a1a;
+  --bda-muted: #5c635f;
   --bda-line: rgba(10, 43, 33, 0.1);
   --bda-radius: 20px;
-  --bda-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bda-font: var(--font-inter), Inter, system-ui, sans-serif;
+  --bda-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --bda-serif: var(--font-fraunces), Fraunces, Georgia, serif;
+  --bda-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --bda-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --bda-reveal-in: 440ms;
+  --bda-reveal-out: 320ms;
+  --bda-stagger: 42ms;
+  --bda-phase-accent: var(--bda-jaune);
+  --bda-glass: rgba(236, 241, 244, 0.58);
+  --bda-glass-strong: rgba(248, 250, 252, 0.78);
+  --bda-glass-border: rgba(255, 255, 255, 0.72);
+  --bda-glass-edge: rgba(255, 255, 255, 0.92);
+  --bda-glass-shadow: 0 -8px 28px rgba(8, 20, 16, 0.1);
+  --bda-glass-blur: 18px;
 
   isolation: isolate;
   position: relative;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100svh;
   background: var(--bda-canvas);
   color: var(--bda-ink);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--bda-font);
+  -webkit-font-smoothing: antialiased;
 }
 
 .b2m-bda *,
@@ -26,15 +44,33 @@
   box-sizing: border-box;
 }
 
+/* Même cadre éditorial que Pourquoi Back2Mboa */
 .bda-inner {
-  max-width: 1180px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: clamp(1rem, 2.2vh, 1.5rem);
+  width: 100%;
+  max-width: min(100%, 92rem);
+  min-height: 100svh;
   margin-inline: auto;
-  padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 3.5vw, 2rem);
+  padding: clamp(1rem, 2.2vh, 1.65rem) clamp(1.35rem, 5.5vw, 4.75rem);
+}
+
+@media (min-width: 768px) {
+  .bda-inner {
+    padding-block: clamp(0.85rem, 2vh, 1.35rem);
+  }
+}
+
+.bda-head {
+  flex: 0 0 auto;
+  max-width: min(54rem, 100%);
 }
 
 .bda-eyebrow {
-  margin: 0 0 0.7rem;
-  font-size: 0.72rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -42,28 +78,36 @@
 }
 
 .bda-title {
-  margin: 0 0 0.65rem;
-  max-width: 22ch;
-  font-family: var(--font-bricolage), system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.75rem, 3.6vw, 2.55rem);
+  margin: 0 0 0.75rem;
+  max-width: min(28ch, 100%);
+  font-family: var(--bda-serif);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.12;
   color: var(--bda-forest);
 }
 
+.bda-title em {
+  font-style: italic;
+}
+
 .bda-sub {
-  margin: 0 0 clamp(1.75rem, 3.5vw, 2.75rem);
-  max-width: 48ch;
-  font-size: 1.02rem;
+  margin: 0;
+  max-width: min(48rem, 100%);
+  font-size: 0.95rem;
   line-height: 1.55;
   color: var(--bda-muted);
 }
 
 .bda-grid {
   display: grid;
+  flex: 1 1 auto;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.1rem, 2.2vw, 1.5rem);
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  align-items: stretch;
+  min-height: 0;
 }
 
 .bda-item {
@@ -71,24 +115,38 @@
   flex-direction: column;
   gap: 0.85rem;
   min-width: 0;
+  min-height: 0;
 }
 
+/* ── Carte ── */
 .bda-card {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: clamp(22rem, 52vh, 34rem);
+  aspect-ratio: auto;
   border-radius: var(--bda-radius);
   background: #e4e0d8;
   cursor: pointer;
   transform: translateZ(0);
   outline: none;
-  transition: box-shadow 0.35s var(--bda-ease), transform 0.35s var(--bda-ease);
+  box-shadow: 0 10px 28px rgba(26, 26, 26, 0.06);
+  opacity: 1;
+  transition:
+    box-shadow var(--bda-reveal-out) var(--bda-ease-out),
+    transform var(--bda-reveal-out) var(--bda-ease-out),
+    opacity var(--bda-reveal-in) var(--bda-ease-reveal);
 }
 
-.bda-item.is-active .bda-card {
+.bda-card:is(:hover, :focus-within) {
   box-shadow: 0 18px 40px rgba(10, 43, 33, 0.14);
   transform: translateY(-2px);
+}
+
+.bda-item.is-active .bda-caption-title {
+  color: var(--bda-vert);
 }
 
 .bda-card:focus-visible {
@@ -98,136 +156,312 @@
 
 .bda-card-img {
   object-fit: cover;
-  transform: scale(1.04);
-  filter: saturate(0.92) brightness(1.02);
+  transform: scale(1.03);
+  filter: saturate(0.94) brightness(1.02);
   transition:
-    transform 0.7s var(--bda-ease),
-    filter 0.55s var(--bda-ease);
+    transform 0.7s var(--bda-ease-reveal),
+    filter 0.55s var(--bda-ease-reveal);
 }
 
-/* Voile clair par défaut (maquette) */
+/* Voile léger — photo mise en valeur au repos */
 .bda-veil {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.08) 35%,
-      rgba(10, 43, 33, 0.55) 100%
-    );
-  transition: opacity 0.45s var(--bda-ease);
+  opacity: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(8, 14, 12, 0.22) 52%,
+    rgba(8, 14, 12, 0.58) 100%
+  );
+  transition: opacity var(--bda-reveal-out) var(--bda-ease-out);
 }
 
-/* Contenu texte visible au repos */
-.bda-overlay {
+/* Face repos — phase + titre court */
+.bda-rest {
   position: absolute;
-  inset: 0 0 3.1rem;
-  z-index: 3;
+  inset: 0 0 2.85rem;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 0.35rem;
   padding: 1.35rem 1.2rem 1rem;
   color: #fff;
-  transition: opacity 0.4s var(--bda-ease), transform 0.4s var(--bda-ease);
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity var(--bda-reveal-out) var(--bda-ease-out);
 }
 
-.bda-overlay-title {
-  margin: 0 0 0.65rem;
-  font-family: var(--font-bricolage), system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+.bda-rest-phase {
+  font-family: var(--bda-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bda-phase-accent);
+}
+
+.bda-rest-title {
+  font-family: var(--bda-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.2;
   letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: #fff;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
 }
 
-.bda-overlay-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bda-overlay-list li {
-  position: relative;
-  margin: 0;
-  padding: 0.35rem 0 0.35rem 1rem;
-  font-size: 0.84rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.bda-overlay-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  top: 0.35rem;
-  color: var(--bda-jaune);
-  font-weight: 700;
-}
-
-/* Barre outil jaune — reste au hover */
-.bda-tool {
+/* Bandeau outil — glace grise, glassmorphism */
+.bda-foot-strip {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
-  padding: 0.7rem 1rem;
-  background: var(--bda-jaune-soft);
+  z-index: 3;
+  padding: 0.68rem 1rem;
+  background: linear-gradient(
+    180deg,
+    var(--bda-glass-strong) 0%,
+    var(--bda-glass) 100%
+  );
+  border-top: 1px solid var(--bda-glass-border);
+  backdrop-filter: blur(var(--bda-glass-blur)) saturate(1.45) brightness(1.04);
+  -webkit-backdrop-filter: blur(var(--bda-glass-blur)) saturate(1.45) brightness(1.04);
+  box-shadow:
+    var(--bda-glass-shadow),
+    inset 0 1px 0 var(--bda-glass-edge);
   color: var(--bda-forest);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.3;
-  backdrop-filter: blur(4px);
+  font-family: var(--bda-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  opacity: 1;
+  isolation: isolate;
+  transition: opacity var(--bda-reveal-out) var(--bda-ease-out);
 }
 
-/* Léger dégradé noir révélé au hover */
-.bda-shade {
+.bda-foot-strip::before {
+  content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: -1;
   pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.38) 0%, transparent 48%);
-  transition: opacity 0.45s var(--bda-ease);
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.06) 42%,
+    rgba(200, 210, 218, 0.08) 100%
+  );
 }
 
-/*
-  Hover / focus / phase active (itération) :
-  image nette + overlay texte disparaît + shade noir + barre jaune conservée
-*/
-.bda-card:hover .bda-veil,
-.bda-card:focus-within .bda-veil,
-.bda-item.is-active .bda-veil {
-  opacity: 0;
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .bda-foot-strip {
+    background: rgba(236, 241, 244, 0.94);
+  }
 }
 
-.bda-card:hover .bda-overlay,
-.bda-card:focus-within .bda-overlay,
-.bda-item.is-active .bda-overlay {
+/* ── Overlay reveal — détail au survol / focus uniquement ── */
+.bda-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px 22px 24px;
+  color: #fff;
   opacity: 0;
-  transform: translateY(8px);
+  visibility: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 14, 12, 0.08) 0%,
+    rgba(8, 14, 12, 0.55) 36%,
+    rgba(8, 14, 12, 0.94) 100%
+  );
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
   pointer-events: none;
+  transition:
+    opacity var(--bda-reveal-out) var(--bda-ease-out),
+    visibility 0s linear var(--bda-reveal-out),
+    backdrop-filter var(--bda-reveal-out) var(--bda-ease-out);
 }
 
-.bda-card:hover .bda-shade,
-.bda-card:focus-within .bda-shade,
-.bda-item.is-active .bda-shade {
+.bda-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bda-overlay-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.65rem;
+  margin: 0;
+  color: var(--bda-phase-accent);
+  font-family: var(--bda-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.bda-overlay-date {
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--bda-font);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.bda-overlay-title {
+  margin: 0;
+  font-family: var(--bda-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Liste éditoriale — lignes blanches, pastilles alignées */
+.bda-rows {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--bda-display);
+}
+
+.bda-row {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  column-gap: 11px;
+  padding: 11px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 280ms var(--bda-ease-out),
+    transform 280ms var(--bda-ease-out);
+  transition-delay: 0ms;
+}
+
+.bda-row:first-child {
+  padding-top: 0;
+}
+
+.bda-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bda-row-mark {
+  justify-self: center;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bda-phase-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--bda-phase-accent) 35%, transparent);
+}
+
+.bda-row-label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.bda-overlay-tool {
+  margin: 0;
+  padding-top: 2px;
+  font-family: var(--bda-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ── Ouverture : survol, focus clavier, ou carte active en boucle ── */
+.bda-card:is(:hover, :focus-within) .bda-rest,
+.bda-card:is(:hover, :focus-within) .bda-foot-strip,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-rest,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-foot-strip {
+  opacity: 0;
+  transition: opacity var(--bda-reveal-in) var(--bda-ease-reveal);
+}
+
+.bda-card:is(:hover, :focus-within) .bda-overlay,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-overlay {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
+  transition:
+    opacity var(--bda-reveal-in) var(--bda-ease-reveal),
+    visibility 0s linear 0s,
+    backdrop-filter var(--bda-reveal-in) var(--bda-ease-reveal);
+}
+
+.bda-card:is(:hover, :focus-within) .bda-row,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-row {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 380ms var(--bda-ease-reveal),
+    transform 380ms var(--bda-ease-reveal);
+  transition-delay: calc(var(--bi, 0) * var(--bda-stagger) + 50ms);
+}
+
+.bda-card:is(:hover, :focus-within) .bda-card-img,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-card-img {
+  transform: scale(1.05);
+  filter: saturate(1) brightness(0.94);
+}
+
+.bda-card:is(:hover, :focus-within) .bda-veil,
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-veil {
+  opacity: 0.35;
+}
+
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-card {
+  box-shadow: 0 18px 40px rgba(10, 43, 33, 0.14);
+  transform: translateY(-2px);
+}
+
+/* Cartes inactives — léger recul pendant la boucle */
+.b2m-bda.is-playing:not(.is-hovered) .bda-item:not(.is-active) .bda-card {
+  opacity: 0.9;
+  transition:
+    opacity var(--bda-reveal-in) var(--bda-ease-reveal),
+    box-shadow var(--bda-reveal-out) var(--bda-ease-out),
+    transform var(--bda-reveal-out) var(--bda-ease-out);
+}
+
+.b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-card {
   opacity: 1;
 }
 
-.bda-card:hover .bda-card-img,
-.bda-card:focus-within .bda-card-img,
-.bda-item.is-active .bda-card-img {
-  transform: scale(1.08);
-  filter: none;
+/* Annonce accessibilité — hors écran */
+.bda-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Caption */
+/* Légende sous carte — toujours visible */
 .bda-caption {
   padding-inline: 0.15rem;
 }
@@ -250,77 +484,127 @@
 }
 
 .bda-indicator {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  height: 0.5rem;
   flex-shrink: 0;
+  overflow: hidden;
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(20, 40, 32, 0.14);
+}
+
+.bda-item.is-active .bda-indicator {
+  width: 40px;
+  background: rgba(255, 213, 6, 0.35);
 }
 
 .bda-dot {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
   background: var(--bda-forest);
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.bda-bar {
-  height: 2px;
-  width: 0;
-  margin-left: 0;
-  border-radius: 1px;
-  background: var(--bda-vert);
-  transition: width 0.45s var(--bda-ease), margin-left 0.25s ease;
+.bda-item:not(.is-active) .bda-dot {
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  inset: auto;
+  border-radius: 50%;
+  background: rgba(20, 40, 32, 0.22);
 }
 
-.bda-item.is-active .bda-dot,
-.bda-item:hover .bda-dot {
-  background: var(--bda-vert);
-  transform: scale(1.15);
+.bda-progress {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--bda-jaune);
+  transform-origin: left center;
+  animation-name: bda-dot-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
-.bda-item.is-active .bda-bar,
-.bda-item:hover .bda-bar {
-  width: 1.75rem;
-  margin-left: 0.35rem;
+.b2m-bda:not(.is-playing) .bda-progress {
+  animation-play-state: paused;
+}
+
+@keyframes bda-dot-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .bda-caption-title {
   margin: 0;
-  font-family: var(--font-bricolage), system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  font-family: var(--bda-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--bda-forest);
-  transition: color 0.25s ease;
-}
-
-.bda-item.is-active .bda-caption-title,
-.bda-item:hover .bda-caption-title {
-  color: var(--bda-vert);
+  transition: color var(--bda-reveal-out) var(--bda-ease-out);
 }
 
 .bda-foot {
-  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
-  padding-top: 1.15rem;
+  flex: 0 0 auto;
+  margin: 0;
+  padding-top: 1rem;
   border-top: 1px solid var(--bda-line);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   line-height: 1.5;
   color: var(--bda-muted);
 }
 
 @media (max-width: 900px) {
+  .bda-inner {
+    min-height: 0;
+  }
+
   .bda-grid {
     grid-template-columns: 1fr;
-    max-width: 26rem;
+    max-width: min(100%, 28rem);
     margin-inline: auto;
+    flex: 0 0 auto;
   }
 
   .bda-card {
+    min-height: 0;
     aspect-ratio: 4 / 5;
+  }
+}
+
+@media (hover: none) {
+  /* Touch : la phase active du carousel affiche le détail */
+  .bda-item.is-active .bda-card .bda-rest,
+  .bda-item.is-active .bda-card .bda-foot-strip {
+    opacity: 0;
+  }
+
+  .bda-item.is-active .bda-card .bda-overlay {
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .bda-item.is-active .bda-card .bda-row {
+    opacity: 1;
+    transform: none;
+  }
+
+  .bda-item.is-active .bda-card .bda-veil {
+    opacity: 0.35;
   }
 }
 
@@ -328,17 +612,25 @@
   .bda-card,
   .bda-card-img,
   .bda-veil,
+  .bda-rest,
+  .bda-foot-strip,
   .bda-overlay,
-  .bda-shade,
-  .bda-dot,
-  .bda-bar,
-  .bda-caption-title {
+  .bda-row,
+  .bda-caption,
+  .bda-progress {
     transition: none !important;
+    animation: none !important;
   }
 
-  .bda-card:hover .bda-card-img,
-  .bda-card:focus-within .bda-card-img,
-  .bda-item.is-active .bda-card-img {
+  .bda-card:is(:hover, :focus-within) .bda-overlay,
+  .b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .bda-card:is(:hover, :focus-within) .bda-row,
+  .b2m-bda.is-playing:not(.is-hovered) .bda-item.is-active .bda-row {
+    opacity: 1;
     transform: none;
   }
 }

@@ -40,13 +40,16 @@
 /* —— Snapshot —— */
 .bat-snap {
   background: #fff;
-  padding: clamp(3.25rem, 7vw, 5.75rem) clamp(1.15rem, 4vw, 2.5rem);
+  padding-block: clamp(3.25rem, 7vw, 5.75rem);
+  padding-inline: 0;
   border-bottom: 1px solid var(--bat-line);
 }
 
 .bat-snap-inner {
-  max-width: 1120px;
+  width: 100%;
+  max-width: min(100%, 92rem);
   margin-inline: auto;
+  padding-inline: clamp(1.35rem, 5.5vw, 4.75rem);
 }
 
 .bat-snap-grid {
@@ -165,12 +168,15 @@
 /* —— Team —— */
 .bat-team {
   background: var(--bat-canvas);
-  padding: clamp(3.25rem, 7vw, 5.75rem) clamp(1.15rem, 4vw, 2.5rem);
+  padding-block: clamp(3.25rem, 7vw, 5.75rem);
+  padding-inline: 0;
 }
 
 .bat-team-inner {
-  max-width: 1120px;
+  width: 100%;
+  max-width: min(100%, 92rem);
   margin-inline: auto;
+  padding-inline: clamp(1.35rem, 5.5vw, 4.75rem);
 }
 
 .bat-team-head {
@@ -243,9 +249,9 @@
 
 .bat-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.1fr);
   gap: clamp(1.1rem, 2.5vw, 2.25rem);
-  align-items: center;
+  align-items: start;
   padding: clamp(1.5rem, 3.5vw, 2.25rem) 0;
   border-top: 1px solid var(--bat-line);
   cursor: pointer;
@@ -258,6 +264,10 @@
 
 .bat-row.is-active {
   background: color-mix(in srgb, var(--bat-vert) 4%, transparent);
+}
+
+.bat-row-lead {
+  padding-left: clamp(1.5rem, 4.5vw, 3.25rem);
 }
 
 .bat-row-lead h3 {
@@ -304,6 +314,21 @@
   color: #fff;
 }
 
+.bat-row-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: stretch;
+  min-width: 0;
+}
+
+.bat-row-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
 .bat-row-body ul {
   margin: 0;
   padding: 0;
@@ -343,7 +368,7 @@
 .bat-row-media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 21 / 9;
+  min-height: 0;
   border-radius: 14px;
   background: #e8e4dc;
 }
@@ -513,8 +538,13 @@
     gap: 1rem;
   }
 
+  .bat-row-content {
+    grid-template-columns: 1fr;
+  }
+
   .bat-row-media {
     order: -1;
+    min-height: 14rem;
     max-width: 28rem;
   }
 }

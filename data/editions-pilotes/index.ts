@@ -9,9 +9,9 @@ export const EDITIONS_PILOTES_COPY: EditionsPilotesCopy = {
   hoverHint:
     "Survolez chaque colonne pour comprendre le rôle de ces acteurs dans Back2Mboa.",
   badge: "Preuve · pas promesse",
-  foot2022: "2022 — 90 acteurs · 60+ mises en relation",
-  foot2023: "2023 — 400+ participants · SG MINREX · FEICOM",
-  footDate: "16 · 17 décembre 2023 — Musée National, Yaoundé",
+  foot2022: "2022 : 90 acteurs · 60+ mises en relation",
+  foot2023: "2023 : 400+ participants, SG MINREX, FEICOM",
+  footDate: "16 au 17 décembre 2023 : Musée National, Yaoundé",
 };
 
 /** Locaux + Unsplash (images.unsplash.com déjà autorisé dans next.config). */

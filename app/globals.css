@@ -203,6 +203,29 @@ html.lenis body {
   }
 }
 
+/* Écosystème — route hub Digital Twin (rotation continue) */
+@keyframes eco-route-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.eco-route-spin {
+  transform-origin: center;
+  animation: eco-route-spin 14s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-route-spin {
+    animation: none !important;
+  }
+}
+
 .ticker-track {
   animation: ticker 36s linear infinite;
 }

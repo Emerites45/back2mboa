@@ -2,7 +2,6 @@ import type { OpenRoadCopy } from "@/types/open-road";
 
 /** Diaporama Open Road — slide 01 = Pexels thé, puis forêt, puis sommets. */
 export const OPEN_ROAD_COPY: OpenRoadCopy = {
-  brand: "BACK 2 MBOA",
   watchLabel: "Watch trailer",
   autoplayMs: 8000,
   programs: [

@@ -65,21 +65,23 @@ export function ChampionStageBackdrop({
 
   return (
     <div ref={rootRef} className="champ-stage-backdrop" aria-hidden="true">
-      <Image
-        src={image}
-        alt=""
-        fill
-        sizes="(max-width: 1024px) 100vw, 1320px"
-        className="champ-stage-poster"
-        priority={active}
-      />
+      {/* Photo uniquement sans vidéo (ou reduced-motion) — jamais par-dessus la vidéo */}
+      {!useVideo ? (
+        <Image
+          src={image}
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 100vw, 1320px"
+          className="champ-stage-poster"
+          priority={active}
+        />
+      ) : null}
 
       {useVideo && video ? (
         <video
           ref={videoRef}
           className={`champ-stage-video${showVideo ? " is-ready" : ""}`}
           src={video}
-          poster={image}
           muted
           loop
           playsInline

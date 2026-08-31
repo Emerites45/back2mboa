@@ -290,6 +290,11 @@
   opacity: 1;
 }
 
+/* Fond sombre le temps que la vidéo charge (plus de photo paysage) */
+.champ-stage-backdrop:has(.champ-stage-video):not(:has(.champ-stage-video.is-ready)) {
+  background: #0d2818;
+}
+
 .champ-stage-scrim {
   position: absolute;
   inset: 0;

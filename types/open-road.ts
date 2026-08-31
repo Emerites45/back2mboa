@@ -16,7 +16,6 @@ export type OpenRoadProgram = {
 };
 
 export type OpenRoadCopy = {
-  brand: string;
   watchLabel: string;
   autoplayMs: number;
   programs: [OpenRoadProgram, OpenRoadProgram, OpenRoadProgram];

@@ -5,12 +5,17 @@ import { HERO_LINES } from "@/data/hero-landing";
 
 const N = HERO_LINES.length;
 const TRIPLE = [...HERO_LINES, ...HERO_LINES, ...HERO_LINES];
-const MOVE_MS = 750; // cadence du déplacement, un cran à la fois
+/** Transition d’un cran — assez douce pour se lire, sans traîner */
+const MOVE_MS = 880;
+/** Pause lecture une fois la ligne centrée (hors animation) */
+const DWELL_MS = 3200;
+const DEFAULT_TICK_MS = MOVE_MS + DWELL_MS;
 
 function tickMs(el: HTMLElement | null): number {
-  if (!el) return 2600;
-  const v = parseInt(getComputedStyle(el).getPropertyValue("--tick"), 10);
-  return Number.isFinite(v) && v > 0 ? v : 2600;
+  if (!el) return DEFAULT_TICK_MS;
+  const raw = getComputedStyle(el).getPropertyValue("--tick").trim();
+  const v = parseInt(raw, 10);
+  return Number.isFinite(v) && v > 0 ? v : DEFAULT_TICK_MS;
 }
 
 export function BottomLinesWheel() {
@@ -48,7 +53,7 @@ export function BottomLinesWheel() {
     const li = list?.querySelector("li");
     if (!list || !li) return;
     const fs = parseFloat(getComputedStyle(li).fontSize) || 18;
-    ihRef.current = Math.round(fs * 2.2);
+    ihRef.current = Math.round(fs * 2.45);
     list.style.setProperty("--ih", `${ihRef.current}px`);
     snap(false, indexRef.current);
   }, [snap]);

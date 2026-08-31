@@ -114,8 +114,8 @@ export function TerritorySection() {
           <div className="relative w-full max-w-[520px]">
             <div className="relative aspect-square w-full">
               <Image
-                src="/images/Route Map.png"
-                alt="Route Diaspora - Territoire"
+                src="/images/potentialites/carte_cameroun.png"
+                alt="Carte Diaspora - Territoire"
                 fill
                 className="object-contain"
                 priority

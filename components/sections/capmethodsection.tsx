@@ -16,21 +16,21 @@ const CAP_ITEMS = [
     label: "C'EST CRÉDIBLE !",
     description:
       'Compréhensible, documentée, portée par des acteurs identifiés et reliée à des données, des responsabilités et des résultats attendus.',
-    image: '/images/cap-images/cap-credible.jpg',
+    image: '/images/cap-images/cap-credible.svg',
   },
   {
     id: 2,
     label: "C'EST ACCESSIBLE !",
     description:
       'Découverte, comprise et rejointe par les acteurs pertinents. Accès au décideur, au régulateur, au financement, au marché.',
-    image: '/images/cap-images/cap-accessible.jpg',
+    image: '/images/cap-images/cap-accessible.svg',
   },
   {
     id: 3,
     label: "C'EST POSSIBLE !",
     description:
       "Un chemin crédible vers l'exécution : de l'idée au partenariat, du financement à l'impact durable.",
-    image: '/images/cap-images/cap-possible.jpg',
+    image: '/images/cap-images/cap-possible.svg',
   },
 ];
 

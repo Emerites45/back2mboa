@@ -59,9 +59,6 @@ export function PourquoiSection() {
 
         <div className="pourquoi-layout">
           <div className="pourquoi-card">
-            <div className="pourquoi-card-mark" aria-hidden="true">
-              <span>BACK2MBOA</span>
-            </div>
             <div className="pourquoi-table" role="table" aria-label="Comparaison Back2Mboa">
               <div className="pourquoi-row is-head" role="row">
                 <div className="pourquoi-cell is-crit" role="columnheader">

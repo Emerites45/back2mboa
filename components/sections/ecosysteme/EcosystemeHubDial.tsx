@@ -15,14 +15,26 @@ const DIAL = {
   compact: { size: 188, radius: 78, node: 36, hub: 56, labelMinH: "2rem" },
 } as const;
 
-function HubCenterMark({ hub }: { hub: number }) {
+function HubCenterMark({
+  hub,
+  reduceMotion,
+}: {
+  hub: number;
+  reduceMotion: boolean;
+}) {
   return (
     <div
       className="absolute top-1/2 left-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[14px] bg-[#0a2b21] shadow-[0_0_24px_rgba(227,167,59,0.3),0_6px_18px_rgba(10,43,33,0.22)]"
       style={{ width: hub, height: hub }}
       aria-hidden="true"
     >
-      <svg viewBox="0 0 32 32" width={hub * 0.42} height={hub * 0.42} fill="none">
+      <svg
+        viewBox="0 0 32 32"
+        width={hub * 0.42}
+        height={hub * 0.42}
+        fill="none"
+        className={reduceMotion ? undefined : "eco-route-spin"}
+      >
         <path
           d="M7 23 C13 23 18 10 25 9"
           stroke="#F5F1E9"
@@ -152,7 +164,7 @@ export function EcosystemeHubDial({ compact = false }: { compact?: boolean }) {
             </div>
           );
         })}
-        <HubCenterMark hub={spec.hub} />
+        <HubCenterMark hub={spec.hub} reduceMotion={reduceMotion} />
       </div>
 
       <p

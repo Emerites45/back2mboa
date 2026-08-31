@@ -113,8 +113,11 @@ const glassClass =
 
 export function LiaisonSection() {
   return (
-    <section id="liaison" className="relative" aria-label="Liaison">
-      <div
+    <section
+      id="liaison"
+      className="relative z-0 isolate overflow-hidden"
+      aria-label="Liaison"
+    >      <div
         className="pointer-events-none absolute top-0 right-0 z-0 size-[71px] bg-brand-glow-mint"
         aria-hidden="true"
       />
@@ -123,9 +126,7 @@ export function LiaisonSection() {
         aria-hidden="true"
       />
 
-      {/* <div className="relative z-[1] overflow-hidden rounded-t-[71px]"> */}
-      <div className="relative z-[1] overflow-hidden">
-        <Image
+      <div className="relative z-[1] overflow-hidden">        <Image
           src="/images/background_link_section-1920.webp"
           alt=""
           width={3840}

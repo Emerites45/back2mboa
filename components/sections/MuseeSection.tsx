@@ -35,10 +35,11 @@ export function MuseeSection() {
     <section
       ref={ref}
       id="musee"
-      className="relative isolate z-10 overflow-visible"
+      className="relative isolate z-10 overflow-hidden bg-[#061a14]"
       aria-label="Musée national"
     >
-      <div className="pointer-events-none absolute bottom-full left-0 z-0 w-full">
+      {/* Sol + texte — dans le flux (plus de bottom-full qui chevauche la section précédente) */}
+      <div className="relative w-full overflow-hidden">
         <Image
           src="/images/museum_floor-1920.webp"
           alt=""
@@ -46,10 +47,11 @@ export function MuseeSection() {
           height={1224}
           sizes="100vw"
           className="block h-auto w-full"
+          priority={false}
         />
         <motion.p
           style={{ y: reduce ? TEXT_Y_SHOWN : y }}
-          className="absolute inset-x-0 bottom-0 z-10 mx-auto mb-15 max-w-[64rem] px-[var(--page-gutter)] text-center font-sans text-[clamp(1.2rem,3.8vw,3.0rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white [text-shadow:0_2px_28px_rgb(0_0_0_/_0.5)]"
+          className="absolute inset-x-0 bottom-0 z-10 mx-auto mb-[clamp(1.5rem,4vw,3.75rem)] max-w-[64rem] px-[var(--page-gutter,1.25rem)] text-center font-sans text-[clamp(1.2rem,3.8vw,3rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white [text-shadow:0_2px_28px_rgb(0_0_0_/_0.5)]"
         >
           {toTitleCaseFr(MUSEE_COPY)}
         </motion.p>

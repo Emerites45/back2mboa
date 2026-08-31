@@ -1,13 +1,6 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-
-interface CountdownTimerProps {
-  targetDate: string;
-}
-
-export function CountdownTimer({ targetDate }: CountdownTimerProps) {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+function CountdownTimer({ targetDate }: { targetDate: string }) {
+  const [timeLeft, setTimeLeft] = useState({ days: 122, hours: 15, minutes: 40, seconds: 21 });
+  const timerId = useId();
 
   useEffect(() => {
     const calculateTime = () => {
@@ -28,22 +21,22 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate]);
 
   return (
-    <div className="grid grid-cols-4 gap-2 text-center">
-      <div className="bg-black/40 backdrop-blur-md border border-white/10 p-2 rounded-lg">
-        <div className="text-xl sm:text-2xl font-black text-white">{timeLeft.days}</div>
-        <div className="text-[9px] text-gray-400 uppercase font-semibold">JOURS</div>
+    <div className="grid grid-cols-4 divide-x divide-white/15 text-center" key={timerId}>
+      <div className="px-1">
+        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.days}</div>
+        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">JOURS</div>
       </div>
-      <div className="bg-black/40 backdrop-blur-md border border-white/10 p-2 rounded-lg">
-        <div className="text-xl sm:text-2xl font-black text-white">{timeLeft.hours}</div>
-        <div className="text-[9px] text-gray-400 uppercase font-semibold">HEURES</div>
+      <div className="px-1">
+        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.hours}</div>
+        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">HEURES</div>
       </div>
-      <div className="bg-black/40 backdrop-blur-md border border-white/10 p-2 rounded-lg">
-        <div className="text-xl sm:text-2xl font-black text-white">{timeLeft.minutes}</div>
-        <div className="text-[9px] text-gray-400 uppercase font-semibold">MIN</div>
+      <div className="px-1">
+        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.minutes}</div>
+        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">MIN</div>
       </div>
-      <div className="bg-black/40 backdrop-blur-md border border-white/10 p-2 rounded-lg">
-        <div className="text-xl sm:text-2xl font-black text-white">{timeLeft.seconds}</div>
-        <div className="text-[9px] text-gray-400 uppercase font-semibold">SEC</div>
+      <div className="px-1">
+        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.seconds}</div>
+        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">SEC</div>
       </div>
     </div>
   );

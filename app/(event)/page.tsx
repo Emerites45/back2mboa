@@ -31,6 +31,7 @@ import { AgendaSection } from "@/components/sections/agenda/AgendaSection";
 import { NecessiteSection } from "@/components/sections/necessite/NecessiteSection";
 import { PlateformeSection } from "@/components/sections/plateforme/PlateformeSection";
 import { TickerSection } from "@/components/sections/TickerSection";
+import { TerritorySection } from "@/components/sections/territory-section";
 import { RessourcesSection } from "@/components/sections/ressources/RessourcesSection";
 import {
   BilletsSection,
@@ -44,19 +45,18 @@ import { Button } from "@/components/ui/button";
  * Landing — architecture produit (slots 1→30 + pauses + footer).
  *
  * ● Paul-Alain / Williams : sections câblées ci-dessous.
- * ● Franck : slots manquants marqués en commentaires JSX FRANCK.
+ * ● Franck : TerritorySection (slot 2) + slots encore en commentaires.
  */
 export default function HomePage() {
   return (
     <>
       <SmoothScroll />
 
-      {/* ── 1. Hero ─────────────────────────────────────── Paul */}
+      {/* ── 1. Hero ─────────────────────────────────────── Paul / Franck */}
       <HeroSection />
 
-      {/* ── 2. Brief B2M — territoires / Bâtisseurs ─────── FRANCK */}
-      {/* FRANCK — Section 2 : « Les territoires ont des besoins.
-          Les Bâtisseurs-Solutionneurs ont des réponses. » */}
+      {/* ── 2. Brief B2M — territoires / Bâtisseurs ─────── Franck */}
+      <TerritorySection />
 
       {/* ── 3. Éditions pilotes ont prouvé le modèle ───── Paul */}
       <EditionsPilotesSection />

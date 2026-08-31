@@ -141,7 +141,7 @@ export function BeforeDuringAfterSection() {
                     src={phase.image}
                     alt={phase.imageAlt}
                     fill
-                    sizes="(max-width: 900px) 100vw, 33vw"
+                    sizes="(max-width: 900px) 100vw, (max-width: 1400px) 30vw, 28vw"
                     quality={85}
                     style={{
                       objectPosition:

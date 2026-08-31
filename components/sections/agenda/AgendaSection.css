@@ -196,7 +196,7 @@
   }
 }
 
-/* Stage */
+/* Stage — même cadre éditorial que Prélude · Double flux 2026 */
 .agenda-stage {
   position: relative;
   z-index: 3;
@@ -205,10 +205,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1180px;
   width: 100%;
+  max-width: min(100%, 92rem);
   margin: 0 auto;
-  padding: 1.5rem clamp(4.25rem, 8vw, 6.5rem) 1.25rem clamp(1.25rem, 5vw, 3.5rem);
+  padding-block: 1.5rem 1.25rem;
+  padding-left: clamp(1.35rem, 5.5vw, 4.75rem);
+  /* Gouttière droite + dégagement portrait */
+  padding-right: max(clamp(1.35rem, 5.5vw, 4.75rem), min(38vw, 24rem));
 }
 
 .agenda-kicker {
@@ -423,7 +426,7 @@
 .agenda-nav {
   position: absolute;
   top: 46%;
-  right: clamp(1rem, 3vw, 2rem);
+  right: max(clamp(1.35rem, 5.5vw, 4.75rem), calc((100% - min(100%, 92rem)) / 2 + 0.75rem));
   z-index: 4;
   display: flex;
   flex-direction: column;
@@ -459,13 +462,16 @@
   outline-offset: 3px;
 }
 
-/* Tabs */
+/* Tabs — calées sur le même cadre 92rem */
 .agenda-tabs {
   position: relative;
   z-index: 3;
   flex: none;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  max-width: min(100%, 92rem);
+  margin-inline: auto;
   border-top: 1px solid var(--ag-line);
   background: color-mix(in srgb, #0a1c16 88%, transparent);
   backdrop-filter: blur(10px);
@@ -630,7 +636,7 @@
 
   .agenda-stage {
     flex: 1;
-    padding: 1.5rem 4.25rem 1.5rem 1.15rem;
+    padding: 1.5rem clamp(1.35rem, 5.5vw, 4.75rem) 1.5rem;
   }
 
   .agenda-copy {

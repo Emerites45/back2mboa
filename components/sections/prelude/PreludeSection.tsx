@@ -18,66 +18,58 @@ function Tags({ tags }: { tags: PreludeBlock["tags"] }) {
 }
 
 function BlockCard({ block }: { block: PreludeBlock }) {
-  const isCta = block.variant === "cta";
+  const rich = Boolean(block.lead || block.points?.length);
 
   return (
-    <div className={`prelude-card${isCta ? " is-cta" : ""}`}>
-      <span className="prelude-badge" aria-hidden="true">
-        {block.index}
-      </span>
-      <h3 id={`prelude-${block.id}-title`} className="prelude-card-title">
-        {block.title}
-      </h3>
-      <p className="prelude-card-body">{block.body}</p>
+    <div className={`prelude-card${rich ? " is-rich" : ""}`}>
+      <div className="prelude-card-top">
+        <span className="prelude-badge" aria-hidden="true">
+          {block.index}
+        </span>
+        <h3 id={`prelude-${block.id}-title`} className="prelude-card-title">
+          {block.title}
+        </h3>
+        {block.lead ? <p className="prelude-card-lead">{block.lead}</p> : null}
+      </div>
 
-      {block.packs ? (
-        <div className="prelude-packs">
-          {block.packs.map((pack) => (
-            <div className="prelude-pack" key={pack.title}>
-              <strong>{pack.title}</strong>
-              <span>{pack.body}</span>
-            </div>
+      {block.body ? <p className="prelude-card-body">{block.body}</p> : null}
+
+      {block.points?.length ? (
+        <ul className="prelude-points">
+          {block.points.map((point) => (
+            <li key={point.slice(0, 48)}>
+              <span className="prelude-check" aria-hidden="true">
+                ✓
+              </span>
+              <span>{point}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : null}
 
       <Tags tags={block.tags} />
-
-      {block.primaryCta || block.secondaryCta ? (
-        <div className="prelude-actions">
-          {block.primaryCta ? (
-            <Link className="prelude-btn is-primary" href={block.primaryCta.href}>
-              {block.primaryCta.label}
-            </Link>
-          ) : null}
-          {block.secondaryCta ? (
-            <Link className="prelude-btn is-ghost" href={block.secondaryCta.href}>
-              {block.secondaryCta.label}
-            </Link>
-          ) : null}
-        </div>
-      ) : null}
     </div>
   );
 }
 
 function BlockRow({ block }: { block: PreludeBlock }) {
-  const media = (
+  const media = block.image ? (
     <div className="prelude-media">
       <Image
         src={block.image}
-        alt={block.imageAlt}
+        alt={block.imageAlt ?? ""}
         fill
-        sizes="(max-width: 900px) 100vw, 50vw"
+        sizes="(max-width: 900px) 100vw, 48vw"
         className="prelude-media-img"
       />
     </div>
-  );
+  ) : null;
+
   const card = <BlockCard block={block} />;
 
   return (
     <article
-      className={`prelude-row is-${block.layout}${block.variant === "cta" ? " is-cta-row" : ""}`}
+      className={`prelude-row is-${block.layout}`}
       aria-labelledby={`prelude-${block.id}-title`}
     >
       {block.layout === "media-left" ? (
@@ -120,8 +112,8 @@ export function PreludeSection() {
               <Image
                 src={copy.ringImage}
                 alt=""
-                width={72}
-                height={72}
+                width={80}
+                height={80}
                 className="prelude-ring-img"
               />
             </span>
@@ -135,9 +127,18 @@ export function PreludeSection() {
         </div>
 
         <footer className="prelude-foot">
-          {copy.foot.map((line) => (
-            <span key={line}>{line}</span>
-          ))}
+          <div className="prelude-foot-meta" aria-label="Calendrier">
+            {copy.foot.map((line, i) => (
+              <span key={line} className="prelude-foot-item">
+                {i > 0 ? <span className="prelude-foot-sep" aria-hidden="true" /> : null}
+                {line}
+              </span>
+            ))}
+          </div>
+
+          <Link className="prelude-btn is-contact" href={copy.contactCta.href}>
+            {copy.contactCta.label}
+          </Link>
         </footer>
       </div>
     </section>

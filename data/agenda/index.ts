@@ -1,7 +1,7 @@
 import type { AgendaCopy } from "@/types/agenda";
 
 export const AGENDA_COPY: AgendaCopy = {
-  kicker: "Back2Mboa ASAP™ — Agenda 2026",
+  kicker: "Back2Mboa ASAP™, Agenda 2026",
   ctaPrimary: "Réserver ma place",
   ctaPrimaryHref: "/inscription",
   ctaSecondary: "Voir le programme",
@@ -12,7 +12,7 @@ export const AGENDA_COPY: AgendaCopy = {
       id: "masterclass",
       index: "01",
       tag: "Masterclass",
-      titleLead: "Masterclass CTD —",
+      titleLead: "Masterclass CTD,",
       titleAccent: "Attractivité & IA",
       tabTitle: "Masterclass CTD",
       date: "08 octobre 2026",

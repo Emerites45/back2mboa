@@ -108,6 +108,30 @@ const FLUX_BRIDGE = [
   "Marchés",
 ] as const;
 
+/** Itinéraire double sens — placé juste sous l’Autoroute */
+const JOURNEY = {
+  maxWidth: "78rem",
+  lead:
+    "En décembre, les territoires vont d’abord chercher ce que la diaspora a à offrir. Deux semaines plus tard, la diaspora vient chercher ce que les territoires ont à offrir. C’est la même route, parcourue dans les deux directions.",
+  bridge: "Aller ⇄ Retour",
+  legs: [
+    {
+      id: "europe",
+      when: "1er au 7 décembre en Europe",
+      where: "Les territoires vont vers la diaspora",
+      detail:
+        "Salon de la Diaspora, visites d’entreprises et de ports, rendez-vous d’affaires.",
+    },
+    {
+      id: "yaounde",
+      when: "16 au 17 décembre à Yaoundé",
+      where: "La diaspora vient vers les territoires",
+      detail:
+        "Musée National : Mayor Calls, Deal Rooms, ateliers sectoriels, signatures.",
+    },
+  ],
+} as const;
+
 const glassClass =
   "shadow-[inset_0_1px_0_rgb(255_255_255_/_0.14)] [@media(prefers-reduced-transparency:reduce)]:backdrop-blur-none";
 
@@ -117,7 +141,8 @@ export function LiaisonSection() {
       id="liaison"
       className="relative z-0 isolate overflow-hidden"
       aria-label="Liaison"
-    >      <div
+    >
+      <div
         className="pointer-events-none absolute top-0 right-0 z-0 size-[71px] bg-brand-glow-mint"
         aria-hidden="true"
       />
@@ -126,7 +151,8 @@ export function LiaisonSection() {
         aria-hidden="true"
       />
 
-      <div className="relative z-[1] overflow-hidden">        <Image
+      <div className="relative z-[1] overflow-hidden">
+        <Image
           src="/images/background_link_section-1920.webp"
           alt=""
           width={3840}
@@ -238,8 +264,64 @@ export function LiaisonSection() {
             <FluxSide {...FLUX_SIDES[1]} />
           </div>
         </div>
+
+        {/* Itinéraire double sens — juste sous l’Autoroute */}
+        <div
+          className="absolute inset-x-0 z-10 px-[var(--page-gutter)] top-[calc(34%+96rem)] md:top-[calc(34%+32.5rem)]"
+        >
+          <div
+            className="mx-auto"
+            style={{ maxWidth: JOURNEY.maxWidth }}
+          >
+            <p
+              className={`${inter.className} mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95`}
+            >
+              {JOURNEY.lead}
+            </p>
+
+            <div className="mt-7 grid grid-cols-1 items-stretch gap-6 md:mt-8 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-10 md:gap-y-6 lg:gap-x-14">
+              <JourneyLeg leg={JOURNEY.legs[0]} />
+
+              <div className="flex items-center justify-center self-center px-1 py-1 md:px-2 md:py-2">
+                <p
+                  className={`${bricolage.className} rounded-full border border-white/20 bg-[#506D0E]/90 px-5 py-2.5 text-center text-[0.78rem] font-semibold tracking-[0.04em] text-white shadow-[0_10px_28px_rgba(10,43,33,0.25)]`}
+                >
+                  {JOURNEY.bridge}
+                </p>
+              </div>
+
+              <JourneyLeg leg={JOURNEY.legs[1]} />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function JourneyLeg({
+  leg,
+}: {
+  leg: (typeof JOURNEY.legs)[number];
+}) {
+  return (
+    <article className="flex h-full flex-col gap-3 rounded-[1.15rem] border border-white/10 bg-[#454905]/92 px-5 py-5 text-left shadow-[0_16px_40px_rgba(10,43,33,0.22)] backdrop-blur-[2px] md:px-6 md:py-6">
+      <p
+        className={`${inter.className} text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/55`}
+      >
+        {leg.when}
+      </p>
+      <h4
+        className={`${bricolage.className} text-[clamp(1.15rem,1.8vw,1.45rem)] font-bold leading-[1.2] tracking-[-0.02em] text-[#FFF1DA]`}
+      >
+        {leg.where}
+      </h4>
+      <p
+        className={`${inter.className} mt-auto text-[0.92rem] font-medium leading-[1.5] text-white/88`}
+      >
+        {leg.detail}
+      </p>
+    </article>
   );
 }
 

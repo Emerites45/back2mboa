@@ -90,13 +90,15 @@ export function HeroSection() {
       <main className="relative z-20 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 pt-28 sm:pt-32 md:pt-36 pb-0 flex flex-col justify-between min-h-screen w-full pointer-events-none">
         
         {/* TITRES */}
-        <div className="text-center w-full max-w-6xl mx-auto pointer-events-none mt-2 mb-8 sm:mb-12">
+        <div className="text-center w-full max-w-7xl mx-auto pointer-events-none mt-2 mb-8 sm:mb-12 px-2">
           <p className={`${fontNotoSymbols.className} tracking-[0.28em] text-xs sm:text-sm md:text-base uppercase mb-3 font-bold text-white/90 select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]`}>
             {titleTop}
           </p>
-        <h1 className={`${fontBricolage.className} tracking-wide uppercase leading-none whitespace-nowrap text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white select-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)]`}>
-  {titleMain}
-</h1>
+          <h1
+            className={`${fontBricolage.className} mx-auto max-w-[min(100%,22ch)] tracking-[0.04em] uppercase leading-[0.95] text-[clamp(1.15rem,4.2vw,3.75rem)] font-extrabold text-white select-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap`}
+          >
+            {titleMain}
+          </h1>
 
           <p className="mt-5 text-sm sm:text-base md:text-lg font-medium tracking-wide select-none">
             {subtitle.split('').map((char, index) => (
@@ -144,10 +146,6 @@ export function HeroSection() {
 
           {/* COLONNE CENTRE */}
           <div className="lg:col-span-6 flex flex-col justify-end items-center relative pointer-events-none min-h-[320px] lg:min-h-[400px]">
-            <div className="absolute bottom-2 flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-2xl border border-white/25 text-xs font-black tracking-widest text-white shadow-xl pointer-events-auto">
-              <span className="text-orange-400">0{activeSlideIndex + 1}</span>
-              <span className="text-white/40">/0{slides.length || 1}</span>
-            </div>
           </div>
 
           {/* COLONNE DROITE */}
@@ -155,7 +153,9 @@ export function HeroSection() {
             {extraTextContent && (
               <div className="space-y-3">
                 {extraTextContent.split('\n\n').map((paragraph: string, idx: number) => {
-                  const isTitleMarker = paragraph.includes('SIX MOIS PLUS TARD');
+                  const isTitleMarker =
+                    paragraph.includes("SIX MOIS PLUS TARD") ||
+                    paragraph.trim() === "Back2Mboa";
                   return (
                     <p 
                       key={idx} 
@@ -200,7 +200,9 @@ export function HeroSection() {
       </main>
 
       {/* BANDEAU */}
-      <div className="relative z-30 bg-[#F5F0E6] text-[#0a1f18] py-3.5 border-t border-emerald-900/15 text-xs font-extrabold uppercase tracking-widest whitespace-nowrap overflow-hidden pointer-events-auto">
+      <div
+        className={`${fontBricolage.className} relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18] pointer-events-auto`}
+      >
         <style>{`
           @keyframes marquee {
             0% { transform: translateX(0%); }
@@ -209,34 +211,36 @@ export function HeroSection() {
           .animate-marquee-infinite {
             display: flex;
             width: max-content;
-            animation: marquee 25s linear infinite;
+            animation: marquee 28s linear infinite;
           }
         `}</style>
-        <div className="animate-marquee-infinite flex gap-8">
-          <div className="flex items-center gap-6 shrink-0">
-            <span>Identifier</span><span className="text-orange-500">•</span>
-            <span>Qualifier</span><span className="text-orange-500">•</span>
-            <span>Connecter</span><span className="text-orange-500">•</span>
-            <span>Accompagner</span><span className="text-orange-500">•</span>
-            <span>40 Mairies</span><span className="text-orange-500">•</span>
-            <span>10 Régions</span><span className="text-orange-500">•</span>
-          </div>
-          <div className="flex items-center gap-6 shrink-0">
-            <span>Identifier</span><span className="text-orange-500">•</span>
-            <span>Qualifier</span><span className="text-orange-500">•</span>
-            <span>Connecter</span><span className="text-orange-500">•</span>
-            <span>Accompagner</span><span className="text-orange-500">•</span>
-            <span>40 Mairies</span><span className="text-orange-500">•</span>
-            <span>10 Régions</span><span className="text-orange-500">•</span>
-          </div>
-          <div className="flex items-center gap-6 shrink-0">
-            <span>Identifier</span><span className="text-orange-500">•</span>
-            <span>Qualifier</span><span className="text-orange-500">•</span>
-            <span>Connecter</span><span className="text-orange-500">•</span>
-            <span>Accompagner</span><span className="text-orange-500">•</span>
-            <span>40 Mairies</span><span className="text-orange-500">•</span>
-            <span>10 Régions</span><span className="text-orange-500">•</span>
-          </div>
+        <div className="animate-marquee-infinite flex" aria-hidden="true">
+          {[0, 1].map((dup) => (
+            <div
+              key={dup}
+              className="flex shrink-0 items-center gap-x-5 px-2 text-[0.95rem] font-bold uppercase leading-none tracking-[0.14em] sm:gap-x-7 sm:text-[1.05rem] md:text-[1.125rem]"
+            >
+              {(
+                [
+                  "Identifier",
+                  "Qualifier",
+                  "Connecter",
+                  "Accompagner",
+                  "40 Mairies",
+                  "10 Régions",
+                ] as const
+              ).flatMap((label, i) => [
+                <span key={`${dup}-${label}`}>{label}</span>,
+                <span
+                  key={`${dup}-dot-${i}`}
+                  className="inline-block text-[0.65em] text-orange-500"
+                  aria-hidden
+                >
+                  •
+                </span>,
+              ])}
+            </div>
+          ))}
         </div>
       </div>
 

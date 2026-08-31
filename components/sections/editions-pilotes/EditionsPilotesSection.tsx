@@ -180,7 +180,7 @@ function ColumnCarousel({
           className="mb-2.5 text-[0.68rem] font-medium tracking-[0.02em] text-white/95"
           style={{ fontFamily: TYPE.family }}
         >
-          Photo {safeIndex + 1}/{total} — {active?.caption}
+          {active?.caption}
         </p>
 
         {multi ? (

@@ -4,8 +4,10 @@ import { EcosystemeHubDial } from "@/components/sections/ecosysteme/EcosystemeHu
 import { cn } from "@/lib/utils";
 
 const SECTION = {
-  padding: "py-12 px-6 lg:py-14 lg:px-8",
-  maxWidth: "max-w-[1080px]",
+  /** Même cadre éditorial que Éditions pilotes */
+  frame:
+    "mx-auto flex w-full max-w-[min(100%,92rem)] flex-col gap-6 px-[clamp(1.35rem,5.5vw,4.75rem)]",
+  paddingY: "py-[clamp(2.5rem,5vh,3.75rem)]",
 } as const;
 
 const TYPE = {
@@ -47,21 +49,22 @@ export function EcosystemeSection() {
   return (
     <section
       id="digital-twin"
-      className={cn("bg-[#fbf7ef] text-[#0a2b21]", SECTION.padding)}
+      className={cn("bg-[#fbf7ef] text-[#0a2b21]", SECTION.paddingY)}
       aria-labelledby="ecosysteme-title"
       style={{ fontFamily: TYPE.bodyFont }}
     >
-      <div className={cn("mx-auto flex flex-col gap-6", SECTION.maxWidth)}>
+      <div className={SECTION.frame}>
         <h2
           id="ecosysteme-title"
-          className={cn("leading-[1.1] font-bold tracking-[-0.02em]", TYPE.titleSize)}
+          className="max-w-[min(100%,42rem)] text-[clamp(1.25rem,calc(2.6vw+0.85rem),3rem)] leading-[1.08] font-bold tracking-[-0.03em]"
           style={{ fontFamily: TYPE.titleFont }}
         >
-          <span className="block">
-            {copy.titleBefore}{" "}
+          <span className="block whitespace-nowrap">
+            {copy.titleBefore}
+            {"\u00A0"}
             <span className="text-[#e3a73b]">{copy.highlight}</span>
           </span>
-          <span className="block">{copy.titleAfter}</span>
+          <span className="block whitespace-nowrap">{copy.titleAfter}</span>
         </h2>
 
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-8">

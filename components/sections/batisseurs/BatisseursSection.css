@@ -40,13 +40,16 @@
 /* —— Snapshot —— */
 .bat-snap {
   background: #fff;
-  padding: clamp(3.25rem, 7vw, 5.75rem) clamp(1.15rem, 4vw, 2.5rem);
+  padding-block: clamp(3.25rem, 7vw, 5.75rem);
+  padding-inline: 0;
   border-bottom: 1px solid var(--bat-line);
 }
 
 .bat-snap-inner {
-  max-width: 1120px;
+  width: 100%;
+  max-width: min(100%, 92rem);
   margin-inline: auto;
+  padding-inline: clamp(1.35rem, 5.5vw, 4.75rem);
 }
 
 .bat-snap-grid {
@@ -165,12 +168,15 @@
 /* —— Team —— */
 .bat-team {
   background: var(--bat-canvas);
-  padding: clamp(3.25rem, 7vw, 5.75rem) clamp(1.15rem, 4vw, 2.5rem);
+  padding-block: clamp(3.25rem, 7vw, 5.75rem);
+  padding-inline: 0;
 }
 
 .bat-team-inner {
-  max-width: 1120px;
+  width: 100%;
+  max-width: min(100%, 92rem);
   margin-inline: auto;
+  padding-inline: clamp(1.35rem, 5.5vw, 4.75rem);
 }
 
 .bat-team-head {

@@ -52,12 +52,6 @@ export function AgendaSection() {
   );
 
   useEffect(() => {
-    if (!autoplay) return;
-    const id = setInterval(() => go(1), autoplayMs);
-    return () => clearInterval(id);
-  }, [autoplay, autoplayMs, go]);
-
-  useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setReduce(mq.matches);
     sync();

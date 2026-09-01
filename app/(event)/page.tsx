@@ -37,7 +37,7 @@ import { ArticlesSection } from '@/components/sections/ArticlesSection';
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
-
+import { LearnMoreSection } from '@/components/sections/LearnMoreSection';
 /**
  * Landing — architecture produit (slots 1→30 + pauses + footer).
  * Ordre = brief produit Back2Mboa (affichage = ordre JSX ci-dessous).
@@ -145,11 +145,16 @@ export default function HomePage() {
       {/* ── 29. Carousel Articles ──────────────────────── */}
       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
 
+
+
+      <LearnMoreSection />
+      <ArticlesSection/>
+
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
 
 
-      <ArticlesSection/>
+
 
       {/* ── FOOTER + CTA rôles ─────────────────────────── */}
       <FooterRevealZone />

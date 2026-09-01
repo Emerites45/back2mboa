@@ -152,33 +152,37 @@ export function BilletsSection({
             const on = i === sel;
             const darkCta = q.couleur === "#FFD506";
             return (
-              <div
+              <button
                 key={q.id}
-                className={`lane${on ? " on" : ""}`}
-                style={packVars(q)}
+                type="button"
+                aria-pressed={on}
+                aria-expanded={on}
+                className={`stub${q.dispo ? "" : " clos"}${on ? " is-active" : ""}`}
+                style={{
+                  background: on ? q.couleur : stubBg[i],
+                  color: on ? (darkCta ? "#0A2B21" : "#fff") : q.texte,
+                  gridRow: "1",
+                }}
+                aria-label={`${q.complet}, ${q.prix} FCFA`}
+                onClick={() => pick(i)}
               >
-                <button
-                  type="button"
-                  aria-pressed={on}
-                  aria-expanded={on}
-                  className={`stub${q.dispo ? "" : " clos"}`}
-                  style={{
-                    background: on ? q.couleur : stubBg[i],
-                    color: on ? (darkCta ? "#0A2B21" : "#fff") : q.texte,
-                  }}
-                  aria-label={`${q.complet}, ${q.prix} FCFA`}
-                  onClick={() => pick(i)}
-                >
-                  <span className="stub-in">
-                    {q.nom}
-                    <span className="price">{q.prix} F</span>
-                    <span className="state">{q.statut}</span>
-                  </span>
-                </button>
-                <TicketFace p={q} open={on} eyebrow={eyebrow} />
-              </div>
+                <span className="stub-in">
+                  {q.nom}
+                  <span className="price">{q.prix} F</span>
+                  <span className="state">{q.statut}</span>
+                </span>
+              </button>
             );
           })}
+          {packs.map((q, i) => (
+            <div
+              key={`face-${q.id}`}
+              className={`lane${i === sel ? " on" : ""}`}
+              style={{ ...packVars(q), gridRow: "1" }}
+            >
+              <TicketFace p={q} open={i === sel} eyebrow={eyebrow} />
+            </div>
+          ))}
         </div>
 
         <p className="under">{under}</p>

@@ -7,8 +7,6 @@ const QR = (id: string) =>
   </svg>`;
 
 export const BILLET_QR_PATHS: Record<BilletPackId, string> = {
-  growth: QR("growth"),
-  impact: QR("impact"),
   vision: QR("vision"),
   prosperity: QR("prosperity"),
 };

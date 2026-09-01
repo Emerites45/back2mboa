@@ -186,7 +186,7 @@
   margin-left: -40%;
   padding-left: 40%;
   -webkit-mask-image: linear-gradient(to right, transparent 88%, #000 50%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent 18%, #000 50%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent 22.5%, #000 50%, #000 94%, transparent);
 }
 
 .partners-logo {

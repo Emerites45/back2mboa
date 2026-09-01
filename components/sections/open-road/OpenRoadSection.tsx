@@ -4,15 +4,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { OPEN_ROAD_COPY } from "@/data/open-road";
+import { SponsorPopup } from "@/components/sections/respiration/SponsorPopup";
+import type { SlideSponsor } from "@/components/sections/respiration/SponsorPopup";
 import "./OpenRoadSection.css";
 
 export function OpenRoadSection() {
-  const { programs, autoplayMs, watchLabel } = OPEN_ROAD_COPY;
+  const { programs, autoplayMs } = OPEN_ROAD_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
   const [runId, setRunId] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupSponsor, setPopupSponsor] = useState<SlideSponsor | null>(null);
   const wasInView = useRef(false);
 
   const active = programs[index] ?? programs[0];
@@ -105,7 +109,11 @@ export function OpenRoadSection() {
         <button
           type="button"
           className="open-road-next"
-          onClick={() => go(index + 1)}
+          onClick={() => {
+            const s = programs[index]?.sponsor;
+            if (s) { setPopupSponsor(s); setPopupOpen(true); }
+            else go(index + 1);
+          }}
           aria-label="Programme suivant"
         >
           <ArrowUpRight size={20} strokeWidth={2.4} aria-hidden="true" />
@@ -113,14 +121,24 @@ export function OpenRoadSection() {
 
         <div className="open-road-footer">
           <div className="open-road-main">
+            <span className="open-road-powered-by">
+              <span className="open-road-play" aria-hidden="true" />
+              Powered by
+            </span>
             <h2 id="open-road-title" key={`${active.id}-${runId}`} className="open-road-title">
               {active.title}
             </h2>
             <div className="open-road-actions">
-              <button type="button" className="open-road-watch">
-                <span className="open-road-play" aria-hidden="true" />
-                <span>{watchLabel}</span>
-                <span className="open-road-duration">{active.duration}</span>
+              <button
+                type="button"
+                className="open-road-know-more"
+                onClick={() => {
+                  const s = programs[index]?.sponsor;
+                  if (s) { setPopupSponsor(s); setPopupOpen(true); }
+                }}
+              >
+                <span className="open-road-info-icon" aria-hidden="true" />
+                En savoir plus
               </button>
             </div>
           </div>
@@ -155,6 +173,12 @@ export function OpenRoadSection() {
           </nav>
         </div>
       </div>
+
+      <SponsorPopup
+        sponsor={popupSponsor}
+        open={popupOpen}
+        onClose={() => setPopupOpen(false)}
+      />
     </section>
   );
 }

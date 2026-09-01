@@ -1,3 +1,5 @@
+import type { SlideSponsor } from "@/components/sections/respiration/SponsorPopup";
+
 export type HomecomingKenBurns =
   | "zoom-suite"
   | "zoom-grill"
@@ -13,6 +15,7 @@ export type HomecomingProgram = {
   objectPosition: string;
   kenBurns: HomecomingKenBurns;
   duration: string;
+  sponsor?: SlideSponsor;
 };
 
 export type HomecomingCopy = {

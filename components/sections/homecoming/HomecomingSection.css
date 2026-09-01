@@ -125,7 +125,8 @@
 
 .homecoming-ui .homecoming-watch,
 .homecoming-ui .homecoming-item,
-.homecoming-ui .homecoming-next {
+.homecoming-ui .homecoming-next,
+.homecoming-ui .homecoming-know-more {
   pointer-events: auto;
 }
 
@@ -201,35 +202,55 @@
   margin-top: 0.2rem;
 }
 
-.homecoming-watch {
+.homecoming-powered-by {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
   padding: 0.15rem 0;
-  border: 0;
-  background: transparent;
+  color: var(--hc-ink);
+  font-family: var(--hc-script);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.02em;
+}
+
+.homecoming-know-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   color: var(--hc-ink);
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s var(--hc-ease);
 }
 
-.homecoming-duration {
-  margin-left: 0.15rem;
-  font-size: 0.82rem;
-  font-weight: 400;
-  opacity: 0.72;
+.homecoming-know-more:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-.homecoming-watch:hover {
-  opacity: 0.9;
+.homecoming-info-icon {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--brand-yellow);
+  color: var(--brand-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
-.homecoming-watch:focus-visible {
-  outline: 2px solid var(--hc-ink);
-  outline-offset: 6px;
+.homecoming-info-icon::after {
+  content: "i";
 }
 
 .homecoming-play {

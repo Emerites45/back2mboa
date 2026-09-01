@@ -5,6 +5,7 @@ export type MethodePillar = {
   image: string;
   imageAlt: string;
   versoTitle: string;
+  versoSubtitle: string;
   versoText: string;
   versoBottom: string;
 };

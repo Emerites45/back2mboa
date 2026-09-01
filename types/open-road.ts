@@ -1,3 +1,5 @@
+import type { SlideSponsor } from "@/components/sections/respiration/SponsorPopup";
+
 export type OpenRoadKenBurns =
   | "zoom-tea"
   | "zoom-forest"
@@ -13,6 +15,7 @@ export type OpenRoadProgram = {
   objectPosition: string;
   kenBurns: OpenRoadKenBurns;
   duration: string;
+  sponsor?: SlideSponsor;
 };
 
 export type OpenRoadCopy = {

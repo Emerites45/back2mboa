@@ -2,7 +2,6 @@ import type { PassageCopy } from "@/types/passage";
 
 /** Diaporama Passage (PAUSE #3) — 01 bateau, 02 elephant, 03 koki. */
 export const PASSAGE_COPY: PassageCopy = {
-  brand: "BACK 2 MBOA",
   watchLabel: "Watch trailer",
   autoplayMs: 8000,
   programs: [

@@ -11,11 +11,8 @@ export function ParcoursSection() {
         <Reveal
           as="span"
           delay={0}
-          className="inline-flex max-w-full items-center gap-2 rounded-full border border-brand-play bg-white px-3 py-1.5 text-[0.75rem] font-medium text-brand-play sm:text-[0.8125rem]"
+          className="text-[0.75rem] font-medium text-brand-copy sm:text-[0.8125rem]"
         >
-          <span className="grid size-5 place-items-center rounded-full bg-brand-play text-white">
-            <span className="ml-px size-0 border-y-[3.5px] border-l-[6px] border-y-transparent border-l-white" />
-          </span>
           Le parcours Back2Mboa
         </Reveal>
 
@@ -58,25 +55,11 @@ export function ParcoursSection() {
         <div className="relative mt-8 md:mt-10 lg:mt-12 lg:pt-14">
           <StepsCarousel />
 
-          <Reveal
-            delay={0.72}
-            className="pointer-events-none absolute top-[92%] left-[28.6%] hidden lg:block"
-          >
-            <Image
-              src="/images/plane_icon.webp"
-              width={137}
-              height={171}
-              alt=""
-              className="h-[62px] w-auto rotate-[0deg] object-contain"
-              aria-hidden="true"
-            />
-          </Reveal>
-
-          <Reveal
+          {/* <Reveal
             delay={0.88}
             x={-16}
             y={0}
-            className="pointer-events-none absolute top-0 left-[40%] hidden h-[5.75rem] w-[24%] text-brand-yellow lg:block"
+            className="pointer-events-none absolute top-0 left-[40%] hidden h-[5.75rem] w-[24%] text-brand-yellow opacity-10 lg:block"
           >
             <svg
               viewBox="0 0 595 224"
@@ -91,7 +74,7 @@ export function ParcoursSection() {
                 strokeDasharray="18 10"
               />
             </svg>
-          </Reveal>
+          </Reveal> */}
           <Reveal
             delay={1.08}
             x={-20}
@@ -104,18 +87,18 @@ export function ParcoursSection() {
               width={77}
               height={64}
               alt=""
-              className="h-[18px] w-auto rotate-[-5deg] object-contain"
+              className="h-[18px] w-auto rotate-[-5deg] object-contain opacity-10"
               aria-hidden="true"
             />
           </Reveal>
         </div>
       </div>
 
-      <Reveal
+      {/* <Reveal
         delay={0.95}
         x={12}
         y={8}
-        className="pointer-events-none absolute right-[3.5%] bottom-[10%] hidden text-[#155259] lg:block"
+        className="pointer-events-none absolute right-[3.5%] bottom-[10%] hidden text-[#155259] opacity-10 lg:block"
       >
         <svg
           viewBox="0 0 404 314"
@@ -132,7 +115,7 @@ export function ParcoursSection() {
             strokeDasharray="12 9"
           />
         </svg>
-      </Reveal>
+      </Reveal> */}
       <Reveal
         delay={1.12}
         x={-10}
@@ -144,7 +127,7 @@ export function ParcoursSection() {
           width={70}
           height={81}
           alt=""
-          className="h-[22px] w-auto rotate-[5deg] object-contain"
+          className="h-[22px] w-auto rotate-[5deg] object-contain opacity-10"
           aria-hidden="true"
         />
       </Reveal>

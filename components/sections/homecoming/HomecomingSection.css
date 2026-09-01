@@ -124,36 +124,40 @@
 }
 
 .homecoming-ui .homecoming-watch,
-.homecoming-ui .homecoming-item {
+.homecoming-ui .homecoming-item,
+.homecoming-ui .homecoming-next {
   pointer-events: auto;
 }
 
-.homecoming-brand {
+/* Bouton flèche — même DA que Stories (pastille jaune, flèche en haut à droite) */
+.homecoming-next {
   position: absolute;
   top: max(var(--hc-pad-y), env(safe-area-inset-top));
-  left: max(var(--hc-pad-x), env(safe-area-inset-left));
+  right: max(var(--hc-pad-x), env(safe-area-inset-right));
   z-index: 2;
-  margin: 0;
-  font-family: var(--hc-display);
-  font-size: clamp(1.05rem, 1.8vw, 1.28rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--brand-yellow);
+  color: var(--brand-ink);
+  cursor: pointer;
+  transition: transform 0.18s var(--hc-ease);
 }
 
-.homecoming-brand span {
-  display: inline-block;
-  margin-inline: 0.06em;
-  font-family: var(--hc-script);
-  font-size: 1.55em;
-  font-style: italic;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 0.7;
-  text-transform: none;
-  transform: translateY(0.08em);
+.homecoming-next:hover {
+  transform: scale(1.08);
+}
+
+.homecoming-next:active {
+  transform: scale(0.94);
+}
+
+.homecoming-next:focus-visible {
+  outline: 2px solid var(--hc-ink);
+  outline-offset: 3px;
 }
 
 .homecoming-footer {

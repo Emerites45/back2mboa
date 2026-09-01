@@ -16,7 +16,6 @@ export type PassageProgram = {
 };
 
 export type PassageCopy = {
-  brand: string;
   watchLabel: string;
   autoplayMs: number;
   programs: [PassageProgram, PassageProgram, PassageProgram];

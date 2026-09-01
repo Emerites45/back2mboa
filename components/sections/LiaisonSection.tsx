@@ -1,14 +1,5 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin", "latin-ext"],
-});
-
-const inter = Inter({
-  subsets: ["latin", "latin-ext"],
-});
 
 const CARD = {
   color: "#D9D9D9",
@@ -184,13 +175,13 @@ export function LiaisonSection() {
               La Prospérité à Double Sens
             </p>
             <h2
-              className={`${bricolage.className} mt-4 text-balance font-bold leading-[1.15] uppercase`}
+              className={`mt-4 text-balance font-bold leading-[1.15] uppercase`}
               style={{ fontSize: CARD.text2Size, color: CARD.text2Color }}
             >
               LA PROSPÉRITÉ NE DESCEND PAS DANS UN SEUL SENS.
             </h2>
             <p
-              className={`${inter.className} mx-auto mt-5 max-w-[42rem] text-pretty leading-[1.2]`}
+              className={`mx-auto mt-5 max-w-[42rem] text-pretty leading-[1.2]`}
               style={{
                 fontSize: CARD.text3Size,
                 color: CARD.text3Color,
@@ -238,7 +229,7 @@ export function LiaisonSection() {
                 ⇄
               </span>
               <p
-                className={`${bricolage.className} mt-4 leading-snug`}
+                className={`mt-4 leading-snug`}
                 style={{
                   fontSize: FLUX.bridgeTitleSize,
                   color: FLUX.bridgeTitleColor,
@@ -248,7 +239,7 @@ export function LiaisonSection() {
                 L&apos;Autoroute de la Prospérité™
               </p>
               <ul
-                className={`${inter.className} mt-6 flex flex-col gap-2`}
+                className={`mt-6 flex flex-col gap-2`}
                 style={{
                   fontSize: FLUX.bridgeListSize,
                   color: FLUX.bridgeListColor,
@@ -274,7 +265,7 @@ export function LiaisonSection() {
             style={{ maxWidth: JOURNEY.maxWidth }}
           >
             <p
-              className={`${inter.className} mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95`}
+              className={`mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95`}
             >
               {JOURNEY.lead}
             </p>
@@ -284,7 +275,7 @@ export function LiaisonSection() {
 
               <div className="flex items-center justify-center self-center px-1 py-1 md:px-2 md:py-2">
                 <p
-                  className={`${bricolage.className} rounded-full border border-white/20 bg-[#506D0E]/90 px-5 py-2.5 text-center text-[0.78rem] font-semibold tracking-[0.04em] text-white shadow-[0_10px_28px_rgba(10,43,33,0.25)]`}
+                  className={`rounded-full border border-white/20 bg-[#506D0E]/90 px-5 py-2.5 text-center text-[0.78rem] font-semibold tracking-[0.04em] text-white shadow-[0_10px_28px_rgba(10,43,33,0.25)]`}
                 >
                   {JOURNEY.bridge}
                 </p>
@@ -307,17 +298,17 @@ function JourneyLeg({
   return (
     <article className="flex h-full flex-col gap-3 rounded-[1.15rem] border border-white/10 bg-[#454905]/92 px-5 py-5 text-left shadow-[0_16px_40px_rgba(10,43,33,0.22)] backdrop-blur-[2px] md:px-6 md:py-6">
       <p
-        className={`${inter.className} text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/55`}
+        className={`text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/55`}
       >
         {leg.when}
       </p>
       <h4
-        className={`${bricolage.className} text-[clamp(1.15rem,1.8vw,1.45rem)] font-bold leading-[1.2] tracking-[-0.02em] text-[#FFF1DA]`}
+        className={`text-[clamp(1.15rem,1.8vw,1.45rem)] font-bold leading-[1.2] tracking-[-0.02em] text-[#FFF1DA]`}
       >
         {leg.where}
       </h4>
       <p
-        className={`${inter.className} mt-auto text-[0.92rem] font-medium leading-[1.5] text-white/88`}
+        className={`mt-auto text-[0.92rem] font-medium leading-[1.5] text-white/88`}
       >
         {leg.detail}
       </p>
@@ -356,7 +347,7 @@ function FluxSide({
         {label}
       </p>
       <h3
-        className={`${bricolage.className} mt-3 leading-none`}
+        className={`mt-3 leading-none`}
         style={{
           fontSize: FLUX.titleSize,
           color: FLUX.titleColor,
@@ -366,7 +357,7 @@ function FluxSide({
         {title}
       </h3>
       <p
-        className={`${inter.className} mt-3 flex items-center gap-1.5 leading-snug`}
+        className={`mt-3 flex items-center gap-1.5 leading-snug`}
         style={{
           fontSize: FLUX.subtitleSize,
           color: FLUX.subtitleColor,
@@ -396,7 +387,7 @@ function FluxSide({
         {subtitle}
       </p>
       <ul
-        className={`${inter.className} mt-6 flex flex-col gap-2`}
+        className={`mt-6 flex flex-col gap-2`}
         style={{
           fontSize: FLUX.listSize,
           color: FLUX.listColor,

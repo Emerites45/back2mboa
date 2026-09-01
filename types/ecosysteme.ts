@@ -6,10 +6,8 @@ export type EcosystemeCopy = {
   twinTitle: string;
   twinBody: string;
   twinCta: string;
-  twinCtaHref: string;
   mayorTitle: string;
   mayorBody: string;
   mayorBullets: [string, string];
   mayorCta: string;
-  mayorCtaHref: string;
 };

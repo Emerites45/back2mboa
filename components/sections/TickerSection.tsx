@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { Bricolage_Grotesque } from "next/font/google";
 import { cn } from "@/lib/utils";
-
-const fontBricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-  display: "swap",
-});
 
 const COPY =
   "Rejoignez les Bâtisseurs Solutionneurs · 16 · 17 décembre 2026 - Yaoundé · 300 places";
@@ -50,10 +43,7 @@ export function TickerSection() {
   return (
     <aside
       ref={ref}
-      className={cn(
-        fontBricolage.className,
-        "overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18]",
-      )}
+      className="overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18]"
       aria-label="Événement Back2Mboa"
     >
       <p className="sr-only">

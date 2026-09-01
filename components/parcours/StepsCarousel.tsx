@@ -93,23 +93,6 @@ export function StepsCarousel() {
               duration={lg ? 0.5 : 0.3}
               className={`relative w-[min(70vw,15.5rem)] shrink-0 snap-start list-none lg:w-auto lg:min-w-0 ${step.n % 2 === 0 ? "lg:mt-12" : ""}`}
             >
-              {step.n === 6 ? (
-                <Reveal
-                  delay={cardDelay(6) + 0.18}
-                  y={-12}
-                  duration={0.28}
-                  className="pointer-events-none absolute top-[-62px] left-[30%] hidden lg:block"
-                >
-                  <Image
-                    src="/images/maps.webp"
-                    width={136}
-                    height={166}
-                    alt=""
-                    className="h-[62px] w-auto -translate-x-1/2 rotate-[0deg] object-contain"
-                    aria-hidden="true"
-                  />
-                </Reveal>
-              ) : null}
               <StepCard step={step} />
             </Reveal>
           ))}

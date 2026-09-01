@@ -1,3 +1,5 @@
+import type { SlideSponsor } from "@/components/sections/respiration/SponsorPopup";
+
 export type PassageKenBurns =
   | "zoom-river"
   | "zoom-herd"
@@ -13,6 +15,7 @@ export type PassageProgram = {
   objectPosition: string;
   kenBurns: PassageKenBurns;
   duration: string;
+  sponsor?: SlideSponsor;
 };
 
 export type PassageCopy = {

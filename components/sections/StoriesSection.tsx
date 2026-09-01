@@ -15,20 +15,20 @@ import {
 } from "@/components/ui/carousel";
 
 const TYPE = {
-  titleSize: "clamp(1.7rem, 4.2vh, 3rem)",
+  titleSize: "clamp(2rem, 5vh, 3.5rem)",
   titleWeight: 700,
-  bodySize: "clamp(0.9rem, 2vh, 1.05rem)",
+  bodySize: "clamp(1.05rem, 2.4vh, 1.25rem)",
 } as const;
 
 /** Taille de la carte active et de son contenu — contraint par la hauteur de viewport. */
 const CARD = {
-  width: "min(58rem, 88vw, calc(52vh * 16 / 10))",
+  width: "min(63.8rem, 97vw, calc(57vh * 16 / 10))",
   aspectRatio: "16 / 10",
-  padding: "clamp(1rem, 2.8vh, 1.75rem)",
-  quoteSize: "clamp(0.95rem, 2.4vh, 1.55rem)",
-  metaSize: "clamp(0.8rem, 1.8vh, 1.1rem)",
-  arrowSize: "clamp(2rem, 4.5vh, 2.75rem)",
-  arrowIcon: "clamp(0.9rem, 2vh, 1.25rem)",
+  padding: "clamp(1.1rem, 3.1vh, 1.93rem)",
+  quoteSize: "clamp(1.05rem, 2.6vh, 1.7rem)",
+  metaSize: "clamp(0.88rem, 2vh, 1.2rem)",
+  arrowSize: "clamp(2.2rem, 5vh, 3rem)",
+  arrowIcon: "clamp(1rem, 2.2vh, 1.4rem)",
 } as const;
 
 const STORIES = [

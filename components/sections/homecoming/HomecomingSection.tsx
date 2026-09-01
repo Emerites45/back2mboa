@@ -4,15 +4,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { HOMECOMING_COPY } from "@/data/homecoming";
+import { SponsorPopup } from "@/components/sections/respiration/SponsorPopup";
+import type { SlideSponsor } from "@/components/sections/respiration/SponsorPopup";
 import "./HomecomingSection.css";
 
 export function HomecomingSection() {
-  const { programs, autoplayMs, watchLabel } = HOMECOMING_COPY;
+  const { programs, autoplayMs } = HOMECOMING_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
   const [runId, setRunId] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupSponsor, setPopupSponsor] = useState<SlideSponsor | null>(null);
   const wasInView = useRef(false);
 
   const active = programs[index] ?? programs[0];
@@ -103,7 +107,11 @@ export function HomecomingSection() {
         <button
           type="button"
           className="homecoming-next"
-          onClick={() => go(index + 1)}
+          onClick={() => {
+            const s = programs[index]?.sponsor;
+            if (s) { setPopupSponsor(s); setPopupOpen(true); }
+            else go(index + 1);
+          }}
           aria-label="Programme suivant"
         >
           <ArrowUpRight size={20} strokeWidth={2.4} aria-hidden="true" />
@@ -111,6 +119,10 @@ export function HomecomingSection() {
 
         <div className="homecoming-footer">
           <div className="homecoming-main">
+            <span className="homecoming-powered-by">
+              <span className="homecoming-play" aria-hidden="true" />
+              Powered by
+            </span>
             <h2
               id="homecoming-title"
               key={`${active.id}-${runId}`}
@@ -119,10 +131,16 @@ export function HomecomingSection() {
               {active.title}
             </h2>
             <div className="homecoming-actions">
-              <button type="button" className="homecoming-watch">
-                <span className="homecoming-play" aria-hidden="true" />
-                <span>{watchLabel}</span>
-                <span className="homecoming-duration">{active.duration}</span>
+              <button
+                type="button"
+                className="homecoming-know-more"
+                onClick={() => {
+                  const s = programs[index]?.sponsor;
+                  if (s) { setPopupSponsor(s); setPopupOpen(true); }
+                }}
+              >
+                <span className="homecoming-info-icon" aria-hidden="true" />
+                En savoir plus
               </button>
             </div>
           </div>
@@ -157,6 +175,12 @@ export function HomecomingSection() {
           </nav>
         </div>
       </div>
+
+      <SponsorPopup
+        sponsor={popupSponsor}
+        open={popupOpen}
+        onClose={() => setPopupOpen(false)}
+      />
     </section>
   );
 }

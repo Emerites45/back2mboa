@@ -44,11 +44,15 @@ const TYPE = {
   pillarBodyWeight: 400,
 
   versoTitleFont: "var(--font-bricolage)",
-  versoTitleSize: "0.95rem",
+  versoTitleSize: "1.3rem",
   versoTitleWeight: 700,
 
+  versoSubtitleFont: "var(--font-bricolage)",
+  versoSubtitleSize: "0.92rem",
+  versoSubtitleWeight: 600,
+
   versoBodyFont: "var(--font-roboto)",
-  versoBodySize: "0.78rem",
+  versoBodySize: "0.88rem",
   versoBodyWeight: 400,
 
   versoBottomFont: "var(--font-roboto-mono)",
@@ -290,6 +294,17 @@ export function MethodeSection() {
                         }}
                       >
                         {pillar.versoTitle}
+                      </p>
+                      <p
+                        className="leading-snug tracking-[-0.005em]"
+                        style={{
+                          fontFamily: TYPE.versoSubtitleFont,
+                          fontSize: TYPE.versoSubtitleSize,
+                          fontWeight: TYPE.versoSubtitleWeight,
+                          color: "#1e3a5f",
+                        }}
+                      >
+                        {pillar.versoSubtitle}
                       </p>
                       <div
                         className="min-h-0 flex-1 overflow-hidden text-pretty whitespace-pre-line"

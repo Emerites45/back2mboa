@@ -83,11 +83,11 @@ export function PartenairesSection() {
           <div className="partners-corridor">
             <LogoTrack items={copy.enter} extraClass="is-in" />
           </div>
-          <Door src="/images/layer-stone-archway_right.png" />
+          <Door src="/images/layer-stone-archway_right.webp" />
         </div>
 
         <div className="partners-band is-exit">
-          <Door src="/images/layer-stone-archway_left.png" />
+          <Door src="/images/layer-stone-archway_left.webp" />
           <div className="partners-corridor">
             <LogoTrack items={copy.exit} extraClass="is-out" />
           </div>

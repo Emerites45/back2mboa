@@ -2,15 +2,9 @@
 
 import React, { useState, useEffect, useId } from 'react';
 
-import { Bricolage_Grotesque, Noto_Sans_Symbols, Montserrat } from 'next/font/google';
+import { Noto_Sans_Symbols, Montserrat } from 'next/font/google';
 import HeroBackgroundSlider from '@/components/hero/HeroBackgroundSlider';
 import { SLIDES_DATA, SlideData } from '@/data/slides';
-
-const fontBricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  display: 'swap',
-});
 
 const fontNotoSymbols = Noto_Sans_Symbols({
   subsets: ['latin'],
@@ -94,7 +88,7 @@ export function HeroSection() {
             {titleTop}
           </p>
           <h1
-            className={`${fontBricolage.className} mx-auto max-w-[min(100%,22ch)] tracking-[0.04em] uppercase leading-[0.95] text-[clamp(1.15rem,4.2vw,3.75rem)] font-extrabold text-white select-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap`}
+            className="mx-auto max-w-[min(100%,22ch)] tracking-[0.04em] uppercase leading-[0.95] text-[clamp(1.15rem,4.2vw,3.75rem)] font-bold text-white select-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap"
           >
             {titleMain}
           </h1>
@@ -200,7 +194,7 @@ export function HeroSection() {
 
       {/* BANDEAU */}
       <div
-        className={`${fontBricolage.className} relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18] pointer-events-auto`}
+        className="relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18] pointer-events-auto"
       >
         <style>{`
           @keyframes marquee {

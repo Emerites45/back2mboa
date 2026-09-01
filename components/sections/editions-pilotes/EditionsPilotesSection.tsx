@@ -28,7 +28,7 @@ const SECTION = {
   wash: "rgba(17, 157, 99, 0.045)",
 } as const;
 
-const ROLE_BULLET = "/images/editions-pilotes/role-bullet-brick.png";
+const ROLE_BULLET = "/images/editions-pilotes/role-bullet-brick.webp";
 
 const HOVER = {
   ms: 320,

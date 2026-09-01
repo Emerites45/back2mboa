@@ -27,7 +27,7 @@ function HubCenterMark({
       aria-hidden="true"
     >
       <img
-        src="/images/portail-terre-cuite.png"
+        src="/images/portail-terre-cuite.webp"
         alt=""
         className="h-full w-full object-cover"
       />

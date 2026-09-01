@@ -21,7 +21,7 @@ export const PARTENAIRES_COPY: PartenairesCopy = {
     { nom: "CVUC", sous: "Communes et villes unies", icon: "/images/institutions/cvuc.svg" },
     { nom: "APME", sous: "Promotion des PME", icon: "/images/institutions/apme.svg" },
     { nom: "CARPA", sous: "Partenariats public-privé", icon: "/images/institutions/carpa.svg" },
-    { nom: "MINADER", sous: "Agriculture", icon: "/images/institutions/minader.jpg" },
+    { nom: "MINADER", sous: "Agriculture", icon: "/images/institutions/minader.webp" },
     { nom: "CCIMA", sous: "Chambre de commerce", icon: "/images/institutions/ccima.svg" },
   ],
   exit: [
@@ -30,8 +30,8 @@ export const PARTENAIRES_COPY: PartenairesCopy = {
     { nom: "UNION EUROPÉENNE", sous: "Délégation au Cameroun", icon: "/images/institutions/ue.svg" },
     { nom: "PAD", sous: "Port autonome de Douala", icon: "/images/institutions/pad.svg" },
     { nom: "ANOR", sous: "Normes et qualité", icon: "/images/institutions/anor.svg" },
-    { nom: "MINSANTÉ", sous: "Santé publique", icon: "/images/institutions/minsante.png" },
-    { nom: "MINEE", sous: "Eau et énergie", icon: "/images/institutions/minee.png" },
+    { nom: "MINSANTÉ", sous: "Santé publique", icon: "/images/institutions/minsante.webp" },
+    { nom: "MINEE", sous: "Eau et énergie", icon: "/images/institutions/minee.webp" },
     { nom: "SOLUTIONNEURS", sous: "Initiative", icon: "/images/institutions/solutionneurs.svg" },
   ],
 };

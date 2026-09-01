@@ -75,7 +75,7 @@ export function CameroonMap({
     <div className={`potentialites-map-stage${sectorFilter ? " is-filter" : ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/potentialites/carte_cameroun.png"
+        src="/images/potentialites/carte_cameroun.webp"
         alt="Carte du Cameroun — 10 régions"
       />
       <svg

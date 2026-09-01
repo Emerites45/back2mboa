@@ -6,7 +6,7 @@ import { POURQUOI_COPY } from "@/data/pourquoi";
 import type { PourquoiStars } from "@/types/pourquoi";
 import "./PourquoiSection.css";
 
-const LOGO_SRC = "/images/pourquoi/logo-back2mboa.png";
+const LOGO_SRC = "/images/pourquoi/logo-back2mboa.webp";
 
 function BrandLogo({ className }: { className?: string }) {
   return (

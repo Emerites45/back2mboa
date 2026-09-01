@@ -25,27 +25,27 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#histoires",
     slides: [
       {
-        src: "/images/editions-pilotes/solutionneurs/01.jpg",
+        src: "/images/editions-pilotes/solutionneurs/01.webp",
         alt: "Solutionneurs en atelier collaboratif",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/02.jpg",
+        src: "/images/editions-pilotes/solutionneurs/02.webp",
         alt: "Workshop entrepreneurs diaspora",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/03.jpg",
+        src: "/images/editions-pilotes/solutionneurs/03.webp",
         alt: "Agro-transformation locale",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/04.jpg",
+        src: "/images/editions-pilotes/solutionneurs/04.webp",
         alt: "Finance et paiements digitaux",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/05.jpg",
+        src: "/images/editions-pilotes/solutionneurs/05.webp",
         alt: "Mise en relation diaspora",
         caption: "Solutionneurs",
       },
@@ -75,27 +75,27 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#partenaires",
     slides: [
       {
-        src: "/images/editions-pilotes/ecosysteme/01.jpg",
+        src: "/images/editions-pilotes/ecosysteme/01.webp",
         alt: "Interview média institutionnelle",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/02.jpg",
+        src: "/images/editions-pilotes/ecosysteme/02.webp",
         alt: "Présentation résultats et preuve",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/03.jpg",
+        src: "/images/editions-pilotes/ecosysteme/03.webp",
         alt: "Financement et partenaires",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/04.jpg",
+        src: "/images/editions-pilotes/ecosysteme/04.webp",
         alt: "Acteur institutionnel",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/05.jpg",
+        src: "/images/editions-pilotes/ecosysteme/05.webp",
         alt: "Structuration de l'écosystème",
         caption: "Écosystème",
       },
@@ -125,27 +125,27 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#mairies-championnes",
     slides: [
       {
-        src: "/images/editions-pilotes/ctd/01.jpg",
+        src: "/images/editions-pilotes/ctd/01.webp",
         alt: "Réunion mairie et collectivités",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/02.jpg",
+        src: "/images/editions-pilotes/ctd/02.webp",
         alt: "Mairie championne Douala III",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/03.jpg",
+        src: "/images/editions-pilotes/ctd/03.webp",
         alt: "Mairie championne Limbé I",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/04.jpg",
+        src: "/images/editions-pilotes/ctd/04.webp",
         alt: "Mairie championne Babadjou",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/05.jpg",
+        src: "/images/editions-pilotes/ctd/05.webp",
         alt: "Mairie championne Guider",
         caption: "CTD / Maires",
       },

@@ -17,7 +17,7 @@ export function ArticlesSection() {
       {/* Image de fond */}
       <div className="absolute inset-0">
         <Image
-          src="/images/pexels-cody-king.png"
+          src="/images/living-land/slide-01-forest.webp"
           alt="African Forest"
           fill
           className="object-cover object-center"

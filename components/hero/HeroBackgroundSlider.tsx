@@ -178,7 +178,7 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
           }}
         >
           <Image 
-            src="/images/gate.png" 
+            src="/images/gate.webp" 
             alt="Portail Back2Mboa"
             fill
             priority

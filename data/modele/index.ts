@@ -50,7 +50,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     description:
       "Transformer davantage localement, réduire les pertes, augmenter les revenus des producteurs.",
     visual: "photo",
-    image: "/images/modele/secteurs/agriculture.jpg",
+    image: "/images/modele/secteurs/agriculture.webp",
     imagePosition: "50% 32%",
   },
   {
@@ -60,7 +60,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Finance, Fiscalité & Paiements",
     description: "Moderniser les transactions et le capital.",
     visual: "photo",
-    image: "/images/modele/secteurs/finance.jpg",
+    image: "/images/modele/secteurs/finance.webp",
     imagePosition: "50% 28%",
   },
   {
@@ -70,7 +70,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Foncier, Immobilier & Construction",
     description: "Sécuriser le foncier, bâtir les actifs du futur.",
     visual: "photo",
-    image: "/images/modele/secteurs/foncier.jpg",
+    image: "/images/modele/secteurs/foncier.webp",
     imagePosition: "50% 26%",
   },
   {
@@ -80,7 +80,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Tourisme, Mobilité & Marketing Territorial",
     description: "Valoriser les destinations et relier les territoires.",
     visual: "photo",
-    image: "/images/modele/secteurs/tourisme.jpg",
+    image: "/images/modele/secteurs/tourisme.webp",
     imagePosition: "50% 40%",
   },
   {
@@ -90,7 +90,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Eau & Énergie",
     description: "Sécuriser l'accès à l'eau et aux énergies durables.",
     visual: "photo",
-    image: "/images/modele/secteurs/eau-energie.jpg",
+    image: "/images/modele/secteurs/eau-energie.webp",
     imagePosition: "50% 35%",
   },
   {
@@ -100,7 +100,7 @@ export const MODELE_CARDS: ModeleCard[] = [
     title: "Santé, Social & Bien-être",
     description: "Renforcer l'offre de soins et le tissu social local.",
     visual: "photo",
-    image: "/images/modele/secteurs/sante.jpg",
+    image: "/images/modele/secteurs/sante.webp",
     imagePosition: "48% 30%",
   },
 ];

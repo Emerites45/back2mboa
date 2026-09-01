@@ -120,54 +120,45 @@
 
 .prelude-row {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1.12fr 0.88fr;
   gap: clamp(1.1rem, 2vw, 1.5rem);
   align-items: stretch;
   width: 100%;
 }
 
 .prelude-row.is-media-right {
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 0.88fr 1.12fr;
 }
 
-.prelude-media,
-.prelude-card {
+/*
+  Média = même hauteur que la carte (stretch).
+  object-fit: fill → image entière étalée bord à bord, sans crop.
+*/
+.prelude-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
   min-height: clamp(17.5rem, 28vh, 22rem);
   border-radius: var(--pr-radius);
+  overflow: hidden;
+  background: #0a2b21;
+  box-shadow: 0 1px 0 rgba(10, 43, 33, 0.04);
+  isolation: isolate;
 }
 
-.prelude-row:has(.prelude-card.is-rich) .prelude-media,
-.prelude-row:has(.prelude-card.is-rich) .prelude-card {
+.prelude-row:has(.prelude-card.is-rich) .prelude-media {
   min-height: clamp(26rem, 42vh, 34rem);
 }
 
-.prelude-media {
-  position: relative;
-  overflow: hidden;
-  background: #d5dbd6;
-  box-shadow: 0 1px 0 rgba(10, 43, 33, 0.04);
-}
-
 .prelude-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    165deg,
-    rgba(10, 43, 33, 0.04) 0%,
-    transparent 42%,
-    rgba(10, 43, 33, 0.1) 100%
-  );
+  display: none;
 }
 
 .prelude-media-img {
-  object-fit: cover;
-  transition: transform 700ms var(--pr-ease);
-}
-
-.prelude-row:hover .prelude-media-img {
-  transform: scale(1.03);
+  object-fit: fill;
+  object-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 .prelude-card {
@@ -176,15 +167,18 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.85rem;
+  min-height: clamp(17.5rem, 28vh, 22rem);
   padding: clamp(1.5rem, 2.8vw, 2.25rem) clamp(1.4rem, 2.6vw, 2.1rem);
   background: var(--pr-card);
   border: 1px solid rgba(10, 43, 33, 0.06);
+  border-radius: var(--pr-radius);
   box-shadow: 0 14px 36px rgba(10, 43, 33, 0.04);
 }
 
 .prelude-card.is-rich {
   justify-content: flex-start;
   gap: 0.75rem;
+  min-height: clamp(26rem, 42vh, 34rem);
   padding-block: clamp(1.35rem, 2.4vw, 1.85rem);
 }
 
@@ -398,12 +392,19 @@
   }
 
   .prelude-media,
-  .prelude-card {
+  .prelude-card,
+  .prelude-card.is-rich {
     min-height: 0;
   }
 
   .prelude-media {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+
+  .prelude-media-img {
+    object-fit: fill;
   }
 
   .prelude-card-body {
@@ -431,12 +432,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .prelude-btn,
-  .prelude-media-img {
+  .prelude-btn {
     transition: none;
-  }
-
-  .prelude-row:hover .prelude-media-img {
-    transform: none;
   }
 }

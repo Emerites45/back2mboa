@@ -14,7 +14,12 @@ export const EDITIONS_PILOTES_COPY: EditionsPilotesCopy = {
   footDate: "16 au 17 décembre 2023 : Musée National, Yaoundé",
 };
 
-/** Locaux + Unsplash (images.unsplash.com déjà autorisé dans next.config). */
+/**
+ * Galeries locales — photos éditions 2022 / 2023 (chemins ed-* = cache-bust).
+ * solutionneurs ← Entrepreneurs Diaspora
+ * ecosysteme    ← Régulateurs, PTF
+ * ctd           ← CTD
+ */
 export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
   {
     id: "solutionneurs",
@@ -25,43 +30,38 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#histoires",
     slides: [
       {
-        src: "/images/editions-pilotes/solutionneurs/01.jpg",
-        alt: "Solutionneurs en atelier collaboratif",
+        src: "/images/editions-pilotes/solutionneurs/ed-01.jpg",
+        alt: "Entrepreneurs diaspora en atelier",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/02.jpg",
-        alt: "Workshop entrepreneurs diaspora",
+        src: "/images/editions-pilotes/solutionneurs/ed-02.jpg",
+        alt: "Session collaborative entrepreneurs",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/03.jpg",
-        alt: "Agro-transformation locale",
+        src: "/images/editions-pilotes/solutionneurs/ed-03.jpg",
+        alt: "Échanges Solutionneurs et partenaires",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/04.jpg",
-        alt: "Finance et paiements digitaux",
+        src: "/images/editions-pilotes/solutionneurs/ed-04.jpg",
+        alt: "Pitch et co-construction terrain",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/05.jpg",
-        alt: "Mise en relation diaspora",
+        src: "/images/editions-pilotes/solutionneurs/ed-05.jpg",
+        alt: "Networking entrepreneurs diaspora",
         caption: "Solutionneurs",
       },
       {
-        src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
-        alt: "Équipe startup en collaboration",
+        src: "/images/editions-pilotes/solutionneurs/ed-06.jpg",
+        alt: "Moment d'échange entre entrepreneurs",
         caption: "Solutionneurs",
       },
       {
-        src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
-        alt: "Networking entrepreneurs",
-        caption: "Solutionneurs",
-      },
-      {
-        src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
-        alt: "Atelier co-construction",
+        src: "/images/editions-pilotes/solutionneurs/ed-07.jpg",
+        alt: "Groupe d'entrepreneurs en session",
         caption: "Solutionneurs",
       },
     ],
@@ -75,43 +75,43 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#partenaires",
     slides: [
       {
-        src: "/images/editions-pilotes/ecosysteme/01.jpg",
-        alt: "Interview média institutionnelle",
+        src: "/images/editions-pilotes/ecosysteme/ed-01.jpg",
+        alt: "Régulateurs et partenaires techniques",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/02.jpg",
-        alt: "Présentation résultats et preuve",
+        src: "/images/editions-pilotes/ecosysteme/ed-02.jpg",
+        alt: "Présentation institutionnelle",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/03.jpg",
-        alt: "Financement et partenaires",
+        src: "/images/editions-pilotes/ecosysteme/ed-03.jpg",
+        alt: "Panel PTF et investisseurs",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/04.jpg",
-        alt: "Acteur institutionnel",
+        src: "/images/editions-pilotes/ecosysteme/ed-04.jpg",
+        alt: "Échanges avec les médias",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/05.jpg",
-        alt: "Structuration de l'écosystème",
+        src: "/images/editions-pilotes/ecosysteme/ed-05.jpg",
+        alt: "Table ronde écosystème",
         caption: "Écosystème",
       },
       {
-        src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
-        alt: "Conférence institutionnelle",
+        src: "/images/editions-pilotes/ecosysteme/ed-06.jpg",
+        alt: "Partenaires et financeurs",
         caption: "Écosystème",
       },
       {
-        src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80",
-        alt: "Conférence de presse et médias",
+        src: "/images/editions-pilotes/ecosysteme/ed-07.jpg",
+        alt: "Session plénière institutionnelle",
         caption: "Écosystème",
       },
       {
-        src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80",
-        alt: "Partenariat investisseurs",
+        src: "/images/editions-pilotes/ecosysteme/ed-08.jpg",
+        alt: "Moment média et couverture",
         caption: "Écosystème",
       },
     ],
@@ -125,43 +125,38 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#mairies-championnes",
     slides: [
       {
-        src: "/images/editions-pilotes/ctd/01.jpg",
-        alt: "Réunion mairie et collectivités",
+        src: "/images/editions-pilotes/ctd/ed-01.jpg",
+        alt: "Maires et collectivités en session",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/02.jpg",
-        alt: "Mairie championne Douala III",
+        src: "/images/editions-pilotes/ctd/ed-02.jpg",
+        alt: "Échanges entre collectivités territoriales",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/03.jpg",
-        alt: "Mairie championne Limbé I",
+        src: "/images/editions-pilotes/ctd/ed-03.jpg",
+        alt: "Table ronde maires engagés",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/04.jpg",
-        alt: "Mairie championne Babadjou",
+        src: "/images/editions-pilotes/ctd/ed-04.jpg",
+        alt: "Collectivités et besoins du terrain",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/05.jpg",
-        alt: "Mairie championne Guider",
+        src: "/images/editions-pilotes/ctd/ed-05.jpg",
+        alt: "Mairies championnes en atelier",
         caption: "CTD / Maires",
       },
       {
-        src: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=1200&q=80",
-        alt: "Réunion territoriale",
+        src: "/images/editions-pilotes/ctd/ed-06.jpg",
+        alt: "Moment CTD — dialogue territorial",
         caption: "CTD / Maires",
       },
       {
-        src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
-        alt: "Table ronde élus locaux",
-        caption: "CTD / Maires",
-      },
-      {
-        src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80",
-        alt: "Collectivité et terrain communal",
+        src: "/images/editions-pilotes/ctd/ed-07.jpg",
+        alt: "Élus locaux en collaboration",
         caption: "CTD / Maires",
       },
     ],

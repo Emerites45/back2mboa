@@ -1,32 +1,21 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useId } from 'react';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Bricolage_Grotesque, Noto_Sans_Symbols, Montserrat } from 'next/font/google';
-import HeroBackgroundSlider from '@/components/hero/HeroBackgroundSlider';
-import { SLIDES_DATA, SlideData } from '@/data/slides';
+import React, { useState, useEffect, useId } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
+import { SLIDES_DATA, SlideData } from "@/data/slides";
 
-const fontBricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  display: 'swap',
-});
-
-const fontNotoSymbols = Noto_Sans_Symbols({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-});
-
-const fontMontserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
+const APFEL =
+  "var(--font-apfel-grotezk), 'Apfel Grotezk', system-ui, sans-serif";
 
 function CountdownTimer({ targetDate }: { targetDate: string }) {
-  const [timeLeft, setTimeLeft] = useState({ days: 122, hours: 15, minutes: 40, seconds: 21 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 122,
+    hours: 15,
+    minutes: 40,
+    seconds: 21,
+  });
   const timerId = useId();
 
   useEffect(() => {
@@ -48,22 +37,42 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
   }, [targetDate]);
 
   return (
-    <div className="grid grid-cols-4 divide-x divide-white/15 text-center" key={timerId}>
+    <div
+      className="grid grid-cols-4 divide-x divide-white/15 text-center"
+      key={timerId}
+      style={{ fontFamily: APFEL }}
+    >
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.days}</div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">JOURS</div>
+        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+          {timeLeft.days}
+        </div>
+        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+          JOURS
+        </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.hours}</div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">HEURES</div>
+        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+          {timeLeft.hours}
+        </div>
+        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+          HEURES
+        </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.minutes}</div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">MIN</div>
+        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+          {timeLeft.minutes}
+        </div>
+        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+          MIN
+        </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">{timeLeft.seconds}</div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">SEC</div>
+        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+          {timeLeft.seconds}
+        </div>
+        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+          SEC
+        </div>
       </div>
     </div>
   );
@@ -76,133 +85,152 @@ export function HeroSection() {
   const currentSlide = slides[activeSlideIndex] || slides[0] || {};
 
   const titleTop = currentSlide.titleTop || "LE RETOUR";
-  const titleMain = currentSlide.titleMain || "DES BÂTISSEURS-SOLUTIONNEURS";
-  const subtitle = currentSlide.subtitle || "African Solutions Activating Prosperity (ASAP)";
-  const locationOrange = currentSlide.quote || "Babadjou — Région de l’Ouest, Cameroun.";
+  const titleMain =
+    currentSlide.titleMain || "DES BÂTISSEURS-SOLUTIONNEURS";
+  const subtitle =
+    currentSlide.subtitle || "African Solutions Activating Prosperity (ASAP)";
+  const locationOrange =
+    currentSlide.quote || "Babadjou — Région de l’Ouest, Cameroun.";
   const descriptionText = currentSlide.description || "";
   const extraTextContent = currentSlide.extraText || "";
 
   return (
-    <div className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col justify-between">
-      
-      <HeroBackgroundSlider onSlideChange={(index) => setActiveSlideIndex(index)} />
+    <div
+      className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-black"
+      style={{ fontFamily: APFEL }}
+    >
+      <HeroBackgroundSlider
+        onSlideChange={(index) => setActiveSlideIndex(index)}
+      />
 
-      <main className="relative z-20 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 pt-28 sm:pt-32 md:pt-36 pb-0 flex flex-col justify-between min-h-screen w-full pointer-events-none">
-        
-        {/* TITRES */}
-        <div className="text-center w-full max-w-7xl mx-auto pointer-events-none mt-2 mb-8 sm:mb-12 px-2">
-          <p className={`${fontNotoSymbols.className} tracking-[0.28em] text-xs sm:text-sm md:text-base uppercase mb-3 font-bold text-white/90 select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]`}>
+      <main className="pointer-events-none relative z-20 mx-auto flex min-h-screen w-full max-w-[1800px] flex-col justify-between px-4 pb-0 pt-28 sm:px-6 sm:pt-32 md:px-10 md:pt-36 lg:px-12 xl:px-16">
+        {/* TITRES — flottent dans le ciel, clairance optique au-dessus du portail */}
+        <div className="pointer-events-none mx-auto mb-10 mt-0 w-full max-w-7xl -translate-y-3 px-2 text-center sm:mb-14 sm:-translate-y-5 md:-translate-y-7 lg:-translate-y-9 xl:-translate-y-10">
+          <p className="mb-2.5 select-none text-sm font-bold uppercase tracking-[0.28em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:mb-3 sm:text-base md:text-lg">
             {titleTop}
           </p>
-          <h1
-            className={`${fontBricolage.className} mx-auto max-w-[min(100%,22ch)] tracking-[0.04em] uppercase leading-[0.95] text-[clamp(1.15rem,4.2vw,3.75rem)] font-extrabold text-white select-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap`}
-          >
+          <h1 className="mx-auto max-w-[min(100%,22ch)] select-none text-[clamp(1.25rem,4.2vw,3.75rem)] font-bold uppercase leading-[0.95] tracking-[0.04em] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap">
             {titleMain}
           </h1>
 
-          <p className="mt-5 text-sm sm:text-base md:text-lg font-medium tracking-wide select-none">
-            {subtitle.split('').map((char, index) => (
+          <p className="mt-3.5 select-none text-base font-medium tracking-wide sm:mt-4 sm:text-lg md:text-xl">
+            {subtitle.split("").map((char, index) => (
               <span
                 key={index}
-                className="inline-block text-transparent bg-clip-text"
+                className="inline-block bg-clip-text text-transparent"
                 style={{
                   backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.22) 45%, rgba(255,255,255,0.08) 100%)`,
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
                   textShadow: `0 1px 1px rgba(255,255,255,0.4), 0 0 12px rgba(255,255,255,0.15), 0 2px 8px rgba(0,0,0,0.3)`,
-                  filter: 'brightness(1.1)',
+                  filter: "brightness(1.1)",
                 }}
               >
-                {char === ' ' ? '\u00A0' : char}
+                {char === " " ? "\u00A0" : char}
               </span>
             ))}
           </p>
         </div>
 
-        {/* GRILLE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end pb-0 my-auto relative w-full pointer-events-none">
-          
-          {/* COLONNE GAUCHE */}
-          <div className="lg:col-span-3 space-y-5 text-left pointer-events-auto w-full lg:mr-auto">
-            <div className="space-y-3">
-              {locationOrange && (
-                <h2 className="text-orange-400 font-black text-base sm:text-lg tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-                  {locationOrange}
-                </h2>
-              )}
-              {descriptionText.split('\n\n').map((paragraph: string, idx: number) => (
-                <p key={idx} className={`${fontMontserrat.className} text-white/90 text-xs sm:text-sm leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] font-medium`}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            {/* CARTE GAUCHE */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] backdrop-blur-2xl border border-white/20 p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] w-full">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-              <CountdownTimer targetDate="2026-12-16T09:00:00" />
-            </div>
-          </div>
-
-          {/* COLONNE CENTRE */}
-          <div className="lg:col-span-6 flex flex-col justify-end items-center relative pointer-events-none min-h-[320px] lg:min-h-[400px]">
-          </div>
-
-          {/* COLONNE DROITE */}
-          <div className="lg:col-span-3 space-y-5 text-left pointer-events-auto w-full lg:ml-auto">
-            {extraTextContent && (
+        <div className="pointer-events-none relative mt-2 mb-4 flex w-full flex-1 flex-col justify-start lg:mt-3 lg:mb-6">
+          <div className="grid w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+            {/* COLONNE GAUCHE — Mairie (remontée au niveau du portail) */}
+            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:mr-auto lg:min-h-[20rem] lg:-translate-y-6 xl:-translate-y-8">
               <div className="space-y-3">
-                {extraTextContent.split('\n\n').map((paragraph: string, idx: number) => {
-                  const isTitleMarker =
-                    paragraph.includes("SIX MOIS PLUS TARD") ||
-                    paragraph.trim() === "Back2Mboa";
-                  return (
-                    <p 
-                      key={idx} 
-                      className={`${fontMontserrat.className} ${
-                        isTitleMarker 
-                          ? 'text-orange-400 font-extrabold text-xs sm:text-sm tracking-widest uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] my-2' 
-                          : 'text-white/90 text-xs sm:text-sm leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] font-medium'
-                      }`}
-                    >
-                      {paragraph}
-                    </p>
-                  );
-                })}
+                {locationOrange ? (
+                  <h2 className="text-base font-bold uppercase tracking-widest text-orange-400 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] sm:text-lg">
+                    {locationOrange}
+                  </h2>
+                ) : null}
+                {descriptionText.split("\n\n").map((paragraph: string, idx: number) => (
+                  <p
+                    key={idx}
+                    className="text-sm font-medium leading-relaxed text-white/92 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] sm:text-base"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </div>
-            )}
 
-            {/* CARTE DROITE */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] backdrop-blur-2xl border border-white/20 p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] w-full">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-              <div className="grid grid-cols-4 divide-x divide-white/15 text-center relative z-10">
-                <div className="px-1">
-                  <div className="text-xl sm:text-2xl font-black text-white drop-shadow">122</div>
-                  <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">Emplois</div>
+              <div className="relative mt-auto w-full overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                <CountdownTimer targetDate="2026-12-16T09:00:00" />
+              </div>
+            </div>
+
+            <div
+              className="pointer-events-none relative hidden min-h-0 lg:col-span-6 lg:block"
+              aria-hidden="true"
+            />
+
+            {/* COLONNE DROITE — Back2Mboa (remontée au même niveau que Mairie) */}
+            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:ml-auto lg:min-h-[20rem] lg:-translate-y-6 xl:-translate-y-8">
+              {extraTextContent ? (
+                <div className="space-y-3">
+                  {extraTextContent.split("\n\n").map((paragraph: string, idx: number) => {
+                    const isTitleMarker =
+                      paragraph.includes("SIX MOIS PLUS TARD") ||
+                      paragraph.trim() === "Back2Mboa";
+                    return (
+                      <p
+                        key={idx}
+                        className={
+                          isTitleMarker
+                            ? "text-base font-bold uppercase tracking-widest text-orange-400 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] sm:text-lg"
+                            : "text-sm font-medium leading-relaxed text-white/92 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] sm:text-base"
+                        }
+                      >
+                        {paragraph}
+                      </p>
+                    );
+                  })}
                 </div>
-                <div className="px-1">
-                  <div className="text-xl sm:text-2xl font-black text-white drop-shadow">2</div>
-                  <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">Mrds C.A.</div>
-                </div>
-                <div className="px-1">
-                  <div className="text-xl sm:text-2xl font-black text-white drop-shadow">40</div>
-                  <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">Recettes fiscales</div>
-                </div>
-                <div className="px-1">
-                  <div className="text-xl sm:text-2xl font-black text-white drop-shadow">20</div>
-                  <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">Tonnes exportées</div>
+              ) : null}
+
+              <div className="relative mt-auto w-full overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                <div className="relative z-10 grid grid-cols-4 divide-x divide-white/15 text-center">
+                  <div className="px-1">
+                    <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
+                      122
+                    </div>
+                    <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
+                      Emplois
+                    </div>
+                  </div>
+                  <div className="px-1">
+                    <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
+                      2
+                    </div>
+                    <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
+                      Mrds C.A.
+                    </div>
+                  </div>
+                  <div className="px-1">
+                    <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
+                      40
+                    </div>
+                    <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
+                      Recettes fiscales
+                    </div>
+                  </div>
+                  <div className="px-1">
+                    <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
+                      20
+                    </div>
+                    <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
+                      Tonnes exportées
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </main>
 
       {/* BANDEAU */}
-      <div
-        className={`${fontBricolage.className} relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18] pointer-events-auto`}
-      >
+      <div className="pointer-events-auto relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18]">
         <style>{`
           @keyframes marquee {
             0% { transform: translateX(0%); }
@@ -218,7 +246,7 @@ export function HeroSection() {
           {[0, 1].map((dup) => (
             <div
               key={dup}
-              className="flex shrink-0 items-center gap-x-5 px-2 text-[0.95rem] font-bold uppercase leading-none tracking-[0.14em] sm:gap-x-7 sm:text-[1.05rem] md:text-[1.125rem]"
+              className="flex shrink-0 items-center gap-x-5 px-2 text-[1rem] font-bold uppercase leading-none tracking-[0.14em] sm:gap-x-7 sm:text-[1.125rem] md:text-[1.2rem]"
             >
               {(
                 [
@@ -244,14 +272,14 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* BOUTON */}
       <div className="fixed bottom-12 right-6 z-50">
         <Link
           href="/inscription"
-          className="flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-black font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_10px_30px_rgba(251,146,60,0.4)] hover:scale-105 transition-all"
+          className="flex items-center gap-2 rounded-xl bg-orange-400 px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-black shadow-[0_10px_30px_rgba(251,146,60,0.4)] transition-all hover:scale-105 hover:bg-orange-500"
+          style={{ fontFamily: APFEL }}
         >
           <span>S&apos;inscrire</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </div>

@@ -7,20 +7,30 @@ type ChampionStageBackdropProps = {
   image: string;
   video?: string;
   active: boolean;
+  /** Prefetch as soon as the section nears the viewport. */
+  eager?: boolean;
 };
 
+/**
+ * When a video exists: only the video (no legacy landscape photo underneath).
+ * Solid stage fill while buffering — never the old still image.
+ */
 export function ChampionStageBackdrop({
   image,
   video,
   active,
+  eager = false,
 }: ChampionStageBackdropProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [nearView, setNearView] = useState(false);
   const [inView, setInView] = useState(false);
   const [readyVideo, setReadyVideo] = useState<string | undefined>();
   const [reduce, setReduce] = useState(false);
 
   const useVideo = Boolean(video) && !reduce;
+  const shouldLoad = useVideo && (eager || nearView || inView || active);
+  const showVideo = useVideo && readyVideo === video && Boolean(video);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -34,38 +44,74 @@ export function ChampionStageBackdrop({
     const node = rootRef.current;
     if (!node) return;
 
-    const observer = new IntersectionObserver(
+    const near = new IntersectionObserver(
+      ([entry]) => setNearView(entry?.isIntersecting ?? false),
+      { threshold: 0, rootMargin: "60% 0px 60% 0px" },
+    );
+    const visible = new IntersectionObserver(
       ([entry]) => setInView(entry?.isIntersecting ?? false),
-      { threshold: 0.2, rootMargin: "80px 0px" },
+      { threshold: 0.12, rootMargin: "120px 0px" },
     );
 
-    observer.observe(node);
-    return () => observer.disconnect();
+    near.observe(node);
+    visible.observe(node);
+    return () => {
+      near.disconnect();
+      visible.disconnect();
+    };
   }, []);
+
+  useEffect(() => {
+    setReadyVideo(undefined);
+  }, [video]);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !useVideo || !shouldLoad) return;
+
+    const markReady = () => {
+      if (video) setReadyVideo(video);
+    };
+
+    if (el.readyState >= 2) markReady();
+
+    const onReady = () => markReady();
+    el.addEventListener("loadeddata", onReady);
+    el.addEventListener("canplay", onReady);
+
+    try {
+      el.load();
+    } catch {
+      /* ignore */
+    }
+
+    return () => {
+      el.removeEventListener("loadeddata", onReady);
+      el.removeEventListener("canplay", onReady);
+    };
+  }, [useVideo, shouldLoad, video]);
 
   useEffect(() => {
     const el = videoRef.current;
     if (!el || !useVideo) return;
 
-    const play = () => {
+    if (active && inView && showVideo) {
       void el.play().catch(() => {
-        window.setTimeout(() => void el.play().catch(() => {}), 280);
+        window.setTimeout(() => void el.play().catch(() => {}), 200);
       });
-    };
-
-    if (active && inView) {
-      play();
       return;
     }
 
     el.pause();
-  }, [active, inView, useVideo, video]);
-
-  const showVideo = useVideo && readyVideo === video;
+  }, [active, inView, useVideo, showVideo, video]);
 
   return (
-    <div ref={rootRef} className="champ-stage-backdrop" aria-hidden="true">
-      {/* Photo uniquement sans vidéo (ou reduced-motion) — jamais par-dessus la vidéo */}
+    <div
+      ref={rootRef}
+      className={`champ-stage-backdrop${useVideo ? " has-video" : ""}`}
+      aria-hidden="true"
+    >
+      {/* Photo ONLY when there is no video (or reduced-motion). */}
       {!useVideo ? (
         <Image
           src={image}
@@ -73,11 +119,11 @@ export function ChampionStageBackdrop({
           fill
           sizes="(max-width: 1024px) 100vw, 1320px"
           className="champ-stage-poster"
-          priority={active}
+          priority={active || eager}
         />
       ) : null}
 
-      {useVideo && video ? (
+      {useVideo && video && shouldLoad ? (
         <video
           ref={videoRef}
           className={`champ-stage-video${showVideo ? " is-ready" : ""}`}
@@ -85,7 +131,7 @@ export function ChampionStageBackdrop({
           muted
           loop
           playsInline
-          autoPlay
+          autoPlay={active && inView}
           preload="auto"
           onLoadedData={() => setReadyVideo(video)}
           onCanPlay={() => setReadyVideo(video)}

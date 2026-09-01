@@ -34,8 +34,8 @@ export const BATISSEURS_COPY: BatisseursCopy = {
         "Conseil consultatif Microsoft Afrique (2013–2016)",
         "Projets pour le Département d’État américain au Cameroun (2013–2017)",
       ],
-      image: "/images/batisseurs/olivia.webp",
-      imageAlt: "Atelier collaboratif — leadership Olivia Mukam Wandji",
+      image: "/images/batisseurs/olivia.jpg",
+      imageAlt: "Olivia Mukam Wandji — Présidente Fondatrice Back2Mboa",
     },
     {
       id: "solutionneurs",
@@ -48,8 +48,8 @@ export const BATISSEURS_COPY: BatisseursCopy = {
         "10 à 15 emplois créés par entreprise lauréate",
         "Partenaire reconnu du Fonds Fiduciaire d’Urgence de l’UE pour l’Afrique",
       ],
-      image: "/images/batisseurs/solutionneurs.webp",
-      imageAlt: "Travail collaboratif — Solutionneurs Initiative",
+      image: "/images/batisseurs/calendrier.jpeg",
+      imageAlt: "Calendrier et trajectoire — Solutionneurs Initiative",
     },
   ],
   quote:

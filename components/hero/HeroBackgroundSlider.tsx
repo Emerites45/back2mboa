@@ -161,10 +161,10 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
         }}
       />
 
-      {/* PORTAIL / ARCHE AVEC EFFECT ZOOM SUR CAMÉRA */}
+      {/* PORTAIL / ARCHE AVEC EFFECT ZOOM SUR CAMÉRA — légèrement plus bas pour laisser monter les titres latéraux */}
       <div 
         onClick={handleNext}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer group pointer-events-auto"
+        className="absolute left-1/2 top-[54%] -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer group pointer-events-auto sm:top-[55%] md:top-[56%]"
         style={{ perspective: '1000px' }}
       >
         <div 
@@ -178,7 +178,7 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
           }}
         >
           <Image 
-            src="/images/gate.png" 
+            src="/images/Back2Mboa_Portail_Terre_Cuite.png" 
             alt="Portail Back2Mboa"
             fill
             priority

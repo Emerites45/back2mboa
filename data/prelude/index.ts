@@ -4,7 +4,7 @@ export const PRELUDE_COPY: PreludeCopy = {
   eyebrow: "Prélude · Double flux 2026",
   title: "Avant Yaoundé : former, capter, signer.",
   subtitle:
-    "Masterclass d’octobre pour les mairies, puis mission et salon de la diaspora en décembre — le premier sens de la flèche : les territoires vont vers la diaspora.",
+    "Masterclass d’octobre pour les mairies, puis mission et salon de la diaspora en décembre ,le premier sens de la flèche : les territoires vont vers la diaspora.",
   ringImage: "/images/prelude/ring.webp",
   ringAlt: "Paysage camerounais",
   blocks: [
@@ -20,8 +20,8 @@ export const PRELUDE_COPY: PreludeCopy = {
         "Une visibilité auprès de la diaspora mobilisable, celle qui investit, pas celle qui commente.",
         "Les mêmes interlocuteurs retrouvés à Yaoundé, dix jours plus tard, la conversation reprend où elle s’est arrêtée.",
       ],
-      image: "/images/prelude/salon.webp",
-      imageAlt: "Salon et networking diaspora",
+      image: "/images/prelude/Salon_Diaspora.jpg",
+      imageAlt: "Salon de la Diaspora — networking et engagements",
       layout: "media-left",
       variant: "light",
       tags: [
@@ -44,7 +44,7 @@ export const PRELUDE_COPY: PreludeCopy = {
         "Un marketing territorial qui tient ce que la commune offre, pas ce qui lui manque.",
         "Des délégations prêtes, celles qui n’ont pas préparé perdent leur semaine en Europe.",
       ],
-      image: "/images/prelude/masterclass.webp",
+      image: "/images/prelude/Masterclass.jpg",
       imageAlt: "Masterclass mairies et équipes CTD",
       layout: "media-right",
       variant: "light",

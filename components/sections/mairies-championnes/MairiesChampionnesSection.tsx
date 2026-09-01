@@ -52,11 +52,37 @@ export function MairiesChampionnesSection() {
         }
         wasInView.current = visible;
       },
-      { threshold: 0.28, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.18, rootMargin: "35% 0px 10% 0px" },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
+  }, []);
+
+  /* Warm the first videos before the user reaches the stage. */
+  useEffect(() => {
+    const urls = CHAMPION_MAIRIES.map((item) => item.video).filter(
+      (url): url is string => Boolean(url),
+    );
+    const links: HTMLLinkElement[] = [];
+
+    urls.slice(0, 3).forEach((href) => {
+      const existing = document.querySelector(
+        `link[rel="preload"][as="video"][href="${href}"]`,
+      );
+      if (existing) return;
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "video";
+      link.href = href;
+      link.type = "video/mp4";
+      document.head.appendChild(link);
+      links.push(link);
+    });
+
+    return () => {
+      links.forEach((link) => link.remove());
+    };
   }, []);
 
   useEffect(() => {
@@ -68,6 +94,8 @@ export function MairiesChampionnesSection() {
 
     return () => window.clearInterval(id);
   }, [index, playing, autoplayMs, go]);
+
+  const nextMairie = CHAMPION_MAIRIES[(index + 1) % len];
 
   return (
     <section
@@ -139,8 +167,20 @@ export function MairiesChampionnesSection() {
             image={mairie.image}
             video={mairie.video}
             active
+            eager={index === 0}
           />
-
+          {nextMairie.video && nextMairie.id !== mairie.id ? (
+            <video
+              key={`prefetch-${nextMairie.id}`}
+              src={nextMairie.video}
+              muted
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+              tabIndex={-1}
+              className="champ-video-prefetch"
+            />
+          ) : null}
           <div className="champ-stage-scrim" aria-hidden="true" />
 
           <div className="champ-stage-body">

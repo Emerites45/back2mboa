@@ -144,12 +144,13 @@ export function BeforeDuringAfterSection() {
                     sizes="(max-width: 900px) 100vw, (max-width: 1400px) 30vw, 28vw"
                     quality={85}
                     style={{
+                      objectFit: "cover",
                       objectPosition:
                         phase.id === "before"
-                          ? "center 40%"
+                          ? "42% 28%"
                           : phase.id === "during"
-                            ? "center 30%"
-                            : "center 45%",
+                            ? "center 22%"
+                            : "center 42%",
                     }}
                   />
 

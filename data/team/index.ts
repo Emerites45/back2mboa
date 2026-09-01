@@ -113,8 +113,8 @@ export const TEAM_COPY: TeamCopy = {
     {
       id: "arnold",
       name: "Arnold Ekanga",
-      role: "Responsable Financier",
-      roleBack: "Responsable Financier",
+      role: "IT & Technologie",
+      roleBack: "IT & Technologie",
       bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
       photo: "/images/team/arnold-400.webp",
       socials: [
@@ -183,8 +183,8 @@ export const TEAM_COPY: TeamCopy = {
     {
       id: "charlie",
       name: "Charlie Wandji",
-      role: "IT & Technologie",
-      roleBack: "IT & Technologie",
+      role: "Responsable Financier",
+      roleBack: "Responsable Financier",
       bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
       photo: "/images/team/charlie-400.webp",
       socials: [

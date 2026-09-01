@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useId } from 'react';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
 import { Bricolage_Grotesque, Noto_Sans_Symbols, Montserrat } from 'next/font/google';
 import HeroBackgroundSlider from '@/components/hero/HeroBackgroundSlider';
 import { SLIDES_DATA, SlideData } from '@/data/slides';
@@ -244,16 +243,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* BOUTON */}
-      <div className="fixed bottom-12 right-6 z-50">
-        <Link
-          href="/inscription"
-          className="flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-black font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_10px_30px_rgba(251,146,60,0.4)] hover:scale-105 transition-all"
-        >
-          <span>S&apos;inscrire</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
     </div>
   );
 }

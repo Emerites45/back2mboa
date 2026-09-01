@@ -12,8 +12,7 @@ export const ECOSYSTEME_COPY: EcosystemeCopy = {
   twinTitle: "Digital Twin™",
   twinBody:
     "Avant les trois jours à Yaoundé, le jumeau numérique rend les opportunités visibles, publie les Mayor Calls™ et prépare les rendez-vous.",
-  twinCta: "Explorer les potentialités",
-  twinCtaHref: "#potentialites",
+  twinCta: "Se préenregistrer",
   mayorTitle: "Mayor Calls™",
   mayorBody:
     "Un besoin territorial documenté, adressé aux bonnes personnes, avec les régulateurs là où il faut pour débloquer le dossier.",
@@ -21,6 +20,5 @@ export const ECOSYSTEME_COPY: EcosystemeCopy = {
     "Qualifié selon la méthode CAP™",
     "Décideurs identifiés",
   ],
-  mayorCta: "Voir les mairies championnes",
-  mayorCtaHref: "#mairies-championnes",
+  mayorCta: "S'inscrire",
 };

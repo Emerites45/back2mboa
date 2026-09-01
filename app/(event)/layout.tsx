@@ -1,4 +1,5 @@
 import React from "react";
+import { Navbar } from "@/components/layout/Navbar";
 
 export default function EventLayout({
   children,
@@ -7,7 +8,7 @@ export default function EventLayout({
 }) {
   return (
     <div className="relative min-h-screen bg-black text-white">
-      {/* <Navbar /> */}
+      <Navbar />
       <main className="relative z-10">{children}</main>
     </div>
   );

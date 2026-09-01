@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
@@ -16,22 +15,6 @@ const TYPE = {
   labelWeight: 400,
   valueSize: "0.9375rem",
   valueWeight: 400,
-} as const;
-
-/** Mini-carte image 2 — ajuster ici. */
-const MINI_CARD = {
-  width: "13.5rem",
-  height: "18rem",
-  borderRadius: "33px",
-  padding: "0.625rem",
-  background: "#2a2a2a",
-  imageRadius: "18px",
-  /** Distance depuis le bas du grand bloc (0 = aligné). */
-  bottom: "0px",
-  /** Distance depuis le bord droit de la colonne. */
-  right: "10px",
-  offsetX: "0px",
-  offsetY: "0px",
 } as const;
 
 const STATS = [
@@ -92,10 +75,7 @@ export function ResultatsSection() {
           className="h-full min-h-0 rounded-[30px]"
         />
 
-        <div
-          className="relative flex min-h-0 flex-col px-5 pt-6 pb-0 text-white sm:px-8 sm:pt-8 lg:px-10 lg:pt-10"
-          style={{ "--mini-card-w": MINI_CARD.width } as CSSProperties}
-        >
+        <div className="relative flex min-h-0 flex-col px-5 pt-6 pb-0 text-white sm:px-8 sm:pt-8 lg:px-10 lg:pt-10">
           <h2
             id="resultats-heading"
             className="tracking-[-0.03em] text-balance"
@@ -118,7 +98,7 @@ export function ResultatsSection() {
             La preuve par les chiffres (2022 &amp; 2023)
           </p>
 
-          <dl className="mt-8 flex max-w-[28rem] flex-col gap-4 pr-[calc(var(--mini-card-w)+1.5rem)] lg:mt-10">
+          <dl className="mt-8 flex max-w-[28rem] flex-col gap-4 lg:mt-10">
             {STATS.map((stat) => (
               <div key={stat.label}>
                 <dt
@@ -145,31 +125,33 @@ export function ResultatsSection() {
             ))}
           </dl>
 
-          <article
-            className="absolute flex flex-col overflow-hidden"
-            style={
-              {
-                width: MINI_CARD.width,
-                height: MINI_CARD.height,
-                borderRadius: MINI_CARD.borderRadius,
-                padding: MINI_CARD.padding,
-                backgroundColor: MINI_CARD.background,
-                bottom: MINI_CARD.bottom,
-                right: MINI_CARD.right,
-                transform: `translate(${MINI_CARD.offsetX}, ${MINI_CARD.offsetY})`,
-              } as CSSProperties
-            }
-          >
-            <Image
-              src="/images/resultat_2.webp"
-              alt="Participants des éditions pilotes Back2Mboa"
-              width={302}
-              height={205}
-              sizes={MINI_CARD.width}
-              className="h-auto w-full"
-              style={{ borderRadius: MINI_CARD.imageRadius }}
-            />
-          </article>
+          <div className="pointer-events-none absolute right-5 bottom-5 hidden sm:right-8 lg:right-10 lg:grid lg:w-[min(24rem,55%)] grid-cols-5 gap-4">
+            {[
+              { src: "/images/institutions/minrex.svg", alt: "MINREX" },
+              { src: "/images/institutions/minddevel.svg", alt: "MINDDEVEL" },
+              { src: "/images/institutions/apme.svg", alt: "APME" },
+              { src: "/images/institutions/feicom.svg", alt: "FEICOM" },
+              { src: "/images/institutions/carpa.svg", alt: "CARPA" },
+              { src: "/images/institutions/cvuc.svg", alt: "CVUC" },
+              { src: "/images/institutions/giz.svg", alt: "GIZ" },
+              { src: "/images/institutions/afd.svg", alt: "AFD" },
+              { src: "/images/institutions/ue.svg", alt: "UE" },
+              { src: "/images/institutions/ccima.svg", alt: "CCIMA" },
+            ].map((logo) => (
+              <div
+                key={logo.alt}
+                className="flex h-10 items-center justify-center"
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={80}
+                  height={40}
+                  className="h-7 w-auto max-w-full object-contain opacity-90"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>

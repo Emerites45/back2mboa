@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { PASSAGE_COPY } from "@/data/passage";
 import "./PassageSection.css";
 
 export function PassageSection() {
-  const { programs, autoplayMs, brand, watchLabel } = PASSAGE_COPY;
+  const { programs, autoplayMs, watchLabel } = PASSAGE_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
@@ -99,9 +100,14 @@ export function PassageSection() {
       </div>
 
       <div className="passage-ui">
-        <p className="passage-brand" aria-label={brand}>
-          BACK <span>2</span> MBOA
-        </p>
+        <button
+          type="button"
+          className="passage-next"
+          onClick={() => go(index + 1)}
+          aria-label="Programme suivant"
+        >
+          <ArrowUpRight size={20} strokeWidth={2.4} aria-hidden="true" />
+        </button>
 
         <div className="passage-footer">
           <div className="passage-main">

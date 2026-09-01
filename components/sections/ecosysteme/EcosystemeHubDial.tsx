@@ -17,35 +17,20 @@ const DIAL = {
 
 function HubCenterMark({
   hub,
-  reduceMotion,
 }: {
   hub: number;
-  reduceMotion: boolean;
 }) {
   return (
     <div
-      className="absolute top-1/2 left-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[14px] bg-[#0a2b21] shadow-[0_0_24px_rgba(227,167,59,0.3),0_6px_18px_rgba(10,43,33,0.22)]"
+      className="absolute top-1/2 left-1/2 z-[2] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[14px] overflow-hidden shadow-[0_0_24px_rgba(227,167,59,0.3),0_6px_18px_rgba(10,43,33,0.22)]"
       style={{ width: hub, height: hub }}
       aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 32 32"
-        width={hub * 0.42}
-        height={hub * 0.42}
-        fill="none"
-        className={reduceMotion ? undefined : "eco-route-spin"}
-      >
-        <path
-          d="M7 23 C13 23 18 10 25 9"
-          stroke="#F5F1E9"
-          strokeWidth="1.5"
-          strokeDasharray="2.4 2.2"
-          strokeLinecap="round"
-        />
-        <circle cx="7" cy="23" r="2.3" fill="#C94C3A" />
-        <circle cx="16.5" cy="16.5" r="1.15" fill="#7CB89A" />
-        <circle cx="25" cy="9" r="2.3" fill="#E3A73B" />
-      </svg>
+      <img
+        src="/images/portail-terre-cuite.webp"
+        alt=""
+        className="h-full w-full object-cover"
+      />
     </div>
   );
 }
@@ -148,23 +133,23 @@ export function EcosystemeHubDial({ compact = false }: { compact?: boolean }) {
                 className={cn(
                   "relative flex items-center justify-center rounded-full bg-white text-[#0a2b21]",
                   "shadow-[0_3px_10px_rgba(10,43,33,0.08)] transition-[transform,box-shadow] duration-300 motion-reduce:transition-none",
-                  on && "ring-2 ring-[#0a2b21] ring-offset-2 ring-offset-[#e3a73b]",
+                  on && "ring-2 ring-white ring-offset-2 ring-offset-[#DCB700] hover:ring-white",
                 )}
                 style={{
                   width: spec.node,
                   height: spec.node,
                   transform: `rotate(calc(var(--i) * -${STEP_DEG}deg)) scale(${on ? 1.08 : 1})`,
                 }}
-                aria-pressed={on}
                 aria-label={node.label}
-                onClick={() => go(index)}
+                onMouseEnter={() => go(index)}
+                onFocus={() => go(index)}
               >
                 <DialIcon node={node} px={iconPx} />
               </button>
             </div>
           );
         })}
-        <HubCenterMark hub={spec.hub} reduceMotion={reduceMotion} />
+        <HubCenterMark hub={spec.hub} />
       </div>
 
       <p

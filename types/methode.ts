@@ -4,6 +4,9 @@ export type MethodePillar = {
   description: string;
   image: string;
   imageAlt: string;
+  versoTitle: string;
+  versoText: string;
+  versoBottom: string;
 };
 
 export type MethodeCopy = {

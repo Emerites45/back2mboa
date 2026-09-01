@@ -5,9 +5,18 @@ import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const COPY =
-  "Rejoignez les Bâtisseurs Solutionneurs · 16 · 17 · 18 décembre 2026 - Yaoundé · 300 places ·";
+  "Rejoignez les Bâtisseurs Solutionneurs · 16 · 17 décembre 2026 - Yaoundé · 300 places";
 
-const REPEAT = 6;
+const ITEMS = [
+  "Identifier",
+  "Qualifier",
+  "Connecter",
+  "Accompagner",
+  "40 Mairies",
+  "10 Régions",
+];
+
+const REPEAT = 4;
 
 export function TickerSection() {
   const reduce = useReducedMotion();
@@ -34,27 +43,51 @@ export function TickerSection() {
   return (
     <aside
       ref={ref}
-      className="overflow-hidden bg-brand-cream py-3 text-brand-ink"
+      className="overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18]"
       aria-label="Événement Back2Mboa"
     >
       <p className="sr-only">
-        Rejoignez les Bâtisseurs Solutionneurs. 16, 17 et 18 décembre 2026 à
+        Rejoignez les Bâtisseurs Solutionneurs. 16 et 17 décembre 2026 à
         Yaoundé. 300 places.
       </p>
       {reduce ? (
-        <p className="px-[var(--page-gutter)] text-center text-[0.9375rem] font-medium tracking-[0.02em] text-pretty">
+        <p className="px-[var(--page-gutter)] text-center text-[0.95rem] font-bold uppercase tracking-[0.14em] text-pretty">
           {COPY}
         </p>
       ) : (
         <div
           aria-hidden="true"
           className={cn(
-            "ticker-track flex w-max text-[0.9375rem] font-medium tracking-[0.02em] whitespace-nowrap",
-            !inView && "is-paused",
+            "flex w-max whitespace-nowrap",
+            !inView && "[animation-play-state:paused]",
           )}
+          style={{
+            animation: "marquee 28s linear infinite",
+          }}
         >
-          <div className="flex shrink-0">{items}</div>
-          <div className="flex shrink-0">{items}</div>
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+          `}</style>
+          {[0, 1].map((dup) => (
+            <div
+              key={dup}
+              className="flex shrink-0 items-center gap-x-5 px-2 text-[0.95rem] font-bold uppercase leading-none tracking-[0.14em] sm:gap-x-7 sm:text-[1.05rem] md:text-[1.125rem]"
+            >
+              {ITEMS.flatMap((label, i) => [
+                <span key={`${dup}-${label}`}>{label}</span>,
+                <span
+                  key={`${dup}-dot-${i}`}
+                  className="inline-block text-[0.65em] text-orange-500"
+                  aria-hidden
+                >
+                  •
+                </span>,
+              ])}
+            </div>
+          ))}
         </div>
       )}
     </aside>

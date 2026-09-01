@@ -8,15 +8,9 @@ const TRIPLE = [...HERO_LINES, ...HERO_LINES, ...HERO_LINES];
 /** Transition d’un cran — assez douce pour se lire, sans traîner */
 const MOVE_MS = 880;
 /** Pause lecture une fois la ligne centrée (hors animation) */
-const DWELL_MS = 3200;
-const DEFAULT_TICK_MS = MOVE_MS + DWELL_MS;
-
-function tickMs(el: HTMLElement | null): number {
-  if (!el) return DEFAULT_TICK_MS;
-  const raw = getComputedStyle(el).getPropertyValue("--tick").trim();
-  const v = parseInt(raw, 10);
-  return Number.isFinite(v) && v > 0 ? v : DEFAULT_TICK_MS;
-}
+const DWELL_MS = 1120;
+/** Cycle total = pause + transition */
+const TICK_MS = MOVE_MS + DWELL_MS;
 
 export function BottomLinesWheel() {
   const listRef = useRef<HTMLUListElement>(null);
@@ -131,16 +125,18 @@ export function BottomLinesWheel() {
     }
     if (reduceMotion.current || paused) return;
 
-    const wait = tickMs(wheelRef.current);
+    let active = true;
     const loop = () => {
       timerRef.current = window.setTimeout(() => {
+        if (!active) return;
         go(indexRef.current + 1, false);
         loop();
-      }, wait);
+      }, TICK_MS);
     };
     loop();
 
     return () => {
+      active = false;
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, [go, paused]);

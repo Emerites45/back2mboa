@@ -16,7 +16,6 @@ export type HomecomingProgram = {
 };
 
 export type HomecomingCopy = {
-  brand: string;
   watchLabel: string;
   autoplayMs: number;
   programs: [HomecomingProgram, HomecomingProgram, HomecomingProgram];

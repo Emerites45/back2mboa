@@ -1,6 +1,197 @@
-export const BILLET_QR_PATHS: Record<string, string> = {
-  growth: "<svg viewBox=\"0 0 41 41\" class=\"qr\"><path class=\"qrline\" stroke=\"#0a2b21\" d=\"M0 0.5h7m4 0h1m8 0h1m3 0h1m1 0h1m1 0h2m1 0h1m2 0h7m-41 1h1m5 0h1m2 0h1m1 0h1m2 0h2m3 0h6m1 0h1m1 0h1m1 0h1m3 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h2m1 0h3m4 0h3m1 0h1m4 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m3 0h1m1 0h2m2 0h2m4 0h1m4 0h1m3 0h1m2 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m1 0h4m1 0h5m1 0h3m1 0h1m2 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m6 0h1m1 0h1m1 0h1m1 0h1m6 0h1m1 0h2m1 0h1m2 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-33 1h1m3 0h5m1 0h1m1 0h1m1 0h1m1 0h2m1 0h3m2 0h1m-31 1h2m2 0h4m1 0h1m1 0h2m3 0h2m2 0h10m1 0h2m1 0h1m-36 1h2m4 0h1m1 0h1m8 0h3m1 0h1m1 0h3m1 0h1m1 0h3m1 0h3m1 0h2m-35 1h3m3 0h3m2 0h2m3 0h1m2 0h3m2 0h1m3 0h2m1 0h1m1 0h1m-36 1h1m1 0h1m1 0h3m2 0h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m2 0h2m3 0h1m-35 1h1m3 0h1m6 0h2m1 0h2m1 0h5m1 0h1m1 0h2m1 0h1m2 0h4m-34 1h4m3 0h1m1 0h2m3 0h1m2 0h1m3 0h1m1 0h1m1 0h1m4 0h1m2 0h1m-41 1h3m1 0h1m1 0h3m4 0h3m3 0h2m5 0h3m1 0h3m1 0h3m1 0h3m-41 1h1m3 0h2m4 0h4m2 0h2m4 0h1m1 0h2m2 0h1m5 0h1m1 0h2m1 0h2m-41 1h1m1 0h1m1 0h11m3 0h1m1 0h2m1 0h6m1 0h1m1 0h1m3 0h1m-37 1h4m1 0h1m1 0h1m4 0h3m1 0h2m1 0h1m1 0h1m1 0h5m4 0h2m1 0h1m1 0h2m-38 1h2m2 0h3m2 0h2m1 0h2m1 0h3m4 0h2m2 0h2m1 0h1m1 0h1m1 0h1m1 0h2m-37 1h3m1 0h1m2 0h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h10m1 0h2m1 0h1m-41 1h2m1 0h2m1 0h1m5 0h2m2 0h4m1 0h3m1 0h1m1 0h2m2 0h5m1 0h2m1 0h1m-41 1h1m1 0h1m4 0h1m1 0h6m3 0h1m6 0h2m1 0h1m2 0h4m1 0h1m2 0h2m-38 1h2m1 0h1m2 0h1m1 0h3m5 0h2m1 0h2m4 0h2m8 0h2m-38 1h2m1 0h1m7 0h1m1 0h1m1 0h2m1 0h1m3 0h1m5 0h1m1 0h1m1 0h1m2 0h1m1 0h2m-39 1h2m2 0h1m2 0h2m2 0h2m1 0h2m1 0h1m3 0h3m1 0h3m1 0h1m3 0h1m4 0h1m-41 1h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m-41 1h1m2 0h2m1 0h2m4 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h2m-41 1h2m5 0h1m3 0h1m5 0h1m1 0h2m2 0h1m1 0h2m3 0h3m2 0h3m1 0h1m-40 1h2m1 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h2m1 0h1m1 0h8m1 0h3m2 0h3m1 0h1m-30 1h1m4 0h2m3 0h1m1 0h3m3 0h1m1 0h6m1 0h1m1 0h1m-40 1h1m1 0h1m2 0h5m1 0h2m1 0h3m2 0h1m1 0h1m1 0h1m3 0h3m1 0h1m1 0h2m2 0h1m-29 1h1m3 0h1m1 0h1m1 0h2m3 0h5m2 0h3m2 0h1m1 0h1m1 0h2m-39 1h7m6 0h1m3 0h2m1 0h1m1 0h2m3 0h3m1 0h7m1 0h1m-33 1h1m2 0h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h1m2 0h2m-41 1h7m1 0h1m3 0h1m1 0h6m1 0h1m2 0h3m3 0h3m1 0h1m1 0h4m-40 1h1m5 0h1m2 0h1m4 0h2m1 0h1m3 0h2m1 0h6m2 0h1m3 0h1m2 0h2m-41 1h1m1 0h3m1 0h1m2 0h5m1 0h2m1 0h2m2 0h1m4 0h1m4 0h7m1 0h1m-41 1h1m1 0h3m1 0h1m1 0h5m1 0h1m2 0h1m1 0h4m1 0h2m1 0h3m1 0h2m3 0h2m2 0h1m-41 1h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m3 0h1m1 0h2m1 0h1m-41 1h1m5 0h1m2 0h2m1 0h2m1 0h2m2 0h5m2 0h3m3 0h1m1 0h1m1 0h4m-40 1h7m3 0h1m1 0h2m1 0h1m2 0h2m1 0h1m1 0h3m4 0h1m1 0h2m4 0h2\"/></svg>",
-  impact: "<svg viewBox=\"0 0 41 41\" class=\"qr\"><path class=\"qrline\" stroke=\"#0a2b21\" d=\"M0 0.5h7m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m3 0h2m1 0h1m2 0h7m-41 1h1m5 0h1m1 0h3m1 0h1m4 0h1m5 0h1m3 0h3m2 0h1m1 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h3m3 0h1m2 0h1m1 0h2m1 0h3m2 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h3m3 0h2m4 0h1m3 0h1m2 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m2 0h4m2 0h2m2 0h2m1 0h1m2 0h2m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m1 0h3m1 0h1m3 0h3m2 0h2m1 0h4m1 0h2m3 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-33 1h2m1 0h1m1 0h1m2 0h2m3 0h3m1 0h2m1 0h1m1 0h1m-29 1h3m1 0h1m1 0h1m1 0h3m1 0h3m4 0h1m1 0h1m2 0h1m2 0h1m3 0h3m2 0h3m-41 1h5m4 0h1m8 0h3m1 0h1m1 0h3m1 0h1m1 0h3m1 0h3m1 0h2m-39 1h3m1 0h3m1 0h1m3 0h4m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m3 0h1m-39 1h1m5 0h1m2 0h1m2 0h5m1 0h3m2 0h1m6 0h5m1 0h1m1 0h1m-38 1h1m1 0h4m2 0h1m5 0h3m1 0h2m1 0h5m1 0h1m1 0h2m1 0h1m2 0h2m-39 1h1m1 0h2m3 0h1m1 0h3m1 0h1m1 0h1m2 0h4m1 0h2m1 0h4m3 0h1m1 0h6m-39 1h2m2 0h1m1 0h2m1 0h2m2 0h1m2 0h1m3 0h1m2 0h1m6 0h2m1 0h1m1 0h2m-39 1h1m3 0h2m4 0h7m1 0h2m1 0h3m2 0h1m1 0h1m5 0h1m1 0h2m1 0h2m-38 1h2m1 0h2m1 0h1m1 0h3m1 0h3m2 0h3m2 0h2m2 0h1m3 0h1m1 0h1m2 0h2m-38 1h1m1 0h2m3 0h2m1 0h3m1 0h4m2 0h2m2 0h1m1 0h1m1 0h3m1 0h3m1 0h3m-40 1h2m2 0h3m1 0h4m1 0h1m1 0h1m1 0h1m2 0h3m3 0h1m2 0h1m1 0h1m1 0h1m1 0h2m-38 1h2m7 0h7m2 0h1m1 0h1m4 0h1m1 0h1m3 0h1m2 0h1m1 0h2m1 0h2m-38 1h1m2 0h5m2 0h3m1 0h3m2 0h4m1 0h1m2 0h1m1 0h1m2 0h2m1 0h2m-40 1h1m1 0h3m2 0h1m1 0h1m1 0h3m8 0h1m2 0h2m1 0h1m2 0h4m1 0h1m2 0h2m-38 1h4m1 0h1m4 0h3m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1m1 0h2m1 0h2m-34 1h1m1 0h1m2 0h3m1 0h1m3 0h2m1 0h4m2 0h1m1 0h2m2 0h3m2 0h1m-35 1h3m1 0h2m1 0h2m2 0h2m1 0h2m1 0h1m3 0h3m1 0h3m1 0h1m3 0h1m4 0h1m-41 1h1m1 0h1m4 0h1m1 0h3m1 0h2m1 0h2m1 0h2m3 0h1m5 0h2m1 0h2m1 0h2m2 0h1m-41 1h1m1 0h1m2 0h6m2 0h3m3 0h2m2 0h2m2 0h4m1 0h2m2 0h1m-35 1h1m1 0h2m1 0h2m2 0h1m5 0h1m1 0h2m2 0h1m1 0h2m3 0h3m2 0h3m2 0h1m-39 1h1m3 0h1m2 0h1m1 0h2m2 0h2m1 0h2m2 0h1m1 0h2m2 0h2m1 0h1m1 0h1m3 0h3m-40 1h1m2 0h2m2 0h1m8 0h3m2 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h2m3 0h1m-41 1h1m1 0h1m2 0h6m2 0h1m2 0h2m3 0h2m1 0h5m1 0h2m1 0h2m2 0h1m-38 1h1m1 0h2m1 0h1m2 0h3m2 0h3m4 0h1m2 0h1m3 0h1m3 0h5m-36 1h1m1 0h1m2 0h2m2 0h2m2 0h1m1 0h2m1 0h1m1 0h2m2 0h6m1 0h6m1 0h2m-32 1h3m2 0h3m1 0h3m4 0h2m2 0h3m1 0h1m3 0h1m2 0h2m-41 1h7m9 0h3m2 0h1m1 0h2m1 0h4m1 0h2m1 0h1m1 0h2m-38 1h1m5 0h1m3 0h1m2 0h3m1 0h2m1 0h2m1 0h3m1 0h6m3 0h2m-38 1h1m1 0h3m1 0h1m1 0h5m3 0h1m2 0h1m6 0h1m5 0h7m1 0h1m-41 1h1m1 0h3m1 0h1m1 0h1m5 0h2m3 0h1m2 0h2m1 0h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h4m-41 1h1m1 0h3m1 0h1m1 0h3m1 0h1m9 0h3m1 0h2m1 0h2m2 0h4m1 0h2m-40 1h1m5 0h1m2 0h2m1 0h2m1 0h2m2 0h5m2 0h3m3 0h1m1 0h1m1 0h4m-40 1h7m2 0h3m1 0h2m2 0h1m1 0h2m4 0h3m1 0h1m5 0h2\"/></svg>",
-  vision: "<svg viewBox=\"0 0 41 41\" class=\"qr\"><path class=\"qrline\" stroke=\"#0a2b21\" d=\"M0 0.5h7m2 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h3m5 0h1m1 0h7m-41 1h1m5 0h1m3 0h5m2 0h4m3 0h3m1 0h2m1 0h1m2 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m2 0h2m3 0h2m1 0h6m3 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m1 0h7m3 0h1m1 0h3m3 0h3m2 0h2m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h5m2 0h2m1 0h1m2 0h4m2 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m4 0h2m2 0h1m2 0h1m4 0h4m1 0h1m1 0h1m3 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-30 1h1m2 0h4m1 0h2m1 0h2m3 0h2m1 0h3m-30 1h2m1 0h2m3 0h5m3 0h1m1 0h3m1 0h2m1 0h2m1 0h1m5 0h2m-39 1h1m1 0h3m5 0h1m3 0h3m1 0h2m1 0h1m2 0h2m1 0h1m2 0h2m1 0h1m1 0h2m3 0h1m-38 1h1m2 0h4m1 0h1m1 0h1m1 0h4m6 0h3m1 0h2m3 0h1m3 0h2m-40 1h6m1 0h3m1 0h1m1 0h2m4 0h2m1 0h3m2 0h3m1 0h2m4 0h1m-38 1h1m1 0h1m1 0h5m2 0h4m3 0h5m4 0h2m6 0h1m-36 1h1m4 0h1m2 0h1m1 0h1m2 0h2m2 0h2m1 0h2m1 0h3m2 0h2m1 0h2m2 0h2m3 0h1m-40 1h4m1 0h4m1 0h1m6 0h1m3 0h1m1 0h1m1 0h1m1 0h1m2 0h5m2 0h1m1 0h1m-41 1h1m1 0h2m1 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m4 0h2m2 0h3m-37 1h7m2 0h2m2 0h5m2 0h1m1 0h1m1 0h1m5 0h2m5 0h1m-38 1h2m6 0h2m2 0h1m3 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h1m-35 1h1m1 0h1m1 0h1m3 0h4m1 0h3m1 0h2m2 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h1m-41 1h1m1 0h2m3 0h2m1 0h2m4 0h1m2 0h1m3 0h5m4 0h3m1 0h1m1 0h1m1 0h1m-40 1h1m2 0h1m1 0h1m1 0h3m4 0h3m1 0h1m1 0h8m1 0h3m1 0h7m-39 1h2m7 0h6m1 0h1m1 0h3m2 0h3m3 0h1m4 0h1m1 0h1m-38 1h4m1 0h2m3 0h1m1 0h1m1 0h1m2 0h7m2 0h4m2 0h1m2 0h1m1 0h1m-39 1h3m1 0h2m2 0h1m2 0h2m2 0h1m3 0h2m2 0h1m1 0h1m3 0h1m1 0h2m1 0h3m2 0h2m-41 1h1m2 0h2m1 0h1m2 0h1m1 0h1m8 0h1m1 0h1m1 0h1m1 0h2m4 0h1m1 0h1m2 0h2m-39 1h4m4 0h1m1 0h2m3 0h3m3 0h1m2 0h4m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m-39 1h1m3 0h2m1 0h1m4 0h3m3 0h1m1 0h4m1 0h1m1 0h6m1 0h2m2 0h1m-40 1h5m1 0h5m2 0h4m1 0h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7m-40 1h1m1 0h1m1 0h1m1 0h4m2 0h1m1 0h7m1 0h2m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m2 0h1m-41 1h2m5 0h1m1 0h2m1 0h2m2 0h4m1 0h2m2 0h1m2 0h2m2 0h3m1 0h1m2 0h1m-40 1h2m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h6m4 0h2m1 0h1m2 0h1m1 0h1m-41 1h2m3 0h1m1 0h1m2 0h1m1 0h2m5 0h2m1 0h1m7 0h1m3 0h2m1 0h3m-40 1h3m1 0h4m4 0h3m1 0h1m4 0h2m2 0h1m1 0h1m1 0h1m2 0h9m-33 1h1m5 0h1m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h2m1 0h1m3 0h1m1 0h1m-39 1h7m1 0h4m2 0h2m1 0h5m1 0h1m2 0h3m2 0h2m1 0h1m1 0h3m-39 1h1m5 0h1m2 0h1m2 0h1m4 0h2m2 0h1m2 0h1m3 0h1m1 0h3m3 0h2m1 0h2m-41 1h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h1m2 0h1m2 0h1m4 0h2m1 0h2m1 0h6m-37 1h1m1 0h3m1 0h1m1 0h3m2 0h2m3 0h1m1 0h2m1 0h1m3 0h2m1 0h1m1 0h1m2 0h1m4 0h1m-41 1h1m1 0h3m1 0h1m2 0h1m2 0h2m2 0h1m2 0h1m3 0h9m1 0h1m1 0h6m-41 1h1m5 0h1m5 0h3m4 0h1m3 0h1m9 0h1m2 0h2m2 0h1m-41 1h7m2 0h2m2 0h1m5 0h1m3 0h1m1 0h1m1 0h1m4 0h1m3 0h1m1 0h1\"/></svg>",
-  prosperity: "<svg viewBox=\"0 0 41 41\" class=\"qr\"><path class=\"qrline\" stroke=\"#0a2b21\" d=\"M0 0.5h7m4 0h1m1 0h4m1 0h1m2 0h1m3 0h1m6 0h1m1 0h7m-41 1h1m5 0h1m2 0h1m4 0h1m2 0h2m2 0h3m1 0h2m1 0h2m1 0h1m2 0h1m5 0h1m-41 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m1 0h1m3 0h2m1 0h3m3 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m1 0h3m1 0h1m2 0h1m4 0h1m1 0h2m2 0h1m1 0h1m2 0h2m1 0h1m1 0h3m1 0h1m-41 1h1m1 0h3m1 0h1m5 0h5m2 0h1m1 0h1m1 0h1m4 0h4m2 0h1m1 0h3m1 0h1m-41 1h1m5 0h1m2 0h4m1 0h2m7 0h2m1 0h1m1 0h1m1 0h1m3 0h1m5 0h1m-41 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-30 1h1m1 0h1m1 0h2m1 0h6m1 0h1m1 0h2m1 0h3m-30 1h2m1 0h2m1 0h1m1 0h2m1 0h2m3 0h1m2 0h2m1 0h1m2 0h2m1 0h1m5 0h2m-38 1h2m2 0h1m6 0h1m1 0h2m2 0h2m1 0h1m3 0h1m1 0h1m2 0h2m1 0h1m1 0h2m2 0h1m-39 1h1m4 0h4m1 0h1m1 0h1m3 0h4m2 0h1m1 0h3m1 0h2m2 0h2m3 0h1m-38 1h2m1 0h2m3 0h1m1 0h1m1 0h2m1 0h1m2 0h1m2 0h3m2 0h3m1 0h4m2 0h1m1 0h2m-40 1h1m3 0h2m1 0h1m4 0h4m1 0h5m4 0h2m4 0h3m4 0h1m-41 1h2m2 0h2m2 0h1m1 0h2m1 0h2m3 0h3m2 0h1m4 0h2m1 0h2m2 0h2m3 0h1m-40 1h9m4 0h2m2 0h1m1 0h2m2 0h3m1 0h1m2 0h5m2 0h1m1 0h1m-41 1h1m1 0h4m2 0h1m1 0h2m1 0h1m2 0h1m5 0h1m1 0h1m1 0h2m4 0h2m2 0h3m-39 1h1m1 0h14m1 0h1m3 0h1m2 0h3m1 0h1m3 0h2m5 0h1m-39 1h3m1 0h1m2 0h1m1 0h2m1 0h1m3 0h4m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3m2 0h1m1 0h1m-35 1h1m1 0h1m5 0h3m1 0h1m3 0h3m1 0h1m1 0h2m1 0h3m3 0h2m1 0h1m1 0h1m-41 1h1m6 0h6m4 0h1m1 0h1m1 0h1m2 0h2m1 0h2m3 0h3m1 0h1m1 0h1m1 0h1m-40 1h2m1 0h1m1 0h1m1 0h4m4 0h3m5 0h2m2 0h1m1 0h3m1 0h2m1 0h4m-41 1h1m1 0h1m1 0h1m3 0h1m2 0h3m1 0h4m1 0h1m6 0h1m3 0h1m3 0h2m1 0h1m-37 1h3m1 0h2m3 0h1m3 0h1m1 0h4m1 0h3m2 0h4m2 0h1m1 0h2m-37 1h1m2 0h3m3 0h1m1 0h2m2 0h1m3 0h3m1 0h1m1 0h1m3 0h1m1 0h2m1 0h1m1 0h2m1 0h2m-41 1h1m2 0h1m1 0h2m1 0h4m4 0h1m5 0h1m1 0h4m4 0h1m1 0h1m2 0h1m1 0h2m-41 1h2m1 0h1m1 0h1m2 0h1m1 0h1m6 0h1m2 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m-39 1h2m2 0h4m2 0h1m1 0h3m5 0h1m2 0h1m1 0h1m1 0h6m1 0h2m2 0h1m-40 1h2m1 0h2m3 0h2m3 0h1m1 0h2m1 0h5m1 0h1m1 0h2m1 0h2m2 0h5m1 0h1m-41 1h1m3 0h3m1 0h2m1 0h1m2 0h5m1 0h1m1 0h1m1 0h3m1 0h1m2 0h3m1 0h1m1 0h1m1 0h1m-40 1h1m4 0h1m1 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h2m1 0h1m3 0h2m2 0h1m1 0h1m1 0h1m2 0h1m-40 1h2m3 0h2m2 0h2m1 0h1m1 0h2m1 0h1m3 0h1m2 0h4m1 0h2m1 0h2m1 0h1m2 0h1m1 0h1m-41 1h2m2 0h1m2 0h1m1 0h5m1 0h1m1 0h3m1 0h3m1 0h2m3 0h1m3 0h2m1 0h3m-40 1h3m2 0h3m1 0h4m2 0h1m8 0h1m1 0h4m2 0h9m-33 1h2m3 0h1m7 0h1m1 0h5m1 0h1m2 0h1m3 0h1m1 0h1m-39 1h7m1 0h1m4 0h2m3 0h4m1 0h1m3 0h1m3 0h2m1 0h1m1 0h3m-39 1h1m5 0h1m2 0h6m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h3m3 0h2m1 0h2m-41 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h1m4 0h1m4 0h5m1 0h6m-37 1h1m1 0h3m1 0h1m1 0h1m4 0h2m2 0h2m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m-41 1h1m1 0h3m1 0h1m2 0h1m2 0h2m2 0h2m1 0h1m3 0h9m1 0h1m1 0h2m2 0h2m-41 1h1m5 0h1m3 0h1m1 0h2m3 0h1m1 0h1m1 0h1m1 0h1m2 0h1m6 0h1m2 0h3m1 0h1m-41 1h7m2 0h1m2 0h1m1 0h1m1 0h5m1 0h2m1 0h3m4 0h1m3 0h2\"/></svg>",
-} as const;
+import type { BilletPackId } from "./packs";
+
+/**
+ * QR codes SVG statiques — visuellement réalistes (finder patterns + data modules).
+ * Chaque pack a son propre motif de data pour les différencier visuellement.
+ */
+
+const FINDER_TL = `
+  <rect x="4" y="4" width="28" height="28" fill="#0A2B21"/>
+  <rect x="8" y="8" width="20" height="20" fill="#fff"/>
+  <rect x="12" y="12" width="12" height="12" fill="#0A2B21"/>
+`;
+
+const FINDER_TR = `
+  <rect x="88" y="4" width="28" height="28" fill="#0A2B21"/>
+  <rect x="92" y="8" width="20" height="20" fill="#fff"/>
+  <rect x="96" y="12" width="12" height="12" fill="#0A2B21"/>
+`;
+
+const FINDER_BL = `
+  <rect x="4" y="88" width="28" height="28" fill="#0A2B21"/>
+  <rect x="8" y="92" width="20" height="20" fill="#fff"/>
+  <rect x="12" y="96" width="12" height="12" fill="#0A2B21"/>
+`;
+
+const TIMING = `
+  <rect x="36" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="8" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="36" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="8" y="76" width="4" height="4" fill="#0A2B21"/>
+`;
+
+// Motifs de data spécifiques à chaque pack (grille 5x5 dans la zone centrale 40-80)
+const DATA_EARLY = `
+  <rect x="40" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="80" width="4" height="4" fill="#0A2B21"/>
+`;
+
+const DATA_STANDARD = `
+  <rect x="44" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="80" width="4" height="4" fill="#0A2B21"/>
+`;
+
+const DATA_VIP = `
+  <rect x="40" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="40" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="44" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="48" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="52" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="56" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="60" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="64" width="4" height="4" fill="#0A2B21"/>
+  <rect x="44" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="60" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="76" y="68" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="52" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="64" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="72" width="4" height="4" fill="#0A2B21"/>
+  <rect x="48" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="72" y="76" width="4" height="4" fill="#0A2B21"/>
+  <rect x="40" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="56" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="68" y="80" width="4" height="4" fill="#0A2B21"/>
+  <rect x="80" y="80" width="4" height="4" fill="#0A2B21"/>
+`;
+
+// Modules de alignment pattern (petit carré en bas à droite)
+const ALIGNMENT = `
+  <rect x="88" y="88" width="8" height="8" fill="#0A2B21"/>
+  <rect x="90" y="90" width="4" height="4" fill="#fff"/>
+`;
+
+const buildQR = (dataModules: string) =>
+  `<svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" aria-hidden="true">
+    <rect width="120" height="120" fill="#fff" rx="4"/>
+    ${FINDER_TL}${FINDER_TR}${FINDER_BL}${TIMING}${ALIGNMENT}${dataModules}
+  </svg>`;
+
+export const BILLET_QR_PATHS: Record<BilletPackId, string> = {
+  early: buildQR(DATA_EARLY),
+  standard: buildQR(DATA_STANDARD),
+  vip: buildQR(DATA_VIP),
+};

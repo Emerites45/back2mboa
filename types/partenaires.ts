@@ -1,6 +1,7 @@
 export type Partenaire = {
   nom: string;
   sous: string;
+  icon?: string;
 };
 
 export type PartenairesCopy = {

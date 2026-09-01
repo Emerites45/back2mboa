@@ -33,6 +33,7 @@ import { RessourcesSection } from "@/components/sections/ressources/RessourcesSe
 import {
   BilletsPartenairesSection,
 } from "@/components/sections/billets/BilletsSection";
+import { ArticlesSection } from '@/components/sections/ArticlesSection';
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
@@ -146,6 +147,9 @@ export default function HomePage() {
 
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
+
+
+      <ArticlesSection/>
 
       {/* ── FOOTER + CTA rôles ─────────────────────────── */}
       <FooterRevealZone />

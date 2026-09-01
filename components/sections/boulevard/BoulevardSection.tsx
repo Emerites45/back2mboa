@@ -45,9 +45,15 @@ function Carte({ c, dup }: { c: BoulevardCarte; dup: "a" | "b" }) {
     >
       <div className="face">
         <div className="row">
-          <span className="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: c.s.ico }} />
-          </span>
+          <span
+            className="ico"
+            aria-hidden="true"
+            style={{
+              maskImage: `url(${c.s.iconSrc})`,
+              WebkitMaskImage: `url(${c.s.iconSrc})`,
+              backgroundColor: `var(${c.s.v})`,
+            }}
+          />
           <span className="sec">{c.s.court}</span>
         </div>
         <span className="step">{c.e}</span>

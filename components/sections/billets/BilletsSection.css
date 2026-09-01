@@ -109,7 +109,8 @@
   margin: 0 auto;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 3.5rem 3.5rem 3.5rem;
+  grid-template-columns: repeat(3, 3.5rem) minmax(0, 1fr);
+  grid-template-rows: 1fr;
   flex: 0 0 auto;
   height: auto;
   min-height: 0;
@@ -123,39 +124,20 @@
 }
 
 .b2m-billets .ticket.is-live {
-  transition: grid-template-columns 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.b2m-billets .ticket[data-open="0"] {
-  grid-template-columns: minmax(0, 1fr) 3.5rem 3.5rem 3.5rem;
-}
-
-.b2m-billets .ticket[data-open="1"] {
-  grid-template-columns: 3.5rem minmax(0, 1fr) 3.5rem 3.5rem;
-}
-
-.b2m-billets .ticket[data-open="2"] {
-  grid-template-columns: 3.5rem 3.5rem minmax(0, 1fr) 3.5rem;
-}
-
-.b2m-billets .ticket[data-open="3"] {
-  grid-template-columns: 3.5rem 3.5rem 3.5rem minmax(0, 1fr);
-}
-
-.b2m-billets .ticket[data-count="2"] {
-  grid-template-columns: minmax(0, 1fr) 3.5rem;
-}
-
-.b2m-billets .ticket[data-count="2"][data-open="0"] {
-  grid-template-columns: minmax(0, 1fr) 3.5rem;
-}
-
-.b2m-billets .ticket[data-count="2"][data-open="1"] {
-  grid-template-columns: 3.5rem minmax(0, 1fr);
+  transition: none;
 }
 
 .b2m-billets .ticket::after {
   display: none;
+}
+
+.b2m-billets .stub {
+  grid-row: 1;
+}
+
+.b2m-billets .lane {
+  grid-row: 1;
+  grid-column: -1;
 }
 
 @media (min-width: 900px) {
@@ -273,18 +255,13 @@
   outline-offset: -2px;
 }
 
-.b2m-billets .lane.on .stub {
+.b2m-billets .stub.is-active {
   filter: none;
-  flex: 0 0 4.375rem;
-  width: 4.375rem;
-  min-width: 4.375rem;
-  max-width: 4.375rem;
-  margin: 0;
   border-right: 2px dashed rgb(10 43 33 / 0.12);
   box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.28);
 }
 
-.b2m-billets .lane.on .stub::after {
+.b2m-billets .stub.is-active::after {
   display: none;
 }
 
@@ -658,19 +635,14 @@
     order: 0;
   }
 
-  .b2m-billets .lane.on .stub {
+  .b2m-billets .stub.is-active {
     width: auto;
     min-width: 0;
     max-width: none;
-    flex: 1 1 25%;
-  }
-
-  .b2m-billets .ticket[data-count="2"] .stub,
-  .b2m-billets .ticket[data-count="2"] .lane.on .stub {
     flex: 1 1 50%;
   }
 
-  .b2m-billets .lane.on .stub::after {
+  .b2m-billets .stub.is-active::after {
     display: none;
   }
 
@@ -695,7 +667,7 @@
     animation: b2m-face-up 0.32s var(--ease) both;
   }
 
-  .b2m-billets .lane:last-child .stub {
+  .b2m-billets .stub:last-of-type {
     border-right: 0;
   }
 

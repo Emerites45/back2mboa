@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ECOSYSTEME_COPY } from "@/data/ecosysteme";
 import { EcosystemeHubDial } from "@/components/sections/ecosysteme/EcosystemeHubDial";
 import { cn } from "@/lib/utils";
@@ -18,19 +17,17 @@ const TYPE = {
 } as const;
 
 function EcosystemeCta({
-  href,
   children,
   variant = "dark",
 }: {
-  href: string;
   children: string;
   variant?: "dark" | "light";
 }) {
   return (
-    <Link
-      href={href}
+    <button
+      type="button"
       className={cn(
-        "inline-flex items-center rounded-full border-[1.5px] px-5 py-2.5 text-sm font-medium no-underline transition-colors duration-200",
+        "inline-flex items-center justify-center rounded-full border-[1.5px] px-5 py-2.5 text-sm font-medium transition-colors duration-200",
         "focus-visible:outline-2 focus-visible:outline-offset-[3px]",
         variant === "dark" &&
           "border-[#0a2b21] text-[#0a2b21] hover:bg-[#0a2b21] hover:text-white focus-visible:outline-[#0a2b21]",
@@ -39,7 +36,7 @@ function EcosystemeCta({
       )}
     >
       {children}
-    </Link>
+    </button>
   );
 }
 
@@ -62,7 +59,7 @@ export function EcosystemeSection() {
           <span className="block whitespace-nowrap">
             {copy.titleBefore}
             {"\u00A0"}
-            <span className="text-[#e3a73b]">{copy.highlight}</span>
+            <span className="text-[#DCB700]">{copy.highlight}</span>
           </span>
           <span className="block whitespace-nowrap">{copy.titleAfter}</span>
         </h2>
@@ -96,12 +93,12 @@ export function EcosystemeSection() {
                 {copy.mayorTitle}
               </h3>
               <p className="mb-4 text-sm leading-relaxed text-[#5a6b63]">{copy.mayorBody}</p>
-              <EcosystemeCta href={copy.mayorCtaHref}>{copy.mayorCta}</EcosystemeCta>
+              <EcosystemeCta>{copy.mayorCta}</EcosystemeCta>
             </article>
           </div>
 
           <article
-            className="flex w-full flex-col rounded-[28px] bg-[#e3a73b] px-5 py-6 shadow-[0_20px_40px_-14px_rgba(10,43,33,0.28)]"
+            className="flex w-full flex-col rounded-[28px] bg-[#DCB700] px-5 py-6 shadow-[0_20px_40px_-14px_rgba(10,43,33,0.28)]"
             aria-labelledby="twin-title"
           >
             <EcosystemeHubDial compact />
@@ -109,9 +106,7 @@ export function EcosystemeSection() {
               {copy.twinTitle}
             </h3>
             <p className="mb-4 text-sm leading-snug text-[#0a2b21]/90">{copy.twinBody}</p>
-            <EcosystemeCta href={copy.twinCtaHref} variant="dark">
-              {copy.twinCta}
-            </EcosystemeCta>
+            <EcosystemeCta>{copy.twinCta}</EcosystemeCta>
           </article>
         </div>
       </div>

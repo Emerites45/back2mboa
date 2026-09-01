@@ -2,7 +2,6 @@ import type { HomecomingCopy } from "@/types/homecoming";
 
 /** Diaporama Homecoming — 01 Ariel Mbita, 02 Édouard Tamba, 03 Jakub Dziubak. */
 export const HOMECOMING_COPY: HomecomingCopy = {
-  brand: "BACK 2 MBOA",
   watchLabel: "Watch trailer",
   autoplayMs: 8000,
   programs: [

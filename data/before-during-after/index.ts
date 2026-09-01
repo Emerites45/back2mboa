@@ -36,7 +36,7 @@ export const BDA_COPY: BdaCopy = {
         "Signatures, LOI et mandats sur table",
       ],
       tool: "Outil : match-up table , mise en relation",
-      date: "Pendant : Du 16 au 18 décembre 2026",
+      date: "Pendant : Du 16 au 17 décembre 2026",
       caption: "During , Connecter & closer",
       image: "/images/before-during-after/During.jpeg",
       imageAlt:

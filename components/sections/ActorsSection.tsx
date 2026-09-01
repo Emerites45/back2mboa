@@ -15,7 +15,7 @@ export function ActorsSection() {
       */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero/bg-2.jpg" // Ou ton image de filigrane préférée
+          src="/images/hero/bg-2.webp" // Ou ton image de filigrane préférée
           alt="Filigrane d'arrière-plan"
           fill
           className="object-cover object-center grayscale opacity-15"

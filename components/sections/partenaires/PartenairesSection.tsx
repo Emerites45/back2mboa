@@ -32,7 +32,13 @@ function LogoTrack({ items, extraClass }: { items: Partenaire[]; extraClass: str
     <div className={`partners-track ${extraClass}`}>
       {loop.map((item, i) => (
         <span key={`${item.nom}-${i}`} className="partners-logo" title={`${item.nom} — ${item.sous}`}>
-          <span className="partners-glyph">{partenaireInitiales(item.nom)}</span>
+          <span className="partners-glyph">
+            {item.icon ? (
+              <img src={item.icon} alt="" className="partners-icon" />
+            ) : (
+              partenaireInitiales(item.nom)
+            )}
+          </span>
           {item.nom}
           <small>{item.sous}</small>
         </span>
@@ -41,11 +47,11 @@ function LogoTrack({ items, extraClass }: { items: Partenaire[]; extraClass: str
   );
 }
 
-function Door() {
+function Door({ src }: { src: string }) {
   return (
     <div className="partners-door">
       <span className="partners-door-glow" aria-hidden="true" />
-      <Image src="/images/partenaires/door.png" alt="" width={180} height={180} />
+      <Image src={src} alt="" width={320} height={320} className="partners-archway-img" />
     </div>
   );
 }
@@ -77,11 +83,11 @@ export function PartenairesSection() {
           <div className="partners-corridor">
             <LogoTrack items={copy.enter} extraClass="is-in" />
           </div>
-          <Door />
+          <Door src="/images/layer-stone-archway_right.webp" />
         </div>
 
         <div className="partners-band is-exit">
-          <Door />
+          <Door src="/images/layer-stone-archway_left.webp" />
           <div className="partners-corridor">
             <LogoTrack items={copy.exit} extraClass="is-out" />
           </div>

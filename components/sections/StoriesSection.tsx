@@ -15,20 +15,20 @@ import {
 } from "@/components/ui/carousel";
 
 const TYPE = {
-  titleSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
+  titleSize: "clamp(1.7rem, 4.2vh, 3rem)",
   titleWeight: 700,
-  bodySize: "0.9375rem",
+  bodySize: "clamp(0.9rem, 2vh, 1.05rem)",
 } as const;
 
-/** Taille de la carte active et de son contenu. */
+/** Taille de la carte active et de son contenu — contraint par la hauteur de viewport. */
 const CARD = {
-  width: "min(53rem, 56vw)",
-  height: "30rem",
-  padding: "1.75rem",
-  quoteSize: "1.3rem",
-  metaSize: "1rem",
-  arrowSize: "2.75rem",
-  arrowIcon: "1.25rem",
+  width: "min(58rem, 88vw, calc(52vh * 16 / 10))",
+  aspectRatio: "16 / 10",
+  padding: "clamp(1rem, 2.8vh, 1.75rem)",
+  quoteSize: "clamp(0.95rem, 2.4vh, 1.55rem)",
+  metaSize: "clamp(0.8rem, 1.8vh, 1.1rem)",
+  arrowSize: "clamp(2rem, 4.5vh, 2.75rem)",
+  arrowIcon: "clamp(0.9rem, 2vh, 1.25rem)",
 } as const;
 
 const STORIES = [
@@ -250,12 +250,12 @@ export function StoriesSection() {
   return (
     <section
       id="histoires"
-      className="flex h-[100vh] flex-col bg-brand-paper px-[var(--page-gutter)] py-10 text-brand-ink"
+      className="flex h-screen flex-col overflow-hidden bg-brand-paper px-[var(--page-gutter)] py-5 sm:py-8 text-brand-ink"
       aria-label="Histoires"
     >
       <header className="mx-auto max-w-[40rem] text-center">
         <h2
-          className="font-[family-name:var(--font-bricolage)] tracking-[-0.03em] text-balance"
+          className="font-heading tracking-[-0.03em] text-balance"
           style={{ fontSize: TYPE.titleSize, fontWeight: TYPE.titleWeight }}
         >
           Vraies histoires, vrais résultats
@@ -269,7 +269,7 @@ export function StoriesSection() {
         </p>
       </header>
 
-      <div className="mt-8 flex min-h-0 flex-1 flex-col justify-center">
+      <div className="mt-4 sm:mt-6 flex min-h-0 flex-1 flex-col justify-center">
         <Carousel
           setApi={setApi}
           opts={{
@@ -281,13 +281,13 @@ export function StoriesSection() {
           }}
           className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2"
         >
-          <CarouselContent className="-ml-5 items-center">
+          <CarouselContent className="-ml-2 sm:-ml-3 lg:-ml-4 items-center">
             {SLIDES.map((story, i) => {
               const active = i === current
               return (
                 <CarouselItem
                   key={story.key}
-                  className="basis-auto pl-5"
+                  className="basis-auto flex items-center justify-center pl-2 sm:pl-3 lg:pl-4"
                   style={{ flex: "0 0 auto", width: CARD.width }}
                 >
                   <article
@@ -296,9 +296,9 @@ export function StoriesSection() {
                       active ? "opacity-100" : "opacity-40",
                     )}
                     style={{
-                      width: CARD.width,
-                      height: CARD.height,
-                      transform: active ? "scale(1)" : "scale(0.86)",
+                      width: "100%",
+                      aspectRatio: CARD.aspectRatio,
+                      transform: active ? "scale(1)" : "scale(0.9)",
                     }}
                   >
                     <StoryVideo src={story.video} poster={story.poster} active={active} />
@@ -334,7 +334,7 @@ export function StoriesSection() {
                           style={{ padding: CARD.padding }}
                         >
                           <blockquote
-                            className="max-w-[34ch] leading-relaxed text-pretty"
+                            className="max-w-[34ch] leading-snug text-pretty"
                             style={{ fontSize: CARD.quoteSize }}
                           >
                             « {story.quote} »
@@ -351,9 +351,9 @@ export function StoriesSection() {
               )
             })}
           </CarouselContent>
-          <div className="mt-8 flex justify-center gap-3">
-            <CarouselPrevious className="static top-auto left-auto size-11 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
-            <CarouselNext className="static top-auto right-auto size-11 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
+          <div className="mt-4 sm:mt-6 flex justify-center gap-3">
+            <CarouselPrevious className="static top-auto left-auto size-9 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
+            <CarouselNext className="static top-auto right-auto size-9 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
           </div>
         </Carousel>
       </div>

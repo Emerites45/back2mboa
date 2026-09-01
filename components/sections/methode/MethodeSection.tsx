@@ -10,7 +10,6 @@ import {
 import { METHODE_COPY } from "@/data/methode";
 import { cn } from "@/lib/utils";
 
-/** Watermark « CAP » — typo + position. */
 const WATERMARK = {
   font: "var(--font-oswald)",
   size: "clamp(8rem, 28vw, 16rem)",
@@ -23,7 +22,6 @@ const WATERMARK = {
   zIndex: 0,
 } as const;
 
-/** Typo section — taille, graisse, police. */
 const TYPE = {
   eyebrowFont: "var(--font-roboto)",
   eyebrowSize: "0.8125rem",
@@ -33,7 +31,6 @@ const TYPE = {
   titleSize: "clamp(1.5rem, 4.2vw, 3.35rem)",
   titleWeight: 700,
 
-  /** Style Figma Subtitle → Roboto. */
   leadFont: "var(--font-roboto)",
   leadSize: "1rem",
   leadWeight: 400,
@@ -45,9 +42,20 @@ const TYPE = {
   pillarBodyFont: "var(--font-roboto)",
   pillarBodySize: "0.875rem",
   pillarBodyWeight: 400,
+
+  versoTitleFont: "var(--font-bricolage)",
+  versoTitleSize: "0.95rem",
+  versoTitleWeight: 700,
+
+  versoBodyFont: "var(--font-roboto)",
+  versoBodySize: "0.78rem",
+  versoBodyWeight: 400,
+
+  versoBottomFont: "var(--font-roboto-mono)",
+  versoBottomSize: "0.7rem",
+  versoBottomWeight: 500,
 } as const;
 
-/** Section — hauteur viewport + espacements. */
 const SECTION = {
   height: "100dvh",
   paddingY: "clamp(1.25rem, 3vh, 2.5rem)",
@@ -57,7 +65,6 @@ const SECTION = {
   cardsMarginTop: "clamp(1.25rem, 3vh, 2.5rem)",
 } as const;
 
-/** Carte pilier — dimensions, profondeur, zones image/texte. */
 const CARD = {
   radius: "1rem",
   gap: "1.5rem",
@@ -65,7 +72,6 @@ const CARD = {
   border: "1px solid rgb(11 31 51 / 0.08)",
   imageBg: "#e8ebef",
   bodyBg: "#ffffff",
-  /** Zone texte identique sur les 3 cartes (pavé le plus long = crédible). */
   bodyHeight: "clamp(9.75rem, 22vh, 11rem)",
   bodyPaddingX: "1.25rem",
   bodyPaddingTop: "1.15rem",
@@ -74,20 +80,8 @@ const CARD = {
   titleColor: "#0b1f33",
   bodyColor: "#6b7280",
   bodyLineHeight: 1.55,
-} as const;
-
-/**
- * Hover carte — ombre + trait accent (pas de déplacement / tilt).
- */
-const HOVER = {
-  durationMs: 480,
+  flipMs: 650,
   ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-  shadow:
-    "0 22px 44px rgb(11 31 51 / 0.14), 0 6px 14px rgb(11 31 51 / 0.08)",
-  accentColor: "#0b1f33",
-  accentHeight: "2px",
-  accentWidth: "2.75rem",
-  accentDurationMs: 420,
 } as const;
 
 export function MethodeSection() {
@@ -183,107 +177,150 @@ export function MethodeSection() {
           }}
         >
           {pillars.map((pillar, index) => (
-              <Reveal
-                key={pillar.id}
-                as="li"
-                delay={0.2 + index * 0.1}
-                className="h-full min-h-0 min-w-0"
+            <Reveal
+              key={pillar.id}
+              as="li"
+              delay={0.2 + index * 0.1}
+              className="h-full min-h-0 min-w-0"
+            >
+              <article
+                className="group relative min-h-0 h-full [perspective:1200px]"
+                tabIndex={0}
               >
-                <Card
-                  size="sm"
+                <div
                   className={cn(
-                    "group flex h-full min-h-0 flex-col gap-0 overflow-hidden py-0 ring-0",
-                    "transition-[box-shadow]",
-                    "hover:z-[2] hover:shadow-[var(--methode-hover-shadow)]",
-                    "focus-within:z-[2] focus-within:shadow-[var(--methode-hover-shadow)]",
-                    "motion-reduce:transition-none",
+                    "relative h-full w-full [transform-style:preserve-3d]",
+                    "motion-safe:transition-transform motion-safe:duration-[var(--methode-flip)] motion-safe:ease-[var(--methode-ease)]",
+                    "motion-safe:group-hover:[transform:rotateY(180deg)] motion-safe:group-focus-within:[transform:rotateY(180deg)]",
+                    "group-hover:shadow-[0_22px_44px_rgb(11_31_51/0.14),0_6px_14px_rgb(11_31_51/0.08)]",
                   )}
                   style={
                     {
                       borderRadius: CARD.radius,
-                      background: CARD.bodyBg,
-                      border: CARD.border,
-                      boxShadow: CARD.shadow,
-                      transitionDuration: `${HOVER.durationMs}ms`,
-                      transitionTimingFunction: HOVER.ease,
-                      ["--methode-hover-shadow" as string]: HOVER.shadow,
-                      ["--methode-accent" as string]: HOVER.accentColor,
-                      ["--methode-accent-h" as string]: HOVER.accentHeight,
-                      ["--methode-accent-w" as string]: HOVER.accentWidth,
-                      ["--methode-accent-ms" as string]: `${HOVER.accentDurationMs}ms`,
+                      "--methode-flip": `${CARD.flipMs}ms`,
+                      "--methode-ease": CARD.ease,
                     } as CSSProperties
                   }
                 >
+                  {/* FRONT */}
                   <div
-                    className="relative min-h-0 w-full flex-1 overflow-hidden"
-                    style={{ background: CARD.imageBg }}
+                    className={cn(
+                      "absolute inset-0 flex flex-col overflow-hidden rounded-[inherit]",
+                      CARD.border,
+                      "[backface-visibility:hidden] [transform:translateZ(0)]",
+                    )}
+                    style={{ background: CARD.bodyBg, boxShadow: CARD.shadow }}
                   >
-                    <Image
-                      src={pillar.image}
-                      alt={pillar.imageAlt}
-                      fill
-                      sizes="(min-width: 640px) 30vw, 90vw"
-                      className="absolute inset-0 size-full object-cover object-center"
-                    />
-                  </div>
-
-                  <CardContent
-                    className="flex shrink-0 flex-col px-0"
-                    style={{
-                      height: CARD.bodyHeight,
-                      minHeight: CARD.bodyHeight,
-                      paddingLeft: CARD.bodyPaddingX,
-                      paddingRight: CARD.bodyPaddingX,
-                      paddingTop: CARD.bodyPaddingTop,
-                      paddingBottom: CARD.bodyPaddingBottom,
-                      gap: CARD.titleGap,
-                    }}
-                  >
-                    <div className="shrink-0">
-                      <CardTitle
-                        className="tracking-[-0.02em] uppercase"
-                        style={{
-                          fontFamily: TYPE.pillarTitleFont,
-                          fontSize: TYPE.pillarTitleSize,
-                          fontWeight: TYPE.pillarTitleWeight,
-                          color: CARD.titleColor,
-                        }}
-                      >
-                        {pillar.title}
-                      </CardTitle>
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                          "mt-1.5 block w-0 transition-[width]",
-                          "group-hover:w-[var(--methode-accent-w)]",
-                          "group-focus-within:w-[var(--methode-accent-w)]",
-                          "motion-reduce:transition-none",
-                          "motion-reduce:group-hover:w-[var(--methode-accent-w)]",
-                          "motion-reduce:group-focus-within:w-[var(--methode-accent-w)]",
-                        )}
-                        style={{
-                          height: "var(--methode-accent-h)",
-                          background: "var(--methode-accent)",
-                          transitionDuration: "var(--methode-accent-ms)",
-                          transitionTimingFunction: HOVER.ease,
-                        }}
+                    <div
+                      className="relative min-h-0 w-full flex-1 overflow-hidden"
+                      style={{ background: CARD.imageBg }}
+                    >
+                      <Image
+                        src={pillar.image}
+                        alt={pillar.imageAlt}
+                        fill
+                        sizes="(min-width: 640px) 30vw, 90vw"
+                        className="absolute inset-0 size-full object-cover object-center"
                       />
                     </div>
-                    <CardDescription
-                      className="min-h-0 flex-1 overflow-hidden text-pretty"
+
+                    <div
+                      className="flex shrink-0 flex-col"
                       style={{
-                        fontFamily: TYPE.pillarBodyFont,
-                        fontSize: TYPE.pillarBodySize,
-                        fontWeight: TYPE.pillarBodyWeight,
-                        color: CARD.bodyColor,
-                        lineHeight: CARD.bodyLineHeight,
+                        height: CARD.bodyHeight,
+                        minHeight: CARD.bodyHeight,
+                        paddingLeft: CARD.bodyPaddingX,
+                        paddingRight: CARD.bodyPaddingX,
+                        paddingTop: CARD.bodyPaddingTop,
+                        paddingBottom: CARD.bodyPaddingBottom,
+                        gap: CARD.titleGap,
                       }}
                     >
-                      {pillar.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </Reveal>
+                      <div className="shrink-0">
+                        <p
+                          className="tracking-[-0.02em] uppercase"
+                          style={{
+                            fontFamily: TYPE.pillarTitleFont,
+                            fontSize: TYPE.pillarTitleSize,
+                            fontWeight: TYPE.pillarTitleWeight,
+                            color: CARD.titleColor,
+                          }}
+                        >
+                          {pillar.title}
+                        </p>
+                        <span
+                          aria-hidden="true"
+                          className="mt-1.5 block h-[2px] w-[2.75rem]"
+                          style={{ background: CARD.titleColor, opacity: 0.15 }}
+                        />
+                      </div>
+                      <p
+                        className="min-h-0 flex-1 overflow-hidden text-pretty"
+                        style={{
+                          fontFamily: TYPE.pillarBodyFont,
+                          fontSize: TYPE.pillarBodySize,
+                          fontWeight: TYPE.pillarBodyWeight,
+                          color: CARD.bodyColor,
+                          lineHeight: CARD.bodyLineHeight,
+                        }}
+                      >
+                        {pillar.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* BACK */}
+                  <div
+                    className={cn(
+                      "absolute inset-0 flex flex-col overflow-hidden rounded-[inherit]",
+                      "border border-[rgb(11_31_51/0.08)]",
+                      "bg-[#e8ebef]",
+                      "p-5",
+                      "[backface-visibility:hidden] [transform:rotateY(180deg)]",
+                    )}
+                  >
+                    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
+                      <p
+                        className="leading-tight tracking-[-0.01em]"
+                        style={{
+                          fontFamily: TYPE.versoTitleFont,
+                          fontSize: TYPE.versoTitleSize,
+                          fontWeight: TYPE.versoTitleWeight,
+                          color: "#0b1f33",
+                        }}
+                      >
+                        {pillar.versoTitle}
+                      </p>
+                      <div
+                        className="min-h-0 flex-1 overflow-hidden text-pretty whitespace-pre-line"
+                        style={{
+                          fontFamily: TYPE.versoBodyFont,
+                          fontSize: TYPE.versoBodySize,
+                          fontWeight: TYPE.versoBodyWeight,
+                          color: "#4b5563",
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {pillar.versoText}
+                      </div>
+                      <p
+                        className="shrink-0 pt-2"
+                        style={{
+                          fontFamily: TYPE.versoBottomFont,
+                          fontSize: TYPE.versoBottomSize,
+                          fontWeight: TYPE.versoBottomWeight,
+                          color: "#0b1f33",
+                          letterSpacing: "0.02em",
+                          borderTop: "1px solid rgb(11 31 51 / 0.12)",
+                        }}
+                      >
+                        {pillar.versoBottom}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </ul>
       </div>

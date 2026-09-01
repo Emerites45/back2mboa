@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { HOMECOMING_COPY } from "@/data/homecoming";
 import "./HomecomingSection.css";
 
 export function HomecomingSection() {
-  const { programs, autoplayMs, brand, watchLabel } = HOMECOMING_COPY;
+  const { programs, autoplayMs, watchLabel } = HOMECOMING_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
@@ -99,9 +100,14 @@ export function HomecomingSection() {
       </div>
 
       <div className="homecoming-ui">
-        <p className="homecoming-brand" aria-label={brand}>
-          BACK <span>2</span> MBOA
-        </p>
+        <button
+          type="button"
+          className="homecoming-next"
+          onClick={() => go(index + 1)}
+          aria-label="Programme suivant"
+        >
+          <ArrowUpRight size={20} strokeWidth={2.4} aria-hidden="true" />
+        </button>
 
         <div className="homecoming-footer">
           <div className="homecoming-main">

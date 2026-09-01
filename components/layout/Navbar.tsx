@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -8,12 +9,15 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="bg-white/90 p-1.5 rounded-md flex items-center justify-center">
-            <span className="font-black text-xl tracking-tighter text-black">
-              BACK<span className="text-amber-500">2</span>MBOA
-            </span>
-          </div>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.webp"
+            alt="Back2Mboa"
+            width={120}
+            height={40}
+            className="object-contain"
+            priority
+          />
         </Link>
 
         {/* Navigation Links */}

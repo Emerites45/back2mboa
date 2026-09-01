@@ -1,4 +1,4 @@
-export type BilletPackId = "vision" | "prosperity" | "legacy";
+export type BilletPackId = "early" | "standard" | "vip";
 
 export type BilletPack = {
   id: BilletPackId;
@@ -9,7 +9,7 @@ export type BilletPack = {
   texte: string;
   statut: string;
   dispo: boolean;
-  europe: string;
+  extra: string;
   position: string;
   chips?: string[];
   inclus: string[];
@@ -17,88 +17,90 @@ export type BilletPack = {
   bottom: string;
 };
 
-export const STUB_BG = ["#FFF7CC", "#FDE5E7", "#E0F5F1"] as const;
+export const STUB_BG = ["#EAF5EC", "#E8EEEB", "#FBF3D4"] as const;
 
 export const PACKS: BilletPack[] = [
   {
-    id: "vision",
-    nom: "VISION",
-    complet: "VISION PARTNER",
-    prix: "9 900 000",
-    couleur: "#FFD506",
-    texte: "#9A6B08",
-    statut: "Dernières places",
+    id: "early",
+    nom: "EARLY BIRD",
+    complet: "EARLY BIRD",
+    prix: "49",
+    couleur: "#119D63",
+    texte: "#0D7A4C",
+    statut: "Ouvert",
     dispo: true,
-    europe: "1 personne prise en charge en Europe",
-    position: "Propriétaire d'un secteur prioritaire entier.",
+    extra: "Jusqu'au 30 sept. 2026",
+    position: "Tarif préférentiel — accès complet aux 2 jours.",
+    chips: ["2 jours", "Deal Rooms", "Networking", "500 décideurs"],
     inclus: [
-      "<b>Exclusivité</b> sur 1 des 6 secteurs prioritaires",
-      "<b>Keynote</b> lors de l'atelier sectoriel de votre secteur",
-      "Visibilité dédiée sur l'ensemble du secteur et sa Mairie Championne",
-      "<b>Salon de la Diaspora du 1er au 7 décembre — 1 personne, tous frais payés</b>",
-      "Visites d'entreprises et de ports pendant la semaine européenne",
-      "Rendez-vous d'affaires pré-arrangés en Europe et à Yaoundé",
-      "Logo sur les supports de l'événement et les sites des communes",
+      "<b>Accès complet</b> aux 2 jours (16 & 17 décembre)",
+      "Sessions plénières et <b>ateliers sectoriels</b>",
+      "Networking ouvert avec mairies, diaspora et financeurs",
+      "Deal Rooms en accès libre (selon places)",
+      "Kit participant + <b>badge QR</b> check-in",
+      "Accès plateforme (profil + matching de base)",
+      "Tarif verrouillé — économie vs tarif plein",
     ],
     pourqui: [
-      "Leaders sectoriels qui veulent verrouiller leur secteur",
-      "Groupes cherchant une exposition auprès d'une filière entière",
-      "Partenaires visant le deal-flow d'un secteur complet",
+      "Solutionneurs et entrepreneurs de la diaspora",
+      "Cadres et porteurs de projets qui s'inscrivent tôt",
+      "Toute personne qui veut maximiser le ROI du ticket",
     ],
-    bottom: "Un secteur entier, une keynote, <em>une place en Europe payée</em>.",
+    bottom: "Le même accès que le Standard, <em>à prix réduit</em> si vous réservez avant le 30 septembre.",
   },
   {
-    id: "prosperity",
-    nom: "PROSPERITY",
-    complet: "PROSPERITY PARTNER",
-    prix: "24 900 000",
-    couleur: "#D8212E",
-    texte: "#D8212E",
-    statut: "Disponible",
-    dispo: true,
-    europe: "2 personnes prises en charge en Europe",
-    position: "Sponsor officiel — couverture globale, primeur sur tous les projets.",
-    inclus: [
-      "<b>Primeur sur toutes les opportunités qualifiées</b>, tous secteurs confondus",
-      "Logo sur tous les supports et sur les <b>40 sites de mairies</b>",
-      "<b>Allocution officielle</b> à l'ouverture et stand premium de 9 m²",
-      "Naming du Village Partenaire",
-      "<b>Salon de la Diaspora du 1er au 7 décembre — 2 personnes, tous frais payés</b>",
-      "Base de données complète des participants (opt-in)",
-      "Rapport d'impact personnalisé et suivi des opportunités générées",
-    ],
-    pourqui: [
-      "Banques et institutions financières de premier plan",
-      "Groupes cherchant le statut de sponsor officiel",
-      "Marques visant une association durable au projet",
-    ],
-    bottom: "Tout le pipeline en primeur, <em>deux places en Europe payées</em>.",
-  },
-  {
-    id: "legacy",
-    nom: "LEGACY",
-    complet: "LEGACY PARTNER",
-    prix: "49 900 000",
-    couleur: "#45B3A9",
+    id: "standard",
+    nom: "STANDARD",
+    complet: "STANDARD",
+    prix: "99",
+    couleur: "#0A2B21",
     texte: "#0A2B21",
     statut: "Disponible",
     dispo: true,
-    europe: "3 personnes prises en charge en Europe",
-    position: "Fondateur — cofédateur de l'écosystème, accès total.",
+    extra: "Tarif plein",
+    position: "Accès aux sessions, networking et Deal Rooms ouverts.",
+    chips: ["2 jours", "Speed-meeting", "Mayor Calls", "Annuaire"],
     inclus: [
-      "<b>Fondateur de l'écosystème</b> — tous secteurs, tous projets",
-      "<b>Co-locuteur</b> à l'ouverture avec le President de la République",
-      "<b>Naming du Salon de la Diaspora</b> et stand double (18 m²)",
-      "3 personnes prises en charge en Europe (Salon + Rendez-vous)",
-      "Accès privilégié à tous les fondateurs de projets et mairies",
-      "<b>1% de royalty sur toutes les transactions facilitées</b> pendant 5 ans",
-      "Rapport trimestriel d'impact + conseil stratégique personnalisé",
+      "Tout le contenu <b>Early Bird</b>",
+      "Accès <b>prioritaire</b> aux files Deal Rooms",
+      "1 créneau de <b>speed-meeting</b> solutionneur / maire",
+      "Comptes-rendus sectoriels post-événement",
+      "Listing dans l'annuaire participants (optionnel)",
+      "Support check-in prioritaire le matin",
     ],
     pourqui: [
-      "Fondateurs visionnaires souhaitant marquer l'histoire",
-      "Groupes cherchant un partenariat structurel à long terme",
-      "Institutions voulant co-construire l'écosystème agricole camerounais",
+      "Participants qui rejoignent après la fin de l'Early Bird",
+      "Ceux qui veulent un créneau de rencontre qualifié",
+      "Professionnels qui valorisent le suivi post-événement",
     ],
-    bottom: "Leパートenaire fondateur, <em>trois places en Europe payées</em>.",
+    bottom: "L'accès solide : <em>priorité files + 1 speed-meeting</em> inclus.",
+  },
+  {
+    id: "vip",
+    nom: "VIP",
+    complet: "VIP",
+    prix: "199",
+    couleur: "#C9A227",
+    texte: "#8A6E12",
+    statut: "Places limitées",
+    dispo: true,
+    extra: "Accueil 08:00 · Deal Rooms fermés",
+    position: "Accès prioritaire, dîner décideurs et suivi 90 jours.",
+    chips: ["Deal Rooms+", "Dîner", "RDV pré-booké", "Suivi 90 j"],
+    inclus: [
+      "Tout le contenu <b>Standard</b>",
+      "Accès aux <b>Deal Rooms fermés</b> (tables décideurs)",
+      "<b>Dîner décideurs</b> (soirée 16 ou 17 décembre)",
+      "Seat réservé en plénière + accueil dès 08:00",
+      "1 rendez-vous qualifié <b>pré-booké</b> (maire ou financeur)",
+      "Suivi post-événement <b>90 jours</b> (relances matching)",
+      "Badge VIP + canal WhatsApp dédié pendant l'événement",
+    ],
+    pourqui: [
+      "Investisseurs et décideurs qui maximisent chaque créneau",
+      "Solutionneurs en phase de closing",
+      "Ceux qui veulent un suivi structuré après Yaoundé",
+    ],
+    bottom: "Le ticket qui ouvre les portes fermées : <em>dîner, RDV pré-booké, suivi 90 j</em>.",
   },
 ];

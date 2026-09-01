@@ -53,7 +53,7 @@ function TicketFace({
         <div className="dyn">
           <div className="eyebrow">{eyebrow}</div>
           <div className="name">{p.nom}</div>
-          <div className="amount">{p.prix}&nbsp;F</div>
+          <div className="amount">{p.prix}&nbsp;€</div>
           <p className="unit">{p.position}</p>
           <div className={`avail ${p.dispo ? "dispo" : "clos"}`}>{p.statut}</div>
         </div>
@@ -83,8 +83,8 @@ function TicketFace({
               <dd>08:30</dd>
             </div>
             <div>
-              <dt>Europe</dt>
-              <dd>{p.europe}</dd>
+              <dt>Info</dt>
+              <dd>{p.extra}</dd>
             </div>
           </dl>
           <Link className="cta" href="/inscription">
@@ -168,7 +168,7 @@ export function BilletsSection({
               >
                 <span className="stub-in">
                   {q.nom}
-                  <span className="price">{q.prix} F</span>
+                  <span className="price">{q.prix} €</span>
                   <span className="state">{q.statut}</span>
                 </span>
               </button>

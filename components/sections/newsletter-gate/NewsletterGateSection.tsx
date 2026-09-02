@@ -28,10 +28,10 @@ import { cn } from "@/lib/utils";
 /** Section — hauteur viewport + espacements header. */
 const SECTION = {
   bg: "#f8f4ec",
-  height: "100dvh",
-  minHeight: "640px",
-  paddingX: "clamp(1.25rem, 4vw, 2rem)",
-  headerPaddingTop: "clamp(2rem, 5vh, 3.5rem)",
+  height: "auto",
+  minHeight: "100svh",
+  paddingX: "clamp(1rem, 4vw, 2rem)",
+  headerPaddingTop: "clamp(1.5rem, 5vh, 3.5rem)",
   headerGap: "0.75rem",
   headerMaxWidth: "36rem",
 } as const;
@@ -50,7 +50,7 @@ const TYPE = {
  * `fadeBottom` : fondu crème sur le sol noir du PNG.
  */
 const GATE = {
-  width: "clamp(40%, 42vmin, 420px)",
+  width: "clamp(72%, 70vmin, 420px)",
   offsetY: "25px",
   fadeBottom: "12%",
 } as const;
@@ -62,8 +62,8 @@ const GATE = {
 const FORM_SLOT = {
   top: "41%",
   bottom: "7%",
-  insetLeft: "21%",
-  insetRight: "21%",
+  insetLeft: "14%",
+  insetRight: "14%",
   gap: "0.45rem",
 } as const;
 
@@ -73,8 +73,8 @@ const FORM_SLOT = {
  */
 const FORM_INSET = {
   padTop: "0",
-  padInline: "40px",
-  padBottom: "40px",
+  padInline: "clamp(12px, 4vw, 40px)",
+  padBottom: "clamp(20px, 4vw, 40px)",
 } as const;
 
 /** Champs — texte noir sur fond crème. */
@@ -365,7 +365,7 @@ export function NewsletterGateSection() {
     <section
       id="newsletter"
       ref={sectionRef}
-      className="flex flex-col overflow-hidden text-black"
+      className="flex flex-col overflow-visible md:overflow-hidden text-black"
       style={{
         ...gateCssVars,
         backgroundColor: SECTION.bg,

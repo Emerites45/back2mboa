@@ -28,13 +28,13 @@ const FLUX = {
   paddingY: "1.85rem",
   borderRadius: "0rem",
   sideColor: "#454905",
-  sideHeight: "30rem",
-  sideWidth: "22rem",
+  sideHeight: "min(30rem, auto)",
+  sideWidth: "min(100%, 22rem)",
   sideArrowWidth: "2.75rem",
   sideArrowColor: "#FFFFFF",
   sideArrowOpacity: 0.7,
   bridgeColor: "#506D0E",
-  bridgeWidth: "22rem",
+  bridgeWidth: "min(100%, 22rem)",
   bridgeHeight: "auto",
   bridgePaddingX: "1.75rem",
   bridgePaddingY: "2.85rem",
@@ -154,17 +154,16 @@ export function LiaisonSection() {
 
         <div className="absolute inset-x-0 top-0 z-10 flex min-h-[min(100dvh,52rem)] items-center justify-center px-[var(--page-gutter)] py-16">
           <div
-            className={`w-full text-center text-brand-cream ${glassClass} [@media(prefers-reduced-transparency:reduce)]:[background-color:color-mix(in_srgb,var(--liaison-card-color)_82%,transparent)]`}
+            className={`w-full px-5 py-8 text-center text-brand-cream sm:px-10 sm:py-12 md:px-16 md:py-14 ${glassClass} [@media(prefers-reduced-transparency:reduce)]:[background-color:color-mix(in_srgb,var(--liaison-card-color)_82%,transparent)]`}
             style={
               {
                 "--liaison-card-color": CARD.color,
                 maxWidth: CARD.maxWidth,
-                padding: `${CARD.paddingY} ${CARD.paddingX}`,
                 borderRadius: CARD.borderRadius,
                 backgroundColor: `color-mix(in srgb, ${CARD.color} ${CARD.opacity * 100}%, transparent)`,
                 backdropFilter: `blur(${CARD.blurPx}px)`,
                 WebkitBackdropFilter: `blur(${CARD.blurPx}px)`,
-                transform: `translate(${CARD.offsetX}, ${CARD.offsetY})`,
+                transform: `translate(${CARD.offsetX}, 0)`,
               } as CSSProperties
             }
           >
@@ -206,14 +205,12 @@ export function LiaisonSection() {
             <FluxSide {...FLUX_SIDES[0]} />
 
             <article
-              className="flex flex-col items-center self-center text-center"
+              className="flex w-full max-w-[min(100%,22rem)] flex-col items-center self-center text-center md:w-[22rem]"
               style={{
                 borderRadius: FLUX.borderRadius,
                 backgroundColor: FLUX.bridgeColor,
                 padding: `${FLUX.bridgePaddingY} ${FLUX.bridgePaddingX}`,
-                width: FLUX.bridgeWidth,
                 height: FLUX.bridgeHeight,
-                maxWidth: "100%",
                 flexShrink: 0,
               }}
             >
@@ -256,9 +253,9 @@ export function LiaisonSection() {
           </div>
         </div>
 
-        {/* Itinéraire double sens — glissé bas : texte ≈ ancienne place du bouton */}
+        {/* Itinéraire — flux document ; offsets desktop, stack mobile */}
         <div
-          className="absolute inset-x-0 z-10 px-[var(--page-gutter)] top-[calc(34%+108.5rem)] md:top-[calc(34%+45rem)]"
+          className="relative z-10 mt-10 px-[var(--page-gutter)] md:absolute md:inset-x-0 md:mt-0 md:top-[calc(34%+45rem)]"
         >
           <div className="mx-auto" style={{ maxWidth: JOURNEY.maxWidth }}>
             <p className="mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95">
@@ -318,14 +315,11 @@ function FluxSide({
 }: (typeof FLUX_SIDES)[number]) {
   return (
     <article
-      className="flex flex-col"
+      className="flex w-full max-w-[min(100%,22rem)] flex-col md:h-[30rem] md:w-[22rem]"
       style={{
         borderRadius: FLUX.borderRadius,
         backgroundColor: FLUX.sideColor,
         padding: `${FLUX.paddingY} ${FLUX.paddingX}`,
-        width: FLUX.sideWidth,
-        height: FLUX.sideHeight,
-        maxWidth: "100%",
         flexShrink: 0,
       }}
     >

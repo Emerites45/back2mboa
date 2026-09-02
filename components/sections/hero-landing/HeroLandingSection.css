@@ -371,26 +371,42 @@
 }
 
 .b2m-hero .dots button {
-  width: 6px;
-  height: 6px;
+  /* Hit area ≥ 44px ; pastille visuelle petite au centre */
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transform: none;
+  transform-origin: center;
+  transition: background-color 0.35s var(--ease);
+}
+
+.b2m-hero .dots button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
   border-radius: 1px;
   background: color-mix(in srgb, var(--canvas) 24%, transparent);
-  cursor: pointer;
-  transform: scaleX(1);
-  transform-origin: left center;
+  transform: translate(-50%, -50%) scaleX(1);
+  transform-origin: center;
   transition:
     background-color 0.35s var(--ease),
     transform 0.35s var(--ease);
 }
 
-.b2m-hero .dots button.on {
+.b2m-hero .dots button.on::after {
   background: var(--jaune);
-  transform: scaleX(2.6);
+  transform: translate(-50%, -50%) scaleX(2.6);
 }
 
-.b2m-hero .dots button:hover {
+.b2m-hero .dots button:hover::after {
   background: color-mix(in srgb, var(--canvas) 55%, transparent);
 }
 

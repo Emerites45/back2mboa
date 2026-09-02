@@ -16,7 +16,7 @@
   overflow: hidden;
   contain: layout paint;
   width: 100%;
-  min-height: 36rem;
+  min-height: 100svh;
   height: 100svh;
   max-height: 100svh;
   margin: 0;
@@ -427,6 +427,8 @@
 @media (max-width: 720px) {
   .passage {
     min-height: 100svh;
+    height: auto;
+    max-height: none;
   }
 
   .passage-title {
@@ -452,6 +454,11 @@
 
   .passage-item-title {
     white-space: normal;
+  }
+
+  .passage-next {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 

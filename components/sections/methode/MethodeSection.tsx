@@ -61,7 +61,8 @@ const TYPE = {
 } as const;
 
 const SECTION = {
-  height: "100dvh",
+  height: "auto",
+  minHeight: "100svh",
   paddingY: "clamp(1.25rem, 3vh, 2.5rem)",
   headerMaxWidth: "40rem",
   headerGap: "0.75rem",
@@ -94,9 +95,10 @@ export function MethodeSection() {
   return (
     <section
       id="methode"
-      className="relative flex flex-col overflow-hidden bg-white px-[var(--page-gutter)]"
+      className="relative flex flex-col overflow-visible md:overflow-hidden bg-white px-[var(--page-gutter)]"
       style={{
         height: SECTION.height,
+        minHeight: SECTION.minHeight,
         paddingTop: SECTION.paddingY,
         paddingBottom: SECTION.paddingY,
       }}
@@ -174,7 +176,7 @@ export function MethodeSection() {
         </div>
 
         <ul
-          className="grid min-h-0 flex-1 list-none grid-cols-3 p-0"
+          className="grid min-h-0 flex-1 list-none grid-cols-1 gap-4 p-0 md:grid-cols-3 md:gap-0"
           style={{
             gap: CARD.gap,
             marginTop: SECTION.cardsMarginTop,

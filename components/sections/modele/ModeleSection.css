@@ -481,8 +481,8 @@
   transition: transform 560ms var(--mod-ease-reveal);
 }
 
-.modele-card:is(:hover, :focus-visible) .modele-photo,
-.modele-card:is(:hover, :focus-visible) .modele-landscape {
+.modele-card:is(:hover, :focus-visible, :focus-within) .modele-photo,
+.modele-card:is(:hover, :focus-visible, :focus-within) .modele-landscape {
   transform: scale(1.07);
 }
 
@@ -505,8 +505,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.14);
@@ -518,7 +518,7 @@
     border-color var(--mod-reveal-out) var(--mod-ease-out);
 }
 
-.modele-card:is(:hover, :focus-visible) .modele-expand {
+.modele-card:is(:hover, :focus-visible, :focus-within) .modele-expand {
   transform: rotate(45deg) scale(1.06);
   border-color: color-mix(in srgb, var(--mod-sector) 55%, white);
   background: color-mix(in srgb, var(--mod-sector) 28%, rgba(255, 255, 255, 0.12));
@@ -540,7 +540,7 @@
   transition: opacity var(--mod-reveal-out) var(--mod-ease-out);
 }
 
-.modele-card:is(:hover, :focus-visible) .modele-card-face {
+.modele-card:is(:hover, :focus-visible, :focus-within) .modele-card-face {
   opacity: 0;
   pointer-events: none;
 }
@@ -572,7 +572,7 @@
   pointer-events: none;
 }
 
-.modele-card:is(:hover, :focus-visible) .modele-card-reveal {
+.modele-card:is(:hover, :focus-visible, :focus-within) .modele-card-reveal {
   opacity: 1;
   visibility: visible;
   backdrop-filter: blur(8px);
@@ -791,7 +791,7 @@
     animation: none !important;
   }
 
-  .modele-card:is(:hover, :focus-visible) .modele-card-face {
+  .modele-card:is(:hover, :focus-visible, :focus-within) .modele-card-face {
     opacity: 0;
   }
 
@@ -800,7 +800,7 @@
     transform: none;
   }
 
-  .modele-card:is(:hover, :focus-visible) .modele-card-reveal {
+  .modele-card:is(:hover, :focus-visible, :focus-within) .modele-card-reveal {
     opacity: 1;
     visibility: visible;
     backdrop-filter: none;
@@ -825,6 +825,12 @@
 @media (max-width: 1024px) {
   .modele-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .modele-grid {
+    grid-template-columns: 1fr;
   }
 }
 

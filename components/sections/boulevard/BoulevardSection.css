@@ -399,8 +399,8 @@
   }
 
   .b2m-blvd .road-zone {
-    grid-template-columns: 1fr 64px 1fr;
-    height: 520px;
+    grid-template-columns: 1fr 52px 1fr;
+    height: min(520px, 70vh);
   }
 
   .b2m-blvd .road-tag {
@@ -413,6 +413,35 @@
   .b2m-blvd .side {
     gap: 6px;
     padding: 0 6px;
+  }
+}
+
+/* Mobile petit : empile les voies pour éviter le squeeze */
+@media (max-width: 480px) {
+  .b2m-blvd .road-zone {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: 0;
+    gap: 0.65rem;
+  }
+
+  .b2m-blvd .road {
+    order: 2;
+    min-height: 3rem;
+  }
+
+  .b2m-blvd .side#left {
+    order: 1;
+  }
+
+  .b2m-blvd .side#right {
+    order: 3;
+  }
+
+  .b2m-blvd .legend {
+    grid-template-columns: 1fr;
+    row-gap: 0.65rem;
   }
 }
 

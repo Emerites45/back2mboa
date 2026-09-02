@@ -830,5 +830,6 @@
   .contraste-cost {
     flex: 0 0 min(78vw, 17rem);
     scroll-snap-align: start;
+    min-height: var(--touch-min, 44px);
   }
 }

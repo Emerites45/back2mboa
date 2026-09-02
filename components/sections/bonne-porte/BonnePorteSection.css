@@ -183,6 +183,7 @@
   font-size: var(--porte-type-tab, 0.76rem);
   font-weight: 600;
   padding: var(--porte-tab-py, 0.45rem) var(--porte-tab-px, 0.85rem);
+  min-height: 44px;
   border-radius: var(--porte-tab-radius, 9999px);
   background: var(--porte-surface);
   color: var(--porte-forest);
@@ -600,7 +601,22 @@
   .porte-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 0.3rem;
-    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.5rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .porte-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .porte-tab {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
+
+  .porte-gain-trigger {
+    min-height: 48px;
   }
 }

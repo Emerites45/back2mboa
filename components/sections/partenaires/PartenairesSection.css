@@ -354,6 +354,11 @@
     max-height: none;
     min-height: 100svh;
     padding: 1rem 0 1.1rem;
+    overflow: visible;
+  }
+
+  .partners-big {
+    white-space: normal;
   }
 
   .partners-map svg {

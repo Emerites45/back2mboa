@@ -13,8 +13,8 @@
   display: grid;
   grid-template-rows: 56px 1fr;
   width: 100%;
-  min-height: 100vh;
-  height: 100vh;
+  min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
   color: var(--pt-text);
   background: linear-gradient(180deg, var(--pt-bg), var(--pt-bg-2));
@@ -545,8 +545,10 @@
 @media (max-width: 1023px) {
   .potentialites {
     height: auto;
-    min-height: 100vh;
+    min-height: 100svh;
     overflow: visible;
+    /* header / tabs / board */
+    grid-template-rows: auto auto minmax(0, 1fr);
   }
 
   .potentialites-tabs {
@@ -558,7 +560,8 @@
 
   .potentialites-tabs button {
     flex: 1;
-    padding: 8px;
+    min-height: 44px;
+    padding: 10px 8px;
     border-radius: 8px;
     border: 1px solid var(--pt-line);
     background: transparent;
@@ -578,7 +581,7 @@
   .potentialites-panel {
     display: none;
     border-right: none;
-    min-height: 70vh;
+    min-height: min(70vh, 32rem);
   }
 
   .potentialites-panel.is-mobile-on {
@@ -586,6 +589,6 @@
   }
 
   .potentialites-map {
-    min-height: 70vh;
+    min-height: min(70vh, 32rem);
   }
 }

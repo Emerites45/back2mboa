@@ -8,7 +8,7 @@ export function TerritorySection() {
     <section
       aria-label="Double flux Paris Guider"
       className="relative w-full overflow-hidden"
-      style={{ height: "100svh", background: "#0A2B21" }}
+      style={{ minHeight: "100svh", height: "auto", background: "#0A2B21" }}
     >
       <div
         className="

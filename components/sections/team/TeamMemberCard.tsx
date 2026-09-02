@@ -35,9 +35,9 @@ const FRONT = {
   /** Taille du rôle — featured. */
   roleSizeFeatured: "clamp(0.75rem, 1.1vw, 0.9rem)",
   /** Taille des pastilles réseaux (teaser) — secondaires. */
-  socialSize: "clamp(1.35rem, 9cqw, 1.75rem)",
+  socialSize: "clamp(2.75rem, 9cqw, 2.75rem)",
   /** Taille des pastilles réseaux — featured. */
-  socialSizeFeatured: "2rem",
+  socialSizeFeatured: "2.75rem",
 } as const;
 
 /** Typo face arrière (carte retournée) — ajuster ici. */

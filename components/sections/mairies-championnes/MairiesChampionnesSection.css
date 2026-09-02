@@ -1052,4 +1052,20 @@
   .champ-pills-track {
     padding-bottom: 0;
   }
+
+  .champ-pill,
+  .champ-arrow {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .champ-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .champ-stage {
+    padding: 20px 16px;
+  }
 }

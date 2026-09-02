@@ -51,7 +51,7 @@ export function MuseeSection() {
         />
         <motion.p
           style={{ y: reduce ? TEXT_Y_SHOWN : y }}
-          className="absolute inset-x-0 bottom-0 z-10 mx-auto mb-[clamp(1.5rem,4vw,3.75rem)] max-w-[64rem] px-[var(--page-gutter,1.25rem)] text-center font-sans text-[clamp(1.2rem,3.8vw,3rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white [text-shadow:0_2px_28px_rgb(0_0_0_/_0.5)]"
+          className="absolute inset-x-0 bottom-0 z-10 mx-auto mb-[clamp(0.85rem,3vw,3.75rem)] max-w-[64rem] px-[var(--page-gutter,1.25rem)] text-center font-sans text-[clamp(0.95rem,3.2vw,3rem)] font-bold leading-[1.25] tracking-[-0.02em] text-pretty text-white [text-shadow:0_2px_28px_rgb(0_0_0_/_0.5)]"
         >
           {toTitleCaseFr(MUSEE_COPY)}
         </motion.p>

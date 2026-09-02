@@ -54,44 +54,66 @@
 
 .bat-snap-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
-  gap: clamp(1.75rem, 4vw, 3.5rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: clamp(1.75rem, 4vw, 3.25rem);
+  /* Même hauteur que la carte chiffres */
+  align-items: stretch;
+}
+
+.bat-snap-left {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 100%;
+  padding-block: 0.15rem;
 }
 
 .bat-snap-left h2 {
-  margin: 0 0 1rem;
-  max-width: 12ch;
+  margin: 0 0 1.15rem;
+  max-width: 14ch;
   font-family: var(--font-bricolage), system-ui, sans-serif;
   font-weight: 800;
-  font-size: clamp(1.85rem, 3.5vw, 2.55rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-size: clamp(2.05rem, 3.9vw, 2.95rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
   color: var(--bat-forest);
 }
 
-.bat-snap-left p {
-  margin: 0 0 1.5rem;
-  max-width: 36ch;
-  font-size: 1rem;
-  line-height: 1.55;
+.bat-snap-left > p:not(.bat-note) {
+  margin: 0;
+  max-width: 38ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.58;
   color: var(--bat-muted);
+  /* Pousse la note en bas = même hauteur visuelle que la carte */
+  margin-bottom: auto;
+  padding-bottom: 1.5rem;
 }
 
 .bat-note {
   margin: 0 !important;
-  padding-top: 1.15rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--bat-line);
-  font-size: 0.84rem !important;
+  font-size: clamp(0.9rem, 1.1vw, 0.98rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
   color: var(--bat-muted) !important;
 }
 
+/*
+  Cadre KPI — plus large, plus de respiration ;
+  chiffres en display lourd (Material / Google style).
+*/
 .bat-card {
   background: #fff;
-  border: 1px solid var(--bat-line);
-  border-radius: 18px;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
-  box-shadow: 0 16px 40px rgba(10, 43, 33, 0.06);
+  border: 1px solid rgba(10, 43, 33, 0.08);
+  border-radius: 22px;
+  padding: clamp(1.75rem, 3.2vw, 2.55rem) clamp(1.6rem, 3vw, 2.35rem);
+  min-height: clamp(20rem, 32vw, 24rem);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 22px 48px rgba(10, 43, 33, 0.08);
 }
 
 .bat-card-meta {
@@ -99,8 +121,8 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.35rem;
-  font-size: 0.8rem;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: 0.84rem;
   color: var(--bat-muted);
 }
 
@@ -110,59 +132,63 @@
 }
 
 .bat-hero-num {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.45rem;
   font-family: var(--font-bricolage), system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
   color: var(--bat-forest);
 }
 
 .bat-hero-value {
-  font-size: clamp(3.4rem, 7.5vw, 5.2rem);
+  font-size: clamp(5.25rem, 11vw, 8.25rem);
+  font-weight: 900;
 }
 
 .bat-hero-unit {
-  margin-left: 0.4rem;
-  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  margin-left: 0.5rem;
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   vertical-align: super;
 }
 
 .bat-hero-label {
-  margin: 0 0 0.5rem;
-  font-size: 0.95rem;
+  margin: 0 0 0.35rem;
+  max-width: 28ch;
+  font-size: 1.02rem;
+  line-height: 1.4;
   color: var(--bat-muted);
 }
 
 .bat-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1.35rem;
+  gap: clamp(0.85rem, 1.8vw, 1.35rem);
+  margin-top: clamp(1.65rem, 2.8vw, 2.15rem);
+  padding-top: clamp(1.45rem, 2.4vw, 1.85rem);
   border-top: 1px solid var(--bat-line);
 }
 
 .bat-metric b {
   display: block;
   font-family: var(--font-bricolage), system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-weight: 900;
+  font-size: clamp(1.95rem, 3.4vw, 2.75rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
   color: var(--bat-forest);
 }
 
 .bat-metric span {
   display: block;
-  margin-top: 0.35rem;
+  margin-top: 0.45rem;
   font-family: var(--font-ibm-mono), ui-monospace, monospace;
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bat-muted);
+  line-height: 1.35;
 }
 
 /* —— Team —— */

@@ -114,7 +114,7 @@ export function BatisseursSection() {
             <div className="bat-card">
               <div className="bat-card-meta">
                 <span>
-                  <strong>Back2Mboa</strong> — trajectoire consolidée
+                  <strong>Back2Mboa</strong> une trajectoire consolidée
                 </span>
                 <span>{copy.cardMeta}</span>
               </div>

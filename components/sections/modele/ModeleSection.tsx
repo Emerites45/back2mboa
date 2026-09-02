@@ -31,8 +31,8 @@ export function ModeleSection() {
         <header className="modele-header">
           <p className="modele-kicker">{MODELE_COPY.kicker}</p>
           <h2 id="modele-title" className="modele-title">
-            {MODELE_COPY.titleLead}{" "}
-            {MODELE_COPY.titleAccent}
+            <span className="modele-title-lead">{MODELE_COPY.titleLead}</span>
+            <span className="modele-title-accent">{MODELE_COPY.titleAccent}</span>
           </h2>
           <p className="modele-subtitle">{MODELE_COPY.subtitle}</p>
         </header>

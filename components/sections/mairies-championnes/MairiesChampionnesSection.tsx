@@ -206,7 +206,12 @@ export function MairiesChampionnesSection() {
                 ))}
               </ul>
               <div className="champ-story">
-                <strong>{mairie.storyTitle}</strong>
+                <strong>
+                  <span className="champ-story-emoji" aria-hidden="true">
+                    🏆
+                  </span>
+                  {mairie.storyTitle}
+                </strong>
                 <p>{mairie.storyBody}</p>
               </div>
               <div className="champ-ctas">

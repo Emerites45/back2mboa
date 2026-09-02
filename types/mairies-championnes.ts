@@ -29,7 +29,7 @@ export type ChampionMairie = {
   dot: string;
   secteur: string;
   lead: string;
-  stats: [ChampionStat, ChampionStat, ChampionStat];
+  stats: [ChampionStat, ChampionStat, ChampionStat, ChampionStat];
   storyTitle: string;
   storyBody: string;
   visualKicker: string;

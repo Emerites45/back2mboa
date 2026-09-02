@@ -1,0 +1,146 @@
+.prelude-ring-anim {
+  /* Teal référence #236969 — teintes légères / souples / élégantes */
+  --pra-teal: #236969;
+  --pra-teal-rgb: 35, 105, 105;
+  --pra-mist: #eef5f5;
+  --pra-soft: #d8e8e8;
+  --pra-veil: #c5dddd;
+  --pra-yellow: var(--brand-yellow, #fbbf24);
+  --pra-cream: var(--brand-cream, #f9f7f0);
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+
+  /* Glass teal — léger, souple, élégant */
+  background:
+    radial-gradient(
+      90% 80% at 50% 28%,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(var(--pra-teal-rgb), 0.1) 42%,
+      rgba(var(--pra-teal-rgb), 0.2) 100%
+    ),
+    linear-gradient(
+      160deg,
+      var(--pra-mist) 0%,
+      var(--pra-soft) 55%,
+      var(--pra-veil) 100%
+    );
+  backdrop-filter: blur(20px) saturate(1.25);
+  -webkit-backdrop-filter: blur(20px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(var(--pra-teal-rgb), 0.08);
+  isolation: isolate;
+}
+
+.prelude-ring-anim__pulse {
+  position: absolute;
+  inset: -14%;
+  background: radial-gradient(
+    58% 50% at 50% 36%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(var(--pra-teal-rgb), 0.12) 45%,
+    transparent 72%
+  );
+  animation: prelude-ring-breathe 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.prelude-ring-anim__glow {
+  position: absolute;
+  width: 64%;
+  height: 50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(var(--pra-teal-rgb), 0.08) 55%,
+    transparent 75%
+  );
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Filigramme — logo couleur, discret sur verre teal */
+.prelude-ring-anim__mark {
+  position: absolute;
+  width: 58%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  filter: saturate(1.02);
+  transition: opacity 180ms ease;
+}
+
+.prelude-ring-anim__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.prelude-ring-anim__pie {
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  will-change: transform, opacity;
+  z-index: 3;
+}
+
+.prelude-ring-anim__pie svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(35, 105, 105, 0.12));
+}
+
+@keyframes prelude-ring-breathe {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.78;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prelude-ring-anim__pulse {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .prelude-ring-anim__mark {
+    transition: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .prelude-ring-anim {
+    background:
+      radial-gradient(
+        85% 75% at 50% 32%,
+        #f4f9f9 0%,
+        #dceaea 55%,
+        #c8dede 100%
+      );
+  }
+}

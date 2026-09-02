@@ -56,12 +56,12 @@ export function EcosystemeSection() {
           className="max-w-[min(100%,42rem)] text-[clamp(1.25rem,calc(2.6vw+0.85rem),3rem)] leading-[1.08] font-bold tracking-[-0.03em]"
           style={{ fontFamily: TYPE.titleFont }}
         >
-          <span className="block md:whitespace-nowrap">
+          <span className="block whitespace-nowrap">
             {copy.titleBefore}
             {"\u00A0"}
             <span className="text-[#DCB700]">{copy.highlight}</span>
           </span>
-          <span className="block md:whitespace-nowrap">{copy.titleAfter}</span>
+          <span className="block whitespace-nowrap">{copy.titleAfter}</span>
         </h2>
 
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-8">

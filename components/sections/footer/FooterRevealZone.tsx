@@ -11,7 +11,7 @@ const REVEAL = {
   holdMs: 1000,
   revealDuration: 0.5,
   bounceDuration: 0.95,
-  bannerHeight: "min(30vh, 12rem)",
+  bannerHeight: "30vh",
   bannerHeightRatio: 0.3,
   footerScrollTolerance: 12,
 } as const;
@@ -225,9 +225,8 @@ export function FooterRevealZone() {
       const y = e.touches[0]?.clientY ?? touchStartY.current;
       const frameDelta = (touchStartY.current - y) * RUBBER.touchDrag * 0.06;
 
-      if (frameDelta > 0.8) {
-        /* preventDefault seulement quand on tire vraiment le reveal */
-        if (e.cancelable) e.preventDefault();
+      if (frameDelta > 0) {
+        e.preventDefault();
         applyPull(frameDelta);
         touchStartY.current = y;
       }
@@ -257,9 +256,6 @@ export function FooterRevealZone() {
         transition: dragging || open ? "none" : `transform ${releaseEase}`,
       }}
     >
-      <p className="sr-only">
-        En bas de page, tirez vers le haut pour afficher le bandeau.
-      </p>
       <FooterSection />
       <div
         className={cn(

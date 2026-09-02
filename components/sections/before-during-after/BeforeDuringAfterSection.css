@@ -580,17 +580,7 @@
 
   .bda-card {
     min-height: 0;
-    aspect-ratio: 5 / 6;
-  }
-}
-
-@media (max-width: 480px) {
-  .bda-card {
-    aspect-ratio: 3 / 4;
-  }
-
-  .bda-caption {
-    white-space: normal;
+    aspect-ratio: 4 / 5;
   }
 }
 

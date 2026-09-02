@@ -126,7 +126,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 44px;
   padding: 0.62rem 1rem;
   border: 1px solid var(--line);
   border-radius: 999px;

@@ -575,18 +575,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .bat-metrics {
-    grid-template-columns: 1fr;
-  }
-
-  .bat-arrow,
-  .bat-subscribe {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .bat-plane,
   .bat-row,

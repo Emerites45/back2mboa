@@ -279,7 +279,7 @@ export function StoriesSection() {
             containScroll: false,
             startIndex: START_INDEX,
           }}
-          className="relative left-1/2 w-[100vw] max-w-[100vw] -translate-x-1/2 overflow-x-clip"
+          className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2"
         >
           <CarouselContent className="-ml-2 sm:-ml-3 lg:-ml-4 items-center">
             {SLIDES.map((story, i) => {

@@ -123,7 +123,7 @@ export function ImpactSection() {
   return (
     <section
       id="impact"
-      className="relative min-h-[120vh] overflow-x-hidden overflow-y-visible bg-[#0088aa] md:h-[165vh] md:overflow-hidden"
+      className="relative h-[165vh] overflow-hidden bg-[#0088aa]"
       aria-label="Impact"
     >
       <div className="absolute inset-x-0 -top-[4%] bottom-0 z-0">
@@ -200,7 +200,7 @@ export function ImpactSection() {
             {IMPACT.tagline[1]}
           </h2>
           <div
-            className="flex flex-wrap items-center justify-center gap-4 bg-white/25 px-4 py-4 sm:justify-around sm:gap-2 md:px-16"
+            className="flex items-center justify-around bg-white/25 px-6 py-4 md:px-16"
             style={{ backdropFilter: `blur(${BAND.blur})` }}
           >
             {PARTNERS.map((partner, index) => {
@@ -211,7 +211,7 @@ export function ImpactSection() {
                   className={
                     isCenter
                       ? "relative flex items-center justify-center bg-white"
-                      : "relative flex h-8 w-[5.5rem] shrink-0 items-center justify-center sm:w-[7.5rem] md:h-10 md:w-[9rem]"
+                      : "relative flex h-8 w-[7.5rem] items-center justify-center md:h-10 md:w-[9rem]"
                   }
                   style={
                     isCenter

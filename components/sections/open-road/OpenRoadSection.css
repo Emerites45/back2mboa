@@ -14,7 +14,7 @@
   isolation: isolate;
   overflow: hidden;
   width: 100%;
-  min-height: 100svh;
+  min-height: 36rem;
   height: 100svh;
   color: var(--or-ink);
   font-family: var(--or-sans);
@@ -409,8 +409,6 @@
 @media (max-width: 720px) {
   .open-road {
     min-height: 100svh;
-    height: auto;
-    max-height: none;
   }
 
   .open-road-title {
@@ -436,18 +434,6 @@
 
   .open-road-item-title {
     white-space: normal;
-  }
-
-  .open-road-next {
-    min-width: 44px;
-    min-height: 44px;
-  }
-}
-
-@media (max-width: 480px) and (orientation: landscape) {
-  .open-road {
-    min-height: 100svh;
-    height: 100svh;
   }
 }
 

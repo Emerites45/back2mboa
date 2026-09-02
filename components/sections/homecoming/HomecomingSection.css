@@ -14,7 +14,7 @@
   isolation: isolate;
   overflow: hidden;
   width: 100%;
-  min-height: 100svh;
+  min-height: 36rem;
   height: 100svh;
   color: var(--hc-ink);
   font-family: var(--hc-sans);
@@ -410,8 +410,6 @@
 @media (max-width: 720px) {
   .homecoming {
     min-height: 100svh;
-    height: auto;
-    max-height: none;
   }
 
   .homecoming-title {
@@ -437,11 +435,6 @@
 
   .homecoming-item-title {
     white-space: normal;
-  }
-
-  .homecoming-next {
-    min-width: 44px;
-    min-height: 44px;
   }
 }
 

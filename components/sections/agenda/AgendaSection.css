@@ -518,7 +518,6 @@
 
   .agenda-tabs button {
     flex: 0 0 min(78vw, 18rem);
-    min-height: 44px;
   }
 }
 
@@ -529,11 +528,6 @@
     right: 1rem;
   }
 
-  .agenda-nav button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
   .agenda-actions {
     width: 100%;
   }
@@ -541,7 +535,6 @@
   .agenda-btn {
     flex: 1 1 auto;
     justify-content: center;
-    min-height: 44px;
   }
 }
 

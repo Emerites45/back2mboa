@@ -601,21 +601,6 @@
   text-align: center;
 }
 
-@media (min-width: 900px) and (max-height: 720px) {
-  .b2m-billets {
-    height: auto;
-    max-height: none;
-    overflow: visible;
-    padding-block: 1.5rem;
-  }
-
-  .b2m-billets .ticket {
-    height: auto;
-    min-height: min(var(--ticket-h), 70vh);
-    overflow: auto;
-  }
-}
-
 @media (max-width: 899px) {
   .b2m-billets .ticket,
   .b2m-billets .ticket[data-open="0"],
@@ -641,11 +626,11 @@
     width: auto;
     min-width: 0;
     max-width: none;
-    height: auto;
-    min-height: 4.5rem;
-    max-height: none;
+    height: 6.25rem;
+    min-height: 6.25rem;
+    max-height: 6.25rem;
     margin: 0;
-    padding: 12px 6px;
+    padding: 8px 4px;
     border-radius: 0;
     order: 0;
   }

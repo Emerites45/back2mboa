@@ -126,7 +126,7 @@ export function TeamSection() {
         "relative flex w-full flex-col",
         "min-h-dvh overflow-x-hidden",
         "px-4 py-5",
-        "lg:h-dvh lg:overflow-y-auto lg:overflow-x-hidden lg:px-[clamp(1rem,3vw,2.5rem)] lg:py-[clamp(1rem,2.5vh,1.75rem)]",
+        "lg:h-dvh lg:overflow-hidden lg:px-[clamp(1rem,3vw,2.5rem)] lg:py-[clamp(1rem,2.5vh,1.75rem)]",
         "bg-[linear-gradient(165deg,var(--color-dark-green)_0%,#061A14_48%,var(--brand-result)_100%)]",
       )}
       aria-labelledby="team-heading"

@@ -411,42 +411,26 @@
   }
 }
 
-/* Tablet / mobile : scroll horizontal du tableau — on ne masque plus les colonnes (WCAG contenu) */
 @media (max-width: 960px) {
   .pourquoi-layout {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .pourquoi-board {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    padding-bottom: 0.35rem;
-  }
-
-  .pourquoi-rows {
-    min-width: min(100%, 36rem);
   }
 
   .pourquoi-row,
   .pourquoi-row.is-head {
-    grid-template-columns: minmax(9rem, 1.4fr) repeat(3, minmax(4.5rem, 0.7fr));
+    grid-template-columns: 1fr 0.7fr;
     flex: 0 0 auto;
+  }
+
+  .pourquoi-row.is-head .pourquoi-cell.is-score:nth-child(2),
+  .pourquoi-row.is-body .pourquoi-cell.is-score:nth-child(2),
+  .pourquoi-row.is-head .pourquoi-cell.is-score:nth-child(3),
+  .pourquoi-row.is-body .pourquoi-cell.is-score:nth-child(3) {
+    display: none;
   }
 
   .pourquoi-detail {
     min-height: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .pourquoi-inner {
-    padding-inline: var(--page-gutter, 1rem);
-  }
-
-  .pourquoi-rows {
-    min-width: 32rem;
   }
 }
 

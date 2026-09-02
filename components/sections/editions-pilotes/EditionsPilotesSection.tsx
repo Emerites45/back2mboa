@@ -195,8 +195,10 @@ function ColumnCarousel({
                   aria-selected={on}
                   aria-label={`Photo ${i + 1} sur ${total}`}
                   className={cn(
-                    "relative flex h-11 min-w-11 items-center justify-center overflow-hidden rounded-full transition-all duration-200 ease-out",
-                    on ? "w-11 bg-white/25" : "w-11 bg-white/40 hover:bg-white/70",
+                    "relative h-1.5 overflow-hidden rounded-full transition-all duration-200 ease-out",
+                    on
+                      ? "w-7 bg-white/25"
+                      : "w-1.5 bg-white/40 hover:bg-white/70",
                   )}
                   onClick={() => onGoTo(i)}
                 >

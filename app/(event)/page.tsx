@@ -154,10 +154,10 @@ export default function HomePage() {
       {/* ── FOOTER + CTA rôles ─────────────────────────── */}
       <FooterRevealZone />
 
-      <div className="b2m-float-cta">
+      <div className="fixed bottom-12 right-6 z-50">
         <Button
           asChild
-          className="b2m-float-cta__btn bg-amber-400 hover:bg-amber-500 text-black font-extrabold rounded-xl uppercase tracking-wider"
+          className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold shadow-2xl px-6 py-6 rounded-xl uppercase text-xs tracking-wider"
         >
           <Link href="/inscription">S&apos;INSCRIRE →</Link>
         </Button>

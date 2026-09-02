@@ -28,7 +28,7 @@ export const SLIDES_DATA: SlideData[] = [
     description: "Ma commune produit 4.000 tonnes de pommes de terre par an, mais 40% pourrissent sur place, le petit commerce n’arrive pas à absorber ce stock, les agriculteurs ne s’en sortent pas et quelle gâchis pour les recettes communales!",
     extraText: "Back2Mboa\n\nLe connecte à un Bâtisseur-Solutionneur Camerounais qui travaille chez Pringles (industrie de chips de pomme de terre Arizona, USA), qui apporte partenaires, technicité et solutions de micro-industrialisation.\n\nLes investisseurs & PTF, les régulateurs et le PAK, s’embarquent, les chips s’exportent.",
     videoUrl: "/videos/Back2Mboa_Covers_hero.mp4",
-    posterUrl: "/images/canyon-final_225.jpeg",
+    posterUrl: "/images/canyon-final_225.webp",
     stats: {
       stat1: "12",
       label1: "Villages alimentés",
@@ -47,7 +47,7 @@ export const SLIDES_DATA: SlideData[] = [
     description: "Développement d'infrastructures durables pour le développement des collectivités locales.",
     extraText: "Une approche pragmatique pour moderniser l'accès aux services essentiels dans toutes les régions du Cameroun.",
     videoUrl: "/videos/waterfall-final2.mp4",
-    posterUrl: "/images/waterfall-final2_227.jpeg",
+    posterUrl: "/images/waterfall-final2_227.webp",
     stats: {
       stat1: "25",
       label1: "Projets validés",
@@ -66,7 +66,7 @@ export const SLIDES_DATA: SlideData[] = [
     description: "Autonomisation économique et transformation numérique des collectivités décentralisées.",
     extraText: "Mise en œuvre accélérée de projets d'aménagement et d'équipements publics structurants.",
     videoUrl: "/videos/field-tree.mp4",
-    posterUrl: "/images/field-tree_228.jpeg",
+    posterUrl: "/images/field-tree_228.webp",
     stats: {
       stat1: "40",
       label1: "Mairies partenaires",
@@ -85,7 +85,7 @@ export const SLIDES_DATA: SlideData[] = [
     description: "Partenariats public-privé innovants et accompagnement sur-mesure.",
     extraText: "Découvrez nos indicateurs d'impact et participez dès aujourd'hui à la dynamique nationale.",
     videoUrl: "/videos/aurora-final.mp4",
-    posterUrl: "/images/aurora-final_229.jpeg",
+    posterUrl: "/images/aurora-final_229.webp",
     stats: {
       stat1: "100%",
       label1: "Projets traçables",

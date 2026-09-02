@@ -30,37 +30,37 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#histoires",
     slides: [
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-01.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-01.webp",
         alt: "Entrepreneurs diaspora en atelier",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-02.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-02.webp",
         alt: "Session collaborative entrepreneurs",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-03.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-03.webp",
         alt: "Échanges Solutionneurs et partenaires",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-04.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-04.webp",
         alt: "Pitch et co-construction terrain",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-05.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-05.webp",
         alt: "Networking entrepreneurs diaspora",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-06.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-06.webp",
         alt: "Moment d'échange entre entrepreneurs",
         caption: "Solutionneurs",
       },
       {
-        src: "/images/editions-pilotes/solutionneurs/ed-07.jpg",
+        src: "/images/editions-pilotes/solutionneurs/ed-07.webp",
         alt: "Groupe d'entrepreneurs en session",
         caption: "Solutionneurs",
       },
@@ -75,42 +75,42 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#partenaires",
     slides: [
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-01.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-01.webp",
         alt: "Régulateurs et partenaires techniques",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-02.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-02.webp",
         alt: "Présentation institutionnelle",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-03.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-03.webp",
         alt: "Panel PTF et investisseurs",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-04.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-04.webp",
         alt: "Échanges avec les médias",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-05.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-05.webp",
         alt: "Table ronde écosystème",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-06.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-06.webp",
         alt: "Partenaires et financeurs",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-07.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-07.webp",
         alt: "Session plénière institutionnelle",
         caption: "Écosystème",
       },
       {
-        src: "/images/editions-pilotes/ecosysteme/ed-08.jpg",
+        src: "/images/editions-pilotes/ecosysteme/ed-08.webp",
         alt: "Moment média et couverture",
         caption: "Écosystème",
       },
@@ -125,37 +125,37 @@ export const EDITIONS_PILOTES_COLUMNS: EditionColumn[] = [
     href: "#mairies-championnes",
     slides: [
       {
-        src: "/images/editions-pilotes/ctd/ed-01.jpg",
+        src: "/images/editions-pilotes/ctd/ed-01.webp",
         alt: "Maires et collectivités en session",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-02.jpg",
+        src: "/images/editions-pilotes/ctd/ed-02.webp",
         alt: "Échanges entre collectivités territoriales",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-03.jpg",
+        src: "/images/editions-pilotes/ctd/ed-03.webp",
         alt: "Table ronde maires engagés",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-04.jpg",
+        src: "/images/editions-pilotes/ctd/ed-04.webp",
         alt: "Collectivités et besoins du terrain",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-05.jpg",
+        src: "/images/editions-pilotes/ctd/ed-05.webp",
         alt: "Mairies championnes en atelier",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-06.jpg",
+        src: "/images/editions-pilotes/ctd/ed-06.webp",
         alt: "Moment CTD — dialogue territorial",
         caption: "CTD / Maires",
       },
       {
-        src: "/images/editions-pilotes/ctd/ed-07.jpg",
+        src: "/images/editions-pilotes/ctd/ed-07.webp",
         alt: "Élus locaux en collaboration",
         caption: "CTD / Maires",
       },

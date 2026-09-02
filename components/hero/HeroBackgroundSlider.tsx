@@ -178,7 +178,7 @@ export default function HeroBackgroundSlider({ onSlideChange }: HeroBackgroundSl
           }}
         >
           <Image 
-            src="/images/Back2Mboa_Portail_Terre_Cuite.png" 
+            src="/images/Back2Mboa_Portail_Terre_Cuite.webp" 
             alt="Portail Back2Mboa"
             fill
             priority

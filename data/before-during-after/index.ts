@@ -21,7 +21,7 @@ export const BDA_COPY: BdaCopy = {
       tool: "Outil : plateforme de pré-sélection",
       date: "Avant : Octobre ,début décembre",
       caption: "Before , Qualifier & préparer",
-      image: "/images/before-during-after/before.jpg",
+      image: "/images/before-during-after/before.webp",
       imageAlt:
         "Observation terrain en savane — qualifier le territoire avant l’événement",
       aria: "Before — Qualifier et préparer",
@@ -38,7 +38,7 @@ export const BDA_COPY: BdaCopy = {
       tool: "Outil : match-up table , mise en relation",
       date: "Pendant : Du 16 au 17 décembre 2026",
       caption: "During , Connecter & closer",
-      image: "/images/before-during-after/During.jpeg",
+      image: "/images/before-during-after/during.webp",
       imageAlt:
         "Atelier collaboratif — connecter les acteurs pendant Back2Mboa",
       aria: "During — Connecter et closer",
@@ -55,7 +55,7 @@ export const BDA_COPY: BdaCopy = {
       tool: "Outil : plateforme de suivi d’impact",
       date: "Après : 2027 et au-delà",
       caption: "After , Accompagner & mesurer",
-      image: "/images/before-during-after/after.jpg",
+      image: "/images/before-during-after/after.webp",
       imageAlt:
         "Équipe terrain casques et plans — accompagner jusqu’à l’impact",
       aria: "After — Accompagner et mesurer",

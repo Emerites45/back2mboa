@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import { STEPS } from "@/data/steps";
 import { StepCard } from "@/components/parcours/StepCard";

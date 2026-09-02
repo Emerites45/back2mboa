@@ -1,12 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
 import { METHODE_COPY } from "@/data/methode";
 import { cn } from "@/lib/utils";
 

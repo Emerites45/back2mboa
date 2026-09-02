@@ -4,7 +4,6 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useId, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeftRight } from "lucide-react";
 import {
   BONNE_PORTE_BG,
   BONNE_PORTE_COPY,
@@ -141,6 +140,8 @@ function GainList({ gains }: { gains: BonnePorteGain[] }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   useEffect(() => {
+    // Les gains changent avec le profil sélectionné.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpenIndex(0);
   }, [gains]);
 

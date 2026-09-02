@@ -144,12 +144,9 @@ export default function HomePage() {
 
       {/* ── 29. Carousel Articles ──────────────────────── */}
       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
-
+      <ArticlesSection/>
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
-
-
-      <ArticlesSection/>
 
       {/* ── FOOTER + CTA rôles ─────────────────────────── */}
       <FooterRevealZone />

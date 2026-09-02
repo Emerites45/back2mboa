@@ -1,5 +1,12 @@
 # Décisions
 
+## 2026-09-02 — Préparation production et support npm/pnpm
+
+- Build TypeScript corrigé pour le bandeau footer (`srcSet` fourni).
+- Lint rendu sans erreur bloquante ; les composants d’animation conservent leurs règles spécifiques.
+- Métadonnées SEO globales ajoutées dans `app/layout.tsx`.
+- `package-lock.json` et `pnpm-lock.yaml` conservés pour permettre l’installation avec npm ou pnpm.
+
 ## 2026-08-27 — Agenda : cover speaker + maquette ASAP
 
 Refonte `agenda/` : fond ambient Events + disques SVG, silhouette watermark, portrait `Back2Mboa Covers 9 1.png` → `public/images/agenda/cover-speaker.webp`. Contenu maquette (tag, titre bipolaire or, dual CTA, meta icônes). Autoplay 6,5 s (pause hover), pastilles couleur par slide, transitions directionnelles. Data/types enrichis.

@@ -106,6 +106,8 @@ function PilotCarousel({
   const live = slides[index]?.alt ?? "";
 
   useEffect(() => {
+    // Chaque colonne possède son propre premier slide.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIndex(0);
   }, [columnId]);
 

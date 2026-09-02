@@ -55,8 +55,8 @@ export function CapMethodSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 text-xs md:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed opacity-90"
         >
-          Back2Mboa n'est pas un catalogue de projets. C'est un filtre : chaque
-          opportunité doit franchir trois points de contrôle avant d'atteindre
+          Back2Mboa n&apos;est pas un catalogue de projets. C&apos;est un filtre : chaque
+          opportunité doit franchir trois points de contrôle avant d&apos;atteindre
           un décideur, un régulateur ou un financeur.
         </motion.p>
 

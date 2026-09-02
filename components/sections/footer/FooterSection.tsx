@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, type CSSProperties, type FormEvent } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useId } from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
 import { SLIDES_DATA, SlideData } from "@/data/slides";
 
@@ -132,10 +130,10 @@ export function HeroSection() {
           </p>
         </div>
 
-        <div className="pointer-events-none relative mt-2 mb-4 flex w-full flex-1 flex-col justify-start lg:mt-3 lg:mb-6">
-          <div className="grid w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+        <div className="pointer-events-none relative mt-2 mb-0 flex w-full flex-1 flex-col justify-start lg:mt-3 lg:mb-0">
+          <div className="grid h-full w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
             {/* COLONNE GAUCHE — Mairie (remontée au niveau du portail) */}
-            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:mr-auto lg:min-h-[20rem] lg:-translate-y-6 xl:-translate-y-8">
+            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:mr-auto lg:min-h-[20rem]">
               <div className="space-y-3">
                 {locationOrange ? (
                   <h2 className="text-base font-bold uppercase tracking-widest text-orange-400 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] sm:text-lg">
@@ -164,7 +162,7 @@ export function HeroSection() {
             />
 
             {/* COLONNE DROITE — Back2Mboa (remontée au même niveau que Mairie) */}
-            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:ml-auto lg:min-h-[20rem] lg:-translate-y-6 xl:-translate-y-8">
+            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:ml-auto lg:min-h-[20rem]">
               {extraTextContent ? (
                 <div className="space-y-3">
                   {extraTextContent.split("\n\n").map((paragraph: string, idx: number) => {
@@ -272,16 +270,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="fixed bottom-12 right-6 z-50">
-        <Link
-          href="/inscription"
-          className="flex items-center gap-2 rounded-xl bg-orange-400 px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-black shadow-[0_10px_30px_rgba(251,146,60,0.4)] transition-all hover:scale-105 hover:bg-orange-500"
-          style={{ fontFamily: APFEL }}
-        >
-          <span>S&apos;inscrire</span>
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
     </div>
   );
 }

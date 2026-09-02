@@ -53,12 +53,12 @@ export const FOOTER_COPY: FooterCopy = {
   ],
 };
 
-/** Asset logo v1 — actif dans le footer. */
+/** Asset logo monochrome — actif dans le footer. */
 export const FOOTER_LOGO = {
-  src: "/images/back2mboa-logo-footer-200.webp",
+  src: "/images/logo-monochrome.webp",
   width: 200,
   height: 71,
-  srcSet: "/images/back2mboa-logo-footer-200.webp 200w",
+  srcSet: "/images/logo-monochrome.webp 200w",
 } as const;
 
 /**

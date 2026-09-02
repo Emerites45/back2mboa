@@ -22,7 +22,10 @@ export function ContrasteSection() {
   const rootRef = useRef<HTMLElement>(null);
   const costRef = useRef<HTMLDivElement>(null);
   const bumpTimer = useRef<number | null>(null);
-  const [inView, setInView] = useState(false);
+  const [inView, setInView] = useState(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const [activeActor, setActiveActor] = useState<string | null>(null);
   const [bumpId, setBumpId] = useState<string | null>(null);
   const [costOpen, setCostOpen] = useState(false);
@@ -39,11 +42,6 @@ export function ContrasteSection() {
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setInView(true);
-      return;
-    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {

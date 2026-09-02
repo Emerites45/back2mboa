@@ -16,8 +16,6 @@ const ITEMS = [
   "10 Régions",
 ];
 
-const REPEAT = 4;
-
 export function TickerSection() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -33,12 +31,6 @@ export function TickerSection() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
-  const items = Array.from({ length: REPEAT }, (_, i) => (
-    <span key={i} className="px-3">
-      {COPY}
-    </span>
-  ));
 
   return (
     <aside

@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--porte-max-w, 1120px);
+  max-width: min(92%, 1200px);
   margin-inline: auto;
   padding: var(--porte-py, clamp(1rem, 2.2vh, 1.75rem)) var(--porte-px, clamp(1rem, 3.5vw, 1.75rem));
   overflow: hidden;
@@ -281,6 +281,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 .porte-panel-intro h3 {
@@ -518,6 +519,10 @@
     max-height: var(--porte-height, 100svh);
   }
 
+  .porte-inner {
+    max-width: min(92%, 1120px);
+  }
+
   .porte-panel-grid {
     align-items: stretch;
   }
@@ -530,6 +535,23 @@
 
   .porte-gains-col {
     min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--porte-vert) transparent;
+  }
+
+  .porte-gains-col::after {
+    content: "";
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    height: 2rem;
+    background: linear-gradient(to bottom, transparent, var(--porte-surface));
+    pointer-events: none;
+    flex-shrink: 0;
   }
 }
 
@@ -555,14 +577,20 @@
     height: auto;
     max-height: none;
     overflow: visible;
+    min-height: 60svh;
   }
 
   .porte-inner {
     padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 1.5rem);
+    max-width: 100%;
   }
 
   .porte-panel {
     flex: none;
+    max-height: 70svh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--porte-vert) transparent;
   }
 
   .porte-panel-grid {
@@ -570,22 +598,38 @@
     gap: 1.25rem;
   }
 
+  .porte-gains-col {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .porte-gains-col::after {
+    display: none;
+  }
+
   .porte-foot {
     margin-top: 1.5rem;
     font-size: 0.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .porte-foot span {
+    display: block;
   }
 }
 
 @media (max-width: 720px) {
   .porte-flux {
     grid-template-columns: 1fr;
-    text-align: left;
+    gap: 0;
   }
 
   .porte-flux-divider {
     border-inline: none;
     border-block: 1px solid var(--porte-line);
-    padding-block: 0.35rem;
+    padding-block: 0.4rem;
     min-width: 0;
     align-self: stretch;
   }
@@ -593,6 +637,11 @@
   .porte-flux-divider span {
     writing-mode: horizontal-tb;
     transform: none;
+    font-size: 0.68rem;
+  }
+
+  .porte-flux-leg + .porte-flux-leg {
+    margin-top: 0.6rem;
   }
 }
 
@@ -600,7 +649,54 @@
   .porte-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 0.3rem;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+    position: relative;
+  }
+
+  .porte-tab {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .porte-tabs::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    background: linear-gradient(to left, var(--porte-surface), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .b2m-porte {
+    min-height: 50svh;
+  }
+
+  .porte-inner {
+    padding: clamp(1.5rem, 4vw, 2rem) clamp(0.85rem, 3vw, 1.2rem);
+  }
+
+  .porte-title {
+    font-size: 1.3rem;
+  }
+
+  .porte-panel-surface {
+    padding: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .porte-gain-body-inner {
+    padding-left: 1.2rem;
+  }
+
+  .porte-foot {
+    font-size: 0.72rem;
   }
 }

@@ -163,6 +163,7 @@ function GainList({ gains }: { gains: BonnePorteGain[] }) {
             tabIndex={0}
             onMouseEnter={() => setOpenIndex(i)}
             onFocus={() => setOpenIndex(i)}
+            onClick={() => setOpenIndex(open ? -1 : i)}
           >
             <div className="porte-gain-trigger">
               <span className="porte-gain-num" aria-hidden="true">

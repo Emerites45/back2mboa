@@ -33,7 +33,10 @@ import { RessourcesSection } from "@/components/sections/ressources/RessourcesSe
 import {
   BilletsPartenairesSection,
 } from "@/components/sections/billets/BilletsSection";
-import { ArticlesSection } from '@/components/sections/ArticlesSection';
+import { ArticlesSection } from '@/components/sections/articles/ArticlesSection';
+import { LearnMoreSection } from '@/components/sections/articles/LearnMoreSection';
+
+
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
 import { Button } from "@/components/ui/button";
@@ -47,10 +50,10 @@ export default function HomePage() {
     <>
       <SmoothScroll />
 
-      {/* ── 1. Hero ─────────────────────────────────────── */}
+      {/* ── 1. Hero ─────────────────────────────────────── }*/}
       <HeroSection />
 
-      {/* ── 2. Territoires / Paris ↔ Guider ─────────────── */}
+      {/* ── 2. Territoires / Paris ↔ Guider ─────────────── }*/}
       <TerritorySection />
 
       {/* ── 3. Les éditions pilotes ont prouvé le modèle ─ */}
@@ -145,23 +148,22 @@ export default function HomePage() {
       {/* ── 29. Carousel Articles ──────────────────────── */}
       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
 
+       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
+
+
+
+      <LearnMoreSection />
+      <ArticlesSection/>
+
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
 
 
-      <ArticlesSection/>
+      
 
       {/* ── FOOTER + CTA rôles ─────────────────────────── */}
       <FooterRevealZone />
 
-      <div className="fixed bottom-12 right-6 z-50">
-        <Button
-          asChild
-          className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold shadow-2xl px-6 py-6 rounded-xl uppercase text-xs tracking-wider"
-        >
-          <Link href="/inscription">S&apos;INSCRIRE →</Link>
-        </Button>
-      </div>
     </>
   );
 }

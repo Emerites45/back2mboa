@@ -13,7 +13,7 @@
   isolation: isolate;
   position: relative;
   z-index: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   overflow: hidden;
   color: var(--porte-ink);
@@ -25,6 +25,12 @@
 .b2m-porte *::before,
 .b2m-porte *::after {
   box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .b2m-porte {
+    display: flex;
+  }
 }
 
 .porte-bg {

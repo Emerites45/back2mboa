@@ -24,11 +24,11 @@ const TYPE = {
 const CARD = {
   width: "min(63.8rem, 82vw, calc(57vh * 16 / 10))",
   aspectRatio: "16 / 10",
-  padding: "clamp(1rem, 3.1vh, 1.93rem)",
-  quoteSize: "clamp(0.95rem, 2.6vh, 1.7rem)",
-  metaSize: "clamp(0.78rem, 2vh, 1.2rem)",
-  arrowSize: "clamp(1.8rem, 5vh, 3rem)",
-  arrowIcon: "clamp(0.85rem, 2.2vh, 1.4rem)",
+  padding: "clamp(0.75rem, 3.1vh, 1.93rem)",
+  quoteSize: "clamp(0.82rem, 2.2vw + 0.4rem, 1.7rem)",
+  metaSize: "clamp(0.68rem, 1.5vw + 0.3rem, 1.2rem)",
+  arrowSize: "clamp(1.5rem, 5vh, 3rem)",
+  arrowIcon: "clamp(0.7rem, 2.2vh, 1.4rem)",
 } as const;
 
 const STORIES = [
@@ -334,12 +334,12 @@ export function StoriesSection() {
                           style={{ padding: CARD.padding }}
                         >
                           <blockquote
-                            className="max-w-[34ch] leading-snug text-pretty"
+                            className="max-w-[28ch] leading-snug text-pretty sm:max-w-[34ch]"
                             style={{ fontSize: CARD.quoteSize }}
                           >
                             « {story.quote} »
                           </blockquote>
-                          <p className="mt-4 leading-snug" style={{ fontSize: CARD.metaSize }}>
+                          <p className="mt-2 leading-snug sm:mt-4" style={{ fontSize: CARD.metaSize }}>
                             <span className="block font-medium">{story.role}</span>
                             <span className="text-white/75">{story.org}</span>
                           </p>

@@ -35,8 +35,8 @@ import {
 } from "@/components/sections/billets/BilletsSection";
 import { ArticlesSection } from '@/components/sections/ArticlesSection';
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
-import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
-import { Button } from "@/components/ui/button";
+import { FooterSection } from "@/components/sections/footer/FooterSection";
+import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 
 /**
  * Landing — architecture produit (slots 1→30 + pauses + footer).
@@ -148,17 +148,10 @@ export default function HomePage() {
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
 
-      {/* ── FOOTER + CTA rôles ─────────────────────────── */}
-      <FooterRevealZone />
+      {/* ── FOOTER ──────────────────────────── */}
+      <FooterSection />
 
-      <div className="fixed bottom-12 right-6 z-50">
-        <Button
-          asChild
-          className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold shadow-2xl px-6 py-6 rounded-xl uppercase text-xs tracking-wider"
-        >
-          <Link href="/inscription">S&apos;INSCRIRE →</Link>
-        </Button>
-      </div>
+      <ChatbotWidget />
     </>
   );
 }

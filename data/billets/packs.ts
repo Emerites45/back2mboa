@@ -1,12 +1,19 @@
+import { prices } from "@/lib/currency";
+
 export type BilletPackId = "early" | "standard" | "vip";
 
 export type BilletPack = {
   id: BilletPackId;
   nom: string;
   complet: string;
-  prix: string;
+  /** Prix en XAF (base) */
+  prixAffiche: number;
+  /** Couleur principale du ticket */
   couleur: string;
+  /** Couleur du texte sur le ticket (actif) */
   texte: string;
+  /** Couleur du texte sur la bande inactive */
+  texteInactif: string;
   statut: string;
   dispo: boolean;
   extra: string;
@@ -17,16 +24,17 @@ export type BilletPack = {
   bottom: string;
 };
 
-export const STUB_BG = ["#EAF5EC", "#E8EEEB", "#FBF3D4"] as const;
+export const STUB_BG = ["#D1FAE5", "#DBEAFE", "#FEE2E2"] as const;
 
 export const PACKS: BilletPack[] = [
   {
     id: "early",
     nom: "EARLY BIRD",
     complet: "EARLY BIRD",
-    prix: "49",
+    prixAffiche: 32142,
     couleur: "#119D63",
-    texte: "#0D7A4C",
+    texte: "#FFFFFF",
+    texteInactif: "#064E3B",
     statut: "Ouvert",
     dispo: true,
     extra: "Jusqu'au 30 sept. 2026",
@@ -52,9 +60,10 @@ export const PACKS: BilletPack[] = [
     id: "standard",
     nom: "STANDARD",
     complet: "STANDARD",
-    prix: "99",
-    couleur: "#0A2B21",
-    texte: "#0A2B21",
+    prixAffiche: 64940,
+    couleur: "#2E6BE6",
+    texte: "#FFFFFF",
+    texteInactif: "#1E3A8A",
     statut: "Disponible",
     dispo: true,
     extra: "Tarif plein",
@@ -79,9 +88,10 @@ export const PACKS: BilletPack[] = [
     id: "vip",
     nom: "VIP",
     complet: "VIP",
-    prix: "199",
-    couleur: "#C9A227",
-    texte: "#8A6E12",
+    prixAffiche: 130535,
+    couleur: "#AE3C3A",
+    texte: "#FFFFFF",
+    texteInactif: "#7F1D1D",
     statut: "Places limitées",
     dispo: true,
     extra: "Accueil 08:00 · Deal Rooms fermés",
@@ -104,3 +114,8 @@ export const PACKS: BilletPack[] = [
     bottom: "Le ticket qui ouvre les portes fermées : <em>dîner, RDV pré-booké, suivi 90 j</em>.",
   },
 ];
+
+/** Retourne les 3 devises formatées pour un pack */
+export function packPrices(p: BilletPack) {
+  return prices(p.prixAffiche);
+}

@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 const SECTION = {
   bg: "#1a1a1a",
   maxWidth: "72rem",
-  paddingX: "clamp(1.25rem, 4vw, 2rem)",
-  paddingY: "clamp(3rem, 6vw, 5rem)",
+  paddingX: "clamp(1rem, 4vw, 2rem)",
+  paddingY: "clamp(2.5rem, 6vw, 5rem)",
 } as const;
 
 /** Typo — titres colonnes et liens. */
@@ -72,10 +72,10 @@ export function FooterSection() {
       }}
     >
       <div
-        className="mx-auto grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.35fr)_repeat(4,minmax(0,1fr))] lg:gap-8"
+        className="mx-auto grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-[minmax(0,1.35fr)_repeat(4,minmax(0,1fr))] lg:gap-8"
         style={{ maxWidth: SECTION.maxWidth }}
       >
-        <div className="sm:col-span-2 lg:col-span-1">
+        <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="inline-block">
             <Image
               src={FOOTER_LOGO.src}

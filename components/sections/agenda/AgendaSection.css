@@ -500,6 +500,7 @@
   .agenda-stage {
     flex: 1;
     padding: 1.5rem clamp(1.35rem, 5.5vw, 4.75rem) 1.5rem;
+    padding-right: clamp(3rem, 10vw, 4.75rem);
   }
 
   .agenda-copy {
@@ -507,9 +508,9 @@
   }
 
   .agenda-tabs {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: hidden;
   }
 
   .agenda-tabs::-webkit-scrollbar {
@@ -517,15 +518,29 @@
   }
 
   .agenda-tabs button {
-    flex: 0 0 min(78vw, 18rem);
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 0.65rem 0.5rem 0.75rem;
+    scroll-snap-align: start;
   }
 }
 
 @media (max-width: 640px) {
+  .agenda-stage {
+    padding-bottom: 0.5rem;
+  }
+
   .agenda-nav {
     top: auto;
-    bottom: 0.5rem;
-    right: 1rem;
+    bottom: auto;
+    right: clamp(1rem, 3vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .agenda-nav button {
+    width: 2rem;
+    height: 2rem;
   }
 
   .agenda-actions {
@@ -535,6 +550,20 @@
   .agenda-btn {
     flex: 1 1 auto;
     justify-content: center;
+    min-height: 2.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  .agenda-tab-copy strong {
+    font-size: 0.68rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .agenda-tab-copy span {
+    font-size: 0.55rem;
   }
 }
 

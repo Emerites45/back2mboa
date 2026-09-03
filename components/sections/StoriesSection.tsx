@@ -22,13 +22,13 @@ const TYPE = {
 
 /** Taille de la carte active et de son contenu — contraint par la hauteur de viewport. */
 const CARD = {
-  width: "min(63.8rem, 97vw, calc(57vh * 16 / 10))",
+  width: "min(63.8rem, 82vw, calc(57vh * 16 / 10))",
   aspectRatio: "16 / 10",
-  padding: "clamp(1.1rem, 3.1vh, 1.93rem)",
-  quoteSize: "clamp(1.05rem, 2.6vh, 1.7rem)",
-  metaSize: "clamp(0.88rem, 2vh, 1.2rem)",
-  arrowSize: "clamp(2.2rem, 5vh, 3rem)",
-  arrowIcon: "clamp(1rem, 2.2vh, 1.4rem)",
+  padding: "clamp(1rem, 3.1vh, 1.93rem)",
+  quoteSize: "clamp(0.95rem, 2.6vh, 1.7rem)",
+  metaSize: "clamp(0.78rem, 2vh, 1.2rem)",
+  arrowSize: "clamp(1.8rem, 5vh, 3rem)",
+  arrowIcon: "clamp(0.85rem, 2.2vh, 1.4rem)",
 } as const;
 
 const STORIES = [
@@ -250,7 +250,7 @@ export function StoriesSection() {
   return (
     <section
       id="histoires"
-      className="flex h-screen flex-col overflow-hidden bg-brand-paper px-[var(--page-gutter)] py-5 sm:py-8 text-brand-ink"
+      className="flex h-auto min-h-screen flex-col overflow-hidden bg-brand-paper px-[var(--page-gutter)] py-8 sm:py-10 text-brand-ink lg:h-screen"
       aria-label="Histoires"
     >
       <header className="mx-auto max-w-[40rem] text-center">
@@ -261,7 +261,7 @@ export function StoriesSection() {
           Vraies histoires, vrais résultats
         </h2>
         <p
-          className="mx-auto mt-3 max-w-[36rem] text-pretty text-brand-copy"
+          className="mx-auto mt-2 max-w-[36rem] text-pretty text-brand-copy sm:mt-3"
           style={{ fontSize: TYPE.bodySize }}
         >
           Des territoires aux investisseurs, ces voix disent ce que Back2Mboa
@@ -269,7 +269,7 @@ export function StoriesSection() {
         </p>
       </header>
 
-      <div className="mt-4 sm:mt-6 flex min-h-0 flex-1 flex-col justify-center">
+      <div className="mt-3 flex min-h-0 flex-1 flex-col justify-center sm:mt-6">
         <Carousel
           setApi={setApi}
           opts={{
@@ -281,7 +281,7 @@ export function StoriesSection() {
           }}
           className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2"
         >
-          <CarouselContent className="-ml-2 sm:-ml-3 lg:-ml-4 items-center">
+          <CarouselContent className="-ml-2 items-center sm:-ml-3 lg:-ml-4">
             {SLIDES.map((story, i) => {
               const active = i === current
               return (
@@ -313,7 +313,7 @@ export function StoriesSection() {
                         <motion.button
                           type="button"
                           onClick={() => api?.scrollNext()}
-                          className="absolute top-4 right-4 z-10 grid place-items-center rounded-full bg-brand-yellow text-brand-ink"
+                          className="absolute top-3 right-3 z-10 grid place-items-center rounded-full bg-brand-yellow text-brand-ink sm:top-4 sm:right-4"
                           style={{ width: CARD.arrowSize, height: CARD.arrowSize }}
                           aria-label="Histoire suivante"
                           initial="rest"
@@ -351,9 +351,9 @@ export function StoriesSection() {
               )
             })}
           </CarouselContent>
-          <div className="mt-4 sm:mt-6 flex justify-center gap-3">
-            <CarouselPrevious className="static top-auto left-auto size-9 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
-            <CarouselNext className="static top-auto right-auto size-9 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
+          <div className="mt-3 flex justify-center gap-3 sm:mt-6">
+            <CarouselPrevious className="static top-auto left-auto size-8 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
+            <CarouselNext className="static top-auto right-auto size-8 sm:size-10 translate-y-0 rounded-full border-0 bg-brand-ink text-brand-yellow hover:bg-brand-ink hover:text-brand-yellow" />
           </div>
         </Carousel>
       </div>

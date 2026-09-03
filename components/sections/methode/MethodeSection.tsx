@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { METHODE_COPY } from "@/data/methode";
@@ -84,13 +86,62 @@ const CARD = {
 
 export function MethodeSection() {
   const { eyebrow, watermark, title, lead, pillars } = METHODE_COPY;
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+  const [demoFlip, setDemoFlip] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const demoRan = useRef(false);
+
+  const toggleFlip = useCallback((index: number) => {
+    setFlippedCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  }, []);
+
+  /* Demo flip : retourne la 1ère carte 2s après apparition, puis la retourne après 3s — une seule fois */
+  useEffect(() => {
+    if (demoRan.current) return;
+    const el = sectionRef.current;
+    if (!el) return;
+
+    let flipTimer: ReturnType<typeof setTimeout>;
+    let unflipTimer: ReturnType<typeof setTimeout>;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting && !demoRan.current) {
+          demoRan.current = true;
+          flipTimer = setTimeout(() => setDemoFlip(true), 2000);
+          unflipTimer = setTimeout(() => setDemoFlip(false), 5000);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      clearTimeout(flipTimer);
+      clearTimeout(unflipTimer);
+    };
+  }, []);
+
+  const isFlipped = useCallback(
+    (index: number) => flippedCards.has(index) || (index === 0 && demoFlip),
+    [flippedCards, demoFlip],
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="methode"
-      className="relative flex flex-col overflow-hidden bg-white px-[var(--page-gutter)]"
+      className="relative flex flex-col overflow-hidden bg-white px-[var(--page-gutter)] max-lg:h-auto max-lg:min-h-dvh lg:h-dvh"
       style={{
-        height: SECTION.height,
         paddingTop: SECTION.paddingY,
         paddingBottom: SECTION.paddingY,
       }}
@@ -113,7 +164,7 @@ export function MethodeSection() {
         {watermark}
       </span>
 
-      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-[1120px] flex-1 flex-col">
+      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-[1120px] flex-col lg:flex-1">
         <div
           className="relative mx-auto flex w-full shrink-0 flex-col text-center"
           style={{
@@ -168,9 +219,8 @@ export function MethodeSection() {
         </div>
 
         <ul
-          className="grid min-h-0 flex-1 list-none grid-cols-3 p-0"
+          className="grid list-none grid-cols-1 gap-4 p-0 lg:min-h-0 lg:flex-1 lg:grid-cols-3 lg:gap-6"
           style={{
-            gap: CARD.gap,
             marginTop: SECTION.cardsMarginTop,
           }}
         >
@@ -179,24 +229,26 @@ export function MethodeSection() {
               key={pillar.id}
               as="li"
               delay={0.2 + index * 0.1}
-              className="h-full min-h-0 min-w-0"
+              className="min-w-0 lg:h-full lg:min-h-0"
             >
               <article
-                className="group relative min-h-0 h-full [perspective:1200px]"
+                className="group relative lg:min-h-0 lg:h-full [perspective:1200px]"
                 tabIndex={0}
+                onClick={() => toggleFlip(index)}
+                onFocus={() => toggleFlip(index)}
               >
                 <div
                   className={cn(
-                    "relative h-full w-full [transform-style:preserve-3d]",
-                    "motion-safe:transition-transform motion-safe:duration-[var(--methode-flip)] motion-safe:ease-[var(--methode-ease)]",
-                    "motion-safe:group-hover:[transform:rotateY(180deg)] motion-safe:group-focus-within:[transform:rotateY(180deg)]",
-                    "group-hover:shadow-[0_22px_44px_rgb(11_31_51/0.14),0_6px_14px_rgb(11_31_51/0.08)]",
+                    "relative w-full [transform-style:preserve-3d]",
+                    "transition-transform duration-[var(--methode-flip)] ease-[var(--methode-ease)]",
+                    "h-[clamp(31rem,145vw,38rem)] lg:h-full",
                   )}
                   style={
                     {
                       borderRadius: CARD.radius,
                       "--methode-flip": `${CARD.flipMs}ms`,
                       "--methode-ease": CARD.ease,
+                      transform: isFlipped(index) ? "rotateY(180deg)" : "rotateY(0deg)",
                     } as CSSProperties
                   }
                 >
@@ -217,11 +269,10 @@ export function MethodeSection() {
                         src={pillar.image}
                         alt={pillar.imageAlt}
                         fill
-                        sizes="(min-width: 640px) 30vw, 90vw"
+                        sizes="(min-width: 1024px) 30vw, 90vw"
                         className="absolute inset-0 size-full object-cover object-center"
                       />
                     </div>
-
                     <div
                       className="flex shrink-0 flex-col"
                       style={{
@@ -273,11 +324,11 @@ export function MethodeSection() {
                       "absolute inset-0 flex flex-col overflow-hidden rounded-[inherit]",
                       "border border-[rgb(11_31_51/0.08)]",
                       "bg-[#e8ebef]",
-                      "p-5",
+                      "p-5 max-lg:overflow-visible",
                       "[backface-visibility:hidden] [transform:rotateY(180deg)]",
                     )}
                   >
-                    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
+                    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden max-lg:overflow-visible">
                       <p
                         className="leading-tight tracking-[-0.01em]"
                         style={{
@@ -301,7 +352,7 @@ export function MethodeSection() {
                         {pillar.versoSubtitle}
                       </p>
                       <div
-                        className="min-h-0 flex-1 overflow-hidden text-pretty whitespace-pre-line"
+                        className="min-h-0 flex-1 overflow-hidden text-pretty whitespace-pre-line max-lg:overflow-visible"
                         style={{
                           fontFamily: TYPE.versoBodyFont,
                           fontSize: TYPE.versoBodySize,

@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 /** Section — hauteur viewport + espacements header. */
 const SECTION = {
   bg: "#f8f4ec",
-  height: "100dvh",
+  height: "auto",
   minHeight: "640px",
   paddingX: "clamp(1.25rem, 4vw, 2rem)",
   headerPaddingTop: "clamp(2rem, 5vh, 3.5rem)",
@@ -50,7 +50,7 @@ const TYPE = {
  * `fadeBottom` : fondu crème sur le sol noir du PNG.
  */
 const GATE = {
-  width: "clamp(40%, 42vmin, 420px)",
+  width: "min(88vw, 420px)",
   offsetY: "25px",
   fadeBottom: "12%",
 } as const;
@@ -73,14 +73,14 @@ const FORM_SLOT = {
  */
 const FORM_INSET = {
   padTop: "0",
-  padInline: "40px",
-  padBottom: "40px",
+  padInline: "clamp(8px, 2.8vw, 40px)",
+  padBottom: "clamp(12px, 2.8vw, 40px)",
 } as const;
 
 /** Champs — texte noir sur fond crème. */
 const FIELD = {
   width: "100%",
-  height: "2.5rem",
+  height: "clamp(2.15rem, 6vw, 2.5rem)",
   fontSize: "0.875rem",
   paddingX: "0.375rem",
   textColor: "#0a0a0a",
@@ -405,8 +405,7 @@ export function NewsletterGateSection() {
 
       <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden">
         <div
-          className="relative w-[var(--nl-gate-w)] max-w-full motion-reduce:transform-none"
-          style={{ transform: "translateY(var(--nl-gate-offset-y))" }}
+          className="relative w-[var(--nl-gate-w)] max-w-full translate-y-[var(--nl-gate-offset-y)] motion-reduce:transform-none max-[480px]:w-full max-[480px]:translate-y-0"
         >
           <Image
             src={NEWSLETTER_GATE_IMAGE.src}
@@ -414,20 +413,20 @@ export function NewsletterGateSection() {
             width={NEWSLETTER_GATE_IMAGE.width}
             height={NEWSLETTER_GATE_IMAGE.height}
             sizes="(max-width: 480px) 88vw, 420px"
-            className="block h-auto w-full select-none"
+            className="block h-auto w-full select-none max-[480px]:hidden"
             priority={false}
             aria-hidden="true"
           />
           {/* Masque le sol noir du PNG — reste crème quel que soit offsetY */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--nl-section-bg)] to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--nl-section-bg)] to-transparent max-[480px]:hidden"
             style={{ height: "var(--nl-gate-fade-bottom)" }}
             aria-hidden="true"
           />
 
           {/* Emprise calée dans le vide de l’arche — pas sur la pierre */}
           <form
-            className="absolute flex flex-col items-center justify-start overflow-hidden"
+            className="absolute flex flex-col items-center justify-start overflow-hidden max-[480px]:static max-[480px]:w-full max-[480px]:overflow-visible max-[480px]:px-4"
             style={{
               top: "var(--nl-form-top)",
               left: "var(--nl-form-left)",

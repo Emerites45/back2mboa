@@ -163,9 +163,9 @@ export default function HomePage() {
 
       
 
-      {/* ── FOOTER + CTA rôles ─────────────────────────── */}
+      {/* ── FOOTER + CTA rôles ─────────────────────────── 
       <FooterRevealZone />
-
+*/}
     </>
   );
 }

@@ -12,7 +12,7 @@ Landing page événement **Back2Mboa** : mise en relation mairies camerounaises,
 - Next.js 16 (App Router), React 19, TypeScript
 - Tailwind CSS 4, shadcn/ui, Framer Motion
 - Polices : Bricolage Grotesque, Inter, IBM Plex Mono, Fraunces (`layout.tsx`)
-- Package manager : **npm** (`package-lock.json`)
+- Package managers : **npm et pnpm** (`package-lock.json` et `pnpm-lock.yaml`), tous deux supportés par les scripts du projet.
 
 ## Architecture (équipe)
 Pas de `src/`. Racine Next.js actuelle :
@@ -48,6 +48,6 @@ Sections HTML Back2Mboa montées dans `app/(event)/page.tsx` (wrappers `.b2m-*`)
 Session figée : **Contraste**, **Potentialités**. Plateforme + Écosystème montés. Écosystème : grille resserrée + orbit CSS 48s (`#digital-twin`).
 
 ## État
-Branche `feat/section_paul_alain` = sync `origin/main` + `origin/feat/section_williams` + travail Paul-Alain.
+Le dépôt conserve les deux lockfiles afin que les membres de l’équipe puissent installer le projet avec leur gestionnaire habituel.
 
 Landing : Hero → Contraste → Pourquoi → Open Road → Mairies → Modèle → Potentialités → Nécessité → Plateforme → Impact → Bonne Porte → Before/During/After → Méthode → Parcours → Résultats → Preuve (logos institutions) → Bâtisseurs → Éditions pilotes → Homecoming → Prélude → Liaison → Musée → Écosystème → Stories → Ticker → Boulevard → Hero landing → Agenda → Partenaires → Ressources → Billets → Billets partenaires. Pas de backend.

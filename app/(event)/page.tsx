@@ -38,8 +38,8 @@ import { LearnMoreSection } from '@/components/sections/articles/LearnMoreSectio
 
 
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
-import { FooterRevealZone } from "@/components/sections/footer/FooterRevealZone";
-import { Button } from "@/components/ui/button";
+import { FooterSection } from "@/components/sections/footer/FooterSection";
+import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 
 /**
  * Landing — architecture produit (slots 1→30 + pauses + footer).
@@ -158,6 +158,8 @@ export default function HomePage() {
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
 
+      {/* ── FOOTER ──────────────────────────── */}
+      <FooterSection />
 
       
 

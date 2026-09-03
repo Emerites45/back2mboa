@@ -62,6 +62,8 @@ export function ChampionStageBackdrop({
   }, []);
 
   useEffect(() => {
+    // Réinitialise l’état de chargement quand la vidéo active change.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setReadyVideo(undefined);
   }, [video]);
 

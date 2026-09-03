@@ -49,46 +49,54 @@ const LOGO = {
 
 const INSTITUTIONS = {
   MINREX: {
-    src: "/images/institutions/minrex.svg",
+    src: "/images/institutions/minrex.webp",
     label: "MINREX — Relations extérieures",
   },
   MINDDEVEL: {
-    src: "/images/institutions/minddevel.svg",
+    src: "/images/institutions/minddevel.webp",
     label: "MINDDEVEL — Développement local",
   },
   APME: {
-    src: "/images/institutions/apme.svg",
+    src: "/images/institutions/apme.webp",
     label: "APME — Promotion des PME",
   },
   FEICOM: {
-    src: "/images/institutions/feicom.svg",
+    src: "/images/institutions/feicom.webp",
     label: "FEICOM — Financement des communes",
   },
   CARPA: {
-    src: "/images/institutions/carpa.svg",
+    src: "/images/institutions/carpa.webp",
     label: "CARPA — Partenariats public-privé",
   },
   CVUC: {
-    src: "/images/institutions/cvuc.svg",
+    src: "/images/institutions/cvuc.webp",
     label: "CVUC — Communes et villes unies",
   },
   GIZ: {
-    src: "/images/institutions/giz.svg",
+    src: "/images/institutions/giz.webp",
     label: "GIZ — Coopération allemande",
     wide: true,
   },
   AFD: {
-    src: "/images/institutions/afd.svg",
+    src: "/images/institutions/afd.webp",
     label: "AFD — Agence française de développement",
     wide: true,
   },
   UE: {
-    src: "/images/institutions/ue.svg",
+    src: "/images/institutions/ue.webp",
     label: "Union européenne",
   },
   CCIMA: {
-    src: "/images/institutions/ccima.svg",
+    src: "/images/institutions/ccima.webp",
     label: "CCIMA — Chambre de commerce",
+  },
+  MEET_AFRICA: {
+    src: "/images/institutions/meetafrica.webp",
+    label: "MEET Africa — Événement",
+  },
+  SOLUTIONNEURS: {
+    src: "/images/institutions/solutionneurs.webp",
+    label: "Solutionneurs — Initiative",
   },
 } as const;
 
@@ -102,6 +110,8 @@ const INST_2022 = [
   "CARPA",
   "CVUC",
   "GIZ",
+  "MEET_AFRICA",
+  "SOLUTIONNEURS",
 ] as const satisfies readonly InstId[];
 
 const INST_2023 = [
@@ -113,6 +123,8 @@ const INST_2023 = [
   "GIZ",
   "APME",
   "CCIMA",
+  "MEET_AFRICA",
+  "SOLUTIONNEURS",
 ] as const satisfies readonly InstId[];
 
 type Cell =

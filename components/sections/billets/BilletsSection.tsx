@@ -3,7 +3,7 @@
 import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { BILLET_QR_PATHS } from "@/data/billets/qr-paths";
-import { PACKS, STUB_BG, type BilletPack } from "@/data/billets/packs";
+import { PACKS, STUB_BG, packPrices, type BilletPack } from "@/data/billets/packs";
 import "./BilletsSection.css";
 
 const DEFAULT_SEL = 0;
@@ -22,12 +22,11 @@ export type BilletsSectionProps = {
 };
 
 function packVars(q: BilletPack): CSSProperties {
-  const darkCta = q.couleur === "#FFD506";
   return {
     "--sel": q.couleur,
     "--selTxt": q.texte,
-    "--ctaTxt": darkCta ? "#0A2B21" : "#fff",
-    "--ctaBg": darkCta ? q.couleur : q.texte,
+    "--ctaTxt": "#fff",
+    "--ctaBg": q.couleur,
   } as CSSProperties;
 }
 
@@ -42,6 +41,7 @@ function TicketFace({
 }) {
   const qr = BILLET_QR_PATHS[p.id];
   const chips = p.chips ?? DEFAULT_CHIPS;
+  const cur = packPrices(p);
   return (
     <div className="face" inert={!open} aria-hidden={!open}>
       <span className="notch tl" />
@@ -53,7 +53,12 @@ function TicketFace({
         <div className="dyn">
           <div className="eyebrow">{eyebrow}</div>
           <div className="name">{p.nom}</div>
-          <div className="amount">{p.prix}&nbsp;€</div>
+          <div className="amount">{cur.xaf}</div>
+          <div className="conv">
+            <span>{cur.eur}</span>
+            <span className="sep">·</span>
+            <span>{cur.usd}</span>
+          </div>
           <p className="unit">{p.position}</p>
           <div className={`avail ${p.dispo ? "dispo" : "clos"}`}>{p.statut}</div>
         </div>
@@ -150,7 +155,7 @@ export function BilletsSection({
         >
           {packs.map((q, i) => {
             const on = i === sel;
-            const darkCta = q.couleur === "#FFD506";
+            const cur = packPrices(q);
             return (
               <button
                 key={q.id}
@@ -160,15 +165,15 @@ export function BilletsSection({
                 className={`stub${q.dispo ? "" : " clos"}${on ? " is-active" : ""}`}
                 style={{
                   background: on ? q.couleur : stubBg[i],
-                  color: on ? (darkCta ? "#0A2B21" : "#fff") : q.texte,
+                  color: on ? q.texte : q.texteInactif,
                   gridRow: "1",
                 }}
-                aria-label={`${q.complet}, ${q.prix} FCFA`}
+                aria-label={`${q.complet}, ${cur.xaf}`}
                 onClick={() => pick(i)}
               >
                 <span className="stub-in">
                   {q.nom}
-                  <span className="price">{q.prix} €</span>
+                  <span className="price">{cur.xaf}</span>
                   <span className="state">{q.statut}</span>
                 </span>
               </button>

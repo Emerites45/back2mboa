@@ -34,7 +34,7 @@ export function maillonsForSector(id: SectorId): string[] {
 
 export const MODELE_COPY: ModeleCopy = {
   kicker: "Le modèle",
-  titleLead: "6 secteurs et",
+  titleLead: "6 secteurs",
   titleAccent: "216 opportunités d'affaires.",
   subtitle:
     "Chaque secteur est décliné en 6 étapes de cycle de vie et 6 maillons de chaîne de valeur. Survolez une carte pour voir les sous-domaines.",

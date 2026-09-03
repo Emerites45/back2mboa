@@ -1,7 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PRELUDE_COPY } from "@/data/prelude";
 import type { PreludeBlock } from "@/types/prelude";
+import { PreludeBrickRing } from "./PreludeBrickRing";
+import { PreludeRingAnimation } from "./PreludeRingAnimation";
 import "./PreludeSection.css";
 
 function Tags({ tags }: { tags: PreludeBlock["tags"] }) {
@@ -54,13 +55,19 @@ function BlockCard({ block }: { block: PreludeBlock }) {
 
 function BlockRow({ block }: { block: PreludeBlock }) {
   const media = block.image ? (
-    <div className="prelude-media">
-      <Image
-        src={block.image}
-        alt={block.imageAlt ?? ""}
-        fill
-        sizes="(max-width: 900px) 100vw, 48vw"
-        className="prelude-media-img"
+    <div className={`prelude-media is-${block.id}`} aria-hidden={false}>
+      {/*
+        Cadre = hauteur de la carte (grid stretch).
+        Photo en calque absolu + background-size: cover → formes intactes.
+      */}
+      <div
+        className="prelude-media-fill"
+        role="img"
+        aria-label={block.imageAlt ?? ""}
+        style={{
+          backgroundImage: `url(${block.image})`,
+          backgroundPosition: block.imageFocus ?? "center top",
+        }}
       />
     </div>
   ) : null;
@@ -98,26 +105,17 @@ export function PreludeSection() {
     >
       <div className="prelude-inner">
         <header className="prelude-head">
-          <div className="prelude-head-copy">
-            <p className="prelude-eyebrow">{copy.eyebrow}</p>
-            <h2 id="prelude-title" className="prelude-title">
-              {copy.title}
-            </h2>
-            <p className="prelude-sub">{copy.subtitle}</p>
-          </div>
-
+          <p className="prelude-eyebrow">{copy.eyebrow}</p>
           <div className="prelude-ring" aria-hidden="true">
-            <span className="prelude-ring-orbit" />
+            <PreludeBrickRing />
             <span className="prelude-ring-thumb">
-              <Image
-                src={copy.ringImage}
-                alt=""
-                width={80}
-                height={80}
-                className="prelude-ring-img"
-              />
+              <PreludeRingAnimation />
             </span>
           </div>
+          <h2 id="prelude-title" className="prelude-title">
+            {copy.title}
+          </h2>
+          <p className="prelude-sub">{copy.subtitle}</p>
         </header>
 
         <div className="prelude-stack">

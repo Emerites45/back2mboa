@@ -5,8 +5,6 @@ export const PRELUDE_COPY: PreludeCopy = {
   title: "Avant Yaoundé : former, capter, signer.",
   subtitle:
     "Masterclass d’octobre pour les mairies, puis mission et salon de la diaspora en décembre ,le premier sens de la flèche : les territoires vont vers la diaspora.",
-  ringImage: "/images/prelude/ring.webp",
-  ringAlt: "Paysage camerounais",
   blocks: [
     {
       id: "salon",
@@ -22,6 +20,8 @@ export const PRELUDE_COPY: PreludeCopy = {
       ],
       image: "/images/prelude/salon.webp",
       imageAlt: "Salon de la Diaspora — networking et engagements",
+      /* Sujet à droite : ancrage haut-droite → crop bas/gauche, pas le visage */
+      imageFocus: "72% 18%",
       layout: "media-left",
       variant: "light",
       tags: [
@@ -46,6 +46,8 @@ export const PRELUDE_COPY: PreludeCopy = {
       ],
       image: "/images/prelude/masterclass.webp",
       imageAlt: "Masterclass mairies et équipes CTD",
+      /* Orateur à droite : ancrage haut-droite */
+      imageFocus: "78% 22%",
       layout: "media-right",
       variant: "light",
       tags: [

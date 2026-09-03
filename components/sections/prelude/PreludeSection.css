@@ -37,27 +37,39 @@
   padding-inline: clamp(1.35rem, 5.5vw, 4.75rem);
 }
 
-/* —— Header —— */
+/* —— Header ——
+   Grille éditoriale : eyebrow + cercle partagent la ligne haute */
 .prelude-head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  align-items: end;
+  grid-template-areas:
+    "eyebrow ring"
+    "title  ring"
+    "sub    ring";
+  column-gap: clamp(1.5rem, 3vw, 2.75rem);
+  row-gap: 0;
+  align-items: start;
   margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
   padding-bottom: clamp(1.5rem, 3vw, 2rem);
   border-bottom: 1px solid var(--pr-line);
 }
 
 .prelude-eyebrow {
+  grid-area: eyebrow;
   margin: 0 0 0.85rem;
+  /* Cap-height calé au sommet du disque teal */
+  padding-top: 0;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--pr-vert);
+  line-height: 1.35;
+  align-self: start;
 }
 
 .prelude-title {
+  grid-area: title;
   margin: 0 0 0.95rem;
   max-width: 20ch;
   font-family: var(--font-bricolage), sans-serif;
@@ -70,45 +82,57 @@
 }
 
 .prelude-sub {
+  grid-area: sub;
   margin: 0;
   max-width: 54ch;
   font-size: clamp(0.95rem, 1.15vw, 1.05rem);
   line-height: 1.6;
   color: var(--pr-muted);
   text-wrap: pretty;
+  padding-bottom: 0.15rem;
 }
 
 .prelude-ring {
+  grid-area: ring;
   position: relative;
-  width: 6.75rem;
-  height: 6.75rem;
+  width: 8.35rem;
+  height: 8.35rem;
   flex-shrink: 0;
-  margin-bottom: 0.15rem;
+  margin: -1.15rem 0 0;
+  align-self: start;
+  justify-self: end;
+  background: transparent;
+  /* Ombre portée circulaire (pas de filtre SVG = pas de carré) */
+  filter: drop-shadow(0 8px 18px rgba(40, 14, 8, 0.14));
 }
 
 .prelude-ring-orbit {
+  display: none;
+}
+
+.prelude-ring-brick {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(10, 43, 33, 0.12);
-  box-shadow: 0 12px 32px rgba(10, 43, 33, 0.07);
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .prelude-ring-thumb {
   position: absolute;
-  inset: 50% auto auto 50%;
-  width: 4.15rem;
-  height: 4.15rem;
+  inset: 10.5%;
   border-radius: 50%;
   overflow: hidden;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 8px 22px rgba(10, 43, 33, 0.14);
-}
-
-.prelude-ring-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background: transparent;
+  border: none;
+  z-index: 2;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+    inset 0 6px 14px rgba(35, 105, 105, 0.04);
 }
 
 /* —— Rows —— */
@@ -122,6 +146,7 @@
   display: grid;
   grid-template-columns: 1.12fr 0.88fr;
   gap: clamp(1.1rem, 2vw, 1.5rem);
+  /* Les 2 colonnes partagent TOUJOURS la hauteur du contenu texte */
   align-items: stretch;
   width: 100%;
 }
@@ -131,17 +156,20 @@
 }
 
 /*
-  Média = même hauteur que la carte (stretch).
-  object-fit: fill → image entière étalée bord à bord, sans crop.
+  Stratégie UX (cadre haut + photo paysage) :
+  1. Le cadre (.prelude-media) s’étire à la hauteur exacte de la carte texte.
+  2. On ne réduit jamais le cadre pour « sauver » l’image.
+  3. Un calque absolu remplit le cadre ; background-size: cover conserve le ratio.
+  4. background-position (imageFocus) ancre le sujet — le bas peut être croppé.
 */
 .prelude-media {
   position: relative;
+  align-self: stretch;
   width: 100%;
-  height: 100%;
   min-height: clamp(17.5rem, 28vh, 22rem);
   border-radius: var(--pr-radius);
   overflow: hidden;
-  background: #0a2b21;
+  background-color: #0a2b21;
   box-shadow: 0 1px 0 rgba(10, 43, 33, 0.04);
   isolation: isolate;
 }
@@ -150,15 +178,20 @@
   min-height: clamp(26rem, 42vh, 34rem);
 }
 
-.prelude-media::after {
-  display: none;
-}
-
-.prelude-media-img {
-  object-fit: fill;
-  object-position: center;
+.prelude-media-fill {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  background-color: #0a2b21;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* défaut : ancre haut → crop prioritaire en bas (demande boss) */
+  background-position: center top;
+}
+
+.prelude-media::after {
+  display: none;
 }
 
 .prelude-card {
@@ -379,7 +412,10 @@
 @media (max-width: 900px) {
   .prelude-head {
     grid-template-columns: 1fr;
-    align-items: start;
+    grid-template-areas:
+      "eyebrow"
+      "title"
+      "sub";
   }
 
   .prelude-ring {
@@ -397,14 +433,15 @@
     min-height: 0;
   }
 
+  /* Empilé : cadre large, hauteur lisible — cover + même focal */
   .prelude-media {
-    aspect-ratio: 16 / 9;
-    height: auto;
-    min-height: 0;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    min-height: clamp(14rem, 42vw, 20rem);
   }
 
-  .prelude-media-img {
-    object-fit: fill;
+  .prelude-media-fill {
+    background-size: cover;
   }
 
   .prelude-card-body {

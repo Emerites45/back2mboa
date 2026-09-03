@@ -5,7 +5,7 @@ export const BATISSEURS_COPY: BatisseursCopy = {
   snapBody:
     "Back2Mboa n’est pas une idée sur papier. C’est une équipe avec 15 ans de terrain, et deux éditions pilotes déjà mesurées.",
   snapNote: "Preuve 2022–2023 : MEET Administrations & MEET Écosystème",
-  cardKicker: "Back2Mboa — trajectoire consolidée",
+  cardKicker: "Back2Mboa une trajectoire consolidée",
   cardMeta: "indicateurs clés",
   heroValue: "5",
   heroUnit: "Md FCFA",

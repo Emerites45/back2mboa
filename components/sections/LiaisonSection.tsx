@@ -99,7 +99,7 @@ const FLUX_BRIDGE = [
   "Marchés",
 ] as const;
 
-/** Itinéraire double sens — placé juste sous l’Autoroute */
+/** Itinéraire double sens — placé sous l’Autoroute, ancré bas (feuille / croix) */
 const JOURNEY = {
   maxWidth: "78rem",
   lead:
@@ -256,27 +256,21 @@ export function LiaisonSection() {
           </div>
         </div>
 
-        {/* Itinéraire double sens — juste sous l’Autoroute */}
+        {/* Itinéraire double sens — glissé bas : texte ≈ ancienne place du bouton */}
         <div
-          className="absolute inset-x-0 z-10 px-[var(--page-gutter)] top-[calc(34%+96rem)] md:top-[calc(34%+32.5rem)]"
+          className="absolute inset-x-0 z-10 px-[var(--page-gutter)] top-[calc(34%+108.5rem)] md:top-[calc(34%+45rem)]"
         >
-          <div
-            className="mx-auto"
-            style={{ maxWidth: JOURNEY.maxWidth }}
-          >
-            <p
-              className={`mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95`}
-            >
+          <div className="mx-auto" style={{ maxWidth: JOURNEY.maxWidth }}>
+            <p className="mx-auto max-w-[46rem] text-center text-pretty text-[clamp(0.98rem,1.35vw,1.12rem)] font-medium leading-[1.55] tracking-[-0.01em] text-[#FFF1DA]/95">
               {JOURNEY.lead}
             </p>
 
-            <div className="mt-7 grid grid-cols-1 items-stretch gap-6 md:mt-8 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-10 md:gap-y-6 lg:gap-x-14">
+            {/* Breathing room sous le lead ; bouton centré entre les cartes */}
+            <div className="mt-10 grid grid-cols-1 items-stretch gap-6 md:mt-12 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-10 md:gap-y-6 lg:gap-x-14">
               <JourneyLeg leg={JOURNEY.legs[0]} />
 
               <div className="flex items-center justify-center self-center px-1 py-1 md:px-2 md:py-2">
-                <p
-                  className={`rounded-full border border-white/20 bg-[#506D0E]/90 px-5 py-2.5 text-center text-[0.78rem] font-semibold tracking-[0.04em] text-white shadow-[0_10px_28px_rgba(10,43,33,0.25)]`}
-                >
+                <p className="rounded-full border border-white/20 bg-[#506D0E]/90 px-5 py-2.5 text-center text-[0.78rem] font-semibold tracking-[0.04em] text-white shadow-[0_10px_28px_rgba(10,43,33,0.25)]">
                   {JOURNEY.bridge}
                 </p>
               </div>

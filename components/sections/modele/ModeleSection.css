@@ -378,13 +378,28 @@
 }
 
 .modele-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12em;
   margin: 0 0 16px;
   font-family: var(--mod-serif);
   font-size: clamp(32px, 4.2vw, 48px);
   font-weight: 600;
   font-style: italic;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.03em;
+  color: var(--mod-serif-accent);
+}
+
+.modele-title-lead,
+.modele-title-accent {
+  display: block;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.modele-title-accent {
   color: var(--mod-serif-accent);
 }
 

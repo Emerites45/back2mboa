@@ -43,6 +43,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "2 Md", label: "FCFA pipeline transform." },
       { value: "~40 %", label: "pertes post-récolte" },
       { value: "Chaîne", label: "froid · collecte · export" },
+      { value: "Unité", label: "frites · purée · farine" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:
@@ -68,6 +69,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "GovTech", label: "paiement & traçabilité" },
       { value: "Marchés", label: "taxes & permis" },
       { value: "Recettes", label: "mobilisation locale" },
+      { value: "Mobile", label: "collecte conforme" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:
@@ -92,6 +94,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "300 ha", label: "réserve foncière" },
       { value: "N3", label: "axe économique" },
       { value: "Dossier", label: "études & titres" },
+      { value: "FEICOM", label: "MINDCAF · MINDHU" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:
@@ -118,6 +121,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "10 000", label: "visiteurs (déc.)" },
       { value: "× 10", label: "objectif fréquentation" },
       { value: "Côtier", label: "port & patrimoine" },
+      { value: "Accès", label: "hébergement & mobilité" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:
@@ -142,6 +146,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "3", label: "rivières hydro" },
       { value: "Forages", label: "maintenance à relancer" },
       { value: "Mini-réseaux", label: "solaire & gestion" },
+      { value: "MINEE", label: "CAMWATER · ARSEL" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:
@@ -166,6 +171,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
       { value: "Dialyse", label: "centre visé" },
       { value: "Soins", label: "spécialités absentes" },
       { value: "Diaspora", label: "FR · BE · CA" },
+      { value: "Médecins", label: "diagnostic engagé" },
     ],
     storyTitle: "Success story en construction.",
     storyBody:

@@ -1,9 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useId } from "react";
+import Link from "next/link";
+import { User } from "lucide-react";
 import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
 import { SLIDES_DATA, SlideData } from "@/data/slides";
+import { Inter } from "next/font/google";
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 const APFEL =
   "var(--font-apfel-grotezk), 'Apfel Grotezk', system-ui, sans-serif";
 
@@ -41,34 +49,34 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
       style={{ fontFamily: APFEL }}
     >
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.days}
         </div>
-        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           JOURS
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.hours}
         </div>
-        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           HEURES
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.minutes}
         </div>
-        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           MIN
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-bold text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.seconds}
         </div>
-        <div className="mt-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-white/85">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           SEC
         </div>
       </div>
@@ -102,39 +110,61 @@ export function HeroSection() {
       />
 
       <main className="pointer-events-none relative z-20 mx-auto flex min-h-screen w-full max-w-[1800px] flex-col justify-between px-4 pb-0 pt-28 sm:px-6 sm:pt-32 md:px-10 md:pt-36 lg:px-12 xl:px-16">
-        {/* TITRES — flottent dans le ciel, clairance optique au-dessus du portail */}
-        <div className="pointer-events-none mx-auto mb-10 mt-0 w-full max-w-7xl -translate-y-3 px-2 text-center sm:mb-14 sm:-translate-y-5 md:-translate-y-7 lg:-translate-y-9 xl:-translate-y-10">
+        
+        {/* ========== TITRES ========== */}
+        <div className="pointer-events-none mx-auto mb-8 mt-0 w-full max-w-7xl -translate-y-3 px-2 text-center sm:mb-10 sm:-translate-y-5 md:-translate-y-7 lg:-translate-y-9 xl:-translate-y-10">
           <p className="mb-2.5 select-none text-sm font-bold uppercase tracking-[0.28em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:mb-3 sm:text-base md:text-lg">
             {titleTop}
           </p>
+
           <h1 className="mx-auto max-w-[min(100%,22ch)] select-none text-[clamp(1.25rem,4.2vw,3.75rem)] font-bold uppercase leading-[0.95] tracking-[0.04em] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.7)] sm:max-w-none sm:whitespace-nowrap">
             {titleMain}
           </h1>
 
-          <p className="mt-3.5 select-none text-base font-medium tracking-wide sm:mt-4 sm:text-lg md:text-xl">
-            {subtitle.split("").map((char, index) => (
-              <span
-                key={index}
-                className="inline-block bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.22) 45%, rgba(255,255,255,0.08) 100%)`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  textShadow: `0 1px 1px rgba(255,255,255,0.4), 0 0 12px rgba(255,255,255,0.15), 0 2px 8px rgba(0,0,0,0.3)`,
-                  filter: "brightness(1.1)",
-                }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </span>
-            ))}
-          </p>
+          {/* ASAP — lettres liquid glass + overlay (pas de carte) */}
+<p
+  className={`${inter.className} mt-3.5 select-none text-base font-medium tracking-wide sm:mt-4 sm:text-lg md:text-xl`}
+>
+  {subtitle.split("").map((char, index) => (
+    <span
+      key={index}
+      className="relative inline-block"
+      style={{
+        // Overlay de brillance sur la lettre
+        textShadow: `
+          0 0 1px rgba(255,255,255,0.9),
+          0 1px 2px rgba(255,255,255,0.55),
+          0 0 18px rgba(255,255,255,0.35),
+          0 2px 12px rgba(0,0,0,0.45)
+        `,
+      }}
+    >
+      <span
+        className="bg-clip-text text-transparent"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.22) 100%)",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          filter: "brightness(1.25)",
+        }}
+      >
+        {char === " " ? "\u00A0" : char}
+      </span>
+    </span>
+  ))}
+</p>
         </div>
 
-        <div className="pointer-events-none relative mt-2 mb-0 flex w-full flex-1 flex-col justify-start lg:mt-3 lg:mb-0">
-          <div className="grid h-full w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
-            {/* COLONNE GAUCHE — Mairie (remontée au niveau du portail) */}
-            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:mr-auto lg:min-h-[20rem]">
-              <div className="space-y-3">
+        {/* ========== GRILLE : texte haut / cartes bas ========== */}
+        <div className="pointer-events-none relative flex w-full flex-1 flex-col justify-end">
+          <div className="grid w-full grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8">
+            
+            {/* ----- COLONNE GAUCHE ----- */}
+            <div className="pointer-events-auto flex w-full flex-col text-left lg:col-span-3 lg:mr-auto lg:min-h-[24rem] xl:min-h-[26rem]">
+              
+              {/* TEXTE — reste en haut */}
+              <div className="shrink-0 space-y-2.5">
                 {locationOrange ? (
                   <h2 className="text-base font-bold uppercase tracking-widest text-orange-400 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] sm:text-lg">
                     {locationOrange}
@@ -150,21 +180,28 @@ export function HeroSection() {
                 ))}
               </div>
 
-              <div className="relative mt-auto w-full overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+              {/* Espaceur desktop */}
+              <div className="hidden flex-1 lg:block" aria-hidden="true" />
+
+              {/* CARTE COUNTDOWN — collée au bandeau */}
+              <div className="relative mt-4 w-full shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-3.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl sm:p-4 lg:mt-auto">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 <CountdownTimer targetDate="2026-12-16T09:00:00" />
               </div>
             </div>
 
+            {/* ----- CENTRE (portail) ----- */}
             <div
               className="pointer-events-none relative hidden min-h-0 lg:col-span-6 lg:block"
               aria-hidden="true"
             />
 
-            {/* COLONNE DROITE — Back2Mboa (remontée au même niveau que Mairie) */}
-            <div className="pointer-events-auto flex w-full flex-col gap-4 text-left lg:col-span-3 lg:ml-auto lg:min-h-[20rem]">
+            {/* ----- COLONNE DROITE ----- */}
+            <div className="pointer-events-auto flex w-full flex-col text-left lg:col-span-3 lg:ml-auto lg:min-h-[24rem] xl:min-h-[26rem]">
+              
+              {/* TEXTE — reste en haut */}
               {extraTextContent ? (
-                <div className="space-y-3">
+                <div className="shrink-0 space-y-2.5">
                   {extraTextContent.split("\n\n").map((paragraph: string, idx: number) => {
                     const isTitleMarker =
                       paragraph.includes("SIX MOIS PLUS TARD") ||
@@ -185,7 +222,11 @@ export function HeroSection() {
                 </div>
               ) : null}
 
-              <div className="relative mt-auto w-full overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+              {/* Espaceur desktop */}
+              <div className="hidden flex-1 lg:block" aria-hidden="true" />
+
+              {/* CARTE STATS — collée au bandeau */}
+              <div className="relative mt-4 w-full shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-white/[0.05] p-3.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] backdrop-blur-2xl sm:p-4 lg:mt-auto">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 <div className="relative z-10 grid grid-cols-4 divide-x divide-white/15 text-center">
                   <div className="px-1">
@@ -227,7 +268,7 @@ export function HeroSection() {
         </div>
       </main>
 
-      {/* BANDEAU */}
+      {/* ========== BANDEAU ========== */}
       <div className="pointer-events-auto relative z-30 overflow-hidden whitespace-nowrap border-t border-emerald-900/15 bg-[#F5F0E6] py-4 text-[#0a1f18]">
         <style>{`
           @keyframes marquee {
@@ -270,6 +311,22 @@ export function HeroSection() {
         </div>
       </div>
 
+      {/* ========== BOUTON INSCRIPTION (rond + icône) ========== */}
+    {/* ========== BOUTON INSCRIPTION (rond + icône) ========== */}
+<div className="fixed bottom-20 right-5 z-50 sm:bottom-24 sm:right-6">
+  <Link
+    href="/inscription"
+    className="group flex flex-col items-center gap-1.5"
+    style={{ fontFamily: APFEL }}
+  >
+    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-orange-400 text-black shadow-[0_10px_30px_rgba(251,146,60,0.45)] transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500 sm:h-16 sm:w-16">
+      <User className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.25} />
+    </span>
+    <span className="rounded-full bg-black/55 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm sm:text-[11px]">
+      S&apos;inscrire
+    </span>
+  </Link>
+</div>
     </div>
   );
 }

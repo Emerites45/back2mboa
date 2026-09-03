@@ -33,7 +33,10 @@ import { RessourcesSection } from "@/components/sections/ressources/RessourcesSe
 import {
   BilletsPartenairesSection,
 } from "@/components/sections/billets/BilletsSection";
-import { ArticlesSection } from '@/components/sections/ArticlesSection';
+import { ArticlesSection } from '@/components/sections/articles/ArticlesSection';
+import { LearnMoreSection } from '@/components/sections/articles/LearnMoreSection';
+
+
 import { NewsletterGateSection } from "@/components/sections/newsletter-gate/NewsletterGateSection";
 import { FooterSection } from "@/components/sections/footer/FooterSection";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
@@ -47,10 +50,10 @@ export default function HomePage() {
     <>
       <SmoothScroll />
 
-      {/* ── 1. Hero ─────────────────────────────────────── */}
+      {/* ── 1. Hero ─────────────────────────────────────── }*/}
       <HeroSection />
 
-      {/* ── 2. Territoires / Paris ↔ Guider ─────────────── */}
+      {/* ── 2. Territoires / Paris ↔ Guider ─────────────── }*/}
       <TerritorySection />
 
       {/* ── 3. Les éditions pilotes ont prouvé le modèle ─ */}
@@ -144,14 +147,25 @@ export default function HomePage() {
 
       {/* ── 29. Carousel Articles ──────────────────────── */}
       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
+
+       {/* Slot 29 : carousel presse / blog à brancher (Franck). */}
+
+
+
+      <LearnMoreSection />
       <ArticlesSection/>
+
       {/* ── 30. Inscription Newsletter ─────────────────── */}
       <NewsletterGateSection />
 
       {/* ── FOOTER ──────────────────────────── */}
       <FooterSection />
 
-      <ChatbotWidget />
+      
+
+      {/* ── FOOTER + CTA rôles ─────────────────────────── */}
+      <FooterRevealZone />
+
     </>
   );
 }

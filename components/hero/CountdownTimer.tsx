@@ -1,8 +1,15 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import React, { useState, useEffect, useId } from "react";
+import Link from "next/link";
+import { UserPlus } from "lucide-react";
+import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
+import { SLIDES_DATA, SlideData } from "@/data/slides";
 
-export function CountdownTimer({ targetDate }: { targetDate: string }) {
+const APFEL =
+  "var(--font-apfel-grotezk), 'Apfel Grotezk', system-ui, sans-serif";
+
+function CountdownTimer({ targetDate }: { targetDate: string }) {
   const [timeLeft, setTimeLeft] = useState({
     days: 122,
     hours: 15,
@@ -30,36 +37,40 @@ export function CountdownTimer({ targetDate }: { targetDate: string }) {
   }, [targetDate]);
 
   return (
-    <div className="grid grid-cols-4 divide-x divide-white/15 text-center" key={timerId}>
+    <div
+      className="grid grid-cols-4 divide-x divide-white/15 text-center"
+      key={timerId}
+      style={{ fontFamily: APFEL }}
+    >
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.days}
         </div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           JOURS
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.hours}
         </div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           HEURES
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.minutes}
         </div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           MIN
         </div>
       </div>
       <div className="px-1">
-        <div className="text-xl sm:text-2xl font-black text-white drop-shadow">
+        <div className="text-xl font-bold text-white drop-shadow sm:text-2xl">
           {timeLeft.seconds}
         </div>
-        <div className="text-[9px] text-white/80 font-bold uppercase mt-0.5">
+        <div className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-white/85 sm:text-[11px]">
           SEC
         </div>
       </div>

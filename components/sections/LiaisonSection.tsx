@@ -509,12 +509,12 @@ function FluxSide({
         {subtitle}
       </p>
       {/*
-        Grille 2 colonnes : puces + textes sur des verticales fixes.
-        w-max + self-end = bloc collé à droite, contenu toujours LTR.
+        Bloc collé à droite ; chaque ligne en justify-end :
+        puces à gauche du mot, fins de texte alignées à droite.
       */}
       <ul
-        className={`mt-4 grid w-max grid-cols-[0.25rem_max-content] items-center gap-x-2.5 gap-y-1.5 text-left sm:mt-6 sm:gap-y-2 ${
-          end ? "md:ml-auto md:self-end" : "self-start"
+        className={`mt-4 flex w-max flex-col gap-y-1.5 text-right sm:mt-6 sm:gap-y-2 ${
+          end ? "md:ml-auto md:self-end" : "self-start text-left"
         }`}
         style={{
           fontSize: FLUX.listSize,
@@ -523,14 +523,49 @@ function FluxSide({
         }}
       >
         {items.map((item) => (
-          <li key={item} className="contents">
-            <span
-              className="size-1 justify-self-center rounded-full bg-current"
-              aria-hidden="true"
-            />
-            <span className="whitespace-nowrap text-left leading-[1.25]">
-              {item}
-            </span>
+          <li
+            key={item}
+            className={`flex w-full items-center gap-2.5 leading-[1.25] ${
+              end ? "justify-end" : "justify-start"
+            }`}
+          >
+            {end ? (
+              <>
+                <span className="text-right">{item}</span>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 16 16"
+                  className="size-3.5 shrink-0"
+                  fill="none"
+                >
+                  <path
+                    d="M3.2 8.2 6.4 11.4 12.8 4.6"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </>
+            ) : (
+              <>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 16 16"
+                  className="size-3.5 shrink-0"
+                  fill="none"
+                >
+                  <path
+                    d="M3.2 8.2 6.4 11.4 12.8 4.6"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="text-left">{item}</span>
+              </>
+            )}
           </li>
         ))}
       </ul>

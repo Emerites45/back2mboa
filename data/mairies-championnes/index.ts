@@ -165,8 +165,8 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     region: "Nord",
     statut: "Commune urbaine",
     dot: "#D8212E",
-    secteur: "Santé, Social & Bien-être",
-    lead: "Santé territoriale, accès aux services essentiels, assainissement et résilience sociale. Des médecins prêts. Un territoire à choisir.",
+    secteur: "Environnement et santé",
+    lead: "Santé territoriale, environnement, accès aux services essentiels et résilience locale. Des médecins prêts. Un territoire à choisir.",
     stats: [
       { value: "Dialyse", label: "centre visé" },
       { value: "Soins", label: "spécialités absentes" },
@@ -176,7 +176,7 @@ export const CHAMPION_MAIRIES: ChampionMairie[] = [
     storyTitle: "Success story en construction.",
     storyBody:
       "Des médecins camerounais exerçant en France, en Belgique et au Canada, autour d'un centre de dialyse et de diagnostic.",
-    visualKicker: "Santé",
+    visualKicker: "Environnement & santé",
     visualCaption: "Soins de proximité · dialyse & diagnostic",
     theme: "health",
     image: "/images/mairies-championnes/guider-savanna-stage.webp",

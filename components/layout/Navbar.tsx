@@ -17,17 +17,35 @@ const NAV_LINKS = [
   { href: "#agenda", label: "L'Événement" },
 ] as const;
 
+/**
+ * Nav chrome : gutter fixe (--page-gutter).
+ * Pas d’adaptation par section au scroll — un chrome qui “respire”
+ * avec le contenu attire l’œil et casse la confiance (Google / Amazon).
+ */
 export function Navbar() {
   const lenis = useLenis();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 48);
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
+  useLenis(() => {
+    setScrolled(window.scrollY > 48);
+  });
 
   useEffect(() => {
     if (mobileOpen) {
@@ -62,18 +80,22 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300",
+          "fixed top-0 right-0 left-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]",
           scrolled
-            ? "bg-black/80 backdrop-blur-md"
-            : "bg-black/40 backdrop-blur-md",
+            ? "border-white/10 bg-black/78 backdrop-blur-md"
+            : "border-white/5 bg-black/36 backdrop-blur-[10px]",
         )}
       >
-        <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6">
-          {/* Logo */}
+        <div
+          className="mx-auto flex h-20 w-full max-w-[min(100%,92rem)] items-center justify-between"
+          style={{
+            paddingInline: "var(--page-gutter, clamp(1.25rem, 4vw, 3.5rem))",
+          }}
+        >
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center justify-center rounded-lg bg-white px-1 py-1 h-10 sm:h-12"
+            className="flex h-10 items-center justify-center rounded-2xl bg-white px-2 py-1 sm:h-12 sm:rounded-[1.15rem] sm:px-2.5"
           >
             <Image
               src="/images/logo.png"
@@ -85,14 +107,13 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-gray-200">
+          <nav className="hidden items-center gap-5 text-[0.68rem] font-bold tracking-[0.12em] text-gray-200 uppercase lg:flex xl:gap-6">
             {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className="hover:text-amber-400 transition-colors"
+                className="transition-colors duration-300 hover:text-amber-400"
               >
                 {label}
               </Link>
@@ -100,43 +121,41 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* CTA Button */}
             <Button
               asChild
-              className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-[0.65rem] px-4 py-4 rounded-md sm:text-xs sm:px-6 sm:py-5"
+              className="rounded-full bg-[#ff6a00] px-4 py-4 text-[0.65rem] font-extrabold tracking-[0.04em] text-black uppercase transition-[background-color,transform] duration-300 hover:bg-[#ff7a1a] sm:px-6 sm:py-5 sm:text-xs"
             >
-              <Link href="/inscription">S&apos;INSCRIRE →</Link>
+              <Link href="/inscription">
+                S&apos;INSCRIRE <span aria-hidden="true">→</span>
+              </Link>
             </Button>
 
-            {/* Hamburger */}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="flex lg:hidden flex-col justify-center gap-[5px] w-10 h-10 rounded-md bg-white/10 backdrop-blur-sm"
+              className="flex h-10 w-10 flex-col justify-center gap-[5px] rounded-md bg-white/10 backdrop-blur-sm lg:hidden"
               aria-label="Ouvrir le menu"
             >
-              <span className="block h-[2px] w-5 mx-auto rounded bg-white" />
-              <span className="block h-[2px] w-5 mx-auto rounded bg-white" />
-              <span className="block h-[2px] w-5 mx-auto rounded bg-white" />
+              <span className="mx-auto block h-[2px] w-5 rounded bg-white" />
+              <span className="mx-auto block h-[2px] w-5 rounded bg-white" />
+              <span className="mx-auto block h-[2px] w-5 rounded bg-white" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[60] bg-black/95 backdrop-blur-md transition-all duration-300 lg:hidden",
+          "fixed inset-0 z-[60] bg-black/95 backdrop-blur-md transition-opacity duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] lg:hidden",
           mobileOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none",
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0",
         )}
       >
-        {/* Close button */}
         <button
           type="button"
           onClick={() => setMobileOpen(false)}
-          className="absolute top-5 right-5 flex h-11 w-11 items-center justify-center rounded-full bg-white/10"
+          className="absolute top-5 right-[var(--page-gutter,1.25rem)] flex h-11 w-11 items-center justify-center rounded-full bg-white/10"
           aria-label="Fermer le menu"
         >
           <svg
@@ -152,14 +171,13 @@ export function Navbar() {
           </svg>
         </button>
 
-        {/* Nav links */}
         <nav className="flex h-full flex-col items-center justify-center gap-8">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={(e) => handleNavClick(e, href)}
-              className="text-2xl font-bold uppercase tracking-wider text-white/80 transition-colors hover:text-amber-400"
+              className="text-2xl font-bold tracking-wider text-white/80 uppercase transition-colors duration-300 hover:text-amber-400"
             >
               {label}
             </Link>
@@ -167,7 +185,7 @@ export function Navbar() {
 
           <Button
             asChild
-            className="mt-4 bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-sm px-10 py-6 rounded-md"
+            className="mt-4 rounded-full bg-[#ff6a00] px-10 py-6 text-sm font-extrabold text-black uppercase hover:bg-[#ff7a1a]"
           >
             <Link href="/inscription" onClick={() => setMobileOpen(false)}>
               S&apos;INSCRIRE →

@@ -383,7 +383,7 @@ function MobileBonnePorteSection({
             <p className="mt-1.5 text-xs sm:text-sm font-medium leading-relaxed text-[#5a6b60]">
               {panel.lead}
             </p>
-          </div>
+        </div>
 
           {/* Gains */}
           <div className="mt-4">

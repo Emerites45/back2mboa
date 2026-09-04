@@ -95,7 +95,18 @@ export const SECTORS: Sector[] = [
   },
   {
     id: "sante",
-    label: "Santé, social et bien-être",
-    keywords: ["pharmacopée", "pharmacopee", "santé", "sante", "médecine", "medecine"],
+    label: "Environnement et santé",
+    keywords: [
+      "pharmacopée",
+      "pharmacopee",
+      "santé",
+      "sante",
+      "médecine",
+      "medecine",
+      "environnement",
+      "assainissement",
+      "bien-être",
+      "bien etre",
+    ],
   },
 ];

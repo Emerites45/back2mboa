@@ -55,9 +55,14 @@ export function BatisseursSection() {
   const [inView, setInView] = useState(false);
   const [activeProfile, setActiveProfile] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [contactStep, setContactStep] = useState<"message" | "email" | "done">(
+    "message",
+  );
   const [reduce, setReduce] = useState(false);
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const messageInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -86,11 +91,32 @@ export function BatisseursSection() {
     return () => window.clearInterval(id);
   }, [inView, paused, reduce, copy.autoplayMs, copy.profiles.length]);
 
-  const onSubscribe = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubscribed(true);
-  }, [email]);
+  useEffect(() => {
+    if (contactStep !== "email") return;
+    emailInputRef.current?.focus();
+  }, [contactStep]);
+
+  const onContactSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      if (contactStep === "message") {
+        if (!message.trim()) {
+          messageInputRef.current?.focus();
+          return;
+        }
+        setContactStep("email");
+        return;
+      }
+      if (contactStep === "email") {
+        if (!email.trim() || !email.includes("@")) {
+          emailInputRef.current?.focus();
+          return;
+        }
+        setContactStep("done");
+      }
+    },
+    [contactStep, message, email],
+  );
 
   const heroCount = useCountUp(5, inView && !reduce, 900);
 
@@ -265,29 +291,88 @@ export function BatisseursSection() {
               <p>{copy.quote}</p>
             </blockquote>
 
-            <form className="bat-form" onSubmit={onSubscribe}>
-              <label className="sr-only" htmlFor="bat-email">
-                Email
-              </label>
-              <div className="bat-input-wrap">
-                <span className="bat-mail" aria-hidden="true">
-                  ✉
-                </span>
-                <input
-                  id="bat-email"
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  placeholder={copy.emailPlaceholder}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+            {contactStep === "done" ? (
+              <div className="bat-form-success" role="status" aria-live="polite">
+                <p className="bat-form-success-title">{copy.successTitle}</p>
+                <p className="bat-form-success-body">{copy.successBody}</p>
               </div>
-              <button type="submit" className="bat-subscribe">
-                {subscribed ? "Merci ✓" : copy.subscribeLabel}
-              </button>
-            </form>
+            ) : (
+              <form
+                className={`bat-form is-${contactStep}`}
+                onSubmit={onContactSubmit}
+                aria-label="Contacter l'équipe"
+              >
+                {contactStep === "email" ? (
+                  <p className="bat-form-hint" id="bat-email-hint">
+                    {copy.emailStepHint}
+                  </p>
+                ) : null}
+
+                <div className="bat-form-row">
+                  {contactStep === "message" ? (
+                    <>
+                      <label className="sr-only" htmlFor="bat-message">
+                        Votre message à l&apos;équipe
+                      </label>
+                      <div className="bat-input-wrap">
+                        <span className="bat-mail" aria-hidden="true">
+                          ✎
+                        </span>
+                        <input
+                          ref={messageInputRef}
+                          id="bat-message"
+                          type="text"
+                          name="message"
+                          autoComplete="off"
+                          placeholder={copy.messagePlaceholder}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          required
+                          maxLength={500}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <label className="sr-only" htmlFor="bat-email">
+                        Votre e-mail
+                      </label>
+                      <div className="bat-input-wrap">
+                        <span className="bat-mail" aria-hidden="true">
+                          ✉
+                        </span>
+                        <input
+                          ref={emailInputRef}
+                          id="bat-email"
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          placeholder={copy.emailPlaceholder}
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          aria-describedby="bat-email-hint"
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  <button type="submit" className="bat-subscribe">
+                    {copy.sendLabel}
+                  </button>
+                </div>
+
+                {contactStep === "email" ? (
+                  <button
+                    type="button"
+                    className="bat-form-back"
+                    onClick={() => setContactStep("message")}
+                  >
+                    Modifier le message
+                  </button>
+                ) : null}
+              </form>
+            )}
           </div>
         </div>
       </div>

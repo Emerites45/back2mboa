@@ -315,7 +315,7 @@ function MobileBonnePorteSection({
               <p className="mt-1 text-[11px] leading-snug text-emerald-900/90">
                 {copy.fluxLeft.body}
               </p>
-            </div>
+          </div>
 
             <div className="rounded-xl border border-amber-800/15 bg-amber-50/70 p-2.5">
               <span className="text-[11px] font-bold text-amber-950">
@@ -324,7 +324,7 @@ function MobileBonnePorteSection({
               <p className="mt-1 text-[11px] leading-snug text-amber-900/90">
                 {copy.fluxRight.body}
               </p>
-            </div>
+          </div>
           </div>
         </div>
 
@@ -338,12 +338,12 @@ function MobileBonnePorteSection({
             {BONNE_PORTE_PANELS.map((p) => {
               const active = panelId === p.id;
               const Icon = PROFILE_ICONS[p.id];
-              return (
-                <button
+            return (
+              <button
                   key={p.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
+                type="button"
+                role="tab"
+                aria-selected={active}
                   id={`${uid}-mob-tab-${p.id}`}
                   aria-controls={`${uid}-mob-panel`}
                   tabIndex={active ? 0 : -1}
@@ -362,10 +362,10 @@ function MobileBonnePorteSection({
                     )}
                   />
                   <span className="whitespace-nowrap">{p.tabLabel}</span>
-                </button>
-              );
-            })}
-          </div>
+              </button>
+            );
+          })}
+        </div>
         </div>
 
         {/* ── 4. PANNEAU DU PROFIL ACTIF ────────── */}
@@ -391,8 +391,8 @@ function MobileBonnePorteSection({
               {panel.gains.map((gain, i) => {
                 const num = String(i + 1).padStart(2, "0");
                 const isOpen = openGains[i] ?? (i === 0);
-                return (
-                  <div
+          return (
+            <div
                     key={i}
                     className={cn(
                       "rounded-2xl border transition-all overflow-hidden",
@@ -450,8 +450,8 @@ function MobileBonnePorteSection({
                   </div>
                 );
               })}
-            </div>
-          </div>
+                      </div>
+                    </div>
 
           {/* CTA */}
           <Link
@@ -489,8 +489,8 @@ function MobileBonnePorteSection({
             </Link>
           </div>
         </footer>
-      </div>
-    </div>
+                </div>
+              </div>
   );
 }
 
@@ -565,8 +565,8 @@ export function BonnePorteSection() {
                 >
                   {p.tabLabel}
                 </button>
-              );
-            })}
+          );
+        })}
           </div>
 
           <div
@@ -580,20 +580,20 @@ export function BonnePorteSection() {
           </div>
 
           <footer className="porte-foot">
-            <span>
+          <span>
               <strong>{copy.footMission.label}</strong>
               {copy.footMission.text}
-            </span>
-            <span>
+          </span>
+          <span>
               <strong>{copy.footEvent.label}</strong>
               {copy.footEvent.text}
-            </span>
+          </span>
             <Link className="porte-foot-link" href={copy.footProsperityHref}>
               {copy.footProsperity}
             </Link>
           </footer>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
   );
 }

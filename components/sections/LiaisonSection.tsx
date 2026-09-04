@@ -159,13 +159,13 @@ export function LiaisonSection() {
           {/* Dégradé bas pour fondu vers le contenu */}
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1a2a10] to-transparent" />
 
-          {/* Carte titre — au-dessus de l'image */}
+          {/* Carte titre — en tête de l'image */}
           <div
-            className={`absolute inset-x-4 bottom-6 text-center text-brand-cream ${glassClass}`}
+            className={`absolute inset-x-4 top-4 text-center text-brand-cream ${glassClass}`}
             style={
               {
                 "--liaison-card-color": CARD.color,
-                padding: "clamp(1.25rem, 4vw, 2rem) clamp(1rem, 4vw, 1.5rem)",
+                padding: "clamp(1.15rem, 3.5vw, 1.75rem) clamp(1rem, 4vw, 1.5rem)",
                 borderRadius: CARD.borderRadius,
                 backgroundColor: `color-mix(in srgb, ${CARD.color} ${CARD.opacity * 100}%, transparent)`,
                 backdropFilter: `blur(${CARD.blurPx}px)`,
@@ -289,14 +289,14 @@ export function LiaisonSection() {
           className="block h-auto w-full"
         />
 
-        {/* Carte titre */}
-        <div className="absolute inset-x-0 top-0 z-10 flex min-h-[min(100dvh,52rem)] items-center justify-center px-[var(--page-gutter)] py-16">
+        {/* Carte titre — ancrée en tête de section (lecture immédiate) */}
+        <div className="absolute inset-x-0 top-0 z-10 flex justify-center px-[var(--page-gutter)] pt-8 pb-6 lg:pt-10">
           <div
             className={`w-full max-w-[92rem] text-center text-brand-cream ${glassClass} [@media(prefers-reduced-transparency:reduce)]:[background-color:color-mix(in_srgb,var(--liaison-card-color)_82%,transparent)]`}
             style={
               {
                 "--liaison-card-color": CARD.color,
-                padding: "3.5rem 4rem",
+                padding: "clamp(1.75rem, 3vw, 3rem) clamp(1.5rem, 4vw, 4rem)",
                 borderRadius: CARD.borderRadius,
                 backgroundColor: `color-mix(in srgb, ${CARD.color} ${CARD.opacity * 100}%, transparent)`,
                 backdropFilter: `blur(${CARD.blurPx}px)`,
@@ -383,7 +383,7 @@ export function LiaisonSection() {
               </ul>
             </article>
 
-            <FluxSide {...FLUX_SIDES[1]} />
+            <FluxSide {...FLUX_SIDES[1]} align="end" />
           </div>
         </div>
 
@@ -440,17 +440,22 @@ function FluxSide({
   title,
   subtitle,
   items,
-}: (typeof FLUX_SIDES)[number]) {
+  align = "start",
+}: (typeof FLUX_SIDES)[number] & { align?: "start" | "end" }) {
+  const end = align === "end";
+
   return (
     <article
-      className="flex w-full flex-col px-5 py-5 sm:px-7 sm:py-7 md:w-[22rem] md:flex-shrink-0"
+      className={`flex w-full flex-col px-5 py-5 sm:px-7 sm:py-7 md:w-[22rem] md:flex-shrink-0 ${
+        end ? "md:items-end" : "items-start"
+      }`}
       style={{
         borderRadius: "0rem",
         backgroundColor: FLUX.sideColor,
       }}
     >
       <p
-        className="tracking-wide uppercase"
+        className={`tracking-wide uppercase ${end ? "md:text-right" : "text-left"}`}
         style={{
           fontSize: FLUX.labelSize,
           color: FLUX.labelColor,
@@ -461,7 +466,7 @@ function FluxSide({
         {label}
       </p>
       <h3
-        className="mt-2 leading-none sm:mt-3"
+        className={`mt-2 leading-none sm:mt-3 ${end ? "md:text-right" : "text-left"}`}
         style={{
           fontSize: FLUX.titleSize,
           color: FLUX.titleColor,
@@ -470,8 +475,11 @@ function FluxSide({
       >
         {title}
       </h3>
+      {/* Même ordre que FLUX 1 (→ + texte) ; le bloc est collé à droite si end */}
       <p
-        className="mt-2 flex items-center gap-1.5 leading-snug sm:mt-3"
+        className={`mt-2 flex items-center gap-1.5 leading-snug sm:mt-3 ${
+          end ? "md:self-end" : ""
+        }`}
         style={{
           fontSize: FLUX.subtitleSize,
           color: FLUX.subtitleColor,
@@ -500,8 +508,14 @@ function FluxSide({
         </svg>
         {subtitle}
       </p>
+      {/*
+        Grille 2 colonnes : puces + textes sur des verticales fixes.
+        w-max + self-end = bloc collé à droite, contenu toujours LTR.
+      */}
       <ul
-        className="mt-4 flex flex-col gap-1.5 sm:mt-6 sm:gap-2"
+        className={`mt-4 grid w-max grid-cols-[0.25rem_max-content] items-center gap-x-2.5 gap-y-1.5 text-left sm:mt-6 sm:gap-y-2 ${
+          end ? "md:ml-auto md:self-end" : "self-start"
+        }`}
         style={{
           fontSize: FLUX.listSize,
           color: FLUX.listColor,
@@ -509,9 +523,14 @@ function FluxSide({
         }}
       >
         {items.map((item) => (
-          <li key={item} className="flex items-center gap-2.5">
-            <span className="size-1 shrink-0 rounded-full bg-current" />
-            {item}
+          <li key={item} className="contents">
+            <span
+              className="size-1 justify-self-center rounded-full bg-current"
+              aria-hidden="true"
+            />
+            <span className="whitespace-nowrap text-left leading-[1.25]">
+              {item}
+            </span>
           </li>
         ))}
       </ul>

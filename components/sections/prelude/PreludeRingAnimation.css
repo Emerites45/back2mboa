@@ -69,13 +69,13 @@
   z-index: 0;
 }
 
-/* Filigramme — logo couleur, discret sur verre teal */
+/* Filigramme — même échelle que le logo particules (~80% du disque) */
 .prelude-ring-anim__mark {
   position: absolute;
-  width: 58%;
+  width: 78%;
   height: auto;
   object-fit: contain;
-  opacity: 0.2;
+  opacity: 0.22;
   pointer-events: none;
   user-select: none;
   z-index: 1;

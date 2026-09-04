@@ -132,8 +132,8 @@ export function PreludeRingAnimation() {
 
     function drawLogoToOffscreen(img: HTMLImageElement) {
       octx!.clearRect(0, 0, W, H);
-      /* Wordmark centré, marge confortable dans le disque */
-      const targetW = W * 0.62;
+      /* Wordmark plus présent dans le disque — marge fine vers la brique */
+      const targetW = W * 0.8;
       const scale = targetW / img.width;
       const targetH = img.height * scale;
       const x = (W - targetW) / 2;

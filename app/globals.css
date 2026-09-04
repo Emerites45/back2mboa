@@ -184,7 +184,7 @@
 @layer base {
   html {
     /* Décale l'ancrage sous le header fixe (environ 80px) */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 5rem; 
   }
 
   html:not(.lenis) {

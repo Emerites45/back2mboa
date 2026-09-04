@@ -19,7 +19,7 @@ export const CHAMPION_COPY: ChampionCopy = {
   ],
   ctaPrimary: "Voir le Mayor Call™",
   ctaSecondary: "Je peux répondre",
-  autoHint: "Défilement auto · 12 s · survolez la scène pour pause",
+  autoHint: "Survolez la scène",
   autoplayMs: 12_000,
   legend: [
     { value: "500", label: "participants visés" },

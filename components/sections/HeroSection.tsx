@@ -312,7 +312,7 @@ export function HeroSection() {
       </div>
 
       {/* ========== BOUTON INSCRIPTION (rond + icône) ========== */}
-    {/* ========== BOUTON INSCRIPTION (rond + icône) ========== */}
+    {/* ========== BOUTON INSCRIPTION (rond + icône) ========== 
 <div className="fixed bottom-20 right-5 z-50 sm:bottom-24 sm:right-6">
   <Link
     href="/inscription"
@@ -326,7 +326,7 @@ export function HeroSection() {
       S&apos;inscrire
     </span>
   </Link>
-</div>
+</div>*/}
     </div>
   );
 }

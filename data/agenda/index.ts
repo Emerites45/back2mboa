@@ -3,7 +3,7 @@ import type { AgendaCopy } from "@/types/agenda";
 export const AGENDA_COPY: AgendaCopy = {
   kicker: "Back2Mboa ASAP™, Agenda 2026",
   ctaPrimary: "Réserver ma place",
-  ctaPrimaryHref: "/inscription",
+  opensPopup: true,
   ctaSecondary: "Voir le programme",
   ctaSecondaryHref: "#prelude-mission",
   autoplayMs: 6500,

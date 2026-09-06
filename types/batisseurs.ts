@@ -30,7 +30,11 @@ export type BatisseursCopy = {
   teamLead: string;
   profiles: [BatisseursProfile, BatisseursProfile];
   quote: string;
+  messagePlaceholder: string;
   emailPlaceholder: string;
-  subscribeLabel: string;
+  sendLabel: string;
+  emailStepHint: string;
+  successTitle: string;
+  successBody: string;
   autoplayMs: number;
 };

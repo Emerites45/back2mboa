@@ -6,9 +6,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CHAMPION_COPY, CHAMPION_MAIRIES } from "@/data/mairies-championnes";
 import { ChampionStageBackdrop } from "./ChampionStageBackdrop";
 import { ChampionVisual } from "./ChampionVisual";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import "./MairiesChampionnesSection.css";
 
 export function MairiesChampionnesSection() {
+  const { open: openPopup } = useScrollPopup();
   const { autoplayMs } = CHAMPION_COPY;
   const sectionRef = useRef<HTMLElement | null>(null);
   const wasInView = useRef(false);
@@ -218,9 +220,9 @@ export function MairiesChampionnesSection() {
                 <Link href="#digital-twin" className="champ-cta is-primary">
                   {CHAMPION_COPY.ctaPrimary}
                 </Link>
-                <Link href="/inscription" className="champ-cta is-ghost">
+                <button onClick={openPopup} className="champ-cta is-ghost">
                   {CHAMPION_COPY.ctaSecondary}
-                </Link>
+                </button>
               </div>
             </div>
 

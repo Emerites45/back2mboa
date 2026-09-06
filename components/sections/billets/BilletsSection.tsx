@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import Link from "next/link";
 import { BILLET_QR_PATHS } from "@/data/billets/qr-paths";
 import { PACKS, STUB_BG, packPrices, type BilletPack } from "@/data/billets/packs";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import "./BilletsSection.css";
 
 const DEFAULT_SEL = 0;
@@ -34,10 +34,12 @@ function TicketFace({
   p,
   open,
   eyebrow,
+  openPopup,
 }: {
   p: BilletPack;
   open: boolean;
   eyebrow: string;
+  openPopup: () => void;
 }) {
   const qr = BILLET_QR_PATHS[p.id];
   const chips = p.chips ?? DEFAULT_CHIPS;
@@ -53,9 +55,9 @@ function TicketFace({
         <div className="dyn">
           <div className="eyebrow">{eyebrow}</div>
           <div className="name">{p.nom}</div>
-          <div className="amount">{cur.xaf}</div>
+          <div className="amount">{cur.eur}</div>
           <div className="conv">
-            <span>{cur.eur}</span>
+            <span>{cur.xaf}</span>
             <span className="sep">·</span>
             <span>{cur.usd}</span>
           </div>
@@ -92,9 +94,9 @@ function TicketFace({
               <dd>{p.extra}</dd>
             </div>
           </dl>
-          <Link className="cta" href="/inscription">
+          <button className="cta" onClick={openPopup}>
             Choisir {p.nom}
-          </Link>
+          </button>
         </div>
         <div className="qr-panel">
           <div
@@ -128,6 +130,7 @@ export function BilletsSection({
   ariaLabel = "Packs entreprises",
   tone = "day",
 }: BilletsSectionProps = {}) {
+  const { open: openPopup } = useScrollPopup();
   const [sel, setSel] = useState(DEFAULT_SEL);
   const [live, setLive] = useState(false);
 
@@ -168,12 +171,12 @@ export function BilletsSection({
                   color: on ? q.texte : q.texteInactif,
                   gridRow: "1",
                 }}
-                aria-label={`${q.complet}, ${cur.xaf}`}
+                aria-label={`${q.complet}, ${cur.eur}`}
                 onClick={() => pick(i)}
               >
                 <span className="stub-in">
                   {q.nom}
-                  <span className="price">{cur.xaf}</span>
+                  <span className="price">{cur.eur}</span>
                   <span className="state">{q.statut}</span>
                 </span>
               </button>
@@ -185,7 +188,7 @@ export function BilletsSection({
               className={`lane${i === sel ? " on" : ""}`}
               style={{ ...packVars(q), gridRow: "1" }}
             >
-              <TicketFace p={q} open={i === sel} eyebrow={eyebrow} />
+              <TicketFace p={q} open={i === sel} eyebrow={eyebrow} openPopup={openPopup} />
             </div>
           ))}
         </div>

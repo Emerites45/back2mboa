@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useId } from "react";
-import Link from "next/link";
-import { User } from "lucide-react";
 import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
 import { SLIDES_DATA, SlideData } from "@/data/slides";
 import { Inter } from "next/font/google";

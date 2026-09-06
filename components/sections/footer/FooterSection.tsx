@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FOOTER_COPY, FOOTER_LOGO } from "@/data/footer";
 import { cn } from "@/lib/utils";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 
 /** Section — fond sombre + espacements. */
 const SECTION = {
@@ -46,6 +47,7 @@ const EMAIL = {
 
 export function FooterSection() {
   const copy = FOOTER_COPY;
+  const { open: openPopup } = useScrollPopup();
   const [email, setEmail] = useState("");
 
   const onEmailSubmit = useCallback(
@@ -162,6 +164,14 @@ export function FooterSection() {
                     >
                       {link.label}
                     </a>
+                  ) : link.opensPopup ? (
+                    <button
+                      onClick={openPopup}
+                      className="text-white/80 transition-colors hover:text-white text-left"
+                      style={{ fontSize: TYPE.linkSize }}
+                    >
+                      {link.label}
+                    </button>
                   ) : (
                     <Link
                       href={link.href}

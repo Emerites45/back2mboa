@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TerritorySection } from "@/components/sections/territory-section";
@@ -62,6 +61,9 @@ export default function HomePage() {
       {/* ── 4. Chiffres principaux (montagnes) ─────────── */}
       <ImpactSection />
 
+      {/* ── 21. Introduction édition B2M 2026 ──────────── */}
+      <HeroLandingSection />
+
       {/* ── 5. Avant Back2Mboa : 5 acteurs ─────────────── */}
       <ContrasteSection />
 
@@ -118,9 +120,6 @@ export default function HomePage() {
       <BoulevardSection />
       <TickerSection />
 
-      {/* ── 21. Introduction édition B2M 2026 ──────────── */}
-      <HeroLandingSection />
-
       {/* ── 22. Musée National ─────────────────────────── */}
       <MuseeSection />
 
@@ -161,11 +160,7 @@ export default function HomePage() {
       {/* ── FOOTER ──────────────────────────── */}
       <FooterSection />
 
-      
-
-      {/* ── FOOTER + CTA rôles ─────────────────────────── 
-      <FooterRevealZone />
-*/}
+      <ChatbotWidget />
     </>
   );
 }

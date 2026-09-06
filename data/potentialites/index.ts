@@ -80,6 +80,27 @@ export function markersForSector(sectorId: SectorId): CommuneMarker[] {
     .filter((m): m is CommuneMarker => m !== null);
 }
 
+/** Pastilles de toutes les communes documentées d’une région (sélection carte). */
+export function markersForRegion(regionId: RegionId): CommuneMarker[] {
+  return communesOfRegion(regionId)
+    .map((commune) => {
+      const pt = communeMapPoint(commune.id);
+      if (!pt) return null;
+      return {
+        commune,
+        x: pt.x,
+        y: pt.y,
+        opportunities: [],
+      };
+    })
+    .filter((m): m is CommuneMarker => m !== null);
+}
+
+/** Secteurs présents dans la région (au moins 1 commune matchée). */
+export function sectorsForRegion(regionId: RegionId) {
+  return SECTORS.filter((s) => communesCountForSector(s.id, regionId) > 0);
+}
+
 /** "47 561" | "120.232" (séparateur milliers FR) → entier. */
 export function parsePopulation(raw?: string): number | null {
   if (!raw) return null;

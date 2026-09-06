@@ -296,6 +296,11 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.potentialites-pins-layer {
+  pointer-events: auto;
 }
 
 .potentialites-region,
@@ -315,14 +320,13 @@
   fill: rgba(227, 167, 59, 0.22);
   stroke: var(--pt-gold);
   stroke-width: 2.2;
-  filter: drop-shadow(0 0 6px rgba(227, 167, 59, 0.55));
 }
 
 .potentialites-region.is-selected {
-  fill: rgba(0, 194, 168, 0.18);
+  fill: rgba(0, 194, 168, 0.14);
   stroke: var(--pt-aqua);
-  stroke-width: 2.4;
-  filter: drop-shadow(0 0 7px rgba(0, 194, 168, 0.5));
+  stroke-width: 2.6;
+  /* Pas de filter : crée un stacking context SVG qui masque les pins au-dessus. */
 }
 
 .potentialites-region.is-muted {
@@ -452,6 +456,76 @@
   outline: 2px solid var(--pt-aqua);
 }
 
+/* —— Pins région (sélection carte) : rouge premium —— */
+.potentialites-map-stage.is-region .potentialites-region.is-selected {
+  fill: rgba(0, 194, 168, 0.1);
+}
+
+.potentialites-pin.is-region .potentialites-pin-halo {
+  fill: rgba(225, 29, 72, 0.35);
+}
+
+.potentialites-pin.is-region .potentialites-pin-core {
+  fill: #e11d48;
+  stroke: #fff5f7;
+  stroke-width: 2;
+}
+
+.potentialites-pin.is-region:hover .potentialites-pin-halo,
+.potentialites-pin.is-region:focus-visible .potentialites-pin-halo {
+  fill: rgba(225, 29, 72, 0.48);
+}
+
+.potentialites-pin.is-region:hover .potentialites-pin-core,
+.potentialites-pin.is-region:focus-visible .potentialites-pin-core {
+  filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.75));
+}
+
+.potentialites-pin.is-region.is-active .potentialites-pin-halo {
+  fill: rgba(225, 29, 72, 0.5);
+}
+
+.potentialites-pin.is-region.is-active .potentialites-pin-core {
+  fill: #ff2d55;
+  filter: drop-shadow(0 0 8px rgba(255, 45, 85, 0.65));
+}
+
+.potentialites-pin.is-dim {
+  opacity: 0.28;
+}
+
+.potentialites-pin.is-dim .potentialites-label {
+  opacity: 0;
+}
+
+.potentialites-label {
+  animation: potentialites-label-in 0.32s ease both;
+  pointer-events: none;
+}
+
+.potentialites-label-commune {
+  fill: #ffffff;
+  font-family: var(--pt-font-title);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  paint-order: stroke fill;
+  stroke: rgba(8, 12, 10, 0.92);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.potentialites-label-mairie {
+  fill: #ffd4dc;
+  font-family: var(--pt-font-body);
+  font-size: 10px;
+  font-weight: 500;
+  paint-order: stroke fill;
+  stroke: rgba(8, 12, 10, 0.88);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
 @keyframes potentialites-pin-in {
   from {
     opacity: 0;
@@ -460,6 +534,35 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes potentialites-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Mobile : labels commune uniquement (mairie au tooltip) */
+  .potentialites-label-mairie {
+    display: none;
+  }
+
+  .potentialites-label-commune {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .potentialites-pin-scale,
+  .potentialites-label {
+    animation: none !important;
   }
 }
 

@@ -1,11 +1,14 @@
-import Link from "next/link";
+"use client";
+
 import { buildSceneSvg } from "@/lib/scene-svg";
 import { BottomLinesWheel } from "./BottomLinesWheel";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import "./HeroLandingSection.css";
 
 const HERO_BG = buildSceneSvg("hero", 77, "hero");
 
 export function HeroLandingSection() {
+  const { open: openPopup } = useScrollPopup();
   return (
     <div className="b2m-hero">
       <section className="hero" id="hero">
@@ -33,12 +36,12 @@ export function HeroLandingSection() {
             </p>
 
             <div className="acts" role="group" aria-label="Actions principales">
-              <Link className="btn btn-1" href="/inscription">
+              <button className="btn btn-1" onClick={openPopup}>
                 Demander une invitation
-              </Link>
-              <Link className="btn btn-2" href="#agenda">
+              </button>
+              <a className="btn btn-2" href="#agenda">
                 Voir le programme
-              </Link>
+              </a>
             </div>
           </div>
 

@@ -411,14 +411,35 @@
   }
 }
 
-@media (max-width: 960px) {
+/* —— Responsive (ladder Williams) : 900 → 720 → 560 → 400 —— */
+@media (max-width: 900px) {
+  .pourquoi,
+  .pourquoi-inner {
+    /* Auto height on phone — 100svh locks reserved for large screens */
+    min-height: 0;
+  }
+
+  .pourquoi-inner {
+    padding: clamp(1.35rem, 4vw, 2rem) clamp(1.1rem, 4.5vw, 2rem);
+    gap: clamp(1rem, 3vw, 1.35rem);
+  }
+
   .pourquoi-layout {
     grid-template-columns: 1fr;
   }
 
+  .pourquoi-title {
+    font-size: clamp(1.35rem, 2vw + 0.75rem, 1.95rem);
+  }
+
+  .pourquoi-sub {
+    font-size: clamp(0.86rem, 0.7vw + 0.6rem, 0.95rem);
+  }
+
   .pourquoi-row,
   .pourquoi-row.is-head {
-    grid-template-columns: 1fr 0.7fr;
+    /* Keep reco + one score col; hide mid scores */
+    grid-template-columns: minmax(0, 1.4fr) minmax(4.5rem, 0.65fr);
     flex: 0 0 auto;
   }
 
@@ -429,8 +450,47 @@
     display: none;
   }
 
+  .pourquoi-row.is-body {
+    min-height: 44px;
+  }
+
   .pourquoi-detail {
     min-height: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .pourquoi-cell {
+    padding-block: 0.85rem;
+  }
+
+  .pourquoi-kicker {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .pourquoi-inner {
+    padding-inline: 1rem;
+  }
+
+  .pourquoi-row,
+  .pourquoi-row.is-head {
+    grid-template-columns: minmax(0, 1fr) minmax(3.75rem, 0.55fr);
+  }
+
+  .pourquoi-title {
+    font-size: clamp(1.28rem, 4.8vw + 0.4rem, 1.7rem);
+  }
+}
+
+@media (max-width: 400px) {
+  .pourquoi-inner {
+    padding: 1.15rem 0.9rem;
+  }
+
+  .pourquoi-cell {
+    padding-inline: 0.75rem;
   }
 }
 

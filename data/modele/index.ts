@@ -96,9 +96,9 @@ export const MODELE_CARDS: ModeleCard[] = [
   {
     id: "sante",
     index: "06",
-    category: "Santé & social",
-    title: "Santé, Social & Bien-être",
-    description: "Renforcer l'offre de soins et le tissu social local.",
+    category: "Santé, environnement et bien-être",
+    title: "Santé, environnement et bien-être",
+    description: "Renforcer l'offre de soins et la résilience environnementale des territoires.",
     visual: "photo",
     image: "/images/modele/secteurs/sante.webp",
     imagePosition: "48% 30%",

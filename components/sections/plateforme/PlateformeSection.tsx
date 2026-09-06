@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { PLATEFORME_COPY, PLATEFORME_PROFILES } from "@/data/plateforme";
 import type { PlateformeProfileId } from "@/types/plateforme";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import "./PlateformeSection.css";
 
 export function PlateformeSection() {
+  const { open: openPopup } = useScrollPopup();
   const [activeId, setActiveId] = useState<PlateformeProfileId>("maires");
   const profile = PLATEFORME_PROFILES.find((p) => p.id === activeId) ?? PLATEFORME_PROFILES[0];
 
@@ -55,9 +56,9 @@ export function PlateformeSection() {
             {profile.title && <h3 className="plateforme-role">{profile.title}</h3>}
             {profile.body && <p className="plateforme-body">{profile.body}</p>}
             {profile.cta && (
-              <Link href="/inscription" className="plateforme-cta">
+              <button onClick={openPopup} className="plateforme-cta">
                 {profile.cta}
-              </Link>
+              </button>
             )}
           </div>
 

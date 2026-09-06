@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { Bricolage_Grotesque, Inter } from 'next/font/google';
 
 const bricolage = Bricolage_Grotesque({
@@ -15,214 +16,6 @@ const inter = Inter({
   display: 'swap',
 });
 
-/* ---------- scènes SVG ---------- */
-function rng(s: number) {
-  let seed = s % 2147483647;
-  if (seed <= 0) seed += 2147483646;
-  return () => {
-    seed = (seed * 16807) % 2147483647;
-    return (seed - 1) / 2147483646;
-  };
-}
-
-const PAL: Record<string, { sky: string[]; ridge: string[]; glow: string }> = {
-  verdant: {
-    sky: ['#D6EFD2', '#93CFA0', '#3F8B63', '#1C4A36'],
-    ridge: ['#5B9E70', '#3E7C57', '#2A5B40', '#173A2A'],
-    glow: '#A8E0A4',
-  },
-  ocean: {
-    sky: ['#BDEDE8', '#63CBC6', '#1E8891', '#0A3A46'],
-    ridge: ['#3FA3A6', '#25787F', '#155259', '#08303A'],
-    glow: '#7FE2DA',
-  },
-  dawn: {
-    sky: ['#FFC79A', '#FB8F63', '#B4526E', '#3B2B54'],
-    ridge: ['#8B5F79', '#6B4566', '#4A3054', '#2C1D3C'],
-    glow: '#FF9A6B',
-  },
-  nocturne: {
-    sky: ['#4B5FC4', '#2E3277', '#181B47', '#080A1E'],
-    ridge: ['#2C3160', '#242A5E', '#181C42', '#0C0E26'],
-    glow: '#5C6BD8',
-  },
-  savanna: {
-    sky: ['#FFE9B8', '#F7C069', '#C98246', '#6B4028'],
-    ridge: ['#B27C4C', '#8E5F3B', '#65422A', '#3E281A'],
-    glow: '#F5B45E',
-  },
-  emerald: {
-    sky: ['#C9F0DC', '#6FC7A0', '#2C8A6A', '#10402F'],
-    ridge: ['#4FA37E', '#347E62', '#215C47', '#10402F'],
-    glow: '#8FDCBB',
-  },
-};
-
-function Scene({
-  pal,
-  fg,
-  seed,
-}: {
-  pal: string;
-  fg: string;
-  seed: number;
-}) {
-  const p = PAL[pal] || PAL.verdant;
-  const rand = rng(seed);
-  const w = 800;
-  const h = 620;
-  const id = `s${seed}`;
-
-  const ridges = Array.from({ length: 4 }, (_, i) => {
-    const t = i / 3;
-    const baseY = h * (0.42 + t * 0.34);
-    const amp = h * (0.12 - t * 0.045);
-    let d = `M-30 ${h + 30} L-30 ${baseY.toFixed(1)}`;
-    for (let k = 0; k <= 6; k++) {
-      const x = (w / 6) * k;
-      const y =
-        baseY +
-        Math.sin(k * 1.1 + i * 2.3) * amp * (0.5 + rand() * 0.7) -
-        rand() * amp * 0.4;
-      d += ` L${x.toFixed(1)} ${y.toFixed(1)}`;
-    }
-    d += ` L${w + 30} ${baseY.toFixed(1)} L${w + 30} ${h + 30} Z`;
-    return (
-      <path
-        key={i}
-        d={d}
-        fill={p.ridge[Math.min(i, 3)]}
-        fillOpacity={0.74 + t * 0.26}
-      />
-    );
-  });
-
-  const fc = p.ridge[3];
-  let fgEl: React.ReactNode = null;
-
-  if (fg === 'crops') {
-    fgEl = Array.from({ length: 20 }, (_, i) => {
-      const x = -10 + i * (w / 19);
-      return (
-        <path
-          key={i}
-          d={`M${x} ${h} L${x} ${h - 56} M${x} ${h - 30} l-10 -12 M${x} ${h - 30} l10 -12`}
-          stroke={fc}
-          strokeWidth={3}
-          fill="none"
-          strokeLinecap="round"
-        />
-      );
-    });
-  } else if (fg === 'city') {
-    const rects = [];
-    let x = -20;
-    let i = 0;
-    while (x < w + 20) {
-      const bw = 28 + rand() * 48;
-      const bh = h * (0.12 + rand() * 0.28);
-      rects.push(
-        <rect key={i++} x={x} y={h - bh} width={bw} height={bh + 30} fill={fc} />
-      );
-      x += bw + 8;
-    }
-    fgEl = rects;
-  } else if (fg === 'village') {
-    fgEl = Array.from({ length: 6 }, (_, i) => {
-      const x = w * 0.05 + rand() * w * 0.82;
-      const bw = w * 0.06 + rand() * w * 0.04;
-      const bh = h * 0.06 + rand() * h * 0.04;
-      return (
-        <path
-          key={i}
-          d={`M${x} ${h} L${x} ${h - bh} L${x + bw / 2} ${h - bh - h * 0.035} L${x + bw} ${h - bh} L${x + bw} ${h} Z`}
-          fill={fc}
-        />
-      );
-    });
-  } else if (fg === 'museum') {
-    const cx = w * 0.5;
-    const bw = w * 0.36;
-    const bh = h * 0.28;
-    const bx = cx - bw / 2;
-    const by = h - bh;
-    fgEl = (
-      <>
-        <path
-          d={`M${bx - 22} ${by} L${cx} ${by - h * 0.1} L${bx + bw + 22} ${by} Z`}
-          fill={fc}
-        />
-        <rect x={bx} y={by} width={bw} height={bh + 30} fill={fc} />
-        {Array.from({ length: 6 }, (_, i) => {
-          const cxx = bx + bw * 0.09 + i * ((bw * 0.82) / 5);
-          return (
-            <rect
-              key={i}
-              x={cxx}
-              y={by + h * 0.04}
-              width={bw * 0.05}
-              height={bh - h * 0.04}
-              fill={p.ridge[1]}
-              opacity={0.5}
-            />
-          );
-        })}
-      </>
-    );
-  } else if (fg === 'solar') {
-    fgEl = Array.from({ length: 4 }, (_, i) => {
-      const x = w * 0.08 + i * (w / 4.4);
-      const yy = h - h * 0.12;
-      return (
-        <g key={i}>
-          <g transform={`translate(${x} ${yy}) skewY(-13)`}>
-            <rect width={w * 0.08} height={h * 0.06} fill={fc} />
-          </g>
-          <rect
-            x={x + w * 0.037}
-            y={yy + h * 0.055}
-            width={5}
-            height={h * 0.075}
-            fill={fc}
-          />
-        </g>
-      );
-    });
-  }
-
-  return (
-    <svg
-      viewBox={`0 0 ${w} ${h}`}
-      preserveAspectRatio="xMidYMax slice"
-      className="block h-full w-full transition-transform duration-1000 group-hover:scale-105"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id={`sky-${id}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={p.sky[0]} />
-          <stop offset="34%" stopColor={p.sky[1]} />
-          <stop offset="68%" stopColor={p.sky[2]} />
-          <stop offset="100%" stopColor={p.sky[3]} />
-        </linearGradient>
-        <radialGradient id={`glow-${id}`}>
-          <stop offset="0%" stopColor={p.glow} stopOpacity={0.76} />
-          <stop offset="60%" stopColor={p.glow} stopOpacity={0.2} />
-          <stop offset="100%" stopColor={p.glow} stopOpacity={0} />
-        </radialGradient>
-      </defs>
-      <rect width={w} height={h} fill={`url(#sky-${id})`} />
-      <circle
-        cx={w * (0.2 + rand() * 0.6)}
-        cy={h * 0.22}
-        r={h * 0.5}
-        fill={`url(#glow-${id})`}
-      />
-      {ridges}
-      {fgEl}
-    </svg>
-  );
-}
-
 /* ---------- articles ---------- */
 const ARTICLES = [
   {
@@ -231,18 +24,16 @@ const ARTICLES = [
     acc: '#119D63',
     titre:
       "Le Salon de la Diaspora se tiendra le 4 decembre, au coeur d'une semaine europeenne",
-    pal: 'nocturne',
-    fg: 'city',
-    seed: 11,
+    image: '/images/learn-more/salon.webp',
+    imageAlt: 'Salon de la Diaspora',
   },
   {
     cat: 'Territoire',
     tag: 'Agriculture',
     acc: '#119D63',
     titre: 'Babadjou : 4 000 tonnes de pommes de terre en quete de leur industrie',
-    pal: 'verdant',
-    fg: 'crops',
-    seed: 12,
+    image: '/images/learn-more/pomme.webp',
+    imageAlt: 'Pommes de terre — Babadjou',
   },
   {
     cat: 'Preuve',
@@ -250,56 +41,52 @@ const ARTICLES = [
     acc: '#AE3C3A',
     titre:
       '97 % de satisfaction : ce que les deux editions pilotes ont reellement prouve',
-    pal: 'dawn',
-    fg: 'museum',
-    seed: 13,
+    image: '/images/learn-more/after.webp',
+    imageAlt: 'Éditions pilotes — après',
   },
   {
     cat: 'Methode',
     tag: 'Qualification',
     acc: '#D8212E',
     titre: 'Credible, Accessible, Possible : les trois filtres avant tout financeur',
-    pal: 'savanna',
-    fg: 'village',
-    seed: 14,
+    image: '/images/learn-more/credibilite.webp',
+    imageAlt: 'Qualification CAP — crédible, accessible, possible',
   },
   {
     cat: 'Territoire',
     tag: 'Eau & Energie',
     acc: '#00C2A8',
     titre: 'Fundong : des forages construits, puis arretes faute de modele de gestion',
-    pal: 'ocean',
-    fg: 'solar',
-    seed: 15,
+    image: '/images/learn-more/forage.webp',
+    imageAlt: 'Forage — Fundong, eau & énergie',
   },
   {
     cat: 'Analyse',
     tag: 'Decentralisation',
     acc: '#AE3C3A',
     titre: 'Les dix recommandations des maires : ou en est-on quatre ans apres ?',
-    pal: 'emerald',
-    fg: 'village',
-    seed: 16,
+    image: '/images/learn-more/dix.webp',
+    imageAlt: 'Dix recommandations des maires',
   },
   {
     cat: 'Territoire',
     tag: 'Tourisme',
     acc: '#FFD506',
     titre: 'Limbe recoit 10 000 visiteurs en decembre et vise dix fois plus',
-    pal: 'ocean',
-    fg: 'village',
-    seed: 17,
+    image: '/images/learn-more/plage.webp',
+    imageAlt: 'Plage — tourisme Limbé',
   },
   {
     cat: 'Partenariat',
     tag: 'Offres',
     acc: '#D8212E',
     titre: 'Le voyage en Europe est desormais inclus dans les deux paliers hauts',
-    pal: 'dawn',
-    fg: 'city',
-    seed: 18,
+    image: '/images/learn-more/route-air.webp',
+    imageAlt: 'Voyage Europe — route aérienne',
   },
 ];
+
+const AUTOPLAY_MS = 6000;
 
 export function LearnMoreSection() {
   const railRef = useRef<HTMLDivElement>(null);
@@ -307,6 +94,7 @@ export function LearnMoreSection() {
   const [currentPage, setCurrentPage] = useState(0);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+  const [paused, setPaused] = useState(false);
 
   const pageWidth = useCallback(() => {
     const rail = railRef.current;
@@ -319,6 +107,15 @@ export function LearnMoreSection() {
       Math.round(rail.clientWidth / (card.offsetWidth + gap))
     );
     return per * (card.offsetWidth + gap);
+  }, []);
+
+  const cardStep = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return 0;
+    const card = rail.querySelector('.learn-card') as HTMLElement | null;
+    if (!card) return rail.clientWidth;
+    const gap = parseFloat(getComputedStyle(rail).gap) || 20;
+    return card.offsetWidth + gap;
   }, []);
 
   const sync = useCallback(() => {
@@ -364,16 +161,44 @@ export function LearnMoreSection() {
   };
 
   const prev = () => {
-    railRef.current?.scrollBy({ left: -pageWidth(), behavior: 'smooth' });
+    railRef.current?.scrollBy({ left: -cardStep(), behavior: 'smooth' });
   };
 
-  const next = () => {
-    railRef.current?.scrollBy({ left: pageWidth(), behavior: 'smooth' });
-  };
+  const next = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const step = cardStep();
+    const atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 8;
+    if (atEnd) {
+      rail.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+    rail.scrollBy({ left: step, behavior: 'smooth' });
+  }, [cardStep]);
+
+  /* Autoplay 6 s — pause au survol / focus / reduced-motion */
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches || paused) return;
+
+    const id = window.setInterval(() => {
+      next();
+    }, AUTOPLAY_MS);
+
+    return () => window.clearInterval(id);
+  }, [next, paused]);
 
   return (
     <section
       className={`${inter.className} bg-[#FBF7EF] py-[clamp(3.5rem,6.5vw,6.5rem)]`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
     >
       <div className="mx-auto w-full max-w-[min(100%,92rem)] px-[clamp(1.35rem,5.5vw,4.75rem)]">
         <h2
@@ -424,9 +249,9 @@ export function LearnMoreSection() {
           ref={railRef}
           className="flex snap-x snap-mandatory gap-[clamp(0.9rem,1.6vw,1.4rem)] overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {ARTICLES.map((a) => (
+          {ARTICLES.map((a, i) => (
             <article
-              key={a.seed}
+              key={`${a.cat}-${a.tag}-${i}`}
               className="learn-card group grid w-[min(86vw,540px)] flex-none snap-start grid-cols-1 overflow-hidden rounded-2xl bg-[#F3ECDD] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-22px_rgba(10,43,33,0.38)] sm:grid-cols-[1fr_240px] md:grid-cols-[1fr_260px]"
             >
               <div className="flex min-h-[220px] flex-col p-[clamp(1.15rem,2vw,1.5rem)] sm:min-h-[260px]">
@@ -455,9 +280,22 @@ export function LearnMoreSection() {
                 </button>
               </div>
 
-              <div className="relative min-h-[170px] overflow-hidden bg-[#0A2B21] sm:min-h-0">
-                <Scene pal={a.pal} fg={a.fg} seed={a.seed} />
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(6,26,20,0.32)] to-transparent to-55%" />
+              <div className="relative min-h-[170px] overflow-hidden bg-[#E8E0D2] sm:min-h-0">
+                {a.image ? (
+                  <Image
+                    src={a.image}
+                    alt={a.imageAlt}
+                    fill
+                    sizes="(max-width: 640px) 86vw, 260px"
+                    className="object-cover object-center"
+                    quality={82}
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 bg-[#0A2B21]/12"
+                    aria-hidden="true"
+                  />
+                )}
               </div>
             </article>
           ))}

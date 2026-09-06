@@ -4,9 +4,11 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import Image from "next/image";
 import Link from "next/link";
 import { AGENDA_COPY } from "@/data/agenda";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import "./AgendaSection.css";
 
 export function AgendaSection() {
+  const { open: openPopup } = useScrollPopup();
   const copy = AGENDA_COPY;
   const { events, autoplayMs } = copy;
   const total = events.length;
@@ -115,9 +117,15 @@ export function AgendaSection() {
           <p className="agenda-body">{event.body}</p>
 
           <div className="agenda-actions">
-            <Link href={copy.ctaPrimaryHref} className="agenda-btn is-primary">
-              {copy.ctaPrimary}
-            </Link>
+            {copy.opensPopup ? (
+              <button onClick={openPopup} className="agenda-btn is-primary">
+                {copy.ctaPrimary}
+              </button>
+            ) : (
+              <Link href={copy.ctaPrimaryHref ?? "#"} className="agenda-btn is-primary">
+                {copy.ctaPrimary}
+              </Link>
+            )}
             <Link href={copy.ctaSecondaryHref} className="agenda-btn is-ghost">
               {copy.ctaSecondary}
             </Link>

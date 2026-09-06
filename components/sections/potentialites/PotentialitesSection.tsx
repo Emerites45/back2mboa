@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  communesCountForSector,
   findCommune,
+  markersForRegion,
   markersForSector,
   regionIdsForSector,
   statsForRegion,
@@ -26,10 +28,31 @@ export function PotentialitesSection() {
   const [mobilePane, setMobilePane] = useState<MobilePane>("carte");
 
   const selectedRegion = REGIONS.find((r) => r.id === regionId);
-  const markers = useMemo(
-    () => (sectorId ? markersForSector(sectorId) : []),
-    [sectorId],
-  );
+
+  /** Secteur hors région active → clear (filtre strict). */
+  useEffect(() => {
+    if (!regionId || !sectorId) return;
+    if (communesCountForSector(sectorId, regionId) === 0) {
+      setSectorId(null);
+    }
+  }, [regionId, sectorId]);
+
+  const markers = useMemo(() => {
+    /* Région active → toujours toutes les communes de la région (pins rouges). */
+    if (regionId) return markersForRegion(regionId);
+    if (sectorId) return markersForSector(sectorId);
+    return [];
+  }, [sectorId, regionId]);
+
+  /** Communes du secteur (pour atténuer les pins hors-secteur dans la région). */
+  const sectorCommuneIds = useMemo(() => {
+    if (!sectorId) return null;
+    return new Set(markersForSector(sectorId).map((m) => m.commune.id));
+  }, [sectorId]);
+
+  const pinVariant = regionId ? "region" : "sector";
+  const showLabels = Boolean(regionId);
+
   const litRegionIds = useMemo(
     () => (sectorId ? regionIdsForSector(sectorId) : undefined),
     [sectorId],
@@ -43,7 +66,9 @@ export function PotentialitesSection() {
   const onSelectRegion = useCallback((id: RegionId) => {
     setRegionId(id);
     setCommuneId(null);
-    setMobilePane("details");
+    setTooltip(null);
+    /* Rester sur la carte : pins + labels visibles immédiatement */
+    setMobilePane("carte");
   }, []);
 
   const onSelectCommune = useCallback((id: string) => {
@@ -71,7 +96,11 @@ export function PotentialitesSection() {
   }, [clearFocus]);
 
   const headerHint = selectedRegion
-    ? `Région / ${selectedRegion.name}`
+    ? `Région / ${selectedRegion.name}${
+        markers.length
+          ? ` · ${markers.length} commune${markers.length > 1 ? "s" : ""}`
+          : ""
+      }`
     : "Région / Commune — sélectionnez sur la carte";
 
   return (
@@ -132,7 +161,9 @@ export function PotentialitesSection() {
         />
 
         <div
-          className={`potentialites-panel potentialites-map${mobilePane === "carte" ? " is-mobile-on" : ""}`}
+          className={`potentialites-panel potentialites-map${
+            mobilePane === "carte" ? " is-mobile-on" : ""
+          }`}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               if (sectorId) clearFocus();
@@ -142,17 +173,21 @@ export function PotentialitesSection() {
         >
           {selectedRegion && (
             <RegionStatsCard
-              key={selectedRegion.id}
+              key={`stats-${selectedRegion.id}`}
               name={selectedRegion.name}
               stats={statsForRegion(selectedRegion.id)}
             />
           )}
           <CameroonMap
+            key={`map-${regionId ?? "none"}-${sectorId ?? "none"}`}
             selectedId={regionId}
             hoveredId={hoveredId}
             litRegionIds={litRegionIds}
             sectorFilter={Boolean(sectorId)}
             markers={markers}
+            pinVariant={pinVariant}
+            showLabels={showLabels}
+            sectorCommuneIds={sectorCommuneIds}
             selectedCommuneId={communeId}
             onHover={onHover}
             onSelect={onSelectRegion}
@@ -162,7 +197,9 @@ export function PotentialitesSection() {
           />
           {tooltip && (
             <div
-              className={`potentialites-tooltip${tooltip.lines?.length ? " is-rich" : ""}`}
+              className={`potentialites-tooltip${
+                tooltip.lines?.length ? " is-rich" : ""
+              }`}
               style={{ left: tooltip.x, top: tooltip.y }}
             >
               <strong>{tooltip.title}</strong>

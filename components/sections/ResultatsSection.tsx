@@ -19,13 +19,14 @@ const TYPE = {
 const STATS = [
   {
     label: "Mairies/CTD",
-    value: "40 couvrant les 10 régions & 20 de 6 régions",
+    value: "40 couvrant les 10 régions\n& 20 de 6 régions",
   },
   { label: "Entrepreneurs diaspora", value: "35 & 70" },
   { label: "Satisfaction CTD", value: "89 %" },
   { label: "Satisfaction entrepreneurs", value: "97 %" },
   { label: "Renforcement de capacité", value: "91 %" },
   { label: "Mises en relation", value: "60+" },
+  { label: "", value: "" },
   { label: "Portée numérique", value: "60 000+" },
 ] as const;
 
@@ -89,7 +90,7 @@ export function ResultatsSection() {
           className="h-52 min-h-0 rounded-[20px] sm:h-64 lg:h-full lg:rounded-[30px]"
         />
 
-        <div className="relative flex min-h-0 flex-col overflow-y-auto px-4 pt-5 pb-5 text-white sm:px-6 sm:pt-6 sm:pb-6 lg:px-10 lg:pt-10 lg:pb-8">
+        <div className="relative flex min-h-0 flex-col px-4 pt-5 pb-3 text-white sm:px-6 sm:pt-6 sm:pb-4 lg:px-10 lg:pt-10 lg:pb-2">
           <h2
             id="resultats-heading"
             className="text-balance tracking-[-0.03em]"
@@ -114,61 +115,72 @@ export function ResultatsSection() {
           </p>
 
           <dl className="mt-5 grid grid-cols-1 gap-x-4 gap-y-3.5 sm:mt-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4 lg:mt-8">
-            {STATS.map((stat) => (
-              <div key={stat.label}>
-                <dt
-                  className="leading-snug text-white/55"
-                  style={{
-                    fontFamily: TYPE.subtitleFont,
-                    fontSize: TYPE.labelSize,
-                    fontWeight: TYPE.labelWeight,
-                  }}
-                >
-                  {stat.label}
-                </dt>
-                <dd
-                  className="mt-0.5 leading-snug text-pretty tabular-nums"
-                  style={{
-                    fontFamily: TYPE.subtitleFont,
-                    fontSize: TYPE.valueSize,
-                    fontWeight: TYPE.valueWeight,
-                  }}
-                >
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
+            {STATS.map((stat) =>
+              stat.label ? (
+                <div key={stat.label}>
+                  <dt
+                    className="leading-snug text-white/55"
+                    style={{
+                      fontFamily: TYPE.subtitleFont,
+                      fontSize: TYPE.labelSize,
+                      fontWeight: TYPE.labelWeight,
+                    }}
+                  >
+                    {stat.label}
+                  </dt>
+                  <dd
+                    className="mt-0.5 leading-snug text-pretty tabular-nums"
+                    style={{
+                      fontFamily: TYPE.subtitleFont,
+                      fontSize: TYPE.valueSize,
+                      fontWeight: TYPE.valueWeight,
+                    }}
+                  >
+                    {stat.value.split("\n").map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        {i < stat.value.split("\n").length - 1 && <br />}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ) : (
+                <div key="empty" aria-hidden="true" />
+              )
+            )}
           </dl>
 
-          <div className="mt-auto pt-5 sm:pt-6">
+          <div className="mt-auto pt-2 sm:pt-3">
             <p
               className="mb-2.5 text-white/40 sm:mb-3"
               style={{
                 fontFamily: TYPE.subtitleFont,
-                fontSize: "0.6875rem",
+                fontSize: "0.98rem",
                 fontWeight: TYPE.labelWeight,
               }}
             >
               Partenaires institutionnels
             </p>
-            <div className="grid grid-cols-4 gap-x-3 gap-y-2.5 sm:grid-cols-6 sm:gap-x-4 sm:gap-y-3">
-              {PARTNER_LOGOS.map((logo) => (
-                <div
-                  key={logo.alt}
-                  className="group relative flex h-9 items-center justify-center sm:h-11"
-                >
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={86}
-                    height={43}
-                    className="h-7 w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-110 sm:h-9"
-                  />
-                  <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-xs text-black opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100">
-                    {logo.alt}
-                  </span>
-                </div>
-              ))}
+            <div className="rounded-xl bg-white p-4 sm:p-5">
+              <div className="grid grid-cols-4 gap-x-3 gap-y-2.5 sm:grid-cols-6 sm:gap-x-4 sm:gap-y-3">
+                {PARTNER_LOGOS.map((logo) => (
+                  <div
+                    key={logo.alt}
+                    className="group relative flex h-9 items-center justify-center sm:h-11"
+                  >
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={86}
+                      height={43}
+                      className="h-7 w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-110 sm:h-9"
+                    />
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-xs text-black opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100">
+                      {logo.alt}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -215,6 +215,7 @@
   height: clamp(1.35rem, 2vw, 1.85rem);
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 7px;
+  background: #fff;
   color: rgba(255, 255, 255, 0.75);
   font-family: var(--partners-mono);
   font-size: 0.55em;

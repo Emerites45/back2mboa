@@ -30,7 +30,7 @@ export const FOOTER_COPY: FooterCopy = {
         { label: "Parcours", href: "#parcours" },
         { label: "Agenda", href: "#agenda" },
         { label: "Écosystème", href: "#digital-twin" },
-        { label: "Inscription", href: "/inscription" },
+        { label: "Inscription", opensPopup: true },
       ],
     },
     {

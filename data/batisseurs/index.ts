@@ -28,7 +28,7 @@ export const BATISSEURS_COPY: BatisseursCopy = {
       href: "#inscription",
       bullets: [
         "Fondatrice de Harambe Cameroun (2008), devenue Solutionneurs Initiative",
-        "Certifiée PMP ,plus de  10 ans de gestion de projets",
+        "Certifiée PMP, plus de 10 ans de gestion de projets",
         "A géré des projets de plus de 2 M$ avec des équipes de 300+ personnes",
         "Conseillère en Investissement Pays, Afrilanthropy",
         "Conseil consultatif Microsoft Afrique (2013–2016)",
@@ -54,7 +54,11 @@ export const BATISSEURS_COPY: BatisseursCopy = {
   ],
   quote:
     "« Back2Mboa est porté par des femmes et des hommes qui ont déjà démontré leur capacité à mobiliser des réseaux, fédérer des communautés et conduire des initiatives complexes à fort impact. »",
-  emailPlaceholder: "Your email",
-  subscribeLabel: "Subscribe",
+  messagePlaceholder: "Votre message à l'équipe",
+  emailPlaceholder: "Votre e-mail",
+  sendLabel: "Envoyer",
+  emailStepHint: "Pour vous répondre, indiquez votre e-mail",
+  successTitle: "Message envoyé",
+  successBody: "Merci — l'équipe vous répondra rapidement.",
   autoplayMs: 4800,
 };

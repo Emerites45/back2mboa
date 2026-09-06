@@ -184,7 +184,7 @@
 @layer base {
   html {
     /* Décale l'ancrage sous le header fixe (environ 80px) */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 5rem; 
   }
 
   html:not(.lenis) {
@@ -266,6 +266,23 @@ aside:has(.ticker-track):hover .ticker-track {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes methode-card-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+}
+
+.methode-card-pulse {
+  animation: methode-card-pulse 0.6s ease-in-out 1;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .methode-card-pulse {
+    animation: none;
   }
 }
 
@@ -412,7 +429,7 @@ aside:has(.ticker-track):hover .ticker-track {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 2.5px solid rgba(255,255,255,.85);
+  border: 2.5px solid #DCB700;
   padding: 0;
   cursor: pointer;
   background: var(--brand-result, #0e3b2d);

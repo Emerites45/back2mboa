@@ -95,8 +95,8 @@
 .prelude-ring {
   grid-area: ring;
   position: relative;
-  width: 8.35rem;
-  height: 8.35rem;
+  width: clamp(10.5rem, 12vw, 12.25rem);
+  height: clamp(10.5rem, 12vw, 12.25rem);
   flex-shrink: 0;
   margin: -1.15rem 0 0;
   align-self: start;
@@ -409,6 +409,7 @@
   outline-offset: 3px;
 }
 
+/* —— Responsive (ladder Williams) : 900 → 720 → 560 → 400 —— */
 @media (max-width: 900px) {
   .prelude-head {
     grid-template-columns: 1fr;
@@ -416,10 +417,23 @@
       "eyebrow"
       "title"
       "sub";
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    padding-bottom: clamp(1.15rem, 3vw, 1.65rem);
   }
 
   .prelude-ring {
+    /* Chrome desktop-only — évite le squeeze sur phone (pattern Williams) */
     display: none;
+  }
+
+  .prelude-title {
+    /* Type fluide vw+rem — stable sur courts viewports (pas de vh) */
+    font-size: clamp(1.45rem, 2.4vw + 0.85rem, 2.35rem);
+    max-width: 22ch;
+  }
+
+  .prelude-sub {
+    font-size: clamp(0.9rem, 1.1vw + 0.55rem, 1.02rem);
   }
 
   .prelude-row,
@@ -433,11 +447,10 @@
     min-height: 0;
   }
 
-  /* Empilé : cadre large, hauteur lisible — cover + même focal */
   .prelude-media {
     width: 100%;
     aspect-ratio: 16 / 10;
-    min-height: clamp(14rem, 42vw, 20rem);
+    min-height: clamp(12rem, 40vw, 18rem);
   }
 
   .prelude-media-fill {
@@ -447,11 +460,30 @@
   .prelude-card-body {
     max-width: none;
   }
+
+  .prelude-btn.is-contact {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 720px) {
+  .prelude-inner {
+    padding-inline: clamp(1.1rem, 4.5vw, 1.75rem);
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .prelude-stack {
+    gap: 1.15rem;
+  }
 }
 
 @media (max-width: 560px) {
   .prelude-card {
-    padding: 1.35rem 1.25rem;
+    padding: 1.2rem 1.1rem;
+  }
+
+  .prelude-title {
+    font-size: clamp(1.35rem, 5.5vw + 0.4rem, 1.85rem);
   }
 
   .prelude-foot-meta {
@@ -465,6 +497,22 @@
 
   .prelude-btn.is-contact {
     width: min(100%, 16rem);
+  }
+}
+
+@media (max-width: 400px) {
+  .prelude-inner {
+    padding-inline: 1rem;
+  }
+
+  .prelude-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .prelude-media {
+    min-height: 11rem;
+    aspect-ratio: 16 / 11;
   }
 }
 

@@ -19,7 +19,8 @@ export type BonnePortePanel = {
   title: string;
   titleLines?: [string, string];
   lead: string;
-  ctaHref: string;
+  opensPopup?: boolean;
+  ctaHref?: string;
   cta: string;
   gains: BonnePorteGain[];
 };

@@ -17,7 +17,7 @@ export const METHODE_COPY: MethodeCopy = {
       versoSubtitle:
         "Avant toute mise en relation, chaque opportunité passe un filtre de crédibilité :",
       versoText:
-        "• Données sourcées : volumes, surfaces, populations, écarts documentés (pas d'intentions vagues)\n• Porteurs nommés : commune, opérateur, Solutionneur, qui signe, qui exécute\n• Résultats mesurables : emplois, recettes, tonnes, kWh, indicateurs à M+12\n• Responsabilités claires : qui instruit, qui valide, qui rend compte",
+        "✓ Données sourcées : volumes, surfaces, populations, écarts documentés (pas d'intentions vagues)\n✓ Porteurs nommés : commune, opérateur, Solutionneur, qui signe, qui exécute\n✓ Résultats mesurables : emplois, recettes, tonnes, kWh, indicateurs à M+12\n✓ Responsabilités claires : qui instruit, qui valide, qui rend compte",
       versoBottom: "Filtre n°1 : sans preuves, pas de Deal Room.",
     },
     {
@@ -31,7 +31,7 @@ export const METHODE_COPY: MethodeCopy = {
       versoSubtitle:
         "Un dossier brillant sans chemin vers le décideur reste un PDF. On vérifie que la relation est possible :",
       versoText:
-        "• Décideur territorial : maire / CTD nommé, présent ou représenté (Mayor Calls, Deal Rooms)\n• Régulateur / tutelle : chemin vers l'autorisation, la norme, le foncier\n• Finance : qui peut instruire, banque, PTF, fonds, diaspora investisseuse\n• Marché : clients, usagers ou acheteurs identifiés, pas une demande hypothétique",
+        "✓ Décideur territorial : maire / CTD nommé, présent ou représenté (Mayor Calls, Deal Rooms)\n✓ Régulateur / tutelle : chemin vers l'autorisation, la norme, le foncier\n✓ Finance : qui peut instruire, banque, PTF, fonds, diaspora investisseuse\n✓ Marché : clients, usagers ou acheteurs identifiés, pas une demande hypothétique",
       versoBottom: "Filtre n°2 : la porte s'ouvre vraiment.",
     },
     {
@@ -45,7 +45,7 @@ export const METHODE_COPY: MethodeCopy = {
       versoSubtitle:
         "Crédible et accessible ne suffisent pas. Il faut un chemin réaliste jusqu'à la mise en œuvre :",
       versoText:
-        "• Étapes jalonnées : idée → structuration → financement → chantier → exploitation\n• Blocages anticipés : foncier, permis, devises, capacité locale, traités ou planifiés\n• Partenariat opérable : rôles, apports, gouvernance (PPP, co-investissement, contrat)\n• Suivi 12 mois : ce qui est signé est accompagné et mesuré (M+1 à M+12)",
+        "✓ Étapes jalonnées : idée → structuration → financement → chantier → exploitation\n✓ Blocages anticipés : foncier, permis, devises, capacité locale, traités ou planifiés\n✓ Partenariat opérable : rôles, apports, gouvernance (PPP, co-investissement, contrat)\n✓ Suivi 12 mois : ce qui est signé est accompagné et mesuré (M+1 à M+12)",
       versoBottom: "Filtre n°3 : jusqu'à la prospérité concrète.",
     },
   ],

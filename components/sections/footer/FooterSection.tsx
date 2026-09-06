@@ -173,13 +173,14 @@ export function FooterSection() {
                       {link.label}
                     </button>
                   ) : (
-                    <Link
-                      href={link.href}
-                      className="text-white/80 transition-colors hover:text-white"
-                      style={{ fontSize: TYPE.linkSize }}
-                    >
-                      {link.label}
-                    </Link>
+                   // Remplacez la ligne 177 :
+<Link
+  href={link.href ?? "#"}
+  className="text-white/80 transition-colors hover:text-white"
+  style={{ fontSize: TYPE.linkSize }}
+>
+  {link.label}
+</Link>
                   )}
                 </li>
               ))}

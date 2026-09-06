@@ -309,6 +309,22 @@ export function HeroSection() {
         </div>
       </div>
 
+      {/* ========== BOUTON INSCRIPTION (rond + icône) ========== */}
+    {/* ========== BOUTON INSCRIPTION (rond + icône) ========== 
+<div className="fixed bottom-20 right-5 z-50 sm:bottom-24 sm:right-6">
+  <Link
+    href="/inscription"
+    className="group flex flex-col items-center gap-1.5"
+    style={{ fontFamily: APFEL }}
+  >
+    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-orange-400 text-black shadow-[0_10px_30px_rgba(251,146,60,0.45)] transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500 sm:h-16 sm:w-16">
+      <User className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.25} />
+    </span>
+    <span className="rounded-full bg-black/55 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm sm:text-[11px]">
+      S&apos;inscrire
+    </span>
+  </Link>
+</div>*/}
     </div>
   );
 }

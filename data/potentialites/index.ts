@@ -90,7 +90,7 @@ export function markersForRegion(regionId: RegionId): CommuneMarker[] {
         commune,
         x: pt.x,
         y: pt.y,
-        opportunities: [],
+        opportunities: [] as string[], // Spécification explicite du type string[]
       };
     })
     .filter((m): m is CommuneMarker => m !== null);

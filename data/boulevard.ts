@@ -93,10 +93,10 @@ export const SECTEURS: BoulevardSecteur[] = [
     ],
   },
   {
-    nom: "Environnement et santé",
-    court: "Environnement & santé",
+    nom: "Santé, environnement et bien-être",
+    court: "Santé, environnement et bien-être",
     v: "--s-san",
-    iconSrc: "/images/ecosysteme/regulateur.svg",
+    iconSrc: "/images/ecosysteme/sante.svg",
     maillons: [
       "Prévention & santé publique",
       "Diagnostic & plateau technique",

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useLenis } from "lenis/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 
 const NAV_LINKS = [
   { href: "#contraste", label: "Le Problème" },
@@ -24,6 +25,7 @@ const NAV_LINKS = [
  */
 export function Navbar() {
   const lenis = useLenis();
+  const { open: openPopup } = useScrollPopup();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -122,12 +124,10 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <Button
-              asChild
-              className="rounded-full bg-[#ff6a00] px-4 py-4 text-[0.65rem] font-extrabold tracking-[0.04em] text-black uppercase transition-[background-color,transform] duration-300 hover:bg-[#ff7a1a] sm:px-6 sm:py-5 sm:text-xs"
+              className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-[0.65rem] px-4 py-4 rounded-md sm:text-xs sm:px-6 sm:py-5"
+              onClick={openPopup}
             >
-              <Link href="/inscription">
-                S&apos;INSCRIRE <span aria-hidden="true">→</span>
-              </Link>
+              S&apos;INSCRIRE <span aria-hidden="true">→</span>
             </Button>
 
             <button
@@ -184,12 +184,10 @@ export function Navbar() {
           ))}
 
           <Button
-            asChild
-            className="mt-4 rounded-full bg-[#ff6a00] px-10 py-6 text-sm font-extrabold text-black uppercase hover:bg-[#ff7a1a]"
+            className="mt-4 bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-sm px-10 py-6 rounded-md"
+            onClick={() => { setMobileOpen(false); openPopup(); }}
           >
-            <Link href="/inscription" onClick={() => setMobileOpen(false)}>
-              S&apos;INSCRIRE →
-            </Link>
+            S&apos;INSCRIRE →
           </Button>
         </nav>
       </div>

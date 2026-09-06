@@ -1,7 +1,8 @@
 export type FooterLink = {
   label: string;
-  href: string;
+  href?: string;
   external?: boolean;
+  opensPopup?: boolean;
 };
 
 export type FooterColumn = {

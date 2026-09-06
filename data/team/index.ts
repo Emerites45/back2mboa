@@ -66,27 +66,17 @@ export const TEAM_COPY: TeamCopy = {
       ],
     },
     {
-      id: "manuela",
-      name: "Manuela Ebe-Tabala",
+      id: "amatullah",
+      name: "Amatullah",
       role: "Stratégie Digitale",
       roleBack: "Stratégie Digitale",
       bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-      photo: "/images/team/manuela-400.webp",
+      photo: "/images/team/amatullah-400.webp",
       socials: [
-        {
-          kind: "linkedin",
-          href: "https://www.linkedin.com/in/manuela-ebe",
-          label: "LinkedIn Manuela",
-        },
         {
           kind: "x",
           href: "https://x.com/back2mboa",
-          label: "X Manuela",
-        },
-        {
-          kind: "email",
-          href: "mailto:manuela@back2mboa.com",
-          label: "Email Manuela",
+          label: "X Amatullah",
         },
       ],
     },

@@ -97,6 +97,7 @@ export function MethodeSection() {
       if (next.has(index)) {
         next.delete(index);
       } else {
+        next.clear();
         next.add(index);
       }
       return next;
@@ -232,10 +233,14 @@ export function MethodeSection() {
               className="min-w-0 lg:h-full lg:min-h-0"
             >
               <article
-                className="group relative lg:min-h-0 lg:h-full [perspective:1200px]"
+                className={cn(
+                  "group relative lg:min-h-0 lg:h-full [perspective:1200px]",
+                  "cursor-pointer transition-[box-shadow] duration-300 ease-out",
+                  "hover:shadow-[0_8px_28px_rgb(11_31_51/0.04),0_2px_8px_rgb(11_31_51/0.08)]",
+                  !isFlipped(index) && "methode-card-pulse",
+                )}
                 tabIndex={0}
                 onClick={() => toggleFlip(index)}
-                onFocus={() => toggleFlip(index)}
               >
                 <div
                   className={cn(
@@ -328,7 +333,7 @@ export function MethodeSection() {
                       "[backface-visibility:hidden] [transform:rotateY(180deg)]",
                     )}
                   >
-                    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden max-lg:overflow-visible">
+                    <div className="flex min-h-0 flex-1 flex-col gap-[1.21rem] overflow-hidden max-lg:overflow-visible">
                       <p
                         className="leading-tight tracking-[-0.01em]"
                         style={{

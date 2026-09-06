@@ -1,5 +1,8 @@
+"use client";
+
 import { ECOSYSTEME_COPY } from "@/data/ecosysteme";
 import { EcosystemeHubDial } from "@/components/sections/ecosysteme/EcosystemeHubDial";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import { cn } from "@/lib/utils";
 
 const SECTION = {
@@ -19,13 +22,16 @@ const TYPE = {
 function EcosystemeCta({
   children,
   variant = "dark",
+  onClick,
 }: {
   children: string;
   variant?: "dark" | "light";
+  onClick?: () => void;
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={cn(
         "inline-flex items-center justify-center rounded-full border-[1.5px] px-5 py-2.5 text-sm font-medium transition-colors duration-200",
         "focus-visible:outline-2 focus-visible:outline-offset-[3px]",
@@ -41,6 +47,7 @@ function EcosystemeCta({
 }
 
 export function EcosystemeSection() {
+  const { open: openPopup } = useScrollPopup();
   const copy = ECOSYSTEME_COPY;
 
   return (
@@ -93,7 +100,7 @@ export function EcosystemeSection() {
                 {copy.mayorTitle}
               </h3>
               <p className="mb-4 text-sm leading-relaxed text-[#5a6b63]">{copy.mayorBody}</p>
-              <EcosystemeCta>{copy.mayorCta}</EcosystemeCta>
+              <EcosystemeCta onClick={openPopup}>{copy.mayorCta}</EcosystemeCta>
             </article>
           </div>
 
@@ -106,7 +113,7 @@ export function EcosystemeSection() {
               {copy.twinTitle}
             </h3>
             <p className="mb-4 text-sm leading-snug text-[#0a2b21]/90">{copy.twinBody}</p>
-            <EcosystemeCta>{copy.twinCta}</EcosystemeCta>
+            <EcosystemeCta onClick={openPopup}>{copy.twinCta}</EcosystemeCta>
           </article>
         </div>
       </div>

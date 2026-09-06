@@ -17,7 +17,8 @@ export type AgendaEvent = {
 export type AgendaCopy = {
   kicker: string;
   ctaPrimary: string;
-  ctaPrimaryHref: string;
+  opensPopup?: boolean;
+  ctaPrimaryHref?: string;
   ctaSecondary: string;
   ctaSecondaryHref: string;
   autoplayMs: number;

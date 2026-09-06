@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useId, useState, type CSSProperties } from "react";
 import Image from "next/image";
+import { useScrollPopup } from "@/components/sections/ScrollPopup";
 import Link from "next/link";
 import {
   BONNE_PORTE_BG,
@@ -203,6 +204,7 @@ function GainList({ gains }: { gains: BonnePorteGain[] }) {
 }
 
 function PanelContent({ panel }: { panel: BonnePortePanel }) {
+  const { open: openPopup } = useScrollPopup();
   return (
     <div className="porte-panel-surface">
       <div className="porte-panel-grid">
@@ -219,9 +221,15 @@ function PanelContent({ panel }: { panel: BonnePortePanel }) {
             )}
           </h3>
           <p className="porte-lead">{panel.lead}</p>
-          <Link className="porte-btn" href={panel.ctaHref}>
-            {panel.cta}
-          </Link>
+          {panel.opensPopup ? (
+            <button className="porte-btn" onClick={openPopup}>
+              {panel.cta}
+            </button>
+          ) : (
+            <Link className="porte-btn" href={panel.ctaHref ?? "#"}>
+              {panel.cta}
+            </Link>
+          )}
         </div>
         <GainList gains={panel.gains} />
       </div>
@@ -255,6 +263,7 @@ function MobileBonnePorteSection({
   panel: BonnePortePanel;
   copy: typeof BONNE_PORTE_COPY;
 }) {
+  const { open: openPopup } = useScrollPopup();
   const [openGains, setOpenGains] = useState<Record<number, boolean>>({ 0: true });
 
   useEffect(() => {
@@ -454,13 +463,23 @@ function MobileBonnePorteSection({
                     </div>
 
           {/* CTA */}
-          <Link
-            href={panel.ctaHref}
-            className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0a2b21] py-3.5 px-5 text-center text-sm font-bold text-white transition-transform hover:bg-emerald-900 active:scale-[0.98]"
-          >
-            <span>{panel.cta}</span>
-            <ArrowRight className="h-4 w-4 text-amber-300" />
-          </Link>
+          {panel.opensPopup ? (
+            <button
+              onClick={openPopup}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0a2b21] py-3.5 px-5 text-center text-sm font-bold text-white transition-transform hover:bg-emerald-900 active:scale-[0.98]"
+            >
+              <span>{panel.cta}</span>
+              <ArrowRight className="h-4 w-4 text-amber-300" />
+            </button>
+          ) : (
+            <Link
+              href={panel.ctaHref ?? "#"}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0a2b21] py-3.5 px-5 text-center text-sm font-bold text-white transition-transform hover:bg-emerald-900 active:scale-[0.98]"
+            >
+              <span>{panel.cta}</span>
+              <ArrowRight className="h-4 w-4 text-amber-300" />
+            </Link>
+          )}
         </div>
 
         {/* ── 5. PIED DE SECTION ──────────────────── */}

@@ -34,7 +34,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     tabLabel: "Décideurs & CTD",
     title: "Décideurs & Intendants territoriaux",
     lead: "Vous portez un territoire plein de potentiel — sans mécanisme clair pour le révéler, le structurer et le connecter aux bons partenaires.",
-    ctaHref: "/inscription",
+    opensPopup: true,
     cta: "Je publie mon territoire",
     gains: [
       {
@@ -62,7 +62,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     title: "Bâtisseurs-Solutionneurs",
     titleLines: ["Bâtisseurs-Solutionneurs", "locaux & diaspora"],
     lead: "Vous avez l’expertise, la techno ou le capital — mais pas toujours la porte d’entrée crédible vers un maire, un dossier bancable et un closing.",
-    ctaHref: "/inscription",
+    opensPopup: true,
     cta: "Je propose une solution",
     gains: [
       {
@@ -88,7 +88,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     tabLabel: "Investisseurs & PTF",
     title: "Investisseurs & PTF",
     lead: "Vous cherchez du deal-flow africain crédible — pas des pitchs marketing. Le risque, c’est le manque de structuration et de contreparties territoriales.",
-    ctaHref: "/inscription",
+    opensPopup: true,
     cta: "Accéder au deal-flow",
     gains: [
       {
@@ -115,7 +115,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     tabLabel: "Régulateurs",
     title: "Régulateurs",
     lead: "MINREX, tutelles, administrations : vous devez orienter la diaspora et les investissements sans créer un énième guichet opaque.",
-    ctaHref: "/inscription",
+    opensPopup: true,
     cta: "S’aligner sur le cadre",
     gains: [
       {
@@ -141,7 +141,7 @@ export const BONNE_PORTE_PANELS: BonnePortePanel[] = [
     tabLabel: "Médias",
     title: "Médias d’influence",
     lead: "Vous cherchez des histoires fortes — deals, territoires, diaspora — pas un énième communiqué sans images ni chiffres.",
-    ctaHref: "/inscription",
+    opensPopup: true,
     cta: "Demander un accès presse",
     gains: [
       {

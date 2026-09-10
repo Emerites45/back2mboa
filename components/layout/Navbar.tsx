@@ -97,14 +97,14 @@ export function Navbar() {
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="flex h-10 items-center justify-center rounded-2xl bg-white px-2 py-1 sm:h-12 sm:rounded-[1.15rem] sm:px-2.5"
+            className="flex h-10 items-center justify-center rounded-md bg-white px-2.5 sm:px-3"
           >
             <Image
               src="/images/logo.png"
               alt="Back2Mboa"
               width={120}
               height={32}
-              className="h-full w-auto object-contain"
+              className="h-[1.35rem] w-auto object-contain sm:h-6"
               priority
             />
           </Link>
@@ -124,7 +124,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <Button
-              className="bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-[0.65rem] px-4 py-4 rounded-md sm:text-xs sm:px-6 sm:py-5"
+              className="h-10 bg-amber-400 hover:bg-amber-500 text-black font-extrabold uppercase text-[0.65rem] px-4 rounded-md sm:text-xs sm:px-6"
               onClick={openPopup}
             >
               S&apos;INSCRIRE <span aria-hidden="true">→</span>

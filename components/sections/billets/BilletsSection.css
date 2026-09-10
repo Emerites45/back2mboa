@@ -137,8 +137,8 @@
 .b2m-billets .stub { grid-row: 1; }
 
 .b2m-billets .lane {
-  grid-row: 1;
-  grid-column: -1;
+  /* -2/-1 = dernière colonne explicite (évite une colonne fantôme via grid-column:-1) */
+  grid-area: 1 / -2 / 2 / -1;
 }
 
 @media (min-width: 900px) {
@@ -224,7 +224,8 @@
 
 @media (min-width: 900px) {
   .b2m-billets .face {
-    grid-template-columns: 1fr 1.05fr;
+    /* Aligné sur la perforation à 42% — sinon le prix paraît décalé */
+    grid-template-columns: 42% 1fr;
     opacity: 0;
     transform: translateX(-0.7rem);
   }
@@ -317,10 +318,12 @@
 
 /* ── Tier (left panel — pricing) ────────────────────── */
 .b2m-billets .tier {
-  padding: 1rem 0.9rem;
+  /* Padding droit un peu plus large : la perforation mange le bord droit */
+  padding: 1rem 1.1rem 1rem 0.75rem;
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 0;
   position: relative;
@@ -341,6 +344,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.b2m-billets .tier .dyn > * {
+  margin-inline: auto;
+  text-align: center;
 }
 
 .b2m-billets .tier .eyebrow {
@@ -761,7 +773,7 @@
   }
 
   .b2m-billets .tier {
-    padding: 1.35rem 1rem 1.25rem;
+    padding: 1.35rem 1.15rem 1.25rem 1rem;
   }
 
   .b2m-billets .tier .name {

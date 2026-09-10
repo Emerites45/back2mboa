@@ -24,7 +24,8 @@ export type BilletsSectionProps = {
 function packVars(q: BilletPack): CSSProperties {
   return {
     "--sel": q.couleur,
-    "--selTxt": q.texte,
+    /* Couleur pack sur fond blanc (q.texte = blanc, pour stubs colorés) */
+    "--selTxt": q.couleur,
     "--ctaTxt": "#fff",
     "--ctaBg": q.couleur,
   } as CSSProperties;

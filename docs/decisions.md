@@ -1,5 +1,13 @@
 # Décisions
 
+## 2026-10-02 — Deploy o2switch via GitHub Actions (SSH + Node)
+
+- Mode Node (pas export statique) : API routes possibles plus tard.
+- `output: "standalone"` dans `next.config.ts` → bundle minimal + `server.js` pour Passenger.
+- Workflow `.github/workflows/deploy.yml` : build CI → rsync SSH → `tmp/restart.txt`.
+- Secrets GitHub : `SSH_HOST`, `SSH_USER`, `SSH_PORT`, `SSH_PRIVATE_KEY`, `DEPLOY_PATH`.
+- Prérequis o2switch : Setup Node.js App (Node ≥ 20), racine `back2mboa`, startup `server.js`, clé SSH autorisée.
+
 ## 2026-09-02 — Préparation production et support npm/pnpm
 
 - Build TypeScript corrigé pour le bandeau footer (`srcSet` fourni).

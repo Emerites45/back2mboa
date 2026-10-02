@@ -39,14 +39,16 @@ jobs:
           mkdir -p .next/standalone/.next
           cp -r .next/static .next/standalone/.next/
 
-      - name: Start SSH agent
-        uses: webfactory/ssh-agent@v0.9.1
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          known_hosts: unnecessary
+          if_key_exists: replace
 
       - name: Add host to known_hosts
         run: |
-          mkdir -p ~/.ssh
           ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Rsync to o2switch

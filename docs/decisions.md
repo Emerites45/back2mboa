@@ -1,13 +1,13 @@
 # Décisions
 
-## 2026-10-02 — Deploy o2switch via GitHub Actions (FTP + Node)
+## 2026-10-02 — Deploy o2switch Mode A (static export + FTP)
 
-- Mode Node (pas export statique) : API routes possibles plus tard.
-- `output: "standalone"` → bundle minimal + `server.js` Passenger.
-- SSH depuis GitHub timeout (firewall) → **FTP d’une archive** `deploy.tar.gz` (pas des milliers de fichiers).
-- Upload avec `pv` + `curl` : barre de progression % visible dans les logs Actions.
-- Extraction serveur : cron cPanel (ou SSH manuel depuis un PC) → `tar -xzf` + `tmp/restart.txt`.
-- Secrets : `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD`.
+- Abandon Mode B (Node/Passenger) : 500 Persistent malgré standalone extrait ; SSH coupé.
+- `output: "export"` + `images.unoptimized` + `trailingSlash` → dossier `out/`.
+- Build CI force webpack (`next build --webpack`) : turbopack local casse `next/font`.
+- Upload FTP d’une archive `deploy.tar.gz` (barre `pv`) vers le **docroot domaine** (`~/back2mboa.com`), pas `~/back2mboa` (Node).
+- Prérequis o2switch : **arrêter/détruire** l’app Node liée à back2mboa.com ; FTP chrooté sur `back2mboa.com` ; cron extract sur ce dossier.
+- API plus tard = backend séparé ou retour Mode B une fois Passenger OK.
 
 ## 2026-09-02 — Préparation production et support npm/pnpm
 

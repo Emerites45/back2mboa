@@ -30,22 +30,15 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: Build static export
         run: pnpm build
 
-      - name: Pack standalone archive
+      - name: Pack out/ archive
         run: |
           set -euo pipefail
-          cp -r public .next/standalone/
-          mkdir -p .next/standalone/.next
-          cp -r .next/static .next/standalone/.next/
-          mkdir -p .next/standalone/tmp
-          date -u +%Y-%m-%dT%H:%M:%SZ > .next/standalone/tmp/restart.txt
-          # Flag lu par le cron o2switch pour extraire
-          : > .next/standalone/tmp/DEPLOY_EXTRACT
-          tar -C .next/standalone -czf deploy.tar.gz .
+          test -d out
+          tar -C out -czf deploy.tar.gz .
           ls -lh deploy.tar.gz
-          echo "ARCHIVE_BYTES=$(stat -c%s deploy.tar.gz)" >> "$GITHUB_ENV"
 
       - name: Install pv
         run: sudo apt-get update -qq && sudo apt-get install -y -qq pv
@@ -62,9 +55,7 @@ jobs:
           echo "========================================"
           echo "FTP upload → ftp://$FTP_HOST/$FILE"
           echo "Size: $SIZE bytes ($(numfmt --to=iec-i --suffix=B "$SIZE"))"
-          echo "User: $FTP_USER"
           echo "========================================"
-          # pv -f : barre % même sans TTY (logs GitHub Actions)
           pv -f -p -t -e -r -b -s "$SIZE" "$FILE" \
             | curl --ftp-pasv --fail --show-error \
                 -u "$FTP_USER:$FTP_PASSWORD" \
@@ -73,5 +64,4 @@ jobs:
                 --connect-timeout 30 \
                 --max-time 900 \
                 -w "\n--- done ---\nbytes_uploaded=%{size_upload}\ntime=%{time_total}s\nspeed=%{speed_upload} B/s\n"
-          echo "Upload terminé. Extraction côté o2switch via cron (≤1 min) ou SSH manuel :"
-          echo "  cd ~/back2mboa && tar -xzf deploy.tar.gz && rm -f deploy.tar.gz && touch tmp/restart.txt"
+          echo "Upload OK. Cron doit extraire dans le docroot du domaine (pas le dossier Node)."

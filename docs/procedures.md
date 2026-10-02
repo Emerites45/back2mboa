@@ -7,17 +7,16 @@
 - Liens : `next/link` vers `/inscription`, `#billets`, `#partenaires`.
 - `app/(event)/page.tsx` = assemblage uniquement : importer la section, la poser dans le flux, ne pas y mettre de logique métier.
 
-## Deploy o2switch
+## Deploy o2switch (Mode A — statique)
 
-1. Secrets : `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` (FTP chrooté sur `~/back2mboa`).
-2. Setup Node.js App : Node 24, Production, racine `back2mboa`, startup `server.js`.
-3. **Cron extract** (cPanel → Tâches cron, chaque minute) :
-   ```bash
-   /bin/bash -lc 'APP=$HOME/back2mboa; cd "$APP" || exit 0; [ -f deploy.tar.gz ] || exit 0; tar -xzf deploy.tar.gz && rm -f deploy.tar.gz && mkdir -p tmp && date -u > tmp/restart.txt'
-   ```
-4. Push `main` → Actions build → upload `deploy.tar.gz` (barre % dans les logs) → cron dézippe ≤1 min.
-5. Extract manuel immédiat (SSH depuis ton PC) :
-   ```bash
-   ssh tesp3994@oursin.o2switch.net 'cd ~/back2mboa && tar -xzf deploy.tar.gz && rm -f deploy.tar.gz && mkdir -p tmp && touch tmp/restart.txt'
-   ```
+1. Secrets : `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD`.
+2. **o2switch — une fois** :
+   - Setup Node.js App → **Arrêter** puis **Détruire** l’app `back2mboa` (sinon Passenger garde le 500).
+   - Compte FTP `williams@back2mboa.com` : répertoire = `back2mboa.com` (docroot), **pas** `back2mboa`.
+   - Cron (chaque minute), cible docroot :
+     ```bash
+     /bin/bash -lc 'APP=$HOME/back2mboa.com; cd "$APP" || exit 0; [ -f deploy.tar.gz ] || exit 0; tar -xzf deploy.tar.gz && rm -f deploy.tar.gz'
+     ```
+3. Push `main` → Actions build `out/` → upload `deploy.tar.gz` (logs % via `pv`).
+4. Vérifier https://back2mboa.com/ (doit servir `index.html`, plus d’erreur Passenger).
 

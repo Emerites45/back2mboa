@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Bundle minimal pour o2switch (Passenger lit server.js à la racine deploy)
-  output: "standalone",
+  // Mode A : HTML/CSS/JS statiques pour o2switch (Apache), sans Node/Passenger
+  output: "export",
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

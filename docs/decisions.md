@@ -1,5 +1,12 @@
 # Décisions
 
+## 2026-10-02 — SEO / prod Mode A + 404
+
+- `NEXT_PUBLIC_SITE_URL` défaut + CI = `https://back2mboa.com` (plus `.org`).
+- `app/robots.ts`, `app/sitemap.ts`, JSON-LD Organization/WebSite/Event, OG `public/images/og-default.webp`.
+- `public/.htaccess` : HTTPS, www→apex, ErrorDocument 404, cache, deflate.
+- `app/not-found.tsx` : 404 branded (accueil + potentialités).
+
 ## 2026-10-02 — Deploy o2switch Mode A (static export + FTP)
 
 - Abandon Mode B (Node/Passenger) : 500 Persistent malgré standalone extrait ; SSH coupé.

@@ -31,6 +31,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static export
+        env:
+          NEXT_PUBLIC_SITE_URL: https://back2mboa.com
         run: pnpm build
 
       - name: Pack out/ archive

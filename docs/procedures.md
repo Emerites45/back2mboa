@@ -19,4 +19,5 @@
      ```
 3. Push `main` → Actions build `out/` → upload `deploy.tar.gz` (logs % via `pv`).
 4. Vérifier https://back2mboa.com/ (doit servir `index.html`, plus d’erreur Passenger).
+5. SEO : `/robots.txt`, `/sitemap.xml`, meta OG sur `.com`, 404 custom via `.htaccess`.
 

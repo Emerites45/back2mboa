@@ -33,22 +33,45 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Prepare standalone bundle
+      - name: Pack standalone archive
         run: |
+          set -euo pipefail
           cp -r public .next/standalone/
           mkdir -p .next/standalone/.next
           cp -r .next/static .next/standalone/.next/
-          # Passenger reload (SSH bloqué depuis GitHub → touch via FTP)
           mkdir -p .next/standalone/tmp
           date -u +%Y-%m-%dT%H:%M:%SZ > .next/standalone/tmp/restart.txt
+          # Flag lu par le cron o2switch pour extraire
+          : > .next/standalone/tmp/DEPLOY_EXTRACT
+          tar -C .next/standalone -czf deploy.tar.gz .
+          ls -lh deploy.tar.gz
+          echo "ARCHIVE_BYTES=$(stat -c%s deploy.tar.gz)" >> "$GITHUB_ENV"
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .next/standalone/
-          server-dir: ./
-          protocol: ftp
-          timeout: 600000
+      - name: Install pv
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq pv
+
+      - name: Upload archive via FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          FILE=deploy.tar.gz
+          SIZE=$(stat -c%s "$FILE")
+          echo "========================================"
+          echo "FTP upload → ftp://$FTP_HOST/$FILE"
+          echo "Size: $SIZE bytes ($(numfmt --to=iec-i --suffix=B "$SIZE"))"
+          echo "User: $FTP_USER"
+          echo "========================================"
+          # pv -f : barre % même sans TTY (logs GitHub Actions)
+          pv -f -p -t -e -r -b -s "$SIZE" "$FILE" \
+            | curl --ftp-pasv --fail --show-error \
+                -u "$FTP_USER:$FTP_PASSWORD" \
+                -T - \
+                "ftp://$FTP_HOST/$FILE" \
+                --connect-timeout 30 \
+                --max-time 900 \
+                -w "\n--- done ---\nbytes_uploaded=%{size_upload}\ntime=%{time_total}s\nspeed=%{speed_upload} B/s\n"
+          echo "Upload terminé. Extraction côté o2switch via cron (≤1 min) ou SSH manuel :"
+          echo "  cd ~/back2mboa && tar -xzf deploy.tar.gz && rm -f deploy.tar.gz && touch tmp/restart.txt"

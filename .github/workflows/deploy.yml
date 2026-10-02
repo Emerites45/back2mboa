@@ -39,17 +39,40 @@ jobs:
           mkdir -p .next/standalone/.next
           cp -r .next/static .next/standalone/.next/
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          known_hosts: unnecessary
-          if_key_exists: replace
-
-      - name: Add host to known_hosts
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
         run: |
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          eval "$(ssh-agent -s)"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+
+          PASSFILE=$(mktemp)
+          ASKPASS=$(mktemp)
+          printf '%s' "$SSH_PASSPHRASE" > "$PASSFILE"
+          chmod 600 "$PASSFILE"
+          printf '#!/bin/sh\ncat %s\n' "$PASSFILE" > "$ASKPASS"
+          chmod 700 "$ASKPASS"
+          DISPLAY=:0 SSH_ASKPASS="$ASKPASS" SSH_ASKPASS_REQUIRE=force \
+            setsid -w ssh-add ~/.ssh/id_rsa < /dev/null
+          rm -f "$ASKPASS" "$PASSFILE"
+
+          # o2switch refuse ssh-keyscan → accept-new au 1er contact
+          {
+            echo "Host ${{ secrets.SSH_HOST }}"
+            echo "  Port ${{ secrets.SSH_PORT }}"
+            echo "  StrictHostKeyChecking accept-new"
+            echo "  UserKnownHostsFile ~/.ssh/known_hosts"
+          } > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+          touch ~/.ssh/known_hosts
 
       - name: Rsync to o2switch
         run: |

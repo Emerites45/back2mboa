@@ -3,14 +3,6 @@
 import React, { useState, useEffect, useId } from "react";
 import HeroBackgroundSlider from "@/components/hero/HeroBackgroundSlider";
 import { SLIDES_DATA, SlideData } from "@/data/slides";
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
 const APFEL =
   "var(--font-apfel-grotezk), 'Apfel Grotezk', system-ui, sans-serif";
 
@@ -171,7 +163,7 @@ export function HeroSection() {
 
           {/* ASAP — lettres liquid glass */}
           <p
-            className={`${inter.className} mt-3.5 select-none text-base font-medium tracking-wide sm:mt-4 sm:text-lg md:text-xl`}
+            className={`font-sans mt-3.5 select-none text-base font-medium tracking-wide sm:mt-4 sm:text-lg md:text-xl`}
           >
             {subtitle.split("").map((char, index) => (
               <span

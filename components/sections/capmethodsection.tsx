@@ -2,13 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bricolage_Grotesque } from 'next/font/google';
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  display: 'swap',
-});
 
 const CAP_ITEMS = [
   {
@@ -43,7 +36,7 @@ export function CapMethodSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={`${bricolage.className} text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto uppercase text-[#d946ef]`}
+          className={`font-sans text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto uppercase text-[#d946ef]`}
         >
           CAP™ : LA PROSPÉRITÉ CIRCULE DÉJÀ.
         </motion.h2>

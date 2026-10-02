@@ -2,13 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Bricolage_Grotesque } from 'next/font/google';
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  display: 'swap',
-});
 
 export function ArticlesSection() {
   return (
@@ -39,14 +32,14 @@ export function ArticlesSection() {
         <div className="relative h-full flex flex-col justify-between px-6 sm:px-10 lg:px-14 py-10 lg:py-14">
           
           {/* Travel Jorney */}
-          <p className={`${bricolage.className} text-white/90 text-lg sm:text-xl md:text-2xl font-bold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]`}>
+          <p className={`font-sans text-white/90 text-lg sm:text-xl md:text-2xl font-bold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]`}>
             Travel Jorney
           </p>
 
           {/* Afri + Forest */}
           <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none">
             <h2
-              className={`${bricolage.className} text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-right pr-[2%]`}
+              className={`font-sans text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-right pr-[2%]`}
               style={{
                 color: 'transparent',
                 backgroundImage: `linear-gradient(
@@ -67,7 +60,7 @@ export function ArticlesSection() {
             </h2>
 
             <h2
-              className={`${bricolage.className} text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-right pr-[8%] -mt-4 sm:-mt-6`}
+              className={`font-sans text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-right pr-[8%] -mt-4 sm:-mt-6`}
               style={{
                 color: 'transparent',
                 backgroundImage: `linear-gradient(
@@ -95,7 +88,7 @@ export function ArticlesSection() {
             </p>
 
             <button
-              className={`${bricolage.className} bg-[#F5C518] hover:bg-[#e6b800] text-black font-bold text-sm px-5 py-2.5 rounded-md transition-colors`}
+              className={`font-sans bg-[#F5C518] hover:bg-[#e6b800] text-black font-bold text-sm px-5 py-2.5 rounded-md transition-colors`}
             >
               More Details
             </button>
@@ -107,7 +100,7 @@ export function ArticlesSection() {
       <div className="absolute inset-y-0 right-0 w-1/2 z-10">
         <div className="absolute top-1/2 left-0 -translate-y-[85%] pointer-events-none">
           <h2
-            className={`${bricolage.className} text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-white pl-1 drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)]`}
+            className={`font-sans text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] font-extrabold leading-none text-white pl-1 drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)]`}
           >
             can
           </h2>

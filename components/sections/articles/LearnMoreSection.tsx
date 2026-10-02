@@ -2,19 +2,6 @@
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Bricolage_Grotesque, Inter } from 'next/font/google';
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
 
 /* ---------- articles ---------- */
 const ARTICLES = [
@@ -190,7 +177,7 @@ export function LearnMoreSection() {
 
   return (
     <section
-      className={`${inter.className} bg-[#FBF7EF] py-[clamp(3.5rem,6.5vw,6.5rem)]`}
+      className={`font-sans bg-[#FBF7EF] py-[clamp(3.5rem,6.5vw,6.5rem)]`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -202,7 +189,7 @@ export function LearnMoreSection() {
     >
       <div className="mx-auto w-full max-w-[min(100%,92rem)] px-[clamp(1.35rem,5.5vw,4.75rem)]">
         <h2
-          className={`${bricolage.className} mb-[clamp(1.75rem,3.2vw,2.75rem)] text-[clamp(2rem,4.8vw,3.75rem)] font-normal leading-[1.08] tracking-[-0.03em] text-[#5A6B60]`}
+          className={`font-sans mb-[clamp(1.75rem,3.2vw,2.75rem)] text-[clamp(2rem,4.8vw,3.75rem)] font-normal leading-[1.08] tracking-[-0.03em] text-[#5A6B60]`}
         >
           En savoir plus
         </h2>
@@ -266,7 +253,7 @@ export function LearnMoreSection() {
                 </div>
 
                 <h3
-                  className={`${bricolage.className} text-[clamp(1.05rem,1.55vw,1.28rem)] font-normal leading-[1.3] tracking-[-0.02em] text-[#5A6B60] transition-colors duration-300 group-hover:text-[#0A2B21]`}
+                  className={`font-sans text-[clamp(1.05rem,1.55vw,1.28rem)] font-normal leading-[1.3] tracking-[-0.02em] text-[#5A6B60] transition-colors duration-300 group-hover:text-[#0A2B21]`}
                 >
                   {a.titre}
                 </h3>

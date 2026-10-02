@@ -38,51 +38,17 @@ jobs:
           cp -r public .next/standalone/
           mkdir -p .next/standalone/.next
           cp -r .next/static .next/standalone/.next/
+          # Passenger reload (SSH bloqué depuis GitHub → touch via FTP)
+          mkdir -p .next/standalone/tmp
+          date -u +%Y-%m-%dT%H:%M:%SZ > .next/standalone/tmp/restart.txt
 
-      - name: Setup SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
-        run: |
-          set -euo pipefail
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-          eval "$(ssh-agent -s)"
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-
-          PASSFILE=$(mktemp)
-          ASKPASS=$(mktemp)
-          printf '%s' "$SSH_PASSPHRASE" > "$PASSFILE"
-          chmod 600 "$PASSFILE"
-          printf '#!/bin/sh\ncat %s\n' "$PASSFILE" > "$ASKPASS"
-          chmod 700 "$ASKPASS"
-          DISPLAY=:0 SSH_ASKPASS="$ASKPASS" SSH_ASKPASS_REQUIRE=force \
-            setsid -w ssh-add ~/.ssh/id_rsa < /dev/null
-          rm -f "$ASKPASS" "$PASSFILE"
-
-          # o2switch refuse ssh-keyscan → accept-new au 1er contact
-          {
-            echo "Host ${{ secrets.SSH_HOST }}"
-            echo "  Port ${{ secrets.SSH_PORT }}"
-            echo "  StrictHostKeyChecking accept-new"
-            echo "  UserKnownHostsFile ~/.ssh/known_hosts"
-          } > ~/.ssh/config
-          chmod 600 ~/.ssh/config
-          touch ~/.ssh/known_hosts
-
-      - name: Rsync to o2switch
-        run: |
-          rsync -az --delete --exclude tmp \
-            -e "ssh -p ${{ secrets.SSH_PORT }}" \
-            .next/standalone/ \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/"
-
-      - name: Restart Node app
-        run: |
-          ssh -p "${{ secrets.SSH_PORT }}" \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            "mkdir -p '${{ secrets.DEPLOY_PATH }}/tmp' && touch '${{ secrets.DEPLOY_PATH }}/tmp/restart.txt'"
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: .next/standalone/
+          server-dir: ./
+          protocol: ftp
+          timeout: 600000

@@ -9,7 +9,7 @@
 
 ## Deploy o2switch
 
-1. Secrets repo (`gh secret list`) : `SSH_HOST`, `SSH_USER`, `SSH_PORT`, `SSH_PRIVATE_KEY`, `SSH_PASSPHRASE`, `DEPLOY_PATH`.
+1. Secrets repo : `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` (compte FTP chrooté sur `back2mboa`).
 2. o2switch → Setup Node.js App : Node 24, Production, racine `back2mboa`, startup `server.js`.
 3. Push sur `main` ou Actions → **Deploy o2switch** → Run workflow.
-4. Après deploy : ouvrir l’URL de l’app ; si 503, Restart dans Setup Node.js App.
+4. Après deploy : ouvrir l’URL ; si 503, Restart dans Setup Node.js App.

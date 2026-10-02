@@ -1,12 +1,13 @@
 # Décisions
 
-## 2026-10-02 — Deploy o2switch via GitHub Actions (SSH + Node)
+## 2026-10-02 — Deploy o2switch via GitHub Actions (FTP + Node)
 
 - Mode Node (pas export statique) : API routes possibles plus tard.
 - `output: "standalone"` dans `next.config.ts` → bundle minimal + `server.js` pour Passenger.
-- Workflow `.github/workflows/deploy.yml` : build CI → rsync SSH → `tmp/restart.txt`.
-- Secrets GitHub : `SSH_HOST`, `SSH_USER`, `SSH_PORT`, `SSH_PRIVATE_KEY`, `SSH_PASSPHRASE`, `DEPLOY_PATH`.
-- Prérequis o2switch : Setup Node.js App (Node 24), racine `back2mboa`, startup `server.js`, clé SSH autorisée.
+- SSH depuis GitHub Actions timeout (firewall o2switch sur IP datacenter) → deploy **FTP**.
+- Workflow `.github/workflows/deploy.yml` : build CI → FTP vers racine app → `tmp/restart.txt`.
+- Secrets : `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` (+ `DEPLOY_PATH` doc). Compte FTP chrooté sur `/home/tesp3994/back2mboa`.
+- Prérequis o2switch : Setup Node.js App (Node 24), racine `back2mboa`, startup `server.js`.
 
 ## 2026-09-02 — Préparation production et support npm/pnpm
 
